@@ -1,14 +1,3 @@
-"""
-Django settings for sparmed project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
@@ -23,6 +12,9 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+from django.utils.crypto import get_random_string
+SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"))
 
 # Django Sites ID
 SITE_ID = 1
@@ -47,8 +39,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'mediafiles')
 MEDIA_URL = STATIC_URL + 'media/'
 
-from django.utils.crypto import get_random_string
-SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"))
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -82,7 +77,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
   'gunicorn',
-  #'compressor',
+  'compressor',
   #'analytical',
   #'jquery',
   'bootstrap3',
