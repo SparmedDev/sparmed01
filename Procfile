@@ -1,1 +1,0 @@
-web: gunicorn -w 3 -k gevent --max-requests 500 sparmed/sparmed.wsgi --preload
