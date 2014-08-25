@@ -1,0 +1,1 @@
+web: run-program gunicorn -w 2 sparmed.wsgi --preload
