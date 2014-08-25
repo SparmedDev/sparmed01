@@ -109,3 +109,42 @@ MIDDLEWARE_CLASSES = (
   'django.middleware.cache.FetchFromCacheMiddleware',
   'htmlmin.middleware.MarkRequestMiddleware',
 )
+
+# Mandrill email settings
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
+EMAIL_USE_TLS = True
+
+SERVER_EMAIL = "SparMed.dk <info@SparMed.dk>"
+
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
+
+EMAIL_SUBJECT_PREFIX = "SparMed.dk"
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
