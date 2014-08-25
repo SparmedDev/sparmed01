@@ -32,8 +32,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
-#from memcacheify import memcacheify
-#CACHES = memcacheify()
+from memcacheify import memcacheify
+CACHES = memcacheify()
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
@@ -103,10 +103,12 @@ INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 MIDDLEWARE_CLASSES = (
+  'django.middleware.cache.UpdateCacheMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  'django.middleware.cache.FetchFromCacheMiddleware',
 )
