@@ -99,6 +99,7 @@ INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
+  'htmlmin.middleware.HtmlMinifyMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,4 +107,5 @@ MIDDLEWARE_CLASSES = (
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
   'django.middleware.cache.FetchFromCacheMiddleware',
+  'htmlmin.middleware.MarkRequestMiddleware',
 )
