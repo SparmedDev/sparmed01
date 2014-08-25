@@ -32,8 +32,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
-from memcacheify import memcacheify
-CACHES = memcacheify()
+#from memcacheify import memcacheify
+#CACHES = memcacheify()
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
