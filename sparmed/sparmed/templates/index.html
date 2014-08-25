@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="description" content="Sparmed.dk Under Construction" />
+    <meta name="author" content="Alpha Stage Studios - Rami@AlphaStageStudios.com" />
+
+    {% bootstrap_css %}
+
+    <title>
+      Under Construction | Sparmed.dk
+    </title>
+
+  </head>
+
+  <body>
+    <section style="display: block; margin: 0px auto; width: 60%;">
+      <img class="img-responsive img-rounded" src="{% static 'sparmed-logo.png' %}" alt="Sparmed.dk Logo" style="margin: 0px auto; width:50%; padding-top: 10px;">
+
+      <hr>
+
+      <h2 class="text-center">Contact</h2>
+      <p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a></p>
+      <p class="text-center">Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
+      <p class="text-center">Address: Toppevadvej 34, 3660 Stenløse, DENMARK</p>
+      <iframe
+              width="600"
+              height="250"
+              frameborder="0" 
+              style="border:0; margin:0px auto; display: block;"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
+                   &q=Toppevadvej+34+3660+stenlose+Sparmed+ApS">
+      </iframe>
+
+      <hr>
+      
+      <h2 class="text-center">Website Under Construction</h2>
+      <p class="text-center"><em>Stay Tuned for Updates</em></p>
+      <p class="text-center text-muted" style="padding-top:50px;"><em>Website under development by <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>
+      
+    </section>
+
+
+
+    {# Load javascript at bottom for speed optimization #}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    {# Load Bootstrap javascript #}
+    {% bootstrap_javascript %}
+
+  </body>
+
+</html>
