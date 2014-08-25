@@ -1,1 +1,1 @@
-web: run-program gunicorn -w 2 sparmed.wsgi --preload
+web: run-program gunicorn -w 3 -k gevent --max-requests 500 sparmed.wsgi --preload
