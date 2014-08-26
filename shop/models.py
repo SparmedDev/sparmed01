@@ -16,7 +16,7 @@ class ProductImage(models.Model):
       return u'%s' % self.image_title
 
 class Product(models.Model):
-    product_id = models.CharField(max_length=255, verbose_name="Product #", default="OOOO-0000")
+    product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
     name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")
     in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)
     description = models.CharField(max_length=255, verbose_name="Product description", blank=True)

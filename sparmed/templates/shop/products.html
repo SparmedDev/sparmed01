@@ -26,7 +26,7 @@
     <div class="product-item">
       <a title="{{ product.name }}" href="{{ product.get_absolute_url }}">
         <h3>{{ product.name }}</h3>
-        <p>Product #: {{ product.product_id }}</p>
+        <p>Product ID: {{ product.product_id }}</p>
         {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
 
         {% with product.images.all|first as image %}
