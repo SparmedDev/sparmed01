@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load compress %}
+
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="description" content="{% block pagedescription %}{% endblock %}" />
+    <meta name="author" content="Alpha Stage Studios - Rami@AlphaStageStudios.com" />
+
+    {% block metas %}
+    {% endblock %}
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="icon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
+    <link rel="favicon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
+
+    {% bootstrap_css %}
+
+    <title>
+      {% block title %}{% endblock %} | SparMed
+    </title>
+
+    {% block head %}
+    {% endblock}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+    {% block bodytop %}
+    {% endblock %}
+    
+    <section style="display: block; margin: 0px auto; width: 60%;">
+      {% block body %}
+      {% endblock %}
+    </section>
+
+    <p class="text-center text-muted" style="margin-top: auto;"><em>Website under development by <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>
+
+
+    {# Load javascript at bottom for speed optimization #}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    {% compress js inline %}
+    <script type="text/javascript">
+      if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='{% static 'js/jquery.min.js' %}' type='text/javascript'%3E%3C/script%3E"));
+      }
+    </script>
+    {% endcompress %}
+
+    {# Load Bootstrap javascript #}
+    {% bootstrap_javascript %}
+
+    {# Load Google Analytics Javascript #}
+    {% compress js inline %}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-54174179-1', 'sparmed.dk');
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+    </script>
+    {% endcompress %}
+
+  </body>
+
+</html>

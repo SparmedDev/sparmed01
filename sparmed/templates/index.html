@@ -1,102 +1,42 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load compress %}
 
-<html lang="en">
+<img class="img-responsive img-rounded" src="{% static 'sparmed-logo.png' %}" alt="Sparmed.dk Logo" style="margin: 0px auto; width:50%; padding-top: 10px;">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<hr>
 
-    <meta name="description" content="Sparmed.dk - GOosafe in IVF Laboratories" />
-    <meta name="author" content="Alpha Stage Studios - Rami@AlphaStageStudios.com" />
+<h1 class="text-center">Website Under Construction</h1>
+<p class="text-center"><em>Stay Tuned for Updates</em></p>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-    <link rel="icon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
-    <link rel="favicon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
-    
-    {% bootstrap_css %}
+<hr>
 
-    <title>
-      Sparmed.dk - GOosafe in IVF Laboratories
-    </title>
+<h2 class="text-center">Contact</h2>
+<p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a></p>
+<p class="text-center">Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
+<p class="text-center">Address: Toppevadvej 34, 3660 Stenløse, DENMARK</p>
+<iframe width="600"
+        height="250"
+        frameborder="0" 
+        style="border:0; margin:0px auto; display: block;"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
+             &q=Toppevadvej+34+3660+stenlose+Sparmed+ApS">
+</iframe>
 
-  </head>
+<section>
+  <iframe width="200"
+          height="150"
+          frameborder="0"
+          style="border:0px; display: block; margin: 0px auto; padding-top: 20px;"
+          src="http://www.facebook.com/plugins/likebox.php?
+               href=https%3A%2F%2Fwww.facebook.com%2FSparMED&width&height=62&colorscheme=light&show_faces=false&header=false&stream=false&show_border=false&appId=561016490672735">
+  </iframe>
 
-  <body>
-    <section style="display: block; margin: 0px auto; width: 60%;">
-      <img class="img-responsive img-rounded" src="{% static 'sparmed-logo.png' %}" alt="Sparmed.dk Logo" style="margin: 0px auto; width:50%; padding-top: 10px;">
+</section>
 
-      <hr>
-      
-      <h1 class="text-center">Website Under Construction</h1>
-      <p class="text-center"><em>Stay Tuned for Updates</em></p>
-            
-      <hr>
-
-      <h2 class="text-center">Contact</h2>
-      <p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a></p>
-      <p class="text-center">Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
-      <p class="text-center">Address: Toppevadvej 34, 3660 Stenløse, DENMARK</p>
-      <iframe width="600"
-              height="250"
-              frameborder="0" 
-              style="border:0; margin:0px auto; display: block;"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
-                   &q=Toppevadvej+34+3660+stenlose+Sparmed+ApS">
-      </iframe>
-
-      <section>
-        <iframe width="200"
-                height="150"
-                frameborder="0"
-                style="border:0px; display: block; margin: 0px auto; padding-top: 20px;"
-                src="http://www.facebook.com/plugins/likebox.php?
-                     href=https%3A%2F%2Fwww.facebook.com%2FSparMED&width&height=62&colorscheme=light&show_faces=false&header=false&stream=false&show_border=false&appId=561016490672735">
-        </iframe>
-        
-      </section>
-      
-      <hr>
-      
-      <p class="text-center text-muted" style="margin-top: auto;"><em>Website under development by <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>
-      
-    </section>
+<hr>
 
 
 
-    {# Load javascript at bottom for speed optimization #}
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    {% compress js inline %}
-    <script type="text/javascript">
-        if (typeof jQuery == 'undefined') {
-            document.write(unescape("%3Cscript src='{% static 'js/jquery.min.js' %}' type='text/javascript'%3E%3C/script%3E"));
-        }
-    </script>
-    {% endcompress %}
-
-    {# Load Bootstrap javascript #}
-    {% bootstrap_javascript %}
-    
-    {# Load Google Analytics Javascript #}
-    {% compress js inline %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-54174179-1', 'sparmed.dk');
-      ga('require', 'displayfeatures');
-      ga('send', 'pageview');
-    </script>
-    {% endcompress %}
-
-  </body>
-
-</html>
