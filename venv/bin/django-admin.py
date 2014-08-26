@@ -1,4 +1,4 @@
-#!/home/action/workspace/venv/bin/python
+#!/home/action/workspace/sparmed/venv/bin/python
 from django.core import management
 
 if __name__ == "__main__":

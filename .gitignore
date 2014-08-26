@@ -49,10 +49,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+venv_old/
 venv/
 py27env/
 *.pyc
 staticfiles/
 keys-ignore/
-
-.env

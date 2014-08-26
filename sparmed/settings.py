@@ -4,8 +4,16 @@ BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').repla
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
 HTTPS = False
+
+# Security # Enable for  HTTPS
+SECURE_SSL_REDIRECT = HTTPS
+SECURE_HSTS_SECONDS = 60 * 60  # 1 hour
+SECURE_HSTS_INCLUDE_SUBDOMAINS = HTTPS
+SECURE_FRAME_DENY = HTTPS
+SECURE_CONTENT_TYPE_NOSNIFF = HTTPS
+SECURE_BROWSER_XSS_FILTER = HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ADMINS = (
   ('RamiAhmed', 'rami@alphastagestudios.com'),
@@ -28,6 +36,11 @@ if not DEBUG:
     from memcacheify import memcacheify
     CACHES = memcacheify()
 
+    # Enable for HTTPS
+    SESSION_COOKIE_SECURE = HTTPS
+
+    # Fix admin login cookie not being set correctly 
+    SESSION_COOKIE_DOMAIN = 'www.alphastagestudios.com'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
@@ -48,6 +61,13 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
@@ -83,6 +103,7 @@ THIRD_PARTY_APPS = (
   'compressor',
   'bootstrap3',
   'robots',
+  'sorl.thumbnail',
   #'storages',
   #'wysihtml5',
   #'collectfast',
@@ -90,10 +111,11 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
   'sparmed',
+  'contact',
+  'shop',
 )
 
 INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
@@ -104,6 +126,7 @@ MIDDLEWARE_CLASSES = (
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  'django.middleware.http.ConditionalGetMiddleware',
   'django.middleware.cache.FetchFromCacheMiddleware',
   'htmlmin.middleware.MarkRequestMiddleware',
 )
@@ -115,12 +138,14 @@ EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
 EMAIL_USE_TLS = True
 
-SERVER_EMAIL = "SparMed.dk <info@SparMed.dk>"
+SERVER_EMAIL = "SparMed.dk <admin@SparMed.dk>"
 
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
 EMAIL_SUBJECT_PREFIX = "SparMed.dk"
 
+# Robots caching
+ROBOTS_CACHE_TIMEOUT = 60*60*24 # = 24 hours
 
 
 LOGGING = {

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load compress %}
+
+{% block pagedescription %}Contact SparMed for the best products for GOosafe IVF Laboratories{% endblock %}
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Contact Us</h1>
+<div class="row">
+  <div class="col-md-6">
+    <p><strong>SparMed ApS</strong></p>
+    <p>CVR: DK-30 89 85 75</p>
+    <p>Address: Toppevadvej 34-38, 3660 Stenløse, DENMARK</p>
+
+    <p>Email: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a></p>
+    <p>Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
+    <p>Fax: <a href="fax:004539402564">(+45) 39 40 25 64</a></p>
+  </div>
+  <div class="col-md-6">
+    <p><br>Bank information:</p>
+    <p>Danske Bank A/S</p>
+    <p>Address: Holmens Kanal 2-12,1092 Copenhagen, Denmark</p>
+    <p>SWIFT code: DABADKKK</p>
+  </div>
+</div>
+
+<div class="row" style="display: block; width: 50%; margin: 0px auto;">
+  <div class="col-md-6">
+    <iframe width="200"
+            height="88"
+            frameborder="0"
+            style="border:0px; display: block;"
+            src="http://www.facebook.com/plugins/likebox.php?
+                 href=https%3A%2F%2Fwww.facebook.com%2FSparMED&width&height=62&colorscheme=light&show_faces=false&header=false&stream=false&show_border=false&appId=561016490672735">
+    </iframe>
+  </div>
+  <div class="col-md-6">
+    <span class="minor-skip"></span>
+    <a href="https://twitter.com/SparMed" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @SparMed</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+</div>
+
+<hr>
+
+<iframe width="700"
+        height="350"
+        frameborder="0"
+        style="border:0px; margin:0px auto; display: block;"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
+             &q=Toppevadvej+34+3660+stenlose+Sparmed+ApS">
+</iframe>
+
+<hr>
+
+<article>
+  <section id="contact-form">
+    {% if feedback %}
+    <div class="alert alert-success">
+      <p>{{ feedback }}</p>
+    </div>
+    {% else %}
+    <form role="form" class="form" action="{% url 'contact' %}" method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+
+      {% buttons submit='Send Message' %}{% endbuttons %}
+    </form>
+    {% endif %}
+  </section>
+</article>
+
+{% endblock %}

@@ -3,9 +3,9 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load compress %}
+{% load base_extras %}
 
 <html lang="en">
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +24,10 @@
 
     {% bootstrap_css %}
 
+    {% compress css inline %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" charset="utf-8">
+    {% endcompress %}
+
     <title>
       {% block title %}{% endblock %} | SparMed
     </title>
@@ -34,22 +38,64 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
 
   </head>
   <body>
     {% block bodytop %}
     {% endblock %}
-    
-    <section style="display: block; margin: 0px auto; width: 60%;">
-      {% block body %}
-      {% endblock %}
-    </section>
 
-    <p class="text-center text-muted" style="margin-top: auto;"><em>Website under development by <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>
+    <section id="main-container">
 
+      <header id="header">
+        <div id="nav-logo">
+          <img class="img-responsive img-rounded" src="{% static 'sparmed-logo.png' %}" alt="Sparmed.dk Logo">
+        </div>
+
+        <nav role="navigation">
+          <ul class="nav nav-pills">
+            <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
+            <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>
+            <li class="btn-fancy{% navactive request 'contact' %}"><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li class="btn-fancy{% navactive request 'products' %}"><a href="{% url 'products' %}">Products</a></li>
+            <li class="btn-fancy{% navactive request 'distributors' %}"><a href="{% url 'distributors' %}">Distributors</a></li>
+            <!--<li class="btn-fancy"><a href="">Distributor Login</a></li>-->
+          </ul>
+        </nav>
+      </header>
+
+      <section id="content">
+        {% block body %}
+        {% endblock %}
+      </section>
+
+      <footer id="footer">
+        <div class="row">
+          <div class="col-sm-4">
+            <p class="text-right"><strong>Sparmed ApS</strong></p>
+            <p class="text-right">DK-30 89 85 75</p>
+            <p class="text-right">Toppevadvej 34-38, 3660 Stenløse, DK</p>
+          </div>
+
+          <div class="col-sm-4">
+            <p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a></p>
+            <p class="text-center">Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
+            <p class="text-center">Fax: <a href="fax:004539402564">(+45) 39 40 25 64</a></p>
+          </div>
+
+          <div class="col-sm-4">
+            <p class="text-left"><a href="">Privacy Policy</a></p>
+            <p class="text-left"><a href="">Terms &amp; Conditions</a></p>            
+            <p class="text-left">&copy; Copyright 2014 Sparmed ApS</p>
+          </div>
+        </div>
+        <p><span class="minor-skip"></span><span class="minor-skip"></span></p>
+        <p class="text-center"><em>Website by <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>
+      </footer>
+
+    </section> <!-- /main-container -->
 
     {# Load javascript at bottom for speed optimization #}
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
