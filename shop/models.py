@@ -4,9 +4,6 @@ from django.core.urlresolvers import reverse
 from sorl.thumbnail import ImageField
 import datetime
 
-import gevent_psycopg2
-gevent_psycopg2.monkey_patch()
-
 class ProductImage(models.Model):
   image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
   image = ImageField(upload_to="/media/products")

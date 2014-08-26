@@ -3,9 +3,6 @@ from django.contrib import admin
 from shop.models import ProductImage, Product, Category, Subcategory
 from sorl.thumbnail.admin import AdminImageMixin
 
-import gevent_psycopg2
-gevent_psycopg2.monkey_patch()
-
 class ProductImageAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ['image_title']
     search_fields = ['image_title']
