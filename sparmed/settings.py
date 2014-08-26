@@ -24,7 +24,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
-if not Debug:
+if not DEBUG:
     from memcacheify import memcacheify
     CACHES = memcacheify()
 
