@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from shop.models import Product
 
 # Create your views here.
-def products(request, slug):
+def products(request, slug="0"):
     try:
         category = Category.objects.get(slug=slug)    
     except Category.DoesNotExist:
