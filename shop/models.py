@@ -4,8 +4,6 @@ from django.core.urlresolvers import reverse
 from sorl.thumbnail import ImageField
 import datetime
 
-from shop import views
-
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
     image = ImageField(upload_to="/media/products")
@@ -28,7 +26,7 @@ class Product(models.Model):
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")
 
     def get_absolute_url(self):
-        return reverse(views.details, args=[self.category.slug, self.slug])
+        return reverse('shop.views.details', args=[self.category.slug, self.slug])
 
     class Meta:
         ordering = ['-added']
@@ -44,7 +42,7 @@ class Subcategory(models.Model):
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
 
     def get_absolute_url(self):
-        return reverse(views.products, args=[self.category.slug,])
+        return reverse('shop.views.products', args=[self.category.slug,])
 
     class Meta:
         ordering = ['-added']
@@ -59,7 +57,7 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
 
     def get_absolute_url(self):
-        return reverse(views.products, args=[self.slug,])
+        return reverse('shop.views.products', args=[self.slug,])
 
     class Meta:
         ordering = ['-added']
