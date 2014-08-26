@@ -21,7 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {"slug": ('product_id',)}
 
-    inlines = [ProductImageInline,ProductSizeInline,]
+    inlines = [ProductImageInline,]
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added']
