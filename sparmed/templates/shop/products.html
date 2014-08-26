@@ -10,8 +10,37 @@
 
 {% block body %}
 
-<h1 class="text-center">Products</h1>
+<h1 class="text-center">{{ category.name }}</h1>
+{% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
 
+{% with category.subcategories as subcats %}
+{% for subcat in subcats %}
+<h2 class="text-center">{{ subcat.name }}</h2>
+{% if subcat.description %}<p class="text-center"><em>{{ subcat.description }}</em></p>{% endif %}
 
+{% with subcat.products as products %}
+{% for product in products %}
+{% if forloop.counter0|divisibleby:"4" or forloop.first %}
+<div class="row">
+  {% endif %}
+  <div class="col-md-3">
+    <div class="product-item">
+      <a title="{{ product.name }}" href="{{ product.get_absolute_url }}">
+        <h3>{{ product.name }}</h3>
+        <p>Product #: {{ product.product_id }}</p>
+        {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
+
+        {% with product.images.all|first as image %}
+        {% if image %}
+        <p><img class="img-responsive shop-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
+        {% endif %}
+        {% endwith %}
+      </a>
+    </div>
+  </div>
+  {% if not forloop.first or forloop.last %}{% if forloop.counter|divisibleby:"4" or forloop.last %}</div>{% endif %}{% endif %}
+{% endfor %}
+
+{% endfor %}
 
 {% endblock %}

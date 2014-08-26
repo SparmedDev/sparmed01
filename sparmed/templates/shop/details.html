@@ -10,8 +10,37 @@
 
 {% block body %}
 
-<h1 class="text-center">Product</h1>
+<h1 class="text-center">{{ category.name }}</h1>
+{% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
 
+<h2 class="text-center">{{ product.name }}</h2>
+<p class="text-center">Product #: {{ product.product_id }}</p>
+{% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
 
+<div class="row">
+  <div class="col-sm-6">
+    {% if images %}
+    {% for image in images %}
+    <a href="{{ image.get_absolute_url }}" title="{{ image.image_title }}">
+      <img class="img-responsive" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
+    </a>    
+    {% endfor %}
+
+    {% else %}
+    <div class="alert alert-warning">No pictures available</div>
+    {% endif %}
+  </div>
+  <div class="col-sm-6 shop-product-details">
+    {% if product.description %}<p><em>{{ product.description }}</em></p>{% endif %}
+
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style">
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    </div>
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53062a980fcd97b7"></script>
+    <!-- AddThis Button END -->
+  </div>
+</div>       
 
 {% endblock %}

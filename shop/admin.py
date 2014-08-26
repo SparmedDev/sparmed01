@@ -11,13 +11,9 @@ class ProductImageInline(admin.StackedInline):
     model = ProductImage
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'added', 'product_id']
-
+    list_display = ['name', 'added', 'product_id', 'in_stock']
     list_filter = ['added']
-
-    search_fields = ['name', 'description', 'product_id']
-
-    save_on_top = True
+    search_fields = ['product_id', 'name', 'description', 'in_stock']
 
     prepopulated_fields = {"slug": ('product_id',)}
 
@@ -25,8 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added']
-    list_filter = ['added']
-  
+    list_filter = ['added']  
     search_fields = ['name']
     date_hierarchy = 'added'
   
@@ -34,8 +29,7 @@ class CategoryAdmin(admin.ModelAdmin):
     
 class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added']
-    list_filter = ['added']
-  
+    list_filter = ['added']  
     search_fields = ['name']
     date_hierarchy = 'added'
   
