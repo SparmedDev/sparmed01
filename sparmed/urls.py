@@ -23,8 +23,8 @@ urlpatterns = patterns('',
                        url(r'^contact/$', 'contact.views.contact', name='contact'),
                        url(r'^thanks/$', 'contact.views.thanks', name='thanks'),
 
-                       url(r'^products/(?P<collection_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details', name='product-details'),
-                       url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products', name='products'),
+                       url(r'^products/(?P<collection_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
+                       url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products'),
                        url(r'^products/$', 'shop.views.products', name='products'),
 
                        url(r'distributors/$', views.distributors, name='distributors'),
