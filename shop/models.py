@@ -5,15 +5,15 @@ from sorl.thumbnail import ImageField
 import datetime
 
 class ProductImage(models.Model):
-  image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
-  image = ImageField(upload_to="/media/products")
-  product = models.ForeignKey('Product', related_name="images", verbose_name="Associated  Product")
+    image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
+    image = ImageField(upload_to="/media/products")
+    product = models.ForeignKey('Product', related_name="images", verbose_name="Associated Product")
 
-  def get_absolute_url(self):
-    return u'%s' % self.image.url
+    def get_absolute_url(self):
+      return u'%s' % self.image.url
 
-  def __unicode__(self):
-    return u'%s' % self.image_title
+    def __unicode__(self):
+      return u'%s' % self.image_title
 
 class Product(models.Model):
     product_id = models.CharField(max_length=255, verbose_name="Product #", default="OOOO-0000")
