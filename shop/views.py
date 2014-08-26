@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 
 from shop.models import Product, Category
 
+import gevent_psycopg2
+gevent_psycopg2.monkey_patch()
+
 # Create your views here.
 def products(request, slug="0"):
     try:
