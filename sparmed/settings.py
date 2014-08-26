@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 HTTPS = False
@@ -24,8 +24,10 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
-from memcacheify import memcacheify
-CACHES = memcacheify()
+if not Debug:
+    from memcacheify import memcacheify
+    CACHES = memcacheify()
+
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
