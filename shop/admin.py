@@ -27,7 +27,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added']
     list_filter = ['added']
   
-    search_fields = 'name']
+    search_fields = ['name']
     date_hierarchy = 'added'
   
     prepopulated_fields = {"slug": ('name',)}
@@ -36,7 +36,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added']
     list_filter = ['added']
   
-    search_fields = 'name']
+    search_fields = ['name']
     date_hierarchy = 'added'
   
     prepopulated_fields = {"slug": ('name',)}
