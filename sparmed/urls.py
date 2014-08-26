@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import sitemaps
 
 from sparmed import views
+import shop
 
 from django.contrib import admin
 admin.autodiscover()
@@ -23,9 +24,9 @@ urlpatterns = patterns('',
                        url(r'^contact/$', 'contact.views.contact', name='contact'),
                        url(r'^thanks/$', 'contact.views.thanks', name='thanks'),
 
-                       url(r'^products/(?P<collection_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
-                       url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products'),
-                       url(r'^products/$', 'shop.views.products', name='products'),
+                       url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', shop.views.details),
+                       url(r'^products/(?P<slug>[\w\-]+)/$', shop.views.products),
+                       url(r'^products/$', shop.views.products, name='products'),
 
                        url(r'distributors/$', views.distributors, name='distributors'),
 
