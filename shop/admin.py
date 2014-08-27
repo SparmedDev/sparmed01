@@ -11,7 +11,7 @@ class ProductImageInline(admin.StackedInline):
     model = ProductImage
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'added', 'product_id', 'in_stock']
+    list_display = ['name', 'added', 'product_id', 'in_stock', 'description', 'subcategory', 'category']
     list_filter = ['added']
     search_fields = ['product_id', 'name', 'description', 'in_stock']
 
