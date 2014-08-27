@@ -183,7 +183,7 @@ EMAIL_SUBJECT_PREFIX = "SparMed.dk"
 ROBOTS_CACHE_TIMEOUT = 60*60*24 # = 24 hours
 
 # LOGIN
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/distributor-login/'
 LOGIN_URL = 'django.contrib.auth.views.login'
 
 LOGGING = {

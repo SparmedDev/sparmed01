@@ -17,3 +17,7 @@ def contact(request):
 def distributors(request):
 
   return render(request, "distributors.html")
+
+def distributor_login(request):
+  
+  return render(request, "distributor_login.html")

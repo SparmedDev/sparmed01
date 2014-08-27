@@ -54,6 +54,8 @@ html, body {
 
 #main-container {
   display: block;
+  position: relative;
+  
   margin: 0px auto;
   width: 60%;
   padding: 5px;
