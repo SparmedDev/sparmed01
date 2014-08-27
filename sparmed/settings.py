@@ -148,6 +148,7 @@ LOCAL_APPS = (
   'contact',
   'shop',
   'news',
+  'distributor_login',
 )
 
 INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -182,6 +183,9 @@ EMAIL_SUBJECT_PREFIX = "SparMed.dk"
 # Robots caching
 ROBOTS_CACHE_TIMEOUT = 60*60*24 # = 24 hours
 
+# LOGIN
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'django.contrib.auth.views.login'
 
 LOGGING = {
     'version': 1,

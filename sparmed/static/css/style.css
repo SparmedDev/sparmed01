@@ -153,3 +153,11 @@ a {
     margin-top: 50px;
     padding: 5px;
 }
+
+#dist-login {
+    display: block;
+    position: absolute;
+  
+    top: 5px;
+    right: 10px;
+}
