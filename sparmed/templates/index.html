@@ -53,7 +53,23 @@
 {% compress js inline %}
 <script type="text/javascript">
   $(document).ready(function() {
-    $(".owl-carousel").owlCarousel();
+    $(".owl-carousel").owlCarousel({
+      itemsScaleUp: true,
+      slideSpeed: 600,
+      paginationSpeed: 1200,
+      rewindSpeed = 1500,
+      autoPlay: true,
+      stopOnHover: true,
+      
+      navigation: true,
+      scrollPerPage: true,
+      
+      responsiveBaseWidth: 'content',
+      
+      lazyLoad: true,
+      
+      autoHeight: true,
+    });
   });
 </script>
 {% endcompress %}
