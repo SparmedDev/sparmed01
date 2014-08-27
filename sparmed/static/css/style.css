@@ -155,7 +155,7 @@ a {
     max-height: 125px;
 }
 
-.product-item:not(:last-child) {
+.product-item + .product-item {
     border-right: 1px solid #008393;
 }
 
