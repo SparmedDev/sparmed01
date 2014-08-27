@@ -1,112 +1,112 @@
 html, body {
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
 
-  font-family: Verdana, Geneva, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
-
 #header, header {
-  display: block;
-  position: relative;
+    display: block;
+    position: relative;
 
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
 
-  padding: 5px;
-  height: 160px;
-  width: 100%;
-  border-bottom: 1px solid #008393;
+    padding: 5px;
+    height: 160px;
+    width: 100%;
+    border-bottom: 1px solid #008393;
 }
 
 #main-nav {
-  display: block;
-  position: absolute;
-  right: 5px;
-  bottom: 20px;
+    display: block;
+    position: absolute;
+    right: 5px;
+    bottom: 20px;
 }
 
 #nav-logo {
-  display: block;
-  position: absolute;
-  width: 25%;
-  left: 5px;
-  top: 5px;
-  bottom: 5px;
+    display: block;
+    position: absolute;
+    width: 25%;
+    left: 5px;
+    top: 5px;
+    bottom: 5px;
 }
 
 #footer, footer {
-  display: block;
-  margin: 0px auto;
-  margin-top: 25px;
-  margin-bottom: 5px;
-  padding: 10px;
-  border-top: 1px solid #008393;
+    display: block;
+    margin: 0px auto;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-top: 1px solid #008393;
 
-  font-size: 10px;
-  color: #888;
+    font-size: 10px;
+    color: #888;
 }
 
 #main-container {
-  display: block;
-  position: relative;
-  
-  margin: 0px auto;
-  width: 60%;
-  padding: 5px;
-  
-  z-index: 99;
+    display: block;
+    position: relative;
+
+    margin: 0px auto;
+    width: 60%;
+    padding: 5px;
+
+    z-index: 99;
 }
 
 #content {
-  display: block;
-  margin: 5px;
-  padding: 5px;
-  
-  z-index: 9;
+    display: block;
+    margin: 5px;
+    padding: 5px;
+
+    z-index: 9;
 }
 
 a {
-  font-weight: bold;
-  color: #008393;
+    font-weight: bold;
+    color: #008393;
+    text-decoration: none;
 }
 
 .btn-fancy > a {
-  font-weight: bold;
-  color: white;
+    font-weight: bold;
+    color: white;
 
-  background-color: #008393;
-  background: -webkit-linear-gradient(#008393, #005e69);
-  background: liniear-gradient(#008393, #005e69);
+    background-color: #008393;
+    background: -webkit-linear-gradient(#008393, #005e69);
+    background: liniear-gradient(#008393, #005e69);
 
-  text-shadow: 0 -1px 0 #000;
+    text-shadow: 0 -1px 0 #000;
 }
 
 .btn-fancy:hover > a {
-  background-color: #760d17;
-  background: -webkit-linear-gradient(#760d17, #000000);
-  background: liniear-gradient(#760d17, #000000);
+    background-color: #760d17;
+    background: -webkit-linear-gradient(#760d17, #000000);
+    background: liniear-gradient(#760d17, #000000);
 }
 
 .btn-fancy.active > a,
 .btn-fancy:active > a {
-  background-color: #ed1b2e;
-  background: -webkit-linear-gradient(#ed1b2e, #820f19);
-  background: liniear-gradient(#ed1b2e, #820f19);
-  
-  cursor: default;
+    background-color: #ed1b2e;
+    background: -webkit-linear-gradient(#ed1b2e, #820f19);
+    background: liniear-gradient(#ed1b2e, #820f19);
+
+    cursor: default;
 }
 
 
 .minor-skip {
-  display: block;
-  height: 15px;
-  width: auto;
+    display: block;
+    height: 15px;
+    width: auto;
 }
 
 .owl-image {
@@ -172,4 +172,10 @@ a {
 
 #dist-login > a {
     padding: 5px;
+    font-weight: bold;  
+}
+
+#dist-login > a:hover {
+    color: #ed1b2e;
+    text-decoration: none;
 }
