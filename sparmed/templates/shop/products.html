@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load base_extras %}
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load compress %}
@@ -14,7 +15,7 @@
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
     {% for cat in categories reversed %}
-    <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    <li class="{% productnavactive request '{{ cat.slug }}' %}"><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
     {% endfor %}
   </ul>
 </nav>
@@ -66,11 +67,11 @@
 {% compress js inline %}
 <script type="text/javascript">
     //$('#products-nav li').click(function(e) {
-   $('#products-nav > ul').on('click', 'li', function () {
+   /*$('#products-nav > ul').on('click', 'li', function () {
         $('#products-nav li').removeClass('active');
         $(this).addClass('active');
         console.log("clicked");
-    });
+    });*/
   
     /*$(document).ready(function() {
         $('#products-nav li:first').addClass('active');

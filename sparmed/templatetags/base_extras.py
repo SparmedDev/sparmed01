@@ -14,6 +14,12 @@ def navactive(request, urls):
 
     return ""
 
+@register.simple_tag
+def productnavactive(request, name):
+    if name in request.path_info:
+        return "active"
+    
+    return ""
 
 @register.tag
 def settings_value(parser, token):
