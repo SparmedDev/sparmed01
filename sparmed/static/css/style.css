@@ -159,8 +159,9 @@ a {
 #dist-login {
     display: block;
     position: absolute;
-  
-    margin: 5px;
+
+    width: 40px;
+    height: 40px;
     top: 5px;
     right: 10px;
 }
