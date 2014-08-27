@@ -16,7 +16,7 @@ class NewsPostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
     date_hierarchy = 'added'
     
-    preopulated_fields = {"slug": ('title',)}
+    prepopulated_fields = {"slug": ('title',)}
     
     inlines = [NewsImageInline,]
 
