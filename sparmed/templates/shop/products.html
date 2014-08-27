@@ -14,7 +14,7 @@
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
     {% for cat in categories %}
-    <li><a role="tab" data-toggle="tab" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
     {% endfor %}
   </ul>
 </nav>
@@ -59,4 +59,18 @@
   {% endwith %}
   
 </article>
+{% endblock %}
+
+{% endbody %}
+
+{% compress js inline %}
+<script type="text/javascript">
+    $('#products-nav > a').click(function(e) {
+        $('#products-nav > li').removeClass('active');
+        $(this).addClass('active');
+        console.log("Clicked: " + ($(this).innerHTML).toString());
+    });
+</script>
+{% endcompress %}
+
 {% endblock %}
