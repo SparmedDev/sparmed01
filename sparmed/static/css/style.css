@@ -160,6 +160,15 @@ a {
     display: block;
     position: absolute;
   
+    margin: 5px;
     top: 5px;
     right: 10px;
+}
+
+#dist-login > a {
+    display: block;
+    position: relative;
+  
+    margin: 5px;
+    cursor: pointer;
 }
