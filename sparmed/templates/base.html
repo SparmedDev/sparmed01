@@ -62,7 +62,15 @@
         </div>
 
         <nav id="main-nav" role="navigation">
-          <ul class="nav nav-pills">
+          <ul class="nav nav-pills nav-stacked visible-sm visible-xs">
+            <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
+            <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>
+            <li class="btn-fancy{% navactive request 'contact' %}"><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li class="btn-fancy{% navactive request 'products' %}"><a href="{% url 'products' %}">Products</a></li>
+            <li class="btn-fancy{% navactive request 'distributors' %}"><a href="{% url 'distributors' %}">Distributors</a></li>
+          </ul>
+          
+          <ul class="nav nav-pills visible-md visible-lg">
             <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
             <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>
             <li class="btn-fancy{% navactive request 'contact' %}"><a href="{% url 'contact' %}">Contact Us</a></li>
