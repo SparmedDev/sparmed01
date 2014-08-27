@@ -98,6 +98,10 @@ html, body {
     z-index: 9;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: #003339;
+}
+
 a {
     font-weight: bold;
     color: #008393;
@@ -148,7 +152,11 @@ a {
 .product-image {
     display: block;
     margin: 0px auto;    
-    max-height: 250px;
+    max-height: 125px;
+}
+
+.product-item:not(:last-child) {
+    border-right: 1px solid #008393;
 }
 
 .nav-tabs {
