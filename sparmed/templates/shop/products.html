@@ -14,7 +14,7 @@
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
     {% for cat in categories %}
-    <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    <li{% if forloop.first %} class="active"{% endif %}><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
     {% endfor %}
   </ul>
 </nav>
@@ -61,7 +61,7 @@
 </article>
 {% endblock %}
 
-{% endbody %}
+{% block endbody %}
 
 {% compress js inline %}
 <script type="text/javascript">
