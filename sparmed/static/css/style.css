@@ -115,6 +115,10 @@ a {
     max-height: 250px;
 }
 
+.nav-tabs {
+    border: 0px;
+}
+
 #products-nav {
     display: block;
     float: left;
