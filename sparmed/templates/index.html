@@ -9,9 +9,28 @@
 
 {% block body %}
 
-<h1 class="text-center">Website Under Construction</h1>
-<p class="text-center"><em>Stay Tuned for Updates</em></p>
+{% if news_posts %}
 
+{% for post in news_posts %}
+
+<article id="{{ post.slug }}">
+  <h2 class="text-center">{{ post.title }}</h2>
+  <p>Posted on: <time datetime="{{ post.added|date:'c' }}">{{ post.added|date }}</time>.</p>
+  <p>{{ post.content|safe }}</p>
+  
+  {% if post.images %}
+  {% for image in post.images.all %}
+  
+  <img class="img-responsive" src="{{ image.get_absolute_url }}" alt="{{ image.title }}">
+  
+  {% endfor %}
+  {% endif %}
+</article>
+
+{% if not forloop.last %}<hr>{% endif %}
+
+{% endfor %}
+{% endif %}
 
 
 {% endblock %}

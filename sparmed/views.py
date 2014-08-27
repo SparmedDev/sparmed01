@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from news.models import NewsPost
 
 def home(request):
+  news_posts = NewsPost.objects.all()
 
-  return render(request, "index.html")
+  return render(request, "index.html", {'news_posts':news_posts})
 
 def about(request):
 
