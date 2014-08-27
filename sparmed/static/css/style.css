@@ -59,12 +59,16 @@ html, body {
   margin: 0px auto;
   width: 60%;
   padding: 5px;
+  
+  z-index: 99;
 }
 
 #content {
   display: block;
   margin: 5px;
   padding: 5px;
+  
+  z-index: 9;
 }
 
 a {
@@ -164,4 +168,6 @@ a {
     height: 40px;
     top: 5px;
     right: 10px;
+  
+    z-index: 999;
 }
