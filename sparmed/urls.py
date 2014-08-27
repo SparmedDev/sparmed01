@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import sitemaps
+from django.contrib.sitemaps import GenericSitemap
 
 from sparmed import views
+from shop import Product, Category
 
 from django.contrib import admin
 admin.autodiscover()
@@ -15,7 +17,23 @@ class StaticViewsSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse(item)
+      
+product_dict = {
+    'queryset': Product.objects.all(),
+    'date_field': 'added',
+}
 
+category_dict = {
+    'queryset': Category.objects.all(),
+    'date_field': 'added',
+}
+
+sitemaps = {
+    'static': StaticViewsSitemap,
+    'products': GenericSitemap(product_dict, priority=0.2),
+    'categories': GenericSitemap(category_dict, priority=0.3),
+}
+      
 urlpatterns = patterns('',
                        url(r'^$', views.home, name='home'),
                        url(r'about/$', views.about, name='about'),
