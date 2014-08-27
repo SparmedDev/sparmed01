@@ -3,7 +3,7 @@ from django.contrib import sitemaps
 from django.contrib.sitemaps import GenericSitemap
 
 from sparmed import views
-from shop import Product, Category
+from shop.models import Product, Category
 
 from django.contrib import admin
 admin.autodiscover()
@@ -37,15 +37,14 @@ sitemaps = {
 urlpatterns = patterns('',
                        url(r'^$', views.home, name='home'),
                        url(r'about/$', views.about, name='about'),
+                       url(r'distributors/$', views.distributors, name='distributors'),
 
                        url(r'^contact/$', 'contact.views.contact', name='contact'),
                        url(r'^thanks/$', 'contact.views.thanks', name='thanks'),
 
                        url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
                        url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products'),
-                       url(r'^products/$', 'shop.views.products', name='products'),
-
-                       url(r'distributors/$', views.distributors, name='distributors'),
+                       url(r'^products/$', 'shop.views.products', name='products'),                       
 
                        url(r'^grappelli/', include('grappelli.urls')),
                        url(r'^admin/', include(admin.site.urls)),
