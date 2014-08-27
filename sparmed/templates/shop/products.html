@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% load base_extras %}
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load compress %}
+{% load base_extras %}
 
 {% block pagedescription %}Browse the finest quality IVF Laboratory equipment{% endblock %}
 {% block title %}Products{% endblock %}
@@ -62,23 +62,4 @@
   {% endwith %}
   
 </article>
-{% endblock %}
-
-{% block endbody %}
-
-{% compress js inline %}
-<script type="text/javascript">
-    //$('#products-nav li').click(function(e) {
-   /*$('#products-nav > ul').on('click', 'li', function () {
-        $('#products-nav li').removeClass('active');
-        $(this).addClass('active');
-        console.log("clicked");
-    });*/
-  
-    /*$(document).ready(function() {
-        $('#products-nav li:first').addClass('active');
-    });*/
-</script>
-{% endcompress %}
-
 {% endblock %}
