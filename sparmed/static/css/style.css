@@ -94,3 +94,10 @@ a {
   height: 15px;
   width: auto;
 }
+
+.owl-image {
+    display: block;
+    margin: 0px auto;
+    max-width: 50%;
+    max-height: 300px;
+}
