@@ -130,14 +130,6 @@ a {
     border-bottom: 1px solid #008393;
 }
 
-#products-nav li {
-    border-right: 1px solid #008393;
-}
-
-#products-nav li:last {
-    border: none;
-}
-
 #products-nav li > a {
     border: 0px;
 }
