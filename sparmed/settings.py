@@ -144,8 +144,7 @@ THIRD_PARTY_APPS = (
   'robots',
   'sorl.thumbnail',
   'storages',
-  #'wysihtml5',
-  #'collectfast',
+  'collectfast',
 )
 
 LOCAL_APPS = (
