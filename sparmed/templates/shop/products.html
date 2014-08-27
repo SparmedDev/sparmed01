@@ -10,6 +10,16 @@
 
 {% block body %}
 
+{% if categories %}
+<nav id="products-nav" role="navigation">
+  <ul class="nav nav-tabs" role="tablist">
+    {% for cat in categories %}
+    <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
 <h1 class="text-center">{{ category.name }}</h1>
 {% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
 

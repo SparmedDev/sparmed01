@@ -54,7 +54,7 @@
           <img class="img-responsive img-rounded" src="{% static 'sparmed-logo.png' %}" alt="Sparmed.dk Logo">
         </div>
 
-        <nav role="navigation">
+        <nav id="main-nav" role="navigation">
           <ul class="nav nav-pills">
             <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
             <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>

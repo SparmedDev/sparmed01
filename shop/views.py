@@ -9,9 +9,10 @@ def products(request, slug="0"):
     except Category.DoesNotExist:
         category = Category.objects.get(id=1)
         
+    categories = Category.objects.all()
     products = category.products.all()
   
-    return render(request, 'shop/products.html', {'category':category, 'products':products})
+    return render(request, 'shop/products.html', {'categories':categories, 'category':category, 'products':products})
 
 def details(request, category_slug, product_slug):
   category = get_object_or_404(Category, slug=category_slug)

@@ -22,7 +22,7 @@ html, body {
   border-bottom: 1px solid #008393;
 }
 
-nav {
+#main-nav {
   display: block;
   float: right;
   margin-top: 100px;
@@ -107,4 +107,11 @@ a {
     display: block;
     margin: 0px auto;    
     max-height: 250px;
+}
+
+#products-nav {
+    display: block;
+    float: right;
+    margin-bottom: 30px;
+    margin-top: 5px;
 }
