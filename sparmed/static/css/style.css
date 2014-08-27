@@ -92,6 +92,8 @@ a {
   background-color: #ed1b2e;
   background: -webkit-linear-gradient(#ed1b2e, #820f19);
   background: liniear-gradient(#ed1b2e, #820f19);
+  
+  cursor: default;
 }
 
 
@@ -128,12 +130,21 @@ a {
     border-bottom: 1px solid #008393;
 }
 
+#products-nav li {
+    border-right: 1px solid #008393;
+}
+
+#products-nav li:last {
+    border: none;
+}
+
 #products-nav li > a {
     border: 0px;
 }
 
 #products-nav li:hover > a {
     color: #760d17;
+    background-color: transparent;
 }
 
 #products-nav li.active > a,
