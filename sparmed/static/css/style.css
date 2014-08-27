@@ -153,9 +153,11 @@ a {
     display: block;
     margin: 0px auto;    
     max-height: 125px;
-  
+}
+
+.product-item {
     border-right: 1px solid #008393;
-    border-left: 1px solid #008393;
+    border-left: 1px solid #008393; 
 }
 
 .nav-tabs {
