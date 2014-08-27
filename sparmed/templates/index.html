@@ -22,21 +22,11 @@
 {% if news_posts %}
 {% for post in news_posts %}
 
-<article id="{{ post.slug }}">
-  <h2 class="text-center">{{ post.title }}</h2>
-  <p>Posted on: <time datetime="{{ post.added|date:'c' }}">{{ post.added|date }}</time>.</p>
-  <p>{{ post.content|safe }}</p>
-  
-  {% if post.images %}
-  <div id="owl-{{ post.slug }}" class="owl-carousel">
-    {% for image in post.images.all %}
-
-    <div><img class="img-responsive img-rounded owl-image" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl"></div>
-
-    {% endfor %}
-  </div>
-  {% endif %}
-</article>
+{% if forloop.counter0|divisibleby:"2" or forloop.first %}
+{% include 'news/news_post_left.html' %}
+{% else %}
+{% include 'news/news_post_right.html' %}
+{% endif %}
 
 {% if not forloop.last %}<hr>{% endif %}
 
