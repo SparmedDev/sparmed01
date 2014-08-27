@@ -115,3 +115,10 @@ a {
     margin-bottom: 30px;
     margin-top: 5px;
 }
+
+.category-article {
+    display: block;
+    width: 99%;
+    margin: 5px;
+    padding: 5px;
+}

@@ -20,41 +20,43 @@
 </nav>
 {% endif %}
 
-<h1 class="text-center">{{ category.name }}</h1>
-{% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
+<article class="category-article">
+  <h1 class="text-center">{{ category.name }}</h1>
+  {% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
 
-<hr>
+  <hr>
 
-{% with category.subcategories.all as subcats %}
-{% for subcat in subcats %}
-<h2 class="text-center">{{ subcat.name }}</h2>
-{% if subcat.description %}<p class="text-center"><em>{{ subcat.description }}</em></p>{% endif %}
+  {% with category.subcategories.all as subcats %}
+  {% for subcat in subcats %}
+  <h2 class="text-center">{{ subcat.name }}</h2>
+  {% if subcat.description %}<p class="text-center"><em>{{ subcat.description }}</em></p>{% endif %}
 
-{% for product in subcat.products.all  reversed %}
-{% if forloop.counter0|divisibleby:"4" or forloop.first %}
-<div class="row">
-  {% endif %}
-  <div class="col-md-3">
-    <div class="product-item">
-      <a title="{{ product.name }}" href="{{ product.get_absolute_url }}">
-        <h3>{{ product.name }}</h3>
-        <p>Product ID: {{ product.product_id }}</p>
-        {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
+  {% for product in subcat.products.all  reversed %}
+  {% if forloop.counter0|divisibleby:"4" or forloop.first %}
+  <div class="row">
+    {% endif %}
+    <div class="col-md-3">
+      <div class="product-item">
+        <a title="{{ product.name }}" href="{{ product.get_absolute_url }}">
+          <h3>{{ product.name }}</h3>
+          <p>Product ID: {{ product.product_id }}</p>
+          {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
 
-        {% with product.images.all|first as image %}
-        {% if image %}
-        <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
-        {% endif %}
-        {% endwith %}
-      </a>
+          {% with product.images.all|first as image %}
+          {% if image %}
+          <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
+          {% endif %}
+          {% endwith %}
+        </a>
+      </div>
     </div>
-  </div>
-  {% if not forloop.first or forloop.last %}{% if forloop.counter|divisibleby:"4" or forloop.last %}</div>{% endif %}{% endif %}
-{% endfor %}
+    {% if not forloop.first or forloop.last %}{% if forloop.counter|divisibleby:"4" or forloop.last %}</div>{% endif %}{% endif %}
+  {% endfor %}
 
-{% if not forloop.last %}<hr>{% endif %}
+  {% if not forloop.last %}<hr>{% endif %}
 
-{% endfor %}
-{% endwith %}
-
+  {% endfor %}
+  {% endwith %}
+  
+</article>
 {% endblock %}
