@@ -1,11 +1,11 @@
 <article id="{{ post.slug }}">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <h2>{{ post.title }}</h2>
       <p>Posted on: <time datetime="{{ post.added|date:'c' }}">{{ post.added|date }}</time>.</p>
       <p>{{ post.content|safe }}</p>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
       {% if post.images %}
       <div id="owl-{{ post.slug }}" class="owl-carousel">
         {% for image in post.images.all %}
