@@ -15,7 +15,9 @@
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
     {% for cat in categories reversed %}
-    <li class="{% productnavactive request '{{ cat.slug }}' %}"><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    {% with catslug=cat.slug %}
+    <li class="{% productnavactive request catslug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    {% endwith %}
     {% endfor %}
   </ul>
 </nav>
@@ -27,7 +29,7 @@
 
   <hr>
 
-  {% with category.subcategories.all as subcats %}
+  {% with subcats=category.subcategories.all %}
   {% for subcat in subcats %}
   <h2 class="text-center">{{ subcat.name }}</h2>
   {% if subcat.description %}<p class="text-center"><em>{{ subcat.description }}</em></p>{% endif %}
@@ -43,7 +45,7 @@
           <p>Product ID: {{ product.product_id }}</p>
           {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
 
-          {% with product.images.all|first as image %}
+          {% with image=product.images.all|first %}
           {% if image %}
           <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
           {% endif %}
