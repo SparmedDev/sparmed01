@@ -42,15 +42,14 @@
       <div class="product-item">
         <a title="{{ product.name }}" href="{{ product.get_absolute_url }}">
           <h4>{{ product.name }}</h4>
-          <p>Product ID: {{ product.product_id }}</p>
-          {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
-
-          {% with image=product.images.all|first %}
-          {% if image %}
-          <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
-          {% endif %}
-          {% endwith %}
         </a>
+        <p>Product ID: {{ product.product_id }}</p>
+
+        {% with image=product.images.all|first %}
+        {% if image %}
+        <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
+        {% endif %}
+        {% endwith %}
       </div>
     </div>
     {% if not forloop.first or forloop.last %}{% if forloop.counter|divisibleby:"4" or forloop.last %}</div>{% endif %}{% endif %}
