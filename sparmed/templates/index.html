@@ -50,11 +50,14 @@
 <!-- Include js plugin -->
 <script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8"></script>
 
+{% compress js inline %}
 <script type="text/javascript">
   $(document).ready(function() {
     $(".owl-carousel").owlCarousel();
   });
 </script>
+{% endcompress %}
+
 {% endblock %}
 
 
