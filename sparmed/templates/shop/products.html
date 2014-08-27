@@ -65,9 +65,9 @@
 
 {% compress js inline %}
 <script type="text/javascript">
-    $('#products-nav > a').click(function(e) {
+    $('#products-nav li > a').click(function(e) {
         $('#products-nav > li').removeClass('active');
-        $(this).addClass('active');
+        $(this).parent().addClass('active');
         console.log("Clicked: " + ($(this).innerHTML).toString());
     });
 </script>
