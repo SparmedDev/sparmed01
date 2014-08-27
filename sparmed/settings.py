@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -49,11 +49,7 @@ USE_L10N = True
 USE_TZ = True
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
-#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-#STATIC_URL = '/static/'
-#MEDIA_ROOT = os.path.join(STATIC_ROOT, 'mediafiles')
-#MEDIA_URL = STATIC_URL + 'media/'
-#COMPRESS_ROOT = STATIC_ROOT
+
 # Amazon AWS S3 credientials
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
