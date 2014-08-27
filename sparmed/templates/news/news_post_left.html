@@ -1,8 +1,8 @@
 <article id="{{ post.slug }}">
-  <h2 class="text-center">{{ post.title }}</h2>
-  <p>Posted on: <time datetime="{{ post.added|date:'c' }}">{{ post.added|date }}</time>.</p>
   <div class="row">
     <div class="col-md-6">
+      <h2 class="text-center">{{ post.title }}</h2>
+      <p>Posted on: <time datetime="{{ post.added|date:'c' }}">{{ post.added|date }}</time>.</p>
       <p>{{ post.content|safe }}</p>
     </div>
     <div class="col-md-6">
@@ -15,7 +15,7 @@
         {% endfor %}
       </div>
       {% else %}
-        <p class="text-center text-muted">No pictures available</p>
+      <p class="text-center text-muted">No pictures available</p>
       {% endif %}
     </div>
   </div>

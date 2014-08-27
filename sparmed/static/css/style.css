@@ -98,6 +98,7 @@ a {
 .owl-image {
     display: block;
     margin: 0px auto;
-    max-width: 50%;
+    min-width: 50%;
+    max-width: 95%;
     max-height: 300px;
 }
