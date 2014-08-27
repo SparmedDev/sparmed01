@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import sitemaps
 from django.contrib.sitemaps import GenericSitemap
+from django.core.urlresolvers import reverse
 
 from sparmed import views
 from shop.models import Product, Category
