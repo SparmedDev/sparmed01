@@ -122,7 +122,16 @@ a {
     height: 50px;
 }
 
-#products-nav > li.active > a {
+#products-nav li > a {
+    border: 0px;
+}
+
+#products-nav li:hover > a {
+    color: #760d17;
+}
+
+#products-nav li.active > a,
+#products-nav li:active > a {
     color: #ed1b2e;
     font-weight: bold;
 }

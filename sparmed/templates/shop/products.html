@@ -31,7 +31,7 @@
   <h2 class="text-center">{{ subcat.name }}</h2>
   {% if subcat.description %}<p class="text-center"><em>{{ subcat.description }}</em></p>{% endif %}
 
-  {% for product in subcat.products.all  reversed %}
+  {% for product in subcat.products.all reversed %}
   {% if forloop.counter0|divisibleby:"4" or forloop.first %}
   <div class="row">
     {% endif %}
