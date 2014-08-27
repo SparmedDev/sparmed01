@@ -13,6 +13,8 @@
 <h1 class="text-center">{{ category.name }}</h1>
 {% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
 
+<hr>
+
 {% with category.subcategories.all as subcats %}
 {% for subcat in subcats %}
 <h2 class="text-center">{{ subcat.name }}</h2>
