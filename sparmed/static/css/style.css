@@ -179,3 +179,9 @@ a {
     color: #ed1b2e;
     text-decoration: none;
 }
+
+#loginform {
+    display: block;
+    width: 50%;
+    margin: 0px auto;
+}

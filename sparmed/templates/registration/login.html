@@ -11,12 +11,14 @@
 
 <h2 class="text-center">Login</h2>
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-{% csrf_token %}
-{% bootstrap_form form %}
-  
-{% buttons submit='Login' %}{% endbuttons %}
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+<section id="loginform">
+    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons submit='Login' %}{% endbuttons %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</section>
 
 {% endblock %}
