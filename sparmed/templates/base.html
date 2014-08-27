@@ -48,12 +48,11 @@
     {% endblock %}
 
     <section id="main-container">      
-      <div id="dist-login">
-        {{ user }}
+      <div id="dist-login">        
         {% if user.is_anonymous %}
         <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
         {% else %}
-        <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+        {{ user }} | <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
         {% endif %}
       </div>
 
