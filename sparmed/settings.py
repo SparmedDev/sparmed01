@@ -49,11 +49,50 @@ USE_L10N = True
 USE_TZ = True
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(STATIC_ROOT, 'mediafiles')
+#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+#STATIC_URL = '/static/'
+#MEDIA_ROOT = os.path.join(STATIC_ROOT, 'mediafiles')
+#MEDIA_URL = STATIC_URL + 'media/'
+#COMPRESS_ROOT = STATIC_ROOT
+# Amazon AWS S3 credientials
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Storage'
+STATICFILES_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
+STATIC_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+MEDIA_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
+
 MEDIA_URL = STATIC_URL + 'media/'
-COMPRESS_ROOT = STATIC_ROOT
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+from datetime import date, timedelta
+yearfromtoday = date.today() + timedelta(days=365)
+AWS_HEADERS = {
+  'Cache-Control': 'public, max-age=86400',
+  'Expires': yearfromtoday.strftime('%a, %d %b %Y 20:00:00 GMT'),
+}
+AWS_AUTO_CREATE_BUCKET = True
+AWS_S3_FILE_OVERWRITE = False
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_SECURE_URLS = True
+AWS_REDUCED_REDUNDANCY = False
+AWS_IS_GZIPPED = False
+AWS_PRELOAD_METADATA = True
+
+COMPRESS_ENABLED = DEBUG is False
+if COMPRESS_ENABLED:
+    COMPRESS_CSS_FILTERS = [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.CSSMinFilter',
+    ]
+    COMPRESS_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
+    COMPRESS_URL = STATIC_URL
+    COMPRESS_OFFLINE = False
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -104,7 +143,7 @@ THIRD_PARTY_APPS = (
   'bootstrap3',
   'robots',
   'sorl.thumbnail',
-  #'storages',
+  'storages',
   #'wysihtml5',
   #'collectfast',
 )
