@@ -102,3 +102,10 @@ a {
     max-width: 95%;
     max-height: 300px;
 }
+
+.product-image {
+    display: block;
+    margin: 0px auto;    
+    max-width: 50%;
+    max-height: 250px;
+}

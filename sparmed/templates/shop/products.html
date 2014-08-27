@@ -31,7 +31,7 @@
 
         {% with product.images.all|first as image %}
         {% if image %}
-        <p><img class="img-responsive shop-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
+        <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
         {% endif %}
         {% endwith %}
       </a>

@@ -23,7 +23,7 @@
     {% if images %}
     {% for image in images %}
     <a href="{{ image.get_absolute_url }}" title="{{ image.image_title }}">
-      <img class="img-responsive" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
+      <img class="img-responsive img-rounded" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
     </a>    
     {% endfor %}
 
