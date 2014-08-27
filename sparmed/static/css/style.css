@@ -134,6 +134,7 @@ a {
 #products-nav li:active > a {
     color: #ed1b2e;
     font-weight: bold;
+    border: 0px;
 }
 
 .category-article {
