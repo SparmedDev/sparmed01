@@ -7,6 +7,14 @@
 {% block pagedescription %}Index - GOosafe in IVF Laboratories{% endblock %}
 {% block title %}GOosafe in IVF Laboratories{% endblock %}
 
+{% block head %}
+<!-- Important Owl stylesheet -->
+<link rel="stylesheet" href="{% static 'owl-carousel/css/owl.carousel.css' %}">
+
+<!-- Default Theme -->
+<link rel="stylesheet" href="{% static 'owl-carousel/css/owl.theme.css' %}">
+{% endblock %}
+
 {% block body %}
 
 <h1 class="text-center">Latest News</h1>
@@ -20,11 +28,13 @@
   <p>{{ post.content|safe }}</p>
   
   {% if post.images %}
-  {% for image in post.images.all %}
-  
-  <img class="img-responsive" src="{{ image.get_absolute_url }}" alt="{{ image.title }}">
-  
-  {% endfor %}
+  <div id="owl-{{ post.slug }}" class="owl-carousel">
+    {% for image in post.images.all %}
+
+    <div><img class="img-responsive" src="{{ image.get_absolute_url }}" alt="{{ image.title }}"></div>
+
+    {% endfor %}
+  </div>
   {% endif %}
 </article>
 
@@ -36,5 +46,17 @@
 
 {% endblock %}
 
+{% blody endbody %}
+<!-- Include js plugin -->
+<script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8"></script>
+
+{% compress js inline}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".owl-carousel").owlCarousel();
+  });
+</script>
+{% endcompress %}
+{% endblock %}
 
 
