@@ -1,5 +1,6 @@
 from django.contrib import admin
 from news.models import NewsPost, NewsImage
+from sorl.thumbnail.admin import AdminImageMixin
 
 # Register your models here.
 class NewsImageAdmin(AdminImageMixin, admin.ModelAdmin):
