@@ -11,4 +11,11 @@
 {% block body %}
 <h2 class="text-center">Online Order Sheet</h2>
 
+<form action="{% url 'online_order' %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons submit='Send Order' %}{% endbuttons %}
+</form>
+
 {% endblock %}

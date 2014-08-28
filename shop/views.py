@@ -21,6 +21,3 @@ def details(request, category_slug, product_slug):
   return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images})
 
 
-def online_order(request):
-  
-  return render(request, 'shop/online_order_sheet.html')

@@ -17,7 +17,7 @@
     {% bootstrap_form form %}
 
     {% buttons submit='Login' %}{% endbuttons %}
-    <a class="btn btn-warning" href="{% url 'password_reset' %}">Forgot Password?</a>
+    <a class="btn btn-warning" href="{% url 'password_reset' %}">Reset Password</a>
     <input type="hidden" name="next" value="{{ next }}" />
     </form>
 </section>
