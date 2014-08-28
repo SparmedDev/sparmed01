@@ -43,7 +43,6 @@ urlpatterns = patterns('',
                        url(r'^contact/$', 'contact.views.contact', name='contact'),
                        url(r'^thanks/$', 'contact.views.thanks', name='thanks'),
                        
-                       #url(r'^distributor_login/$', 'distributor_login.views.distributor_login', name='distributor_login', {'template_name': 'distributor_login/index.html'}),
                        url(r'^distributor-login/$', views.distributor_login, name='distributor-login'),
                        url(r'^login/$', 'django.contrib.auth.views.login'),
                        url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
@@ -54,7 +53,7 @@ urlpatterns = patterns('',
                        
                        url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
                        url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
-                       url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
+                       url(r'^user/password/reset/MQ-(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
                        url(r'^user/password/done/$', 'django.contrib.auth.views.password_reset_complete'),                       
 
                        url(r'^grappelli/', include('grappelli.urls')),
