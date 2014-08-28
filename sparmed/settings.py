@@ -135,7 +135,8 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
   'gunicorn',
-  'compressor',
+  'south',
+  'compressor',  
   'bootstrap3',
   'robots',
   'sorl.thumbnail',
