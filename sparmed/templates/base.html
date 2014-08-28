@@ -63,7 +63,9 @@
         {% if user.is_anonymous %}
         <a title="Login for expanded access to Distributor Panel and Online Ordering" href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
         {% else %}
-        <a title="Login to Distributor Panel" href="{% url 'distributor-login' %}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | <a title="Logout from Sparmed Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
+        <a title="Go to Distributor Panel - online ordering, certificates, inventory and more" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-cog"></span></a> | 
+        {{ user }} <span class="glyphicon glyphicon-wrench"></span> | 
+        <a title="Logout from Sparmed Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
         {% endif %}
       </div>
 
