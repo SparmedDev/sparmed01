@@ -50,9 +50,9 @@
     <section id="main-container">      
       <div id="dist-login">        
         {% if user.is_anonymous %}
-        <a href="{% url 'django.contrib.auth.views.login' %}">Login</a>
+        <a href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
         {% else %}
-        <strong><a href="{% url 'distributor-login' %}">{{ user }}</a></strong> | <a href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout</a>
+        <strong><a href="{% url 'distributor-login' %}">{{ user }}</a></strong> | <a href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
         {% endif %}
       </div>
 
@@ -66,7 +66,7 @@
           <ul class="nav nav-pills visible-xs">
             <li class="dropdown btn-fancy">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Navigation <span class="caret"></span>
+               <span class="glyphicon glyphicon-list"></span> Navigation <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
