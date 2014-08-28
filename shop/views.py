@@ -10,9 +10,8 @@ def products(request, slug="0"):
         category = Category.objects.get(id=1)
         
     categories = Category.objects.all()
-    products = category.products.all()
   
-    return render(request, 'shop/products.html', {'categories':categories, 'category':category, 'products':products})
+    return render(request, 'shop/products.html', {'categories':categories, 'category':category})
 
 def details(request, category_slug, product_slug):
   category = get_object_or_404(Category, slug=category_slug)
@@ -20,3 +19,8 @@ def details(request, category_slug, product_slug):
   images = product.images.all()
 
   return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images})
+
+
+def online_order(request):
+  
+  return render(request, 'shop/online_order_sheet.html')
