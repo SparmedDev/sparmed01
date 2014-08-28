@@ -52,7 +52,7 @@
         {% if user.is_anonymous %}
         <a href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
         {% else %}
-        <strong><a href="{% url 'distributor-login' %}">{{ user }}</a></strong> | <a href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
+        <a href="{% url 'distributor-login' %}">{{ user }} <span class="glyphicon glyphicon-home"></span></a> | <a href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
         {% endif %}
       </div>
 
