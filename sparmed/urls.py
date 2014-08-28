@@ -46,7 +46,7 @@ urlpatterns = patterns('',
                        url(r'^login/$', 'django.contrib.auth.views.login'),
                        url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
                        
-                       #url(r'^distributor_login/online_order/$', 'online_order.views.online_order', name='online_order'),
+                       url(r'^distributor_login/online_order/$', 'online_order.views.online_order', name='online_order'),
                        url(r'^distributor-login/$', views.distributor_login, name='distributor-login'),                       
 
                        url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),

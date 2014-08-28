@@ -108,6 +108,15 @@ a {
     text-decoration: none;
 }
 
+.btn-sparmedblue {
+    background-color: #008393;
+    background: -webkit-linear-gradient(#008393, #005e69);
+    background: liniear-gradient(#008393, #005e69);
+  
+    color: white;
+    border: 1px solid black;
+}
+
 .btn-fancy > a {
     font-weight: bold;
     color: white;
