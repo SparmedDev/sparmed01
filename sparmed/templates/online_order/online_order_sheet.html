@@ -48,7 +48,7 @@
 
 <h3>Fill Out Order Sheet</h3>
 
-<form action="{% url 'online_order' %}" method="post">
+<form action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
 

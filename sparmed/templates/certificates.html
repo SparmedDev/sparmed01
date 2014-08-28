@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load compress %}
+{% load base_extras %}
+
+{% block pagedescription %}View and download Sparmed certificates{% endblock %}
+{% block title %}Certificates{% endblock %}
+
+
+{% block body %}
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'distributor-login' %}">Distributor Login</a></li>
+  <li class="active">Certificates</li>
+</ol>
+
+
+<h2>Certificates</h2>
+
+{% endblock %}

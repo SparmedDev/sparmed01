@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load compress %}
+{% load base_extras %}
+
+{% block pagedescription %}View you Order History with SparMed{% endblock %}
+{% block title %}Order History{% endblock %}
+
+
+{% block body %}
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'distributor-login' %}">Distributor Login</a></li>
+  <li class="active">Order History</li>
+</ol>
+
+<h2>Order History</h2>
+
+{% endblock %}

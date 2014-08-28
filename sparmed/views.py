@@ -20,6 +20,16 @@ def distributors(request):
   return render(request, "distributors.html")
 
 @login_required
+def certificates(request):
+  
+  return render(request, "certificates.html")
+
+@login_required
+def inventory(request):
+  
+  return render(request, "inventory.html")
+
+@login_required
 def distributor_login(request):
   
   return render(request, "distributor_login.html")

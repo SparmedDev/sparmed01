@@ -7,7 +7,7 @@ from shop.models import Category
 
 # Create your views here.
 @login_required
-def online_order(request):  
+def order_online(request):  
     if request.method == 'POST':
         form = OrderForm(request.POST)
       
@@ -18,4 +18,9 @@ def online_order(request):
         
     categories = Category.objects.all()
   
-    return render(request, 'shop/online_order_sheet.html', {'form': form, 'categories':categories})
+    return render(request, 'online_order/online_order_sheet.html', {'form': form, 'categories':categories})
+  
+@login_required
+def order_history(request):
+  
+  return render(request, 'online_order/order_history.html')

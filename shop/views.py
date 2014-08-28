@@ -19,5 +19,3 @@ def details(request, category_slug, product_slug):
   images = product.images.all()
 
   return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images})
-
-

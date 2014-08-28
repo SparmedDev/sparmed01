@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load compress %}
+{% load base_extras %}
+
+{% block pagedescription %}View Sparmed inventory - all products and their numbers on stock{% endblock %}
+{% block title %}Inventory{% endblock %}
+
+
+{% block body %}
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'distributor-login' %}">Distributor Login</a></li>
+  <li class="active">Inventory</li>
+</ol>
+
+<h2>Inventory</h2>
+
+{% endblock %}
