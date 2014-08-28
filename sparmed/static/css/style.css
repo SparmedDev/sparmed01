@@ -117,6 +117,9 @@ a {
     background: liniear-gradient(#008393, #005e69);
 
     text-shadow: 0 -1px 0 #000;
+  
+    padding: 10px 15px;
+    border-radius: 4px;
 }
 
 .btn-fancy:hover > a {
