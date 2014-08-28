@@ -7,6 +7,41 @@
 {% block pagedescription %}Distributors in the GOosafe SparMed family{% endblock %}
 {% block title %}Distributors{% endblock %}
 
+{% block bodytop %}
+{% compress css inline %}
+<style>
+    #world-map-container {
+        display: block;
+        position: relative;
+        width: 600px;
+        height: 299px;
+        margin: 10px auto;
+    }
+  
+    .world-map-continent {
+        display: block;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+      
+        -webkit-transition: 1s ease-in-out;
+        -moz-transition: 1s ease-in-out;
+        -o-transition: 1s ease-in-out;
+        transition: 1s ease-in-out;
+    }
+  
+    .world-map-continent:hover {
+        -webkit-transform: scale(2);
+        -moz-transform: scale(2);
+        -o-transform: scale(2);
+        -ms-transform: scale(2);
+        transform: scale(2);
+    }
+</style>
+{% endcompress %}
+{% endblock %}
 
 {% block body %}
 
@@ -27,13 +62,13 @@
 
 <span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span>
 
-<section style="display: block; position: relative; width: 600px; height: 299px; margin: 10px auto;">
-    <img style="display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;" src="{% static 'img/distributors/africa.jpg' %}">
-    <img style="display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;" src="{% static 'img/distributors/asia.jpg' %}">
-    <img style="display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;" src="{% static 'img/distributors/europe.jpg' %}">
-    <img style="display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;" src="{% static 'img/distributors/north_america.jpg' %}">
-    <img style="display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;" src="{% static 'img/distributors/oceania.jpg' %}">
-    <img style="display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;" src="{% static 'img/distributors/south_america.jpg' %}">
+<section id="world-map-container">
+    <img class="world-map-continent" src="{% static 'img/distributors/africa.png' %}">
+    <img class="world-map-continent" src="{% static 'img/distributors/asia.png' %}">
+    <img class="world-map-continent" src="{% static 'img/distributors/europe.png' %}">
+    <img class="world-map-continent" src="{% static 'img/distributors/north_america.png' %}">
+    <img class="world-map-continent" src="{% static 'img/distributors/oceania.png' %}">
+    <img class="world-map-continent" src="{% static 'img/distributors/south_america.png' %}">
 </section>
 
 {% endblock %}

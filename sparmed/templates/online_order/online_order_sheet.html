@@ -15,39 +15,6 @@
 
 <h2 class="text-center">Online Order Sheet</h2>
 
-<h3>Select Products</h3>
-
-{% for category in categories reversed %}
-
-<h4>{{ category.name }}</h4>
-<p class="text-small text-muted"><em>{{ category.description }}</em></p>
-
-{% for subcategory in category.subcategories.all reversed %}
-
-{% if forloop.first %}<div class="btn-group">{% endif %}
-
-<div class="btn-group">
-  <button class="btn btn-sparmedblue dropdown-toggle" type="button" id="dropdown-{{ subcategory.slug }}" data-toggle="dropdown">
-    <span class="glyphicon glyphicon-list"></span>
-    {{ subcategory.name }}
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    {% for product in subcategory.products.all reversed %}
-    <li role="presentation"><a href="">{{ product.name }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
-{% if forloop.last %}</div>{% endif %}
-
-{% endfor %}
-
-<hr>
-
-{% endfor %}
-
-<h3>Fill Out Order Sheet</h3>
-
 <form action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   {% bootstrap_form form %}

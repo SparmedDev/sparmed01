@@ -16,9 +16,7 @@ def order_online(request):
     else:
         form = OrderForm()
         
-    categories = Category.objects.all()
-  
-    return render(request, 'online_order/online_order_sheet.html', {'form': form, 'categories':categories})
+    return render(request, 'online_order/online_order_sheet.html', {'form': form})
   
 @login_required
 def order_history(request):

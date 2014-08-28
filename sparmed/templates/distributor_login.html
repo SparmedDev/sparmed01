@@ -4,31 +4,22 @@
 {% load bootstrap3 %}
 {% load compress %}
 
-{% block pagedescription %}Distributor Login{% endblock %}
-{% block title %}Distributor Login{% endblock %}
+{% block pagedescription %}Distributor Panel - premium distributor access to online ordering, order history, SparMed product inventory and SparMed certificates{% endblock %}
+{% block title %}Distributor Panel{% endblock %}
 
 
 {% block body %}
 
-<h2 class="text-center">Distributor Login</h2>
+<h2 class="text-center">Distributor Panel</h2>
 <hr>
 
-<div class="row">
+<section id="distributor-panel-btn-container">
+    <a class="btn btn-fancy-grid text-center" href="{% url 'order-online' %}">Online Order Sheet</a>
+    <a class="btn btn-fancy-grid text-center" href="{% url 'order-history' %}">View Order History</a>
 
-  <div class="col-sm-4">
-      <p class="btn btn-fancy"><a href="{% url 'order-online' %}">Online Order Sheet</a></p>
-      <span class="minor-skip"></span>
-      <p class="btn btn-fancy"><a href="{% url 'order-history' %}">View Order History</a></p>
-  </div>
+    <a class="btn btn-fancy-grid text-center" href="{% url 'inventory' %}">View Inventory (Products on Stock)</a>
+    <a class="btn btn-fancy-grid text-center" href="{% url 'certificates' %}">View and Download Certificates</a>
+</section>
   
-  <div class="col-sm-4">
-      <p class="btn btn-fancy"><a href="{% url 'inventory' %}">View Inventory (Products on Stock)</a></p>
-  </div>
-  
-  <div class="col-sm-4">
-      <p class="btn btn-fancy"><a href="{% url 'certificates' %}">View and Download Certificates</a></p>
-  </div>
-
-</div>
   
 {% endblock %}

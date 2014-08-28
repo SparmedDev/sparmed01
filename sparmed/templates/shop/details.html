@@ -16,24 +16,20 @@
 </ol>
 
 <h2 class="text-center">{{ product.name }}</h2>
-<p class="text-center">Product ID: {{ product.product_id }}</p>
+<p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
+{% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
 
-<div class="row">
-  <div class="col-sm-6">
-    {% if images %}
-    {% for image in images %}
-    <a href="{{ image.get_absolute_url }}" title="{{ image.image_title }}">
-      <img class="img-responsive img-rounded" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
-    </a>    
-    {% endfor %}
+<span class="minor-skip"></span>
 
-    {% else %}
-    <div class="alert alert-warning">No pictures available</div>
-    {% endif %}
-  </div>
-  <div class="col-sm-6">
-    {% if product.description %}<p><em>{{ product.description }}</em></p>{% endif %}
-  </div>
-</div>       
+{% if images %}
+{% for image in images %}
+<img class="img-responsive img-rounded center-block" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
+{% endfor %}
+
+{% else %}
+<div class="alert alert-warning">No pictures available</div>
+{% endif %}
+ 
+       
 
 {% endblock %}
