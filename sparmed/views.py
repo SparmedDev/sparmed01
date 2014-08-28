@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from news.models import NewsPost
+from django.contrib.auth.decorators import login_required
 
 def home(request):
   news_posts = NewsPost.objects.all()
@@ -18,6 +19,7 @@ def distributors(request):
 
   return render(request, "distributors.html")
 
+@login_required
 def distributor_login(request):
   
   return render(request, "distributor_login.html")
