@@ -45,6 +45,12 @@ class UserChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]                  
       
+class SparmedUserChangeForm(UserChangeForm):
+    password = ReadOnlyPasswordHashField()
+    
+    class Meta:
+        model = SparmedUser
+        fields = ('name', 'country', 'address', 'city', 'postal_code', 'email', 'contact_person_name', 'contact_telephone',)
       
 class SparmedUserAdmin(UserAdmin):
     # The forms to add and change user instances

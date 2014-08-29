@@ -13,4 +13,19 @@
 
 <h2>Accounts Area</h2>
 
+  <section id="account-form">
+    {% if feedback %}
+    <div class="alert alert-success">
+      <p>{{ feedback }}</p>
+    </div>
+    {% else %}
+    <form role="form" class="form" action="{{ request.user.get_absolute_url }}" method="post">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+
+      {% buttons submit='Update Account Details' %}{% endbuttons %}
+    </form>
+    {% endif %}
+  </section>
+
 {% endblock %}
