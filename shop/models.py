@@ -38,7 +38,7 @@ class Product(models.Model):
 class Subcategory(models.Model):
     name = models.CharField(max_length=255, verbose_name="Subcategory Name", default="Subcategory 1")
     description = models.CharField(max_length=255, verbose_name="Subcategory description", blank=True)
-    long_text = models.TextField(max_length=255, verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
+    long_text = models.TextField(verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")

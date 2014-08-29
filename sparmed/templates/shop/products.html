@@ -63,6 +63,12 @@
   </li>
   {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
+  
+  {% if subcat.long_text %}
+  <div class="well hidden-xs three-column" style="font-size: 11px;">
+      {{ subcat.long_text|safe }}
+  </div>
+  {% endif %}
 
   {% if not forloop.last %}<hr>{% endif %}
 
