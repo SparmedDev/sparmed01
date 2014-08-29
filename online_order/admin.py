@@ -70,7 +70,8 @@ class SparmedUserAdmin(UserAdmin):
         ),
     )
     search_fields = ('name', 'country', 'email', 'contact_person_name', 'address')
-    ordering = ('name', 'email',)
+    ordering = ('name', 'email', 'country',)
     filter_horizontal = ()
 
 admin.site.register(SparmedUser, SparmedUserAdmin)
+admin.site.unregister(Group)

@@ -142,6 +142,7 @@ THIRD_PARTY_APPS = (
   'sorl.thumbnail',
   'storages',
   'collectfast',
+  'django_countries',
 )
 
 LOCAL_APPS = (

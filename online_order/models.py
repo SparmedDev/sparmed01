@@ -5,6 +5,8 @@ from django.contrib.auth.models import (
 from django import forms
 import datetime
 
+from django_countries.fields import CountryField
+
 class SparmedUserManager(BaseUserManager):
     def create_user(self, name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
         if not name:
@@ -58,7 +60,7 @@ class SparmedUserManager(BaseUserManager):
     
 class SparmedUser(AbstractBaseUser):
     name = models.CharField(max_length=255, verbose_name="Company Name", unique=True)
-    country = models.CharField(max_length=255, verbose_name="Company Country")
+    country = CountryField()#models.CharField(max_length=255, verbose_name="Company Country")
     address = models.CharField(max_length=255, verbose_name="Company Address")
     city = models.CharField(max_length=255, verbose_name="Company City")
     postal_code = models.IntegerField(verbose_name="Company Postal Code")
