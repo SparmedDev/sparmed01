@@ -188,6 +188,9 @@ ROBOTS_CACHE_TIMEOUT = 60*60*24 # = 24 hours
 LOGIN_REDIRECT_URL = '/distributor-login/'
 LOGIN_URL = 'django.contrib.auth.views.login'
 
+# Custom user model
+AUTH_USER_MODEL = "online_order.SparmedUser"
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

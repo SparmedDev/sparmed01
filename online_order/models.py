@@ -1,15 +1,108 @@
+from django.db import models
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser
+)
 from django import forms
 import datetime
 
-class OrderForm(forms.Form):
-    company_name = forms.CharField(max_length=255, label="Company Name")
-    company_country = forms.CharField(max_length=255, label="Company Country")
-    company_address = forms.CharField(widget=forms.Textarea, label="Company Address")
-    company_postal_code = forms.IntegerField(label="Company Postal Code")
+class SparmedUserManager(BaseUserManager):
+    def create_user(self, name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
+        if not name:
+            raise ValueError('Users must have a company name')
+        elif not country:
+            raise ValueError('Users must have a company country')
+        elif not address:
+            raise ValueError('Users must have a company address')
+        elif not city:
+            raise ValueError('Users must have a company city')
+        elif not postal_code:
+            raise ValueError('Users must have a company postal code')
+        elif not contact_person_name:
+            raise ValueError('Users must have a valid contact person name')
+        elif not contact_telephone:
+            raise ValueError('Users must have a valid contact telephone number')
+        elif not email:
+            raise ValueError('Users must have an email address')
+            
+        user = self.model(
+            name=name,
+            country=country,
+            address=address,
+            city=city,
+            postal_code=postal_code,
+            contact_person_name=contact_person_name,
+            contact_telephone=contact_telephone,
+            email=self.normalize_email(email),
+        )
+        
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+      
+    def create_superuser(self, name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):                   
+        user = self.create_user(
+            name=name,
+            country=country,
+            address=address,
+            city=city,
+            postal_code=postal_code,
+            contact_person_name=contact_person_name,
+            contact_telephone=contact_telephone,
+            email=self.normalize_email(email),
+            password=password,
+        )
+      
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
     
-    contact_person = forms.CharField(max_length=255, label="Contact Person Name")
-    telephone = forms.IntegerField(label="Contact Telephone Number (Please include country code)")
-    email = forms.EmailField(max_length=254, label="Contact Email Address")
+class SparmedUser(AbstractBaseUser):
+    name = models.CharField(max_length=255, verbose_name="Company Name", unique=True)
+    country = models.CharField(max_length=255, verbose_name="Company Country")
+    address = models.CharField(max_length=255, verbose_name="Company Address")
+    city = models.CharField(max_length=255, verbose_name="Company City")
+    postal_code = models.IntegerField(verbose_name="Company Postal Code")
+    contact_person_name = models.CharField(max_length=255, verbose_name="Company Contact Person Name")
+    contact_telephone = models.IntegerField(max_length=20, unique=True)
+    email = models.EmailField(verbose_name="Contact Email Address", max_length=255, unique=True)
+    
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    
+    objects = SparmedUserManager()
+    
+    USERNAME_FIELD = 'name'
+    REQUIRED_FIELDS = ['country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone', 'email']
+    
+    def get_full_name(self):
+        # The user is identified by their email address
+        return self.name
+
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.name
+
+    # On Python 3: def __str__(self):
+    def __unicode__(self):
+        return self.name    
+    
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        # Simplest possible answer: All admins are staff
+        return self.is_admin
+
+class OrderForm(forms.Form):
     date = forms.DateTimeField(initial=datetime.datetime.now, label="Date and time ordered")
     
     arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True)
@@ -46,3 +139,6 @@ class OrderForm(forms.Form):
     invoice_company_postal_code = forms.IntegerField(label="Invoice Company Postal Code", required=False)
     
     other_remarks = forms.CharField(widget=forms.Textarea, label="Any other remarks or comments regarding this order?")
+    
+    
+    
