@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'NewsImage'
         db.create_table(u'news_newsimage', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('image_title', self.gf('django.db.models.fields.CharField')(blank=True, max_length=200)),
+            ('image_title', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
             ('image', self.gf('sorl.thumbnail.fields.ImageField')(max_length=100)),
             ('news_post', self.gf('django.db.models.fields.related.ForeignKey')(related_name='images', to=orm['news.NewsPost'])),
         ))
@@ -41,7 +41,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'NewsImage'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('sorl.thumbnail.fields.ImageField', [], {'max_length': '100'}),
-            'image_title': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '200'}),
+            'image_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
             'news_post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'images'", 'to': u"orm['news.NewsPost']"})
         },
         u'news.newspost': {

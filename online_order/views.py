@@ -22,3 +22,9 @@ def order_online(request):
 def order_history(request):
   
   return render(request, 'online_order/order_history.html')
+
+
+@login_required
+def account_area(request, account_slug):
+  
+  return render(request, 'online_order/account_area.html')

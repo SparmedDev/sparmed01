@@ -1,10 +1,12 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from django import forms
 import datetime
 
+from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
 
 class SparmedUserManager(BaseUserManager):
@@ -60,7 +62,7 @@ class SparmedUserManager(BaseUserManager):
     
 class SparmedUser(AbstractBaseUser):
     name = models.CharField(max_length=255, verbose_name="Company Name", unique=True)
-    country = CountryField()#models.CharField(max_length=255, verbose_name="Company Country")
+    country = CountryField()
     address = models.CharField(max_length=255, verbose_name="Company Address")
     city = models.CharField(max_length=255, verbose_name="Company City")
     postal_code = models.IntegerField(verbose_name="Company Postal Code")
@@ -103,6 +105,13 @@ class SparmedUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+      
+    @property
+    def slug(self):
+        return slugify(self.name)
+      
+    def get_absolute_url(self):
+        return reverse('online_order.views.account_area', args=[self.slug])
 
 class OrderForm(forms.Form):
     date = forms.DateTimeField(initial=datetime.datetime.now, label="Date and time ordered")

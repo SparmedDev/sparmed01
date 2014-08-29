@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'ProductImage'
         db.create_table(u'shop_productimage', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('image_title', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
+            ('image_title', self.gf('django.db.models.fields.CharField')(blank=True, max_length=200)),
             ('image', self.gf('sorl.thumbnail.fields.ImageField')(max_length=100)),
             ('product', self.gf('django.db.models.fields.related.ForeignKey')(related_name='images', to=orm['shop.Product'])),
         ))
@@ -20,12 +20,12 @@ class Migration(SchemaMigration):
         # Adding model 'Product'
         db.create_table(u'shop_product', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('product_id', self.gf('django.db.models.fields.CharField')(max_length=255, default='OOOO-0000')),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255, default='Product 1')),
+            ('product_id', self.gf('django.db.models.fields.CharField')(default='OOOO-0000', max_length=255)),
+            ('name', self.gf('django.db.models.fields.CharField')(default='Product 1', max_length=255)),
             ('in_stock', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('description', self.gf('django.db.models.fields.CharField')(blank=True, max_length=255)),
             ('added', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255, unique=True)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(related_name='products', to=orm['shop.Category'])),
             ('subcategory', self.gf('django.db.models.fields.related.ForeignKey')(related_name='products', to=orm['shop.Subcategory'])),
         ))
@@ -34,10 +34,10 @@ class Migration(SchemaMigration):
         # Adding model 'Subcategory'
         db.create_table(u'shop_subcategory', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255, default='Subcategory 1')),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(default='Subcategory 1', max_length=255)),
+            ('description', self.gf('django.db.models.fields.CharField')(blank=True, max_length=255)),
             ('added', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255, unique=True)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(related_name='subcategories', to=orm['shop.Category'])),
         ))
         db.send_create_signal(u'shop', ['Subcategory'])
@@ -45,10 +45,10 @@ class Migration(SchemaMigration):
         # Adding model 'Category'
         db.create_table(u'shop_category', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255, default='Category 1')),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(default='Category 1', max_length=255)),
+            ('description', self.gf('django.db.models.fields.CharField')(blank=True, max_length=255)),
             ('added', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255, unique=True)),
         ))
         db.send_create_signal(u'shop', ['Category'])
 
@@ -69,40 +69,40 @@ class Migration(SchemaMigration):
 
     models = {
         u'shop.category': {
-            'Meta': {'object_name': 'Category', 'ordering': "['-added']"},
+            'Meta': {'ordering': "['-added']", 'object_name': 'Category'},
             'added': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'description': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '255'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'default': "'Category 1'"}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255'})
+            'name': ('django.db.models.fields.CharField', [], {'default': "'Category 1'", 'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'unique': 'True'})
         },
         u'shop.product': {
-            'Meta': {'object_name': 'Product', 'ordering': "['-added']"},
+            'Meta': {'ordering': "['-added']", 'object_name': 'Product'},
             'added': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'products'", 'to': u"orm['shop.Category']"}),
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'description': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '255'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'in_stock': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'default': "'Product 1'"}),
-            'product_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'default': "'OOOO-0000'"}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255'}),
+            'name': ('django.db.models.fields.CharField', [], {'default': "'Product 1'", 'max_length': '255'}),
+            'product_id': ('django.db.models.fields.CharField', [], {'default': "'OOOO-0000'", 'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'unique': 'True'}),
             'subcategory': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'products'", 'to': u"orm['shop.Subcategory']"})
         },
         u'shop.productimage': {
             'Meta': {'object_name': 'ProductImage'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('sorl.thumbnail.fields.ImageField', [], {'max_length': '100'}),
-            'image_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
+            'image_title': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '200'}),
             'product': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'images'", 'to': u"orm['shop.Product']"})
         },
         u'shop.subcategory': {
-            'Meta': {'object_name': 'Subcategory', 'ordering': "['-added']"},
+            'Meta': {'ordering': "['-added']", 'object_name': 'Subcategory'},
             'added': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'subcategories'", 'to': u"orm['shop.Category']"}),
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'description': ('django.db.models.fields.CharField', [], {'blank': 'True', 'max_length': '255'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'default': "'Subcategory 1'"}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255'})
+            'name': ('django.db.models.fields.CharField', [], {'default': "'Subcategory 1'", 'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'unique': 'True'})
         }
     }
 

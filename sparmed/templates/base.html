@@ -64,7 +64,7 @@
         <a title="Login for expanded access to Distributor Panel and Online Ordering" href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
         {% else %}
         <a title="Go to Distributor Home Panel - online ordering, certificates, inventory and more" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
-        {{ user }} <span class="glyphicon glyphicon-wrench"></span> | 
+        <a title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
         <a title="Logout from Sparmed Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
         {% endif %}
       </div>

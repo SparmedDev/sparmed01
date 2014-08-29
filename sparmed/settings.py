@@ -143,6 +143,7 @@ THIRD_PARTY_APPS = (
   'storages',
   'collectfast',
   'django_countries',
+  'django_extensions',
 )
 
 LOCAL_APPS = (
@@ -191,6 +192,7 @@ LOGIN_URL = 'django.contrib.auth.views.login'
 
 # Custom user model
 AUTH_USER_MODEL = "online_order.SparmedUser"
+
 
 LOGGING = {
     'version': 1,

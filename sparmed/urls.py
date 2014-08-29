@@ -46,6 +46,7 @@ urlpatterns = patterns('',
                        url(r'^login/$', 'django.contrib.auth.views.login'),
                        url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
 
+                       url(r'^distributor_login/account_area/(?P<account_slug>[\w\-]+)/$', 'online_order.views.account_area', name='account-area'),
                        url(r'^distributor_login/order_history/$', 'online_order.views.order_history', name='order-history'),
                        url(r'^distributor_login/order_online/$', 'online_order.views.order_online', name='order-online'),
                        url(r'^distributor_login/certificates/$', views.certificates, name='certificates'),

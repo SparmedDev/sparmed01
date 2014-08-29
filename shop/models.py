@@ -25,8 +25,6 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!", editable=False)
     category = models.ForeignKey('Category', related_name="products", verbose_name="Associated Category")
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")
-    
-    #order = models.ForeignKey('online_order.models.OrderForm', related_name="products", editable=False)
 
     def get_absolute_url(self):
         return reverse('shop.views.details', args=[self.category.slug, self.slug])
