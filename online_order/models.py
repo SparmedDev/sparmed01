@@ -116,11 +116,11 @@ class SparmedUser(AbstractBaseUser):
         return reverse('online_order.views.account_area', args=[self.slug])
 
 class OrderForm(forms.Form):
-    date = forms.DateTimeField(initial=datetime.datetime.now, label="Date and time ordered")
+    date = forms.DateTimeField(initial=datetime.datetime.now, label="Date and time of order")
     
     arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True)
-    freight_forwarder = forms.CharField(max_length=255, label="Freight Forwarder (if not through SparMed)", required=False)
-    account_no = forms.CharField(max_length=255, label="Account Number (if not freight through SparMed)", required=False)
+    freight_forwarder = forms.CharField(max_length=255, label="Freight Forwarder", required=False)
+    account_no = forms.CharField(max_length=255, label="Account Number", required=False)
     
     EURO_PALLET = 'EP'
     HALF_PALLET = 'HP'
@@ -141,7 +141,7 @@ class OrderForm(forms.Form):
     )    
     aircleaner_instructions = forms.CharField(max_length=2, widget=forms.Select(choices=AIRCLEANER_CHOICES))
     
-    insurance_desired = forms.BooleanField(label="Insurance is Desired? (if freight is arranged by SparMed)", initial=False)
+    insurance_desired = forms.BooleanField(label="Is insurance desired?", initial=False)
     
     documents = forms.CharField(widget=forms.Textarea, label="Please write down if you need any documents along with your shipment", required=False)
   
