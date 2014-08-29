@@ -22,7 +22,7 @@ class Product(models.Model):
     in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)
     description = models.CharField(max_length=255, verbose_name="Product description", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
-    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!", editable=False)
+    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     category = models.ForeignKey('Category', related_name="products", verbose_name="Associated Category")
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")
 
@@ -39,7 +39,7 @@ class Subcategory(models.Model):
     name = models.CharField(max_length=255, verbose_name="Subcategory Name", default="Subcategory 1")
     description = models.CharField(max_length=255, verbose_name="Subcategory description", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
-    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!", editable=False)
+    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
 
     def get_absolute_url(self):
@@ -55,7 +55,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name="Category Name", default="Category 1")
     description = models.CharField(max_length=255, verbose_name="Category description", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
-    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!", editable=False)
+    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
 
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.slug,])

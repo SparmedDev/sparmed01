@@ -11,6 +11,8 @@ class ProductImageInline(admin.StackedInline):
     model = ProductImage
 
 class ProductAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)
+    
     list_display = ['name', 'added', 'product_id', 'in_stock', 'description', 'subcategory', 'category']
     list_filter = ['added']
     search_fields = ['product_id', 'name', 'description', 'in_stock']
@@ -20,6 +22,8 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline,]
 
 class CategoryAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)  
+  
     list_display = ['name', 'added']
     list_filter = ['added']  
     search_fields = ['name']
@@ -28,6 +32,8 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
     
 class SubcategoryAdmin(admin.ModelAdmin):
+    readonly_fields = ('slug',)  
+  
     list_display = ['name', 'added']
     list_filter = ['added']  
     search_fields = ['name']

@@ -10,8 +10,10 @@ from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
 
 class SparmedUserManager(BaseUserManager):
-    def create_user(self, name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
+    def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
         if not name:
+            raise ValueError('Users must have a Sparmed website account name')
+        if not company_name:
             raise ValueError('Users must have a company name')
         elif not country:
             raise ValueError('Users must have a company country')
@@ -30,6 +32,7 @@ class SparmedUserManager(BaseUserManager):
             
         user = self.model(
             name=name,
+            company_name=company_name,
             country=country,
             address=address,
             city=city,
@@ -43,9 +46,10 @@ class SparmedUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
       
-    def create_superuser(self, name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):                   
+    def create_superuser(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):                   
         user = self.create_user(
             name=name,
+            company_name=company_name,
             country=country,
             address=address,
             city=city,
@@ -68,7 +72,7 @@ class SparmedUser(AbstractBaseUser):
     city = models.CharField(max_length=255, verbose_name="Company City")
     postal_code = models.IntegerField(verbose_name="Company Postal Code")
     contact_person_name = models.CharField(max_length=255, verbose_name="Company Contact Person Name")
-    contact_telephone = models.IntegerField(max_length=20, unique=True)
+    contact_telephone = models.IntegerField(max_length=20, unique=True, verbose_name="Contact Telephone Number")
     email = models.EmailField(verbose_name="Contact Email Address", max_length=255, unique=True)
     
     is_active = models.BooleanField(default=True)

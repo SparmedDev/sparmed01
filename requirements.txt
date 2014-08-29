@@ -10,7 +10,7 @@ django-appconf==0.6
 django-bootstrap3==4.11.0
 django-compressor==1.4
 django-countries==2.1.2
-django-extensions==1.3.11 
+django-extensions==1.3.11
 django-grappelli==2.5.3
 django-heroku-memcacheify==0.5
 django-heroku-postgresify==0.3
