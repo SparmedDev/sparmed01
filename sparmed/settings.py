@@ -144,6 +144,7 @@ THIRD_PARTY_APPS = (
   'collectfast',
   'django_countries',
   'django_extensions',
+  'django_wysiwyg',
 )
 
 LOCAL_APPS = (

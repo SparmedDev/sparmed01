@@ -28,6 +28,8 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('name',)}
     
 class SubcategoryAdmin(admin.ModelAdmin):
+    change_form_template = 'shop/admin/change_form.html'
+    
     list_display = ['name', 'added']
     list_filter = ['added']  
     search_fields = ['name']
