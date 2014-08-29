@@ -61,7 +61,8 @@ class SparmedUserManager(BaseUserManager):
         return user
     
 class SparmedUser(AbstractBaseUser):
-    name = models.CharField(max_length=255, verbose_name="Company Name", unique=True)
+    name = models.CharField(max_length=255, verbose_name="Sparmed Website Account Name", unique=True)
+    company_name = models.CharField(max_length=255, verbose_name="Company Name")
     country = CountryField()
     address = models.CharField(max_length=255, verbose_name="Company Address")
     city = models.CharField(max_length=255, verbose_name="Company City")
@@ -76,17 +77,14 @@ class SparmedUser(AbstractBaseUser):
     objects = SparmedUserManager()
     
     USERNAME_FIELD = 'name'
-    REQUIRED_FIELDS = ['country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone', 'email']
+    REQUIRED_FIELDS = ['company_name', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone', 'email']
     
     def get_full_name(self):
-        # The user is identified by their email address
-        return self.name
+        return self.company_name
 
     def get_short_name(self):
-        # The user is identified by their email address
         return self.name
 
-    # On Python 3: def __str__(self):
     def __unicode__(self):
         return self.name    
     

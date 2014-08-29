@@ -19,13 +19,34 @@
       <p>{{ feedback }}</p>
     </div>
     {% else %}
-    <form role="form" class="form" action="{{ request.user.get_absolute_url }}" method="post">
-      {% csrf_token %}
-      {% bootstrap_form form %}
+    <form role="form" action="{{ request.user.get_absolute_url }}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form_errors form type='non_fields' %}
+      
+        {% bootstrap_field form.name layout='vertical' %}
+        
+        <hr>
+      
+        {% bootstrap_field form.company_name layout='vertical' %}
+        {% bootstrap_field form.address layout='vertical' %}
+        {% bootstrap_field form.postal_code layout='horizontal' %}        
+        {% bootstrap_field form.city layout='inline' %}
+        {% bootstrap_field form.country layout='vertical' %}   
+      
+        <hr>
+       
+        {% bootstrap_field form.contact_person_name layout='vertical' %}
+        {% bootstrap_field form.contact_telephone layout='vertical' %}
+        {% bootstrap_field form.email layout='vertical' %}
+      
+        <hr>
 
-      {% buttons submit='Update Account Details' %}{% endbuttons %}
+        {% buttons submit='Update Account Details' %}{% endbuttons %}
     </form>
     {% endif %}
-  </section>
+    
+    <a class="btn btn-warning" href="{% url 'password_reset' %}">Reset Password</a>
+</section>
+    
 
 {% endblock %}

@@ -13,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
     
     class Meta:
         model = SparmedUser
-        fields = ('name', 'email', 'contact_person_name')
+        fields = ('name', 'company_name', 'email', 'contact_person_name')
                   
     def clean_password2(self):
         # Check that the two password entries match
@@ -37,7 +37,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = SparmedUser
-        fields = ('name', 'email', 'password', 'contact_person_name', 'is_active', 'is_admin')
+        fields = ('name', 'company_name', 'email', 'password', 'contact_person_name', 'is_active', 'is_admin',)
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -47,11 +47,15 @@ class UserChangeForm(forms.ModelForm):
       
 class SparmedUserChangeForm(UserChangeForm):
     password = ReadOnlyPasswordHashField()
-    
+
     class Meta:
         model = SparmedUser
-        fields = ('name', 'country', 'address', 'city', 'postal_code', 'email', 'contact_person_name', 'contact_telephone',)
-      
+        fields = ('name', 'company_name', 'country', 'address', 'city', 'postal_code', 'email', 'contact_person_name', 'contact_telephone', 'password',)
+
+    def clean_password(self):
+        return self.initial["password"]   
+ 
+
 class SparmedUserAdmin(UserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -60,11 +64,11 @@ class SparmedUserAdmin(UserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('name', 'email', 'contact_person_name', 'is_admin')
+    list_display = ('name', 'company_name', 'email', 'contact_person_name', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('name', 'email', 'password')}),
-        ('Personal info', {'fields': ('country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone',)}),
+        ('Personal info', {'fields': ('company_name', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -72,11 +76,11 @@ class SparmedUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'email', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone', 'password1', 'password2')}
+            'fields': ('name', 'email', 'company_name', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone', 'password1', 'password2')}
         ),
     )
-    search_fields = ('name', 'country', 'email', 'contact_person_name', 'address')
-    ordering = ('name', 'email', 'country',)
+    search_fields = ('name', 'company_name', 'country', 'email', 'contact_person_name', 'address')
+    ordering = ('company_name', 'country', 'name',)
     filter_horizontal = () 
 
 admin.site.register(SparmedUser, SparmedUserAdmin)

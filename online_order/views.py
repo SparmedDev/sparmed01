@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from online_order.models import OrderForm, SparmedUser
 from online_order.admin import SparmedUserChangeForm
@@ -30,9 +31,11 @@ def account_area(request, account_slug):
   user = request.user
   
   if request.method == 'POST':
-      form = SparmedUserChangeForm(request.POST)
+      form = SparmedUserChangeForm(request.POST, instance=user)
+      if form.is_valid():
+          form.save()
+          return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few minutes for the changes to take effect.'})
   else:
-      data = {'name':user.name, 'country':user.country, 'address':user.address, 'city':user.city, 'postal_code':user.postal_code, 'contact_person_name':user.contact_person_name, 'contact_telephone':user.contact_telephone, 'email':user.email, 'password':user.password}
-      form = SparmedUserChangeForm(initial=data)
+      form = SparmedUserChangeForm(instance=user)
   
   return render(request, 'online_order/account_area.html', {'form':form})
