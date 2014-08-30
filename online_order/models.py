@@ -114,7 +114,8 @@ class SparmedUser(AbstractBaseUser):
       
     def get_absolute_url(self):
         return reverse('online_order.views.account_area', args=[self.slug])
-
+      
+      
 class OrderForm(forms.Form):
     date = forms.DateTimeField(initial=datetime.datetime.now, label="Date and time of order")
     

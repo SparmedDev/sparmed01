@@ -48,6 +48,7 @@ class Subcategory(models.Model):
 
     class Meta:
         ordering = ['-added']
+        verbose_name_plural = ('Subcategories')
 
     def __unicode__(self):
        return u'%s' % self.name
@@ -63,6 +64,7 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['-added']
+        verbose_name_plural = ('Categories')
 
     def __unicode__(self):
        return u'%s' % self.name

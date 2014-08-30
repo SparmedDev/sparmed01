@@ -19,6 +19,12 @@
 <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
 {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
 
+{% if user.is_anonymous %}
+<p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span> (login required)</p>
+{% else %}
+<p class="text-center"><a href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+{% endif %}
+
 <span class="minor-skip"></span>
 
 {% if images %}

@@ -1,14 +1,17 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.views.decorators.cache import never_cache
 
 from online_order.models import OrderForm, SparmedUser
 from online_order.admin import SparmedUserChangeForm
 
 from shop.models import Category
+from cart import Cart
 
 # Create your views here.
 @login_required
+@never_cache
 def order_online(request):  
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -27,6 +30,7 @@ def order_history(request):
 
 
 @login_required
+@never_cache
 def account_area(request, account_slug):  
   user = request.user
   

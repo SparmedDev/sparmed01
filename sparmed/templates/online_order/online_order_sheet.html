@@ -18,21 +18,64 @@
 <hr>
 
 <div class="row">
-    <div class="col-sm-6">
-        <section class="well">
-          <p class="text-muted"><strong>{{ user.company_name }}</strong></p>
-          <p class="text-muted">{{ user.address}}</p>
-          <p class="text-muted">{{ user.postal_code }} {{ user.city}}, {{ user.country }}</p>
-          <p class="text-muted">Att: {{ user.contact_person_name }}</p>
-          <p class="text-muted">Telephone: {{ user.contact_telephone }}</p>
-          <p class="text-muted">Email: {{ user.email }}</p>
-        </section>
-      
-      <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        If you need to change your company details, click on the home <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-home"></span></a> button in the top of your screen.</div>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Company Details</h3>
+      </div>
+      <div class="panel-body">          
+        <p class="text-muted"><strong>{{ user.company_name }}</strong></p>
+        <p class="text-muted">{{ user.address}}</p>
+        <p class="text-muted">{{ user.postal_code }} {{ user.city}}, {{ user.country }}</p>
+        <p class="text-muted">Att: {{ user.contact_person_name }}</p>
+        <p class="text-muted">Telephone: {{ user.contact_telephone }}</p>
+        <p class="text-muted">Email: {{ user.email }}</p>
+
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          If you need to change your company details, click on the home <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-home"></span></a> button in the top of your screen.
+        </div>
+      </div>
+    </div>
   </div>
-  
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Products in Cart</h3>
+      </div>
+      
+      {% if get_cart and get_cart.count > 0 %}
+      <div class="panel-body">  
+        <p>Add more products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a>.</p>
+      </div>      
+      
+      <table class="table table-bordered table-hover">
+        <tr>
+          <th>Product (ID-Name)</th>
+          <th>Quantity</th>
+          <th>Remove?</th>
+        </tr>
+
+        {% for item in get_cart %}
+        <tr>
+          <td><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a></td>
+          <td><p class="text-center">{{ item.quantity }}</p></td>
+          <td><p class="text-center"><a href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a></p></td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p><span class="minor-skip"></p>
+      <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Please add some products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a>.
+      </div>    
+      {% endif %}
+    </div>
+
+  </div>
+
 
 </div>
 
@@ -40,78 +83,78 @@
 
 <form action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
-    {% if feedback %}
-    <div class="alert alert-success">
-      <p>{{ feedback }}</p>
-    </div>
-    {% else %}
-    <form role="form" action="{{ request.user.get_absolute_url }}" method="post">
-        {% csrf_token %}
-        {% bootstrap_form_errors form type='non_fields' %}
-      
-        {% bootstrap_field form.date layout='vertical' %}
-        
-        <hr>
-      
-        <div class="form-group">
-            <label for="arranged_freight">Freight arranged by SparMed?</label>  
-            <input type="checkbox" class="form-control" id="arranged_freight" name="arranged_freight" checked required 
-                   onclick="javascript:toggleVisible('arranged_freight_options'); toggleVisible('arranged_freight_options_2');" />
-        </div>
- 
-        <article id="arranged_freight_options">
-          {% bootstrap_field form.freight_forwarder layout='vertical' %}
-          {% bootstrap_field form.account_no layout='vertical' %}
-        </article>
-      
-        <article id="arranged_freight_options_2">
-              {% bootstrap_field form.insurance_desired layout='vertical' %}
-        </article>
-      
-        <hr>
-      
-        {% bootstrap_field form.packing_instructions layout='vertical' %}
-        {% bootstrap_field form.packing_remarks layout='vertical' %}
-      
-        {% bootstrap_field form.aircleaner_instructions layout='vertical' %}
-      
-        {% bootstrap_field form.documents layout='vertical' %}
-      
-        <hr>
-      
-        <div class="form-group">
-            <label for="shipping_and_invoice_same">Shipping and invoice addresses are the same?</label>  
-            <input type="checkbox" class="form-control" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked required 
-                   onclick="javascript:toggleVisible('invoice_options'); " />
-        </div>
-      
-        <article id="invoice_options">
-            {% bootstrap_field form.invoice_company_name layout='vertical' %}
-            {% bootstrap_field form.invoice_company_address layout='vertical' %}
-            {% bootstrap_field form.invoice_company_postal_code layout='vertical' %}
-            {% bootstrap_field form.invoice_company_country layout='vertical' %}            
-        </article>
-      
-        <hr>
-      
-        {% bootstrap_field form.other_remarks layout='vertical' %}
-      
-        <hr>
+  {% if feedback %}
+  <div class="alert alert-success">
+    <p>{{ feedback }}</p>
+  </div>
+  {% else %}
+  <form role="form" action="{{ request.user.get_absolute_url }}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form_errors form type='non_fields' %}
 
-        {% buttons submit='Send Order' %}{% endbuttons %}
-    </form>
-    {% endif %}
+    {% bootstrap_field form.date layout='vertical' %}
+
+    <hr>
+
+    <div class="form-group">
+      <label for="arranged_freight">Freight arranged by SparMed?</label>  
+      <input type="checkbox" class="form-control" id="arranged_freight" name="arranged_freight" checked required 
+             onclick="javascript:toggleVisible('arranged_freight_options'); toggleVisible('arranged_freight_options_2');" />
+    </div>
+
+    <article id="arranged_freight_options">
+      {% bootstrap_field form.freight_forwarder layout='vertical' %}
+      {% bootstrap_field form.account_no layout='vertical' %}
+    </article>
+
+    <article id="arranged_freight_options_2">
+      {% bootstrap_field form.insurance_desired layout='vertical' %}
+    </article>
+
+    <hr>
+
+    {% bootstrap_field form.packing_instructions layout='vertical' %}
+    {% bootstrap_field form.packing_remarks layout='vertical' %}
+
+    {% bootstrap_field form.aircleaner_instructions layout='vertical' %}
+
+    {% bootstrap_field form.documents layout='vertical' %}
+
+    <hr>
+
+    <div class="form-group">
+      <label for="shipping_and_invoice_same">Shipping and invoice addresses are the same?</label>  
+      <input type="checkbox" class="form-control" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked required 
+             onclick="javascript:toggleVisible('invoice_options'); " />
+    </div>
+
+    <article id="invoice_options">
+      {% bootstrap_field form.invoice_company_name layout='vertical' %}
+      {% bootstrap_field form.invoice_company_address layout='vertical' %}
+      {% bootstrap_field form.invoice_company_postal_code layout='vertical' %}
+      {% bootstrap_field form.invoice_company_country layout='vertical' %}            
+    </article>
+
+    <hr>
+
+    {% bootstrap_field form.other_remarks layout='vertical' %}
+
+    <hr>
+
+    {% buttons submit='Send Order' %}{% endbuttons %}
+  </form>
+  {% endif %}
 </form>
 
 {% compress js inline %}
 <script type="text/javascript">
   $(document).ready(function() {
-      $("#arranged_freight_options").toggle();
-      $("#invoice_options").toggle();
+    $("#arranged_freight_options").toggle();
+    $("#invoice_options").toggle();
   });
-  
+
   function toggleVisible(divid) {
-      $("#" + divid).toggle(500); 
+    $("#" + divid).toggle(500); 
   }
 </script>
 

@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -106,8 +106,11 @@ TEMPLATE_LOADERS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
-  'django.contrib.auth.context_processors.auth',
+  "django.contrib.auth.context_processors.auth",
+  "django.core.context_processors.i18n",
+  "django.core.context_processors.tz",
   'django.contrib.messages.context_processors.messages',
+  'cart.context_processors.get_cart',
 )
 
 ROOT_URLCONF = 'sparmed.urls'
@@ -153,6 +156,7 @@ LOCAL_APPS = (
   'shop',
   'news',
   'online_order',
+  'cart',
 )
 
 INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

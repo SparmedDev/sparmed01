@@ -4,6 +4,7 @@
 {% load bootstrap3 %}
 {% load compress %}
 {% load base_extras %}
+{% load cache %}
 
 {% block pagedescription %}Browse the finest quality IVF Laboratory equipment{% endblock %}
 {% block title %}Products{% endblock %}
@@ -11,6 +12,7 @@
 
 {% block body %}
 
+{% cache 3600 products-categories-nav-bar %}
 {% if categories %}
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
@@ -22,18 +24,20 @@
   </ul>
 </nav>
 {% endif %}
+{% endcache %}
 
 <article class="category-article">
+  {% cache 3600 products-category-article-top %}
   <h1 class="text-center">{{ category.name }}</h1>
   {% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
-
+  {% endcache %}
   <hr>
 
   {% with subcats=category.subcategories.all %}
   {% for subcat in subcats %}
   <h2 class="text-center">{{ subcat.name }}</h2>
   {% if subcat.description %}<p class="text-center"><em>{{ subcat.description }}</em></p>{% endif %}
-
+  
   {% with productscount=subcat.products.all|length %}
   {% compress js inline %}
   <script type="text/javascript">
@@ -47,8 +51,7 @@
   </script>  
   {% endcompress %}
   {% endwith %}
-
-  
+    
   {% for product in subcat.products.all reversed %}
   {% if forloop.first %}<ul id="{{ subcat.slug }}-list" class="products-list">{% endif %}
   <li class="product-item">
@@ -60,10 +63,17 @@
     <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
     {% endif %}
     {% endwith %}
+    
+    {% if user.is_anonymous %}
+    <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span> (login required)</p>
+    {% else %}
+    <p class="text-center"><a href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+    {% endif %}
   </li>
   {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
   
+  {% cache 3600 products-subcategory-longtext %}
   {% if subcat.long_text %}
   <div class="well hidden-xs three-column" style="font-size: 11px;">
       {{ subcat.long_text|safe }}
@@ -71,7 +81,8 @@
   {% endif %}
 
   {% if not forloop.last %}<hr>{% endif %}
-
+  {% endcache %}
+  
   {% endfor %}
   {% endwith %}
   
