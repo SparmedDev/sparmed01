@@ -51,6 +51,7 @@
       </div>      
 
       <form class="form" action="{% url 'set-quantity-cart' %}" method="post">
+        {% csrf_token %}
         <table class="table table-bordered table-hover">
           <tr>
             <th>Product (ID-Name)</th>
@@ -58,9 +59,7 @@
             <th>Remove?</th>
           </tr>
 
-          {% for item in get_cart %}
-
-          {% csrf_token %}
+          {% for item in get_cart %}          
           <tr>
             <td>
               <a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a>
@@ -72,14 +71,13 @@
               <p class="text-center"><a href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a></p>
             </td>
           </tr>
-          {% endfor %}
-          
-        </table>  
+          {% endfor %}          
+        </table>    
         
         <div style="display: block; margin: 20px; width: 100%;">
           <input class="btn btn-primary" type="submit" value="Update Cart" />
         </div>
-
+        
       </form>
       
       {% else %}
