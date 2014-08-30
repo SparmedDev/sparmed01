@@ -2,6 +2,8 @@ from django.shortcuts import render
 from news.models import NewsPost
 from django.contrib.auth.decorators import login_required
 
+from shop.models import Category
+
 def home(request):
   news_posts = NewsPost.objects.all()
 
@@ -25,9 +27,10 @@ def certificates(request):
   return render(request, "certificates.html")
 
 @login_required
-def inventory(request):
-  
-  return render(request, "inventory.html")
+def inventory(request, slug="0"):
+  categories = Category.objects.all()      
+
+  return render(request, "inventory.html", {'categories':categories,})
 
 @login_required
 def distributor_login(request):

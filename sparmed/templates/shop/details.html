@@ -3,6 +3,7 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load compress %}
+{% load cache %}
 
 {% block pagedescription %}Browse the finest quality IVF Laboratory equipment{% endblock %}
 {% block title %}Products{% endblock %}
@@ -10,6 +11,7 @@
 
 {% block body %}
 
+{% cache 3600 products-details-nav-and-info %}
 <ol class="breadcrumb">
   <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
   <li class="active">{{ product.subcategory }}</li>
@@ -18,6 +20,7 @@
 <h2 class="text-center">{{ product.name }}</h2>
 <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
 {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
+{% endcache %}
 
 {% if user.is_anonymous %}
 <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span> (login required)</p>
@@ -25,6 +28,7 @@
 <p class="text-center"><a href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
 {% endif %}
 
+{% cache 3600 products-details-images %}
 <span class="minor-skip"></span>
 
 {% if images %}
@@ -35,7 +39,8 @@
 {% else %}
 <div class="alert alert-warning">No pictures available</div>
 {% endif %}
- 
+
+{% endcache %} 
        
 
 {% endblock %}

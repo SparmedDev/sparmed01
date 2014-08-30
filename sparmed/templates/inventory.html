@@ -16,6 +16,40 @@
   <li class="active">Inventory</li>
 </ol>
 
-<h2>Inventory</h2>
+<article>
+  <h2 class="text-center">Inventory</h2>
+  <p class="text-center"><em>All SparMed products and their availability on stock</em></p>
+
+  {% for category in categories reversed %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>{{ category.name }}</h3>
+    </div>
+
+    {% for subcategory in category.subcategories.all reversed %}
+    <div class="panel-body">
+      <h4>{{ subcategory.name }}</h4>
+    </div>
+
+    <table class="table table-hover table-bordered table-condensed">
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th><p class="text-center">Quantity</p></th>
+      </tr>
+
+      {% for product in subcategory.products.all reversed %}
+      <tr>
+        <td><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ product.product_id }}</a></td>
+        <td><p>{{ product.name }}</p></td>
+        <td><p class="text-center">{{ product.in_stock }}</p></td>
+      </tr>          
+      {% endfor %}
+    </table>
+    {% endfor %}
+
+  </div> 
+  {% endfor %}
+</article>
 
 {% endblock %}

@@ -15,6 +15,7 @@ def products(request, slug="0"):
   
     return render(request, 'shop/products.html', {'categories':categories, 'category':category})
 
+@never_cache
 def details(request, category_slug, product_slug):
   category = get_object_or_404(Category, slug=category_slug)
   product = get_object_or_404(Product, slug=product_slug)
