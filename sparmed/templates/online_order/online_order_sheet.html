@@ -49,22 +49,39 @@
       <div class="panel-body">  
         <p>Add more products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a>.</p>
       </div>      
-      
-      <table class="table table-bordered table-hover">
-        <tr>
-          <th>Product (ID-Name)</th>
-          <th>Quantity</th>
-          <th>Remove?</th>
-        </tr>
 
-        {% for item in get_cart %}
-        <tr>
-          <td><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a></td>
-          <td><p class="text-center">{{ item.quantity }}</p></td>
-          <td><p class="text-center"><a href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a></p></td>
-        </tr>
-        {% endfor %}
-      </table>
+      <form class="form" action="{% url 'set-quantity-cart' %}" method="post">
+        <table class="table table-bordered table-hover">
+          <tr>
+            <th>Product (ID-Name)</th>
+            <th>Quantity</th>
+            <th>Remove?</th>
+          </tr>
+
+          {% for item in get_cart %}
+
+          {% csrf_token %}
+          <tr>
+            <td>
+              <a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a>
+            </td>
+            <td>
+              <input class="form-control" name="{{ item.object_id }}_quantity-field" id="{{ item.object_id }}_quantity-field" type="number" value="{{ item.quantity }}" required />
+            </td>
+            <td>
+              <p class="text-center"><a href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a></p>
+            </td>
+          </tr>
+          {% endfor %}
+          
+        </table>  
+        
+        <div style="display: block; margin: 20px; width: 100%;">
+          <input class="btn btn-primary" type="submit" value="Update Cart" />
+        </div>
+
+      </form>
+      
       {% else %}
       <p><span class="minor-skip"></span></p>
       <div class="alert alert-info alert-dismissible" role="alert">

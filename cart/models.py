@@ -48,5 +48,10 @@ class Item(models.Model):
     def set_product(self, product):
         self.content_type = ContentType.objects.get_for_model(type(product))
         self.object_id = product.pk
+        
+    def set_quantity(self, quantity):
+        if quantity >= 0:
+            self.quantity = quantity;
+            self.save()
 
     product = property(get_product, set_product)      

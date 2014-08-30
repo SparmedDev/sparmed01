@@ -57,6 +57,17 @@ class Cart:
             raise ItemDoesNotExist
         else:
             item.delete()
+    
+    def set_product_quantity(self, product, quantity):
+        try:
+            item = models.Item.objects.get(
+                cart=self.cart,
+                product=product,
+            )
+        except models.Item.DoesNotExist:
+            raise ItemDoesNotExist
+        else:
+            item.set_quantity(quantity)
 
     def update(self, product, quantity):
         try:

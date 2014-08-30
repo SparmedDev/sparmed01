@@ -48,6 +48,7 @@ urlpatterns = patterns('',
 
                        url(r'^add_to_cart/(?P<category_slug>[\w\-]+)/(?P<object_id>[0-9]+)/$', 'cart.views.add_to_cart', name='add-to-cart'),
                        url(r'^remove_from_cart/(?P<object_id>[0-9]+)/$', 'cart.views.remove_from_cart', name='remove-from-cart'),
+                       url(r'^set_quantity_cart/$', 'cart.views.set_quantity_on_product', name='set-quantity-cart'),
                        
                        url(r'^distributor-login/account_area/(?P<account_slug>[\w\-]+)/$', 'online_order.views.account_area', name='account-area'),
                        url(r'^distributor-login/order_history/$', 'online_order.views.order_history', name='order-history'),
