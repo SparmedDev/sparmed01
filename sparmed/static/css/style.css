@@ -123,6 +123,10 @@ img {
     max-height: 600px;
 }
 
+#home-button.active {
+  color: #ed1b2e;
+}
+
 .btn-fancy > a {
     font-weight: bold;
     color: white;

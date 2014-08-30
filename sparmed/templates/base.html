@@ -66,7 +66,7 @@
         {% if get_cart and get_cart.count > 0 %}
         <a title="Go to Online Order Sheet to view your cart with your chosen products" href="{% url 'order-online' %}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{ get_cart.count }}</span></a> |
         {% endif %}
-        <a title="Go to Distributor Home Panel - online ordering, certificates, inventory and more" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
+        <a id="home-button" title="Go to Distributor Home Panel - online ordering, certificates, inventory and more" class="{% productnavactive request 'distributor-login' %}" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
         <a title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
         <a title="Logout from Sparmed Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
         {% endif %}
