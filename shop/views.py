@@ -18,7 +18,7 @@ def products(request, slug="0"):
 @never_cache
 def details(request, category_slug, product_slug):
   category = get_object_or_404(Category, slug=category_slug)
-  product = category.get(slug=product_slug)
+  product = category.products.get(slug=product_slug)
   images = product.images.all()
 
   return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images})
