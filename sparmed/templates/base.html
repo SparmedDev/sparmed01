@@ -61,7 +61,7 @@
     <section id="main-container">      
       <div id="dist-login">        
         {% if user.is_anonymous %}
-        <a title="Login for expanded access to Distributor Panel and Online Ordering" href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
+        <a title="Login for expanded access to the Distributor Home Panel and Online Ordering" href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
         {% else %}
         {% if get_cart and get_cart.count > 0 %}
         <a title="Go to Online Order Sheet to view your cart with your chosen products" href="{% url 'order-online' %}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{ get_cart.count }}</span></a> |
