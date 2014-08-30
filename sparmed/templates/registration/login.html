@@ -11,6 +11,11 @@
 
 <h2 class="text-center">Distributor Login</h2>
 
+<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  If you would like to become a distributor for SparMed, please <a class="alert-link" href="{% url 'contact' %}">contact us</a>.
+</div>
+
 <section id="loginform">
     <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
     {% csrf_token %}
