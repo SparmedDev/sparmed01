@@ -40,7 +40,7 @@
 
       {% for product in subcategory.products.all reversed %}
       <tr>
-        <td><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ product.product_id }}</a></td>
+        <td><a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a></td>
         <td><p>{{ product.name }}</p></td>
         <td><p class="text-center">{{ product.in_stock }}</p></td>
       </tr>          
