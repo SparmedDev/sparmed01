@@ -8,10 +8,17 @@
 {% block pagedescription %}Browse the finest quality IVF Laboratory equipment{% endblock %}
 {% block title %}Products{% endblock %}
 
+{% block head %}
+<!-- Important Owl stylesheet -->
+<link rel="stylesheet" href="{% static 'owl-carousel/css/owl.carousel.css' %}">
+
+<!-- Default Theme -->
+<link rel="stylesheet" href="{% static 'owl-carousel/css/owl.theme.css' %}">
+{% endblock %}
 
 {% block body %}
 
-{% cache 3600 products-details-nav-and-info %}
+{% cache 3600 products-details-nav-and-info product.slug %}
 <ol class="breadcrumb">
   <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
   <li class="active">{{ product.subcategory }}</li>
@@ -28,19 +35,53 @@
 <p class="text-center"><a href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
 {% endif %}
 
-{% cache 3600 products-details-images %}
+{% cache 3600 products-details-images product.slug %}
 <span class="minor-skip"></span>
 
 {% if images %}
-{% for image in images %}
-<img class="img-responsive img-rounded center-block" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
-{% endfor %}
-
+<div class="owl-carousel">
+  {% for image in images reversed %}
+  <div>
+    <img class="img-responsive img-rounded center-block" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}" class="lazyOwl">
+  </div>
+  {% endfor %}
+</div>
 {% else %}
 <div class="alert alert-warning">No pictures available</div>
 {% endif %}
 
 {% endcache %} 
        
+
+{% endblock %}
+
+{% block endbody %}
+
+{% cache 3600 products-details-scripts %}
+<!-- Include js plugin -->
+<script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8"></script>
+
+{% compress js inline %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".owl-carousel").owlCarousel({
+      singleItem: true,
+      itemsScaleUp: false,
+      slideSpeed: 1000,
+      paginationSpeed: 1500,
+      rewindSpeed: 1000,
+      autoPlay: true,
+      stopOnHover: true,      
+      navigation: false,
+      scrollPerPage: false,      
+      responsiveBaseWidth: '#content',      
+      lazyLoad: true,      
+      autoHeight: false,
+    });
+  });
+</script>
+{% endcompress %}
+
+{% endcache %}
 
 {% endblock %}
