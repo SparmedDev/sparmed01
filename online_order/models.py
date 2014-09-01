@@ -1,13 +1,16 @@
+from django import forms
 from django.db import models
+from django.forms import ModelForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-from django import forms
 import datetime
 
 from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
+
+from cart.models import Cart
 
 class SparmedUserManager(BaseUserManager):
     def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
@@ -75,6 +78,8 @@ class SparmedUser(AbstractBaseUser):
     contact_telephone = models.IntegerField(max_length=20, unique=True, verbose_name="Contact Telephone Number")
     email = models.EmailField(verbose_name="Contact Email Address", max_length=255, unique=True)
     
+    #orders = models.ForeignKey('Order', related_name='user', null=True, blank=True)
+    
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     
@@ -115,13 +120,18 @@ class SparmedUser(AbstractBaseUser):
     def get_absolute_url(self):
         return reverse('online_order.views.account_area', args=[self.slug])
       
+    def add_to_order_history(self, order):
+        if order:
+            self.orders.order_set.add(order)
+            self.save()
+        
       
-class OrderForm(forms.Form):
-    date = forms.DateTimeField(initial=datetime.datetime.now, label="Date and time of order")
+class Order(models.Model):
+    date = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time of order")
     
-    arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True)
-    freight_forwarder = forms.CharField(max_length=255, label="Freight Forwarder", required=False)
-    account_no = forms.CharField(max_length=255, label="Account Number", required=False)
+    arranged_freight = models.BooleanField(verbose_name="SparMED Arranges Freight?", default=True)
+    freight_forwarder = models.CharField(max_length=255, verbose_name="Freight Forwarder", blank=True, null=True)
+    account_no = models.CharField(max_length=255, verbose_name="Account Number", blank=True, null=True)
     
     EURO_PALLET = 'EP'
     HALF_PALLET = 'HP'
@@ -130,9 +140,10 @@ class OrderForm(forms.Form):
       (EURO_PALLET, 'Euro Pallet'),
       (HALF_PALLET, 'Half Pallet'),
       (BOX, 'Box'),
-    )    
-    packing_instructions = forms.CharField(max_length=2, widget=forms.Select(choices=PACKING_CHOICES))
-    packing_remarks = forms.CharField(widget=forms.Textarea, label="Packaging Remarks/Comments", required=False)
+    )  
+    
+    packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, blank=False)
+    packing_remarks = models.TextField(verbose_name="Packaging Remarks/Comments", blank=True, null=True)
     
     CARDBOARD_BOX = 'CB'
     WOODEN_FRAMES = 'WF'
@@ -140,19 +151,36 @@ class OrderForm(forms.Form):
       (CARDBOARD_BOX, 'Cardboard Box'),
       (WOODEN_FRAMES, 'Wooden Frames'),
     )    
-    aircleaner_instructions = forms.CharField(max_length=2, widget=forms.Select(choices=AIRCLEANER_CHOICES))
+    aircleaner_instructions = models.CharField(verbose_name="Aircleaner Instructions (If applicable)", max_length=2, choices=AIRCLEANER_CHOICES, blank=True, null=True)
     
-    insurance_desired = forms.BooleanField(label="Is insurance desired?", initial=False)
+    insurance_desired = models.BooleanField(verbose_name="Is insurance desired?", default=False)
     
-    documents = forms.CharField(widget=forms.Textarea, label="Please write down if you need any documents along with your shipment", required=False)
-  
-    shipping_and_invoice_same = forms.BooleanField(label="Shipping and invoice addresses are the same?", initial=True)
-    invoice_company_name = forms.CharField(max_length=255, label="Invoice Company Name", required=False)
-    invoice_company_address = forms.CharField(max_length=255, label="Invoice Company Address", required=False)
-    invoice_company_country = forms.CharField(max_length=255, label="Invoice Company Country", required=False)
-    invoice_company_postal_code = forms.IntegerField(label="Invoice Company Postal Code", required=False)
+    documents = models.TextField(verbose_name="Please write down if you need any specific documents along with your shipment", blank=True, null=True)
     
-    other_remarks = forms.CharField(widget=forms.Textarea, label="Any other remarks or comments regarding this order?")
+    shipping_and_invoice_same = models.BooleanField(verbose_name="Shipping and invoice addresses are the same?", default=True)
+    invoice_company_name = models.CharField(max_length=255, verbose_name="Invoice Company Name", blank=True, null=True)
+    invoice_company_address = models.CharField(max_length=255, verbose_name="Invoice Company Address", blank=True, null=True)
+    invoice_company_postal_code = models.IntegerField(verbose_name="Invoice Company Postal Code", blank=True, null=True)    
+    invoice_company_country = CountryField(verbose_name="Invoice Company Country", blank=True, null=True)
+    
+    other_remarks = models.TextField(verbose_name="Any other remarks or comments regarding this order?", blank=True, null=True)
+    
+    user = models.ForeignKey('SparmedUser', related_name='orders', null=True, blank=True)
+    cart = models.OneToOneField(Cart, related_name='order', null=True, blank=True)
+    
+    class Meta:
+        ordering = ['-date']
+        
+    def set_cart(self, new_cart):
+        if new_cart and new_cart.count > 0:
+            self.cart = new_cart
+            self.save()
+        
+      
+class OrderForm(ModelForm):
+    class Meta:
+        model = Order
+        exclude = ['date', 'user', 'cart']
     
     
     

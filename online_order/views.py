@@ -17,7 +17,10 @@ def order_online(request):
         form = OrderForm(request.POST)
       
         if form.is_valid():
-            print 'Form is valid'
+            order = form.save(commit=False)
+            order.set_cart(Cart(request))
+            request.user.add_to_order_history(order)
+            order.save()
     else:
         form = OrderForm()
         
