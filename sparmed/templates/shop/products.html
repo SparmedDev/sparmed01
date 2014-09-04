@@ -38,7 +38,7 @@
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
     {% for cat in categories reversed %}
-    <li class="{% productnavactive request cat.slug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+    <li class="{% productnavactive request cat.slug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.short_name }}</a></li>
     {% endfor %}
   </ul>
 </nav>
@@ -49,6 +49,11 @@
   {% cache 3600 products-category-article-top category.slug %}
   <h1 class="text-center">{{ category.name }}</h1>
   {% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
+  {% if category.long_text %}
+  <section>
+      {{ category.long_text|safe }}
+  </section>
+  {% endif %}
   {% endcache %}
   <hr>
 
