@@ -114,6 +114,8 @@ a {
   -moz-column-gap: 20px;
   -webkit-column-count: 3;
   -webkit-column-gap: 20px;
+  column-count: 3;
+  column-gap: 20px;
 }
 
 .nav-tabs {
@@ -169,10 +171,11 @@ img {
     cursor: default;
 }
 
+
 #distributor-panel-btn-container {
     display: block;
-    width: 400px;
-    margin: 5px auto;  
+    width: 410px;
+    margin: 0px auto;  
     padding: 0px;
 }
   
@@ -184,23 +187,52 @@ img {
     color: white;
     white-space: normal;
 
-    height: 200px;
-    width: 200x;
-    padding: 50px 10px;
+    height: 190px;
+    width: 190px;
+    padding: 60px 20px;
     margin: 5px;
 
     background-color: #008393;
     background-position: center center;
     background-repeat: no-repeat;
 
-    background: -webkit-gradient(radial, center center, 0, center center, 250, from(#9edeff), to(#005e69));
-    background: -webkit-radial-gradient(circle, #9edeff, #005e69);
-    background: -moz-radial-gradient(circle, #9edeff, #005e69);
-    background: -ms-radial-gradient(circle, #9edeff, #005e69);
-
-    border: 5px solid #005e69;
-    box-shadow:2px 2px 5px #055;
+    border-radius: 15px;
+    border: 1px solid #005e69;
+    box-shadow:2px 2px 5px #355;
 }
+  
+.btn-fancy-grid-top-left {
+    background: -webkit-radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: -moz-radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: -ms-radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: -o-radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);    
+}
+  
+.btn-fancy-grid-top-right {
+    background: -webkit-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: -moz-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: -ms-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: -o-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
+    background: radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);    
+}
+  
+.btn-fancy-grid-bot-left {
+    background: -webkit-radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: -moz-radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: -ms-radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: -o-radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);    
+}
+  
+.btn-fancy-grid-bot-right {
+    background: -webkit-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: -moz-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: -ms-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: -o-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
+    background: radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);    
+}
+
 
 .minor-skip {
     display: block;

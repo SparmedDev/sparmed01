@@ -33,16 +33,24 @@
 
     <table class="table table-hover table-bordered table-condensed">
       <tr>
+        <th><p class="text-center">Add to Cart</p></th>
         <th>Product ID</th>
         <th>Product Name</th>
-        <th><p class="text-center">Quantity</p></th>
+        <th><p class="text-center">On Stock</p></th>
+        <th><p class="text-center">Available</p></th>
       </tr>
 
       {% for product in subcategory.products.all reversed %}
       <tr>
-        <td><a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a></td>
+        <td>
+          <p class="text-center"><a href="{% url 'add-to-cart' product.category.slug product.id %}"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+        </td>
+        <td>
+          <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
+        </td>
         <td><p>{{ product.name }}</p></td>
         <td><p class="text-center">{{ product.in_stock }}</p></td>
+        <td><p class="text-center">(available)</p></td>
       </tr>          
       {% endfor %}
     </table>

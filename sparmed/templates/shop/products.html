@@ -12,6 +12,27 @@
 
 {% block body %}
 
+<style>
+  
+.category-article > h1 {
+    border-top: 3px solid #008393;
+    border-bottom: 3px solid #008393;
+  
+    padding: 20px;
+}  
+  
+.category-article > p {
+    display: block;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+  
+</style>
+
 {% cache 3600 products-categories-nav-bar category.slug %}
 {% if categories %}
 <nav id="products-nav" role="navigation">
@@ -72,17 +93,9 @@
   </li>
   {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
-  
-  {% cache 3600 products-subcategory-longtext category.slug %}
-  {% if subcat.long_text %}
-  <div class="well hidden-xs three-column" style="font-size: 11px;">
-      {{ subcat.long_text|safe }}
-  </div>
-  {% endif %}
 
   {% if not forloop.last %}<hr>{% endif %}
-  {% endcache %}
-  
+
   {% endfor %}
   {% endwith %}
   

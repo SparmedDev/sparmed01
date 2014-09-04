@@ -38,17 +38,26 @@
 {% cache 3600 products-details-images product.slug %}
 <span class="minor-skip"></span>
 
-{% if images %}
-<div class="owl-carousel">
-  {% for image in images reversed %}
-  <div>
-    <img class="img-responsive img-rounded center-block" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}" class="lazyOwl">
+<div class="row">
+  <div class="col-md-6">
+    {% if images %}
+    <div class="owl-carousel">
+      {% for image in images reversed %}
+      <div>
+        <img class="img-responsive img-rounded center-block" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}" class="lazyOwl">
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning">No pictures available</div>
+    {% endif %}
   </div>
-  {% endfor %}
+  
+  <div class="col-md-6">
+      {{ product.subcategory.long_text|safe }}
+  </div>
+  
 </div>
-{% else %}
-<div class="alert alert-warning">No pictures available</div>
-{% endif %}
 
 {% endcache %} 
        
