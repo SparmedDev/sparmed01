@@ -100,7 +100,7 @@
 
 <hr>
 
-<form class="form-horizontal" role="form" class="form" action="{% url 'order-online' %}" method="post">
+<form class="form form-horizontal" role="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   {% if feedback %}
   <div class="alert alert-success">
