@@ -100,6 +100,7 @@ html, body {
 
 h1, h2  {
     color: #004f4f;
+    font-weight: bold;
 }
 
 a {
@@ -170,8 +171,9 @@ img {
 
 #distributor-panel-btn-container {
     display: block;
-    width: 500px;
+    width: 400px;
     margin: 5px auto;  
+    padding: 0px;
 }
   
 .btn-fancy-grid {
@@ -182,10 +184,10 @@ img {
     color: white;
     white-space: normal;
 
-    height: 220px;
-    width: 220px;
-    padding: 80px 25px;
-    margin: 10px;
+    height: 200px;
+    width: 200x;
+    padding: 50px 10px;
+    margin: 5px;
 
     background-color: #008393;
     background-position: center center;
@@ -196,8 +198,8 @@ img {
     background: -moz-radial-gradient(circle, #9edeff, #005e69);
     background: -ms-radial-gradient(circle, #9edeff, #005e69);
 
-    border: 1px solid #005e69;
-    box-shadow:1px 1px 5px #005e69;
+    border: 5px solid #005e69;
+    box-shadow:2px 2px 5px #055;
 }
 
 .minor-skip {

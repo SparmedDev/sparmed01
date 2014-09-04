@@ -18,4 +18,56 @@
 
 <h2>Order History</h2>
 
+<hr>
+
+{% for order in orders %}
+<h3>Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time></h3>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>Company Details</h3>
+  </div>
+  <div class="panel-body">          
+    <p class="text-muted"><strong>{{ order.user.company_name }}</strong></p>
+    <p class="text-muted">{{ order.user.address}}</p>
+    <p class="text-muted">{{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}</p>
+    <p class="text-muted">Att: {{ order.user.contact_person_name }}</p>
+    <p class="text-muted">Telephone: {{ order.user.contact_telephone }}</p>
+    <p class="text-muted">Email: {{ order.user.email }}</p>
+  </div>
+
+  {% with items=order.items.all %}
+  {% if items %}
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Quantity</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+      <td>
+        <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
+      </td>
+      <td>
+        <p>{{ item.name }}</p>
+      </td>
+      <td>
+        <p>{{ item.quantity }}</p>
+      </td>
+    </tr> 
+    {% endfor %}
+  </table>
+  {% else %}
+  <div class="alert alert-error">No product items found in the order.</div>
+  {% endif %}
+  {% endwith %}
+</div>
+{% if not forloop.last %}<hr>{% endif %}
+
+{% empty %}
+<div class="alert alert-warning">No orders found in the order history.</div>
+{% endfor %}
+
 {% endblock %}

@@ -10,7 +10,6 @@ import datetime
 from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
 
-from cart.models import Cart
 
 class SparmedUserManager(BaseUserManager):
     def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
@@ -78,8 +77,6 @@ class SparmedUser(AbstractBaseUser):
     contact_telephone = models.IntegerField(max_length=20, unique=True, verbose_name="Contact Telephone Number")
     email = models.EmailField(verbose_name="Contact Email Address", max_length=255, unique=True)
     
-    #orders = models.ForeignKey('Order', related_name='user', null=True, blank=True)
-    
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     
@@ -120,11 +117,53 @@ class SparmedUser(AbstractBaseUser):
     def get_absolute_url(self):
         return reverse('online_order.views.account_area', args=[self.slug])
       
-    def add_to_order_history(self, order):
-        if order:
-            self.orders.order_set.add(order)
-            self.save()
-        
+    def add_to_order_history(self, order, items_list):
+        if order and items_list:
+            o_new = self.orders.create(
+                arranged_freight=order.arranged_freight,
+                freight_forwarder=order.freight_forwarder,
+                account_no=order.account_no,
+              
+                packing_instructions=order.packing_instructions,
+                packing_remarks=order.packing_remarks,
+                
+                aircleaner_instructions=order.aircleaner_instructions,
+                insurance_desired=order.insurance_desired,
+                documents=order.documents,
+              
+                shipping_and_invoice_same=order.shipping_and_invoice_same,
+                invoice_company_name=order.invoice_company_name,
+                invoice_company_address=order.invoice_company_address,
+                invoice_company_postal_code=order.invoice_company_postal_code,
+                invoice_company_country=order.invoice_company_country,
+              
+                other_remarks=order.other_remarks,            
+                
+                user=self,
+            )
+            
+            if o_new:     
+                for item in items_list:
+                    o_new.items.create(
+                        quantity=item.quantity,
+                        object_id=item.object_id,
+
+                        product_id=item.product.product_id,
+                        name=item.product.name,
+                        slug=item.product.slug,
+                      
+                        category_slug=item.product.category.slug,
+
+                        order_history=o_new,  
+                     )
+              
+                o_new.save()
+                self.save()
+            else:
+                raise ValueError('Order history item instantiation failed, o new is null')
+        else:
+            raise ValueError('Cannot add null order or empty items list to order history')
+
       
 class Order(models.Model):
     date = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time of order")
@@ -142,7 +181,7 @@ class Order(models.Model):
       (BOX, 'Box'),
     )  
     
-    packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, blank=False)
+    packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, blank=True)
     packing_remarks = models.TextField(verbose_name="Packaging Remarks/Comments", blank=True, null=True)
     
     CARDBOARD_BOX = 'CB'
@@ -153,11 +192,11 @@ class Order(models.Model):
     )    
     aircleaner_instructions = models.CharField(verbose_name="Aircleaner Instructions (If applicable)", max_length=2, choices=AIRCLEANER_CHOICES, blank=True, null=True)
     
-    insurance_desired = models.BooleanField(verbose_name="Is insurance desired?", default=False)
+    insurance_desired = models.BooleanField(verbose_name="Is insurance desired?", default=False, blank=True)
     
     documents = models.TextField(verbose_name="Please write down if you need any specific documents along with your shipment", blank=True, null=True)
     
-    shipping_and_invoice_same = models.BooleanField(verbose_name="Shipping and invoice addresses are the same?", default=True)
+    shipping_and_invoice_same = models.BooleanField(verbose_name="Shipping and invoice addresses are the same?", default=True, blank=True)
     invoice_company_name = models.CharField(max_length=255, verbose_name="Invoice Company Name", blank=True, null=True)
     invoice_company_address = models.CharField(max_length=255, verbose_name="Invoice Company Address", blank=True, null=True)
     invoice_company_postal_code = models.IntegerField(verbose_name="Invoice Company Postal Code", blank=True, null=True)    
@@ -165,22 +204,37 @@ class Order(models.Model):
     
     other_remarks = models.TextField(verbose_name="Any other remarks or comments regarding this order?", blank=True, null=True)
     
-    user = models.ForeignKey('SparmedUser', related_name='orders', null=True, blank=True)
-    cart = models.OneToOneField(Cart, related_name='order', null=True, blank=True)
-    
     class Meta:
-        ordering = ['-date']
-        
-    def set_cart(self, new_cart):
-        if new_cart and new_cart.count > 0:
-            self.cart = new_cart
-            self.save()
-        
+        ordering = ['-date']        
       
-class OrderForm(ModelForm):
+class OrderForm(ModelForm):  
+    arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True, required=False)
+    insurance_desired = forms.BooleanField(label="Is insurance desired?", initial=False, required=False)
+    shipping_and_invoice_same = forms.BooleanField(label="Shipping and invoice addresses are the same?", initial=True, required=False)
+  
     class Meta:
         model = Order
-        exclude = ['date', 'user', 'cart']
+        exclude = ['date']
     
     
+
+class OrderHistoryItem(Order):
+    user = models.ForeignKey('SparmedUser', related_name='orders', null=True, blank=True)
+
     
+class OrderProduct(models.Model):
+    quantity = models.PositiveIntegerField(verbose_name='quantity')
+    object_id = models.PositiveIntegerField()
+    
+    product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
+    name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")    
+    category_slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
+    slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
+    
+    order_history = models.ForeignKey('OrderHistoryItem', related_name='items')
+    
+    def get_absolute_url(self):
+        return reverse('shop.views.details', args=[self.category_slug, self.slug,])   
+      
+    def __unicode__(self):
+       return u'%s - %s' % (self.product_id, self.name)

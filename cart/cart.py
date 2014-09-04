@@ -19,11 +19,15 @@ class Cart:
                 cart = self.new(request)
         else:
             cart = self.new(request)
+            
         self.cart = cart
 
     def __iter__(self):
         for item in self.cart.item_set.all():
             yield item
+            
+    def get_item_list(self):  
+        return self.cart.item_set.all()
 
     def new(self, request):
         cart = models.Cart(creation_date=datetime.datetime.now())

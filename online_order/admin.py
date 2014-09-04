@@ -54,8 +54,8 @@ class SparmedUserChangeForm(UserChangeForm):
 
     def clean_password(self):
         return self.initial["password"]   
- 
 
+      
 class SparmedUserAdmin(UserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
@@ -83,5 +83,6 @@ class SparmedUserAdmin(UserAdmin):
     ordering = ('company_name', 'country', 'name',)
     filter_horizontal = () 
 
+    
 admin.site.register(SparmedUser, SparmedUserAdmin)
 admin.site.unregister(Group)

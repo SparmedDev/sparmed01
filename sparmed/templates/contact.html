@@ -31,13 +31,13 @@
     <p>Technical Support (Website): <a href="mailto:rami@sparmed.dk">rami@sparmed.dk</a></p>
   </div>
   <div class="col-md-6">
-    <p><br>Bank information:</p>
+    <p><br><br>Bank information:</p>
     <p>Danske Bank A/S</p>
     <p>Address: Holmens Kanal 2-12,1092 Copenhagen, Denmark</p>
-    <p class="text-info">BIC/SWIFT code: DABADKKK</p>
-    <p class="text-danger">DKK Account: Reg. 3543, Account 0011400884</p>
-    <p class="text-success">USD Account: DK98 3000 4779 7775 96</p>
-    <p class="text-primary">EURO Account: DK86 3000 4779 7776 18</p>
+    <p>BIC/SWIFT code: DABADKKK</p>    
+    <p>EUR Account IBAN: DK86 3000 4779 7776 18</p>    
+    <p>USD Account IBAN: DK98 3000 4779 7775 96</p>
+    <p>DKK Account: Regnr.: 3543, Kontonr.: 0011400884</p>
   </div>
 </div>
 
@@ -77,31 +77,35 @@
 
 <hr>
 
-<iframe width="90%"
-        height="350"
-        frameborder="0"
-        style="border:0px; margin:0px auto; display: block;"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
-             &q=Toppevadvej+34+3660+stenlose+Sparmed+ApS">
-</iframe>
+<div class="row">
+  <div class="col-md-6">
+    <iframe width="90%"
+            height="400px"
+            frameborder="0"
+            style="border:0px; margin:0px auto; display: block;"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
+                 &q=Toppevadvej+34+3660+stenlose+Sparmed+ApS">
+    </iframe>
+  </div>
 
-<hr>
+  <div class="col-md-6">
+    <article>
+      <section id="contact-form">
+        {% if feedback %}
+        <div class="alert alert-success">
+          <p>{{ feedback }}</p>
+        </div>
+        {% else %}
+        <form role="form" class="form" action="{% url 'contact' %}" method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
 
-<article>
-  <section id="contact-form">
-    {% if feedback %}
-    <div class="alert alert-success">
-      <p>{{ feedback }}</p>
-    </div>
-    {% else %}
-    <form role="form" class="form" action="{% url 'contact' %}" method="post">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-
-      {% buttons submit='Send Message' %}{% endbuttons %}
-    </form>
-    {% endif %}
-  </section>
-</article>
-
+          {% buttons submit='Send Message' %}{% endbuttons %}
+        </form>
+        {% endif %}
+      </section>
+    </article>
+  </div>    
+</div>
+  
 {% endblock %}

@@ -18,18 +18,20 @@
 <hr>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3>Company Details</h3>
       </div>
       <div class="panel-body">          
-        <p class="text-muted"><strong>{{ user.company_name }}</strong></p>
-        <p class="text-muted">{{ user.address}}</p>
-        <p class="text-muted">{{ user.postal_code }} {{ user.city}}, {{ user.country }}</p>
-        <p class="text-muted">Att: {{ user.contact_person_name }}</p>
-        <p class="text-muted">Telephone: {{ user.contact_telephone }}</p>
-        <p class="text-muted">Email: {{ user.email }}</p>
+        <p class="text-muted text-small">
+          <strong>{{ user.company_name }}</strong><br>
+          {{ user.address}}<br>
+          {{ user.postal_code }} {{ user.city}}, {{ user.country }}<br>
+          Att: {{ user.contact_person_name }}<br>
+          Telephone: {{ user.contact_telephone }}<br>
+          Email: {{ user.email }}
+        </p>
 
         <div class="alert alert-warning alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -39,7 +41,7 @@
     </div>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3>Products in Cart</h3>
@@ -62,7 +64,7 @@
           {% for item in get_cart %}          
           <tr>
             <td>
-              <a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a>
+              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a></p>
             </td>
             <td>
               <div class="form-group">
@@ -98,7 +100,7 @@
 
 <hr>
 
-<form role="form" class="form" action="{% url 'order-online' %}" method="post">
+<form class="form-horizontal" role="form" class="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   {% if feedback %}
   <div class="alert alert-success">
@@ -110,47 +112,47 @@
     {% bootstrap_form_errors form type='non_fields' %}
 
     <div class="form-group">
-      <label for="arranged_freight">Freight arranged by SparMed?</label>  
-      <input type="checkbox" class="form-control" id="arranged_freight" name="arranged_freight" checked required 
+      <label class="control-label col-sm-4" for="arranged_freight">Freight arranged by SparMed?</label>  
+      <input type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked 
              onclick="javascript:toggleVisible('arranged_freight_options'); toggleVisible('arranged_freight_options_2');" />
     </div>
 
     <article id="arranged_freight_options">
-      {% bootstrap_field form.freight_forwarder layout='vertical' %}
-      {% bootstrap_field form.account_no layout='vertical' %}
+      {% bootstrap_field form.freight_forwarder %}
+      {% bootstrap_field form.account_no %}
     </article>
 
     <article id="arranged_freight_options_2">
-      {% bootstrap_field form.insurance_desired layout='vertical' %}
+      {% bootstrap_field form.insurance_desired %}
     </article>
 
     <hr>
 
-    {% bootstrap_field form.packing_instructions layout='vertical' %}
-    {% bootstrap_field form.packing_remarks layout='vertical' %}
+    {% bootstrap_field form.packing_instructions %}
+    {% bootstrap_field form.packing_remarks %}
 
-    {% bootstrap_field form.aircleaner_instructions layout='vertical' %}
+    {% bootstrap_field form.aircleaner_instructions %}
 
-    {% bootstrap_field form.documents layout='vertical' %}
+    {% bootstrap_field form.documents %}
 
     <hr>
 
     <div class="form-group">
-      <label for="shipping_and_invoice_same">Shipping and invoice addresses are the same?</label>  
-      <input type="checkbox" class="form-control" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked required 
+      <label class="control-label col-sm-4" for="shipping_and_invoice_same">Shipping and invoice addresses are the same?</label>  
+      <input type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
              onclick="javascript:toggleVisible('invoice_options'); " />
     </div>
 
     <article id="invoice_options">
-      {% bootstrap_field form.invoice_company_name layout='vertical' %}
-      {% bootstrap_field form.invoice_company_address layout='vertical' %}
-      {% bootstrap_field form.invoice_company_postal_code layout='vertical' %}
-      {% bootstrap_field form.invoice_company_country layout='vertical' %}            
+      {% bootstrap_field form.invoice_company_name %}
+      {% bootstrap_field form.invoice_company_address %}
+      {% bootstrap_field form.invoice_company_postal_code  %}
+      {% bootstrap_field form.invoice_company_country %}            
     </article>
 
     <hr>
 
-    {% bootstrap_field form.other_remarks layout='vertical' %}
+    {% bootstrap_field form.other_remarks %}
 
     <hr>
 

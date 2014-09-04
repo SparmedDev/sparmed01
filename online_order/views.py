@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.views.decorators.cache import never_cache
+from django.core.urlresolvers import reverse
 
 from online_order.models import OrderForm, SparmedUser
 from online_order.admin import SparmedUserChangeForm
 
 from shop.models import Category
+
 from cart import Cart
 
 # Create your views here.
@@ -18,18 +20,28 @@ def order_online(request):
       
         if form.is_valid():
             order = form.save(commit=False)
-            order.set_cart(Cart(request))
-            request.user.add_to_order_history(order)
-            order.save()
+            cart = Cart(request)
+            
+            if cart and order:
+                request.user.add_to_order_history(order, cart)
+                cart.clear()
+              
+                return HttpResponseRedirect(reverse('online_order.views.order_history'))              
+            else:
+                raise ValueError('Cannot order online and set cart when cart is null')          
+        else:
+            raise ValueError("Cannot order online, form is invalid")
     else:
         form = OrderForm()
         
     return render(request, 'online_order/online_order_sheet.html', {'form': form})
   
 @login_required
-def order_history(request):
+@never_cache
+def order_history(request):  
+  orders = request.user.orders.all()
   
-  return render(request, 'online_order/order_history.html')
+  return render(request, 'online_order/order_history.html', {'orders':orders})
 
 
 @login_required
