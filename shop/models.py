@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 
 from sorl.thumbnail import ImageField
 import datetime
+from validatedfile.fields import ValidatedFileField
 
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
@@ -60,7 +61,10 @@ class Category(models.Model):
     long_text = models.TextField(verbose_name="Category Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
+    
+    document = ValidatedFileField(blank=True, null=True, verbose_name="PDF Document file (256 MB max)", upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*256)
 
+    
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.slug,])
 
@@ -70,3 +74,19 @@ class Category(models.Model):
 
     def __unicode__(self):
        return u'%s' % self.name
+      
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules([
+        (
+            [ValidatedFileField],
+            [],
+            {
+                "content_types": ["content_types", {"default": []}],
+                "max_upload_size": ["max_upload_size", {"default": 0}],
+                "mime_lookup_length": ["mime_lookup_length", {"default": 4096}],
+            },
+        ),
+    ], ["^validatedfile\.fields\.ValidatedFileField"])
+except ImportError:
+    pass    

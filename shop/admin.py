@@ -38,6 +38,7 @@ class CategoryAdmin(admin.ModelAdmin):
     date_hierarchy = 'added'
   
     prepopulated_fields = {"slug": ('short_name',)}
+    
   
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Subcategory, SubcategoryAdmin)

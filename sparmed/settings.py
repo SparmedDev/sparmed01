@@ -148,6 +148,7 @@ THIRD_PARTY_APPS = (
   'django_countries',
   'django_extensions',
   'django_wysiwyg',
+  'validatedfile',
 )
 
 LOCAL_APPS = (
