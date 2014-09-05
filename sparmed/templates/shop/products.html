@@ -33,7 +33,6 @@
   
 </style>
 
-{% cache 3600 products-categories-nav-bar category.slug %}
 {% if categories %}
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
@@ -43,7 +42,6 @@
   </ul>
 </nav>
 {% endif %}
-{% endcache %}
 
 <article class="category-article">
   {% cache 3600 products-category-article-top category.slug %}
