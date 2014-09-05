@@ -49,14 +49,19 @@
   {% cache 3600 products-category-article-top category.slug %}
   <h1 class="text-center">{{ category.name }}</h1>
   {% if category.description %}<p class="text-center"><em>{{ category.description }}</em></p>{% endif %}
+  
+  {% if category.document %}
   <section>
     <h4 class="text-center"><a href="{{ category.document.url }}">PDF File <span class="glyphicon glyphicon-file"></span></a></h4>
   </section>  
+  {% endif %}
+  
   {% if category.long_text %}
   <section class="two-column">
       {{ category.long_text|safe }}
   </section>
   {% endif %}
+  
   {% endcache %}
   <hr>
 

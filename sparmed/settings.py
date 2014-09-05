@@ -59,7 +59,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
 STATIC_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = STATIC_URL
+#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
 
@@ -80,7 +81,8 @@ AWS_REDUCED_REDUNDANCY = False
 AWS_IS_GZIPPED = False
 AWS_PRELOAD_METADATA = True
 
-COMPRESS_ENABLED = DEBUG is False
+COMPRESS_ENABLED = True
+#COMPRESS_ENABLED = DEBUG is False
 if COMPRESS_ENABLED:
     COMPRESS_CSS_FILTERS = [
         'compressor.filters.css_default.CssAbsoluteFilter',
@@ -138,7 +140,6 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
   'gunicorn',
-  'south',
   'compressor',  
   'bootstrap3',
   'robots',

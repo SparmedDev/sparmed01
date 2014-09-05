@@ -24,8 +24,8 @@ class Product(models.Model):
     description = models.CharField(max_length=255, verbose_name="Product description", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
+    subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")    
     category = models.ForeignKey('Category', related_name="products", verbose_name="Associated Category")
-    subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")
 
     def get_absolute_url(self):
         return reverse('shop.views.details', args=[self.category.slug, self.slug])

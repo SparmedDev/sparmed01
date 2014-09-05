@@ -1,57 +1,46 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import datetime
+import sorl.thumbnail.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'NewsImage'
-        db.create_table(u'news_newsimage', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('image_title', self.gf('django.db.models.fields.CharField')(max_length=200, blank=True)),
-            ('image', self.gf('sorl.thumbnail.fields.ImageField')(max_length=100)),
-            ('news_post', self.gf('django.db.models.fields.related.ForeignKey')(related_name='images', to=orm['news.NewsPost'])),
-        ))
-        db.send_create_signal(u'news', ['NewsImage'])
+    dependencies = [
+    ]
 
-        # Adding model 'NewsPost'
-        db.create_table(u'news_newspost', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=60)),
-            ('added', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
-            ('content', self.gf('django.db.models.fields.TextField')(default='Write your news post here')),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=255)),
-        ))
-        db.send_create_signal(u'news', ['NewsPost'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'NewsImage'
-        db.delete_table(u'news_newsimage')
-
-        # Deleting model 'NewsPost'
-        db.delete_table(u'news_newspost')
-
-
-    models = {
-        u'news.newsimage': {
-            'Meta': {'object_name': 'NewsImage'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('sorl.thumbnail.fields.ImageField', [], {'max_length': '100'}),
-            'image_title': ('django.db.models.fields.CharField', [], {'max_length': '200', 'blank': 'True'}),
-            'news_post': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'images'", 'to': u"orm['news.NewsPost']"})
-        },
-        u'news.newspost': {
-            'Meta': {'object_name': 'NewsPost', 'ordering': "['-added']"},
-            'added': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'content': ('django.db.models.fields.TextField', [], {'default': "'Write your news post here'"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '60'})
-        }
-    }
-
-    complete_apps = ['news']
+    operations = [
+        migrations.CreateModel(
+            name='NewsImage',
+            fields=[
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('image_title', models.CharField(verbose_name=b'Picture Title', blank=True, max_length=200)),
+                ('image', sorl.thumbnail.fields.ImageField(upload_to=b'/media/news')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='NewsPost',
+            fields=[
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=60)),
+                ('added', models.DateTimeField(verbose_name=b'Date and time added', default=datetime.datetime.now)),
+                ('content', models.TextField(verbose_name=b'Write your news post here (Please do not attempt to insert images here, instead use the news image below)')),
+                ('slug', models.SlugField(verbose_name=b'URL; Never modify this value!', max_length=255, unique=True)),
+            ],
+            options={
+                'ordering': ['-added'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='newsimage',
+            name='news_post',
+            field=models.ForeignKey(related_name=b'images', verbose_name=b'Associated News Post', to='news.NewsPost'),
+            preserve_default=True,
+        ),
+    ]

@@ -1,6 +1,8 @@
 from django.core.files.storage import get_storage_class
 from storages.backends.s3boto import S3BotoStorage
+from django.utils.deconstruct import deconstructible
 
+@deconstructible
 class CachedS3BotoStorage(S3BotoStorage):
     """S3 storage backend that saves the files locally, too.
     """
