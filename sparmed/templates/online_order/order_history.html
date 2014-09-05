@@ -60,14 +60,14 @@
     {% endfor %}
   </table>
   {% else %}
-  <div class="alert alert-error">No product items found in the order.</div>
+  <div class="alert alert-error"><span class="glyphicon glyphicon-exclamation-sign"></span> No product items found in the order.</div>
   {% endif %}
   {% endwith %}
 </div>
 {% if not forloop.last %}<hr>{% endif %}
 
 {% empty %}
-<div class="alert alert-warning">No orders found in the order history.</div>
+<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No orders found in the order history.</div>
 {% endfor %}
 
 {% endblock %}

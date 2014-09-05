@@ -21,7 +21,7 @@
   <section id="account-form">
     {% if feedback %}
     <div class="alert alert-success">
-      <p>{{ feedback }}</p>
+      <p><span class="glyphicon glyphicon-exclamation-sign"></span> {{ feedback }}</p>
     </div>
     {% else %}
     <form role="form" action="{{ request.user.get_absolute_url }}" method="post">
