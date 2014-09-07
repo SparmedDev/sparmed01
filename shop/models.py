@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from sorl.thumbnail import ImageField
 import datetime
 from validatedfile.fields import ValidatedFileField
+from colorfield.fields import ColorField
 
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
@@ -43,6 +44,7 @@ class Subcategory(models.Model):
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
+    color = ColorField(null=True, blank=True, verbose_name="Subcategory Color")
 
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.category.slug,])

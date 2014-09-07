@@ -150,6 +150,7 @@ THIRD_PARTY_APPS = (
   'django_extensions',
   'django_wysiwyg',
   'validatedfile',
+  'colorfield',
 )
 
 LOCAL_APPS = (

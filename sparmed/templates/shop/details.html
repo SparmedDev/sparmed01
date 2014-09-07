@@ -21,19 +21,21 @@
 {% cache 3600 products-details-nav-and-info product.slug %}
 <ol class="breadcrumb">
   <li><a href="{{ category.get_absolute_url }}">{{ category.short_name }}</a></li>
-  <li class="active">{{ product.subcategory }}</li>
+  <li class="active">{{ product.subcategory.name|safe }}</li>
 </ol>
 
-<h2 class="text-center">{{ product.name }}</h2>
-<p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
-{% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
-{% endcache %}
+<div style="display: block; width: 70%; margin: 10px auto; border-bottom: 2px solid {{ product.subcategory.color }};">
+    <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.name }}</h2>
+    <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
+    {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
+    {% endcache %}
 
-{% if user.is_anonymous %}
-<p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span> (login required)</p>
-{% else %}
-<p class="text-center"><a href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
-{% endif %}
+    {% if user.is_anonymous %}
+    <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
+    {% else %}
+    <p class="text-center"><a style="color:{{ product.subcategory.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+    {% endif %}
+</div>
 
 {% cache 3600 products-details-images product.slug %}
 <span class="minor-skip"></span>
@@ -53,10 +55,9 @@
     {% endif %}
   </div>
   
-  <div class="col-md-6">
-      {{ product.subcategory.long_text|safe }}
-  </div>
-  
+  <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
+    {{ product.subcategory.long_text|safe }}     
+  </div>  
 </div>
 
 {% endcache %} 
