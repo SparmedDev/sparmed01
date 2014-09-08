@@ -44,7 +44,7 @@
   <div class="col-md-6">
     {% if images %}
     <div class="owl-carousel">
-      {% for image in images reversed %}
+      {% for image in images %}
       <div>
         <img class="img-responsive img-rounded center-block" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}" class="lazyOwl">
       </div>

@@ -36,7 +36,7 @@
 {% if categories %}
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
-    {% for cat in categories reversed %}
+    {% for cat in categories %}
     <li class="{% productnavactive request cat.slug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.short_name }}</a></li>
     {% endfor %}
   </ul>
@@ -82,7 +82,7 @@
       {% endcompress %}
       {% endwith %}
 
-      {% for product in subcat.products.all reversed %}
+      {% for product in subcat.products.all %}
       {% if forloop.first %}<ul id="{{ subcat.slug }}-list" class="products-list">{% endif %}
       <li class="product-item">
         <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>

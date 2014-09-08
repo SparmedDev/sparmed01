@@ -11,7 +11,7 @@ class ProductImageInline(admin.StackedInline):
     model = ProductImage
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'added', 'product_id', 'in_stock', 'description', 'subcategory', 'category']
+    list_display = ['name', 'added', 'product_id', 'in_stock', 'description', 'subcategory', 'category', 'order_index']
     list_filter = ['added']
     search_fields = ['product_id', 'name', 'description', 'in_stock']
 
@@ -22,7 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
 class SubcategoryAdmin(admin.ModelAdmin):
     change_form_template = 'shop/admin/change_form.html'
     
-    list_display = ['name', 'added']
+    list_display = ['name', 'added', 'order_index']
     list_filter = ['added']  
     search_fields = ['name']
     date_hierarchy = 'added'
@@ -30,7 +30,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     change_form_template = 'shop/admin/change_form.html'
   
-    list_display = ['name', 'added']
+    list_display = ['name', 'added', 'order_index']
     list_filter = ['added']  
     search_fields = ['name']
     date_hierarchy = 'added'
