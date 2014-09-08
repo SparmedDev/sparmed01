@@ -46,7 +46,7 @@
         <h3>Order Details</h3>
       </div>
       <div class="panel-body">
-        {% if order.arranged_freight == True %}
+        {% if order.arranged_freight %}
         <p>
           SparMED Arranged freight: Yes
         </p>    
@@ -54,7 +54,7 @@
         <p>
           SparMED Arranged Freight: No<br>
           Freight Forwarder: {{ order.freight_forwarder }}<br>
-          Account number: {{ order.account_no }}
+          Account Number: {{ order.account_no }}
         </p>
         {% endif %}
 
@@ -69,15 +69,17 @@
         {{ order.aircleaner_instructions }}
         {% endif %}
 
-        {% if order.insurance_desired == True %}
-        <p>Insurance was chosen and was included</p>
+        {% if order.insurance_desired %}
+        <p>Insurance chosen and included</p>
+        {% else %}
+        <p>Insurance not chosen and therefore not included.</p>
         {% endif %}
 
         {% if order.documents|length %}
         <p>Specific Documents Requested:<br> {{ order.documents }}</p>
         {% endif %}
 
-        {% if order.shipping_and_invoice_same == True %}
+        {% if order.shipping_and_invoice_same %}
         <p>Shipping and invoice addresses were the same.</p>
         {% else %}
         <p>Invoice Company Details:<br>
