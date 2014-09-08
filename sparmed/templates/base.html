@@ -56,6 +56,7 @@
   </head>
   <body>
     {% block bodytop %}
+
     {% endblock %}
 
     <section id="main-container">      
@@ -77,30 +78,29 @@
           <img class="img-responsive img-rounded" src="{% static 'img/sparmed-logo.png' %}" alt="Sparmed Logo - GOosafe in IVF Laboratories">
         </div>
 
-        <nav id="main-nav" role="navigation">
-          
-          <ul class="nav nav-pills visible-xs">
-            <li class="dropdown btn-fancy">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-               <span class="glyphicon glyphicon-list"></span> Navigation <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
+        <div id="main-nav" class="navbar navbar-default" role="navigation">
+          <div class="fluid-container">
+            
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>          
+            </div>
+
+            <div class="navbar-collapse collapse">
+              <ul class="nav nav-pills">
                 <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
                 <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>
                 <li class="btn-fancy{% navactive request 'contact' %}"><a href="{% url 'contact' %}">Contact Us</a></li>
                 <li class="btn-fancy{% navactive request 'products' %}"><a href="{% url 'products' %}">Products</a></li>
                 <li class="btn-fancy{% navactive request 'distributors' %}"><a href="{% url 'distributors' %}">Distributors</a></li>
               </ul>
-          </ul>
-          
-          <ul class="nav nav-pills hidden-xs">
-            <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
-            <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>
-            <li class="btn-fancy{% navactive request 'contact' %}"><a href="{% url 'contact' %}">Contact Us</a></li>
-            <li class="btn-fancy{% navactive request 'products' %}"><a href="{% url 'products' %}">Products</a></li>
-            <li class="btn-fancy{% navactive request 'distributors' %}"><a href="{% url 'distributors' %}">Distributors</a></li>
-          </ul>
-        </nav>
+            </div>
+          </div>
+        </div>
       </header>
 
       <section id="content">
@@ -152,6 +152,23 @@
       ga('require', 'displayfeatures');
       ga('send', 'pageview');
     </script>
+    {% endcompress %}
+    
+    {% compress js inline %}
+    <script>
+      //Stack menu when collapsed
+      $('.navbar-collapse').on('show.bs.collapse', function() {
+        $('.nav-pills').addClass('nav-stacked');
+        $('#main-nav').addClass('stacked');
+      });
+      
+      $('.navbar-collapse').on('hide.bs.collapse', function() {
+        setTimeout(function() {
+          $('.nav-pills').removeClass('nav-stacked');
+          $('#main-nav').removeClass('stacked');
+        }, 1000);
+      });      
+    </script>    
     {% endcompress %}
     
     {% block endbody %}

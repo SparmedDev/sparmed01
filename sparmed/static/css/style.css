@@ -28,6 +28,17 @@ html, body {
     position: absolute;
     right: 5px;
     bottom: 20px;
+  
+    background-color: transparent;
+    border: 0px;
+}
+
+#main-nav.stacked {
+    top: 10px;
+}
+
+.navbar-collapse {
+    border: 0px;
 }
 
 #nav-logo {
