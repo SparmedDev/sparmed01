@@ -27,8 +27,6 @@ class SubcategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
     date_hierarchy = 'added'
   
-    prepopulated_fields = {"slug": ('name',)}
-  
 class CategoryAdmin(admin.ModelAdmin):
     change_form_template = 'shop/admin/change_form.html'
   

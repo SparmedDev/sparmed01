@@ -30,8 +30,11 @@ class Product(models.Model):
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")    
-    category = models.ForeignKey('Category', related_name="products", verbose_name="Associated Category")
 
+    @property
+    def category(self):
+        return self.subcategory.category
+    
     def get_absolute_url(self):
         return reverse('shop.views.details', args=[self.category.slug, self.slug])
 
@@ -46,7 +49,6 @@ class Subcategory(models.Model):
     description = models.CharField(max_length=255, verbose_name="Subcategory description", blank=True)
     long_text = models.TextField(verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
-    slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
     color = ColorField(null=True, blank=True, verbose_name="Subcategory Color")
 
@@ -70,6 +72,14 @@ class Category(models.Model):
     
     document = ValidatedFileField(blank=True, null=True, verbose_name="PDF Document file (256 MB max)", upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*256)
 
+    @property
+    def products(self):
+        id_list = []
+        
+        for subcat in self.subcategories.all():
+            id_list += [product.pk for product in subcat.products.all()]
+            
+        return Product.objects.filter(pk__in=id_list)
     
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.slug,])
