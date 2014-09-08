@@ -61,6 +61,10 @@ urlpatterns = patterns('',
                        url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
                        url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products'),
                        url(r'^products/$', 'shop.views.products', name='products'), 
+  
+                       url(r'^search/add_to_cart/$', 'shop.views.add_to_cart'),
+                       url(r'^search/autocomplete/', 'shop.views.autocomplete'),
+                       url(r'^search/', include('haystack.urls'), name='search'),
                        
                        url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
                        url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),

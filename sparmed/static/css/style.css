@@ -359,10 +359,12 @@ img {
     margin: 0px auto;
 }
 
-.news-article {
-    
-}
-
 .owl-carousel {
     margin-top: 20px;
+}
+
+.result-wrapper {
+  margin: 5px 5px;
+  padding: 10px 5px;
+  border-top: 1px solid grey;    
 }

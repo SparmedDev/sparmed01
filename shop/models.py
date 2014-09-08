@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 from django.core.urlresolvers import reverse
 
@@ -18,6 +19,9 @@ class ProductImage(models.Model):
     def __unicode__(self):
       return u'%s' % self.image_title
 
+class GenericForm(forms.Form):
+    q = forms.CharField(max_length=60, initial="Type a product name or ID here")
+    
 class Product(models.Model):
     product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
     name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")

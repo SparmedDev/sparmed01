@@ -49,8 +49,18 @@
       
       {% if get_cart and get_cart.count > 0 %}
       <div class="panel-body">  
-        <p>Add more products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a>.</p>
+        <p>Add more products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a> or the form below.</p>
       </div>      
+
+        <form method="post" action="/search/add_to_cart/" class="autocomplete-me">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing to search for a product name or ID" required onblur="javascript: cleanupResults();" />
+          </div>
+          <div class="form-group col-sm-4">
+            <input class="btn btn-info form-control" type="submit" value="Add New Product" />
+          </div>
+        </form>  
 
       <form role="form" class="form" action="{% url 'set-quantity-cart' %}" method="post">
         {% csrf_token %}
@@ -80,16 +90,29 @@
         
         <div style="display: block; margin: 20px; width: 100%;">
           <input class="btn btn-primary" type="submit" value="Update Cart" />
-        </div>
+        </div>              
         
       </form>
       
       {% else %}
-      <p><span class="minor-skip"></span></p>
-      <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <span class="glyphicon glyphicon-exclamation-sign"></span> Please add some products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a>.
-      </div>    
+      <section>
+        <p><span class="minor-skip"></span></p>
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <span class="glyphicon glyphicon-exclamation-sign"></span> Please add some products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a> or the form below.
+        </div>    
+
+        <form method="post" action="/search/add_to_cart/" class="autocomplete-me">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing to search for a product name or ID" required onblur="javascript: cleanupResults();" />
+          </div>
+          <div class="form-group col-sm-4">
+            <input class="btn btn-info form-control" type="submit" value="Add New Product" />
+          </div>
+        </form>    
+      </section>
+      <div class="clearfix"></div>          
       {% endif %}
     </div>
 
@@ -160,6 +183,9 @@
   </form>
   {% endif %}
 </form>
+{% endblock %}
+
+{% block endbody %}
 
 {% compress js inline %}
 <script type="text/javascript">
@@ -172,7 +198,100 @@
     $("#" + divid).toggle(500); 
   }
 </script>
+{% endcompress %}
 
+{% compress js inline %}
+<script type="text/javascript">
+  function cleanupResults() {
+    setTimeout(function() {
+      $('.ac-results').remove();
+    }, 500);
+  }
+  
+  // In a perfect world, this would be its own library file that got included
+  // on the page and only the ``$(document).ready(...)`` below would be present.
+  // But this is an example.
+  var Autocomplete = function(options) {
+    this.form_selector = options.form_selector
+    this.url = options.url || '/search/autocomplete/'
+    this.delay = parseInt(options.delay || 300)
+    this.minimum_length = parseInt(options.minimum_length || 3)
+    this.form_elem = null
+    this.query_box = null
+  }
+
+  Autocomplete.prototype.setup = function() {
+    var self = this
+
+    this.form_elem = $(this.form_selector)
+    this.query_box = this.form_elem.find('input[name=q]')
+
+    // Watch the input box.
+    this.query_box.on('keyup', function() {
+      var query = self.query_box.val()
+
+      if(query.length < self.minimum_length) {
+        return false
+      }
+
+      self.fetch(query)
+    })
+
+    // On selecting a result, populate the search field.
+    this.form_elem.on('click', '.ac-result', function(ev) {
+      self.query_box.val($(this).text())
+      $('.ac-results').remove()
+      return false
+    })
+  }
+
+  Autocomplete.prototype.fetch = function(query) {
+    var self = this
+
+    $.ajax({
+      url: this.url
+      , data: {
+        'q': query
+      }
+      , success: function(data) {
+        self.show_results(data)
+      }
+    })
+  }
+
+  Autocomplete.prototype.show_results = function(data) {
+    // Remove any existing results.
+    $('.ac-results').remove()
+
+    var results = data.results || []
+    var results_wrapper = $('<div class="ac-results"></div>')
+    var base_elem = $('<div class="result-wrapper"><a href="#" class="ac-result"></a></div>')
+
+    if(results.length > 0) {
+      for (var res_offset in results) {
+        var elem = base_elem.clone()
+        // Don't use .html(...) here, as you open yourself to XSS.
+        // Really, you should use some form of templating.
+        elem.find('.ac-result').text(results[res_offset])
+        results_wrapper.append(elem)
+      }
+    }
+    else {
+      var elem = base_elem.clone()
+      elem.text("No results found.")
+      results_wrapper.append(elem)
+    }
+
+    this.query_box.after(results_wrapper)
+  }
+
+  $(document).ready(function() {
+    window.autocomplete = new Autocomplete({
+      form_selector: '.autocomplete-me'
+    })
+    window.autocomplete.setup()
+  })
+</script>
 {% endcompress %}
 
 {% endblock %}
