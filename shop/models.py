@@ -80,19 +80,3 @@ class Category(models.Model):
 
     def __unicode__(self):
        return u'%s' % self.name
-      
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([
-        (
-            [ValidatedFileField],
-            [],
-            {
-                "content_types": ["content_types", {"default": []}],
-                "max_upload_size": ["max_upload_size", {"default": 0}],
-                "mime_lookup_length": ["mime_lookup_length", {"default": 4096}],
-            },
-        ),
-    ], ["^validatedfile\.fields\.ValidatedFileField"])
-except ImportError:
-    pass    
