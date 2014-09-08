@@ -8,6 +8,8 @@ import datetime
 from validatedfile.fields import ValidatedFileField
 from colorfield.fields import ColorField
 
+from django.template.defaultfilters import slugify
+
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
     image = ImageField(upload_to="/media/products")
@@ -54,6 +56,10 @@ class Subcategory(models.Model):
     color = ColorField(null=True, blank=True, verbose_name="Subcategory Color")
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
 
+    @property
+    def slug(self):
+        return slugify(self.name)
+    
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.category.slug,])
 
