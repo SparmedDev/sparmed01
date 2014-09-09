@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="description" content="{% block pagedescription %}{% endblock %} - Sparmed.dk" />
+    <meta name="author" content="Alpha Stage Studios - Rami@AlphaStageStudios.com" />
+
+    {% block metas %}
+    {% endblock %}
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="icon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
+    <link rel="favicon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
+
+    {% bootstrap_css %}
+
+    <title>
+      {% block title %}{% endblock %} | SparMed
+    </title>
+
+    {% block head %}
+    {% endblock %}
+    
+  </head>
+  <body>
+    {% block bodytop %}
+    {% endblock %}
+
+    {% block body %}
+    
+    {% endblock %}
+      
+    {# Load Bootstrap javascript #}
+    {% bootstrap_javascript %}
+
+    
+    {% block endbody %}
+    {% endblock %}
+
+  </body>
+
+</html>

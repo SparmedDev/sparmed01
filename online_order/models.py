@@ -159,6 +159,7 @@ class SparmedUser(AbstractBaseUser):
               
                 o_new.save()
                 self.save()
+                return o_new
             else:
                 raise ValueError('Order history item instantiation failed, o new is null')
         else:
