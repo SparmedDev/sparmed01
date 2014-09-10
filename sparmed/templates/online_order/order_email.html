@@ -1,0 +1,148 @@
+{% extends 'bare_base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load compress %}
+
+{% block head %}
+    {% compress css inline %}
+    <link href="{% static 'css/email-bootstrap.min.css' %}" media="screen" rel="stylesheet">
+    {% endcompress %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Purchase Order Sheet Receipt</h2>
+      <h4>
+        <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>       
+      </h4>
+      <p>You can also view this order receipt online on SparMED.DK through the <a href="http://www.sparmed.dk{% url 'order-history' %}">Order History</a>.</p>
+    </div>
+    <div class="col-sm-6">
+      <img style="max-width: 300px; width: 50%; margin: 5px auto;" class="img-responsive img-rounded" src="{% static 'img/sparmed-logo.png' %}" alt="Sparmed Logo - GOosafe in IVF Laboratories">
+    </div>
+  </div>   
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div>
+        <p>TO:</p>
+        <p>
+          <strong>SparMED ApS</strong><br>
+          Toppevadvej 34-38<br>
+          DK-3660 Stenløse<br>
+          Denmark
+        </p>
+        <p>
+          Phone: +45 3940 2503<br>
+          Email: info@sparmed.dk<br>
+          Web: www.sparmed.dk
+        </p>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div>
+        <p>FROM:</p>
+        <p>
+          <strong>{{ order.user.company_name }}</strong><br>
+          {{ order.user.address}}<br>
+          {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
+        </p>
+        <p>
+          Att: {{ order.user.contact_person_name }}<br>
+          Telephone: {{ order.user.contact_telephone }}<br>
+          Email: {{ order.user.email }}
+        </p>
+      </div>    
+    </div>
+  </div>
+
+  {% with items=order.items.all %}
+  {% if items %}
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Quantity</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+      <td>
+        <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
+      </td>
+      <td>
+        <p>{{ item.name }}</p>
+      </td>
+      <td>
+        <p>{{ item.quantity }}</p>
+      </td>
+    </tr> 
+    {% endfor %}
+  </table>
+  {% else %}
+  <div class="alert alert-error"><span class="glyphicon glyphicon-exclamation-sign"></span> No product items found in the order.</div>
+  {% endif %}
+  {% endwith %}  
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Order Details</h3>
+    </div>
+    <div class="panel-body">
+      {% if order.arranged_freight %}
+      <p>
+        SparMED Arranged freight: Yes
+      </p>    
+      {% else %}
+      <p>
+        SparMED Arranged Freight: No<br>
+        Freight Forwarder: {{ order.freight_forwarder }}<br>
+        Account Number: {{ order.account_no }}
+      </p>
+      {% endif %}
+
+      <p>Choice of Packaging: {{ order.packing_instructions }}<br>
+        {% if order.packing_remarks|length %}
+        Associated Remarks: <br>
+        {{ order.packing_remarks }}
+        {% endif %}
+      </p>
+
+      {% if order.aircleaner_instructions|length %}
+      {{ order.aircleaner_instructions }}
+      {% endif %}
+
+      {% if order.insurance_desired %}
+      <p>Insurance chosen and included</p>
+      {% else %}
+      <p>Insurance not chosen and therefore not included.</p>
+      {% endif %}
+
+      {% if order.documents|length %}
+      <p>Specific Documents Requested:<br> {{ order.documents }}</p>
+      {% endif %}
+
+      {% if order.shipping_and_invoice_same %}
+      <p>Shipping and invoice addresses were the same.</p>
+      {% else %}
+      <p>Invoice Address Details:<br>
+        Invoice Company Name: {{ order.invoice_company_name }}<br>
+        Invoice Company Address: {{ order.invoice_company_address }}<br>
+        Invoice Company Postal Code: {{ order.invoice_company_postal_code }}<br>
+        Invoice Company Country: {{ order.invoice_company_country }}
+      </p>
+      {% endif %}
+
+      {% if order.other_remarks|length %}
+      <p>Other Remarks given to SparMed: <br> {{ order.other_remarks }}</p>
+      {% endif %}
+    </div>
+  </div>
+  
+</div>
+
+{% endblock %}

@@ -11,6 +11,9 @@ from shop.models import Category
 
 from cart import Cart
 
+from django.template.loader import render_to_string
+import mandrill  
+
 # Create your views here.
 @login_required
 @never_cache
@@ -44,34 +47,35 @@ def order_confirmation(request, order_id, confirmed):
         order = OrderHistoryItem.objects.get(pk=order_id)
         if order:
             recipients = [
-            #{ 'email': 'info@sparmed.dk',
-            #  'name': 'SparMed' },
+            { 'email': 'admin@SparMED.dk',
+              'name': 'SparMed' },
             { 'email': order.user.email,
               'name': order.user.contact_person_name },
-            ]  
-          
-            import os
-            EMAIL_API_KEY = os.environ.get('MANDRILL_APIKEY')
+            ]            
 
-            #import mandrill
-            #try:
-            #    mandrill_client = mandrill.Mandrill(EMAIL_API_KEY)
-            #    message = {
-            #        'from_email': 'info@sparmed.dk',
-            #        'from_name': 'SparMED.dk',
-            #        'subject': 'SparMED Order Receipt',
-            #        'global_merge_vars': {'name':'order', 'content':order},
-            #        'to': recipients,
-             #       'inline_css':True,
-            #    }
-            #    mandrill_client.messages.send_template('online_order/order_confirmation', [], message)
+            html_content = render_to_string('online_order/order_email.html', {'order':order})
 
-            #except mandrill.Error, e:
-            #    # Mandrill errors are thrown as exceptions
-            #    print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
-            #    raise
+            try:
+              mandrill_client = mandrill.Mandrill('Bml5XQ7DhMZLvw3NDwykrQ')
+              message = {
+                'from_email': 'info@sparmed.dk',
+                'from_name': 'SparMED.dk',
+                'subject': 'Online Order Confirmation Receipt | SparMED',
+                'html': html_content,
+                'to': recipients,
+                'headers': {"Reply-To": "info@sparmed.dk"},
+                "auto_html": True,
+                'inline_css': True,
+                "metadata": {"website": "www.sparmed.dk"}, 
+                "async": True,
+              }
+              result = mandrill_client.messages.send(message=message)
 
-            pass
+            except mandrill.Error, e:
+              # Mandrill errors are thrown as exceptions
+              print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
+              raise      
+            return HttpResponseRedirect(reverse('online_order.views.order_history'))
         else:
             raise ValueError('Cannot send order, order is not valid')
     else:
@@ -81,7 +85,7 @@ def order_confirmation(request, order_id, confirmed):
         else:
             raise ValueError('Cannot render order confirmation without valid order object')
             
-    raise ValueError('dropped through')
+    return HttpResponseRedirect(reverse('online_order.views.order_online'))
     
 @login_required
 def order_regret(request, order_id):
@@ -110,7 +114,7 @@ def account_area(request, account_slug):
       form = SparmedUserChangeForm(request.POST, instance=user)
       if form.is_valid():
           form.save()
-          return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few minutes for the changes to take effect.'})
+          return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'})
   else:
       form = SparmedUserChangeForm(instance=user)
   

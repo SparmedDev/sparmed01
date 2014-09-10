@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load compress %}
 
 <html lang="en">
   <head>
@@ -20,8 +21,8 @@
     <link rel="icon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
     <link rel="favicon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
 
-    {% bootstrap_css %}
-
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" media="screen" rel="stylesheet">
+    
     <title>
       {% block title %}{% endblock %} | SparMed
     </title>
@@ -34,17 +35,11 @@
     {% block bodytop %}
     {% endblock %}
 
-    {% block body %}
-    
+    {% block body %}    
     {% endblock %}
-      
-    {# Load Bootstrap javascript #}
-    {% bootstrap_javascript %}
-
     
     {% block endbody %}
     {% endblock %}
-
   </body>
 
 </html>
