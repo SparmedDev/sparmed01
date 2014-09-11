@@ -27,7 +27,7 @@
 <div style="display: block; width: 70%; margin: 10px auto; border-bottom: 2px solid {{ product.subcategory.color }};">
     <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.name }}</h2>
     <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
-    {% if product.description %}<p class="text-center"><em>{{ product.description }}</em></p>{% endif %}
+    {% if product.description %}<p class="text-center"><em>{{ product.description|safe }}</em></p>{% endif %}
     {% endcache %}
 
     {% if user.is_anonymous %}
@@ -40,8 +40,10 @@
 {% cache 3600 products-details-images product.slug %}
 <span class="minor-skip"></span>
 
-<div class="row">
+{% if product.subcategory.long_text %}
+<div class="row">  
   <div class="col-md-6">
+    {% endif %}    
     {% if images %}
     <div class="owl-carousel">
       {% for image in images %}
@@ -53,12 +55,14 @@
     {% else %}
     <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>
     {% endif %}
+    
+  {% if product.subcategory.long_text %}    
   </div>
-  
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
     {{ product.subcategory.long_text|safe }}     
   </div>  
 </div>
+{% endif %}
 
 {% endcache %} 
        
