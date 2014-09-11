@@ -310,6 +310,10 @@ img {
     border-bottom: 1px solid #008393;
 }
 
+#products-nav > ul {
+    padding-bottom: 10px;
+}
+
 #products-nav li > a {
     border: 0px; 
 }
