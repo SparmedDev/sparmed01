@@ -22,7 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
 class SubcategoryAdmin(admin.ModelAdmin):
     change_form_template = 'shop/admin/change_form.html'
     
-    list_display = ['name', 'added', 'order_index']
+    list_display = ['name', 'added', 'order_index', 'category']
     list_filter = ['added']  
     search_fields = ['name']
     date_hierarchy = 'added'
