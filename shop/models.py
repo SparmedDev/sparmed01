@@ -72,7 +72,7 @@ class Subcategory(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name="Category Name", default="Category 1")
-    short_name = models.CharField(max_length=20, verbose_name="Category Short Name (for navigation bar)", default="Cat1")
+    short_name = models.CharField(max_length=40, verbose_name="Category Short Name (for navigation bar)", default="Cat1")
     description = models.CharField(max_length=255, verbose_name="Category description", blank=True)
     long_text = models.TextField(verbose_name="Category Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")

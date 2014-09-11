@@ -30,7 +30,7 @@
 <nav id="products-nav" role="navigation">
   <ul class="nav nav-tabs" role="tablist">
     {% for cat in categories %}
-    <li class="{% productnavactive request cat.slug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.short_name }}</a></li>
+    <li {% if not forloop.last %}style="border-right: 1px solid grey;" {% endif %}class="{% productnavactive request cat.slug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a></li>    
     {% endfor %}
   </ul>
 </nav>
