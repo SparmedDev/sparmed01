@@ -21,6 +21,14 @@ def distributors(request):
 
   return render(request, "distributors.html")
 
+def terms_conditions(request):
+  
+  return render(request, "terms_conditions.html")
+
+def privacy_policy(request):
+  
+  return render(request, "privacy_policy.html")
+
 @login_required
 def certificates(request):
   

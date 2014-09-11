@@ -68,6 +68,9 @@ urlpatterns = patterns('',
                        url(r'^search/autocomplete/', 'shop.views.autocomplete'),
                        url(r'^search/', include('haystack.urls'), name='search'),
                        
+                       url(r'^privacy-policy/$', views.privacy_policy, name='privacy-policy'),
+                       url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
+                       
                        url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
                        url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
                        url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
