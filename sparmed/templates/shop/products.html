@@ -9,29 +9,22 @@
 {% block pagedescription %}Browse the finest quality IVF Laboratory equipment{% endblock %}
 {% block title %}Products{% endblock %}
 
+{% block head %}
+<!-- Important Owl stylesheet -->
+<link rel="stylesheet" href="{% static 'owl-carousel/css/owl.carousel.css' %}">
+
+<!-- Default Theme -->
+<link rel="stylesheet" href="{% static 'owl-carousel/css/owl.theme.css' %}">
+{% endblock %}
+
+{% block bodytop %}
+{% cache 3600 owl-carousel-min-js-script %}
+<!-- Include js plugin -->
+<script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8"></script>
+{% endcache %}
+{% endblock %}
 
 {% block body %}
-
-<style>
-  
-.category-article > h1 {
-    border-top: 3px solid #008393;
-    border-bottom: 3px solid #008393;
-  
-    padding: 20px;
-}  
-  
-.category-article > p {
-    display: block;
-    font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-}
-  
-</style>
 
 {% if categories %}
 <nav id="products-nav" role="navigation">
@@ -68,23 +61,10 @@
       <h2 class="text-center" style="color:{{ subcat.color }};">{{ subcat.name|safe }}</h2>
       {% if subcat.description %}<p class="text-center"><em>{{ subcat.description|safe }}</em></p>{% endif %}
 
-      {% with productscount=subcat.products.all|length %}
-      {% compress js inline %}
-      <script type="text/javascript">
-          $(document).ready(function() {
-              {% if productscount > 3 %}
-              $("#{{ subcat.slug }}-list").css("width", "100%");
-              {% else %}
-              $("#{{ subcat.slug }}-list").css("width", "{% widthratio productscount 1 250 %}px");
-              {% endif %}
-          });    
-      </script>  
-      {% endcompress %}
-      {% endwith %}
-
       {% for product in subcat.products.all %}
-      {% if forloop.first %}<ul id="{{ subcat.slug }}-list" class="products-list">{% endif %}
-      <li class="product-item">
+      {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel">{% endif %}
+      <!--<li class="product-item">-->
+      <div>
         <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
         <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
 
@@ -101,10 +81,33 @@
         {% else %}
         <p class="text-center"><a style="color:{{ subcat.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
         {% endif %}
-      </li>
-      {% if forloop.last %}</ul>{% endif %}
+      </div>
+      {% if forloop.last %}</div>{% endif %}
       {% endfor %}
+    
+    {% cache 3600 products-scripts subcat.slug %}
+    {% compress js inline %}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var itemsLength = {{ subcat.products.all|length }};
+        $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
+          items: itemsLength,
+          itemsDesktop: [1199, itemsLength],  
+          itemsDesktopSmall: [980, itemsLength],
+          singleItem: false,
+          itemsScaleUp: false,
+          autoPlay: false,   
+          scrollPerPage: false,      
+          responsiveBaseWidth: '#content',      
+          lazyLoad: true,      
+          autoHeight: false,
+        });
+      });
+    </script>
+    {% endcompress %}  
+    {% endcache %}    
   </div>
+  
   {% endfor %}
   {% endwith %}
   
