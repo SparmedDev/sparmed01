@@ -71,7 +71,7 @@
         {% for image in product.images.all reversed %}
         {% if forloop.first %}
           {% if image %}
-          <p><img class="img-responsive img-rounded product-image" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
+          <p><img class="img-responsive img-rounded product-image lazyOwl" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></p>
           {% endif %}
         {% endif %}
         {% endfor %}
