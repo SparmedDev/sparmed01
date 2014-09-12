@@ -28,19 +28,15 @@
 
 {% if categories %}
 <nav id="products-nav" role="navigation">
-  <!--<ul class="nav nav-tabs" role="tablist">-->
     {% for cat in categories %}
     {% if forloop.first or forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
       <div class="col-sm-4 products-nav-cat {% productnavactive request cat.slug %}">
         <a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a>
       </div>
-    {% if not forloop.first or forloop.last %}{% if forloop.counter|divisibleby:3 or forloop.last %}</div>{% endif %}{% endif %}
-    <!--<li {% if not forloop.last %}style="border-right: 1px solid #eee;" {% endif %}class="{% productnavactive request cat.slug %}"><a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a></li>-->
+    {% if not forloop.first %}{% if forloop.counter|divisibleby:3 or forloop.last %}</div>{% endif %}{% endif %}
     {% endfor %}
-  <!--</ul>-->
 </nav>
 {% endif %}
-
 
 
 <article class="category-article">
