@@ -5,7 +5,7 @@
 {% load compress %}
 {% load base_extras %}
 
-{% block pagedescription %}View you Order History with SparMed{% endblock %}
+{% block pagedescription %}View you Order History with SparMED{% endblock %}
 {% block title %}Order History{% endblock %}
 
 
@@ -30,12 +30,16 @@
         <h3>Company Details</h3>
       </div>
       <div class="panel-body">          
-        <p class="text-muted"><strong>{{ order.user.company_name }}</strong></p>
-        <p class="text-muted">{{ order.user.address}}</p>
-        <p class="text-muted">{{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}</p>
-        <p class="text-muted">Att: {{ order.user.contact_person_name }}</p>
-        <p class="text-muted">Telephone: {{ order.user.contact_telephone }}</p>
-        <p class="text-muted">Email: {{ order.user.email }}</p>
+        <p class="text-muted">
+          <strong>{{ order.user.company_name }}</strong><br>
+          {{ order.user.address}}<br>
+          { order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
+        </p>
+        <p class="text-muted">
+          Att: {{ order.user.contact_person_name }}<br>
+          Telephone: {{ order.user.contact_telephone }}<br>
+          Email: {{ order.user.email }}
+        </p>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <meta name="description" content="{% block pagedescription %}{% endblock %} - Sparmed.dk" />
+    <meta name="description" content="{% block pagedescription %}{% endblock %} - SparMED.dk" />
     <meta name="author" content="Alpha Stage Studios - Rami@AlphaStageStudios.com" />
 
     {% block metas %}
@@ -69,13 +69,13 @@
         {% endif %}
         <a id="home-button" title="Go to Distributor Home Panel - online ordering, certificates, inventory and more" class="{% productnavactive request 'distributor-login' %}" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
         <a title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
-        <a title="Logout from Sparmed Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
+        <a title="Logout from SparMED Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
         {% endif %}
       </div>
 
       <header id="header">
         <div id="nav-logo">
-          <img class="img-responsive img-rounded" src="{% static 'img/sparmed-logo.png' %}" alt="Sparmed Logo - GOosafe in IVF Laboratories">
+          <img class="img-responsive img-rounded" src="{% static 'img/sparmed-logo.png' %}" alt="SparMED Logo - GOosafe in IVF Laboratories">
         </div>
 
         <div id="main-nav" class="navbar navbar-default" role="navigation">
@@ -111,13 +111,13 @@
       <footer id="footer">
         <div class="row">
           <div class="col-sm-4">
-            <p class="text-right"><strong>Sparmed ApS</strong></p>
+            <p class="text-right"><strong>SparMED ApS</strong></p>
             <p class="text-right">DK-30 89 85 75</p>
             <p class="text-right">Toppevadvej 34-38, 3660 Stenløse, DK</p>
           </div>
 
           <div class="col-sm-4">
-            <p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a></p>
+            <p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@SparMED.dk</a></p>
             <p class="text-center">Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
             <p class="text-center">Fax: <a href="fax:004539402564">(+45) 39 40 25 64</a></p>
           </div>
@@ -125,7 +125,7 @@
           <div class="col-sm-4">
             <p class="text-left"><a href="{% url 'privacy-policy' %}">Privacy Policy</a></p>
             <p class="text-left"><a href="{% url 'terms-conditions' %}">Terms &amp; Conditions</a></p>            
-            <p class="text-left">&copy; Copyright 2014 Sparmed ApS</p>
+            <p class="text-left">&copy; Copyright 2014 SparMED ApS</p>
           </div>
         </div>
         <p><span class="minor-skip"></span><span class="minor-skip"></span></p>

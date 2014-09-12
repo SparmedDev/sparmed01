@@ -4,7 +4,7 @@
 {% load bootstrap3 %}
 {% load compress %}
 
-{% block pagedescription %}Place an order online easily and safely using SparMed's online order sheet{% endblock %}
+{% block pagedescription %}Place an order online easily and safely using SparMED's online order sheet{% endblock %}
 {% block title %}Online Order Sheet{% endblock %}
 
 {% block body %}
@@ -76,7 +76,7 @@
           {% for item in get_cart %}          
           <tr>
             <td>
-              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name }}</a></p>
+              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.description }} {{ item.product.name }}</a></p>
             </td>
             <td>
               <div class="form-group">
