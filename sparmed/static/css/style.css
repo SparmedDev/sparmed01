@@ -6,6 +6,7 @@ html, body {
     padding: 0px;
 
     font-family: Verdana, Geneva, sans-serif;
+    z-index: 0;
 }
 
 #header, header {
@@ -21,6 +22,8 @@ html, body {
     height: 160px;
     width: 100%;
     border-bottom: 1px solid #008393;
+  
+    z-index: 9;
 }
 
 #main-nav {
@@ -31,6 +34,8 @@ html, body {
   
     background-color: transparent;
     border: 0px;
+  
+    z-index: 99;
 }
 
 #main-nav.stacked {
@@ -60,6 +65,8 @@ html, body {
 
     font-size: 10px;
     color: #888;
+    
+    z-index: 88;
 }
 
 #main-container {
@@ -70,7 +77,7 @@ html, body {
     width: 99%;
     padding: 5px;
 
-    z-index: 99;
+    z-index: 98;
 }
 
 @media (min-width: 768px) {
