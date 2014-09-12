@@ -19,6 +19,7 @@ def products(request, slug="0"):
         category = categories.get(slug=slug)    
     except Category.DoesNotExist:
         category = categories.get(id=1)     
+        return HttpResponseRedirect(reverse('shop.views.products', kwargs={'slug':category.slug}))
   
     return render(request, 'shop/products.html', {'categories':categories, 'category':category})
 
