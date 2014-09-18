@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import ProductImage, Product, Category, Subcategory
+from shop.models import ProductImage, Product, Category, Subcategory, ShopImage
 from sorl.thumbnail.admin import AdminImageMixin
 
 class ProductImageAdmin(AdminImageMixin, admin.ModelAdmin):
@@ -19,6 +19,13 @@ class ProductAdmin(admin.ModelAdmin):
 
     inlines = [ProductImageInline,]
     
+class ShopImageAdmin(AdminImageMixin, admin.ModelAdmin):
+    list_display = ['image_title']
+    search_fields = ['image_title']  
+    
+class ShopImageInline(admin.StackedInline):
+    model = ShopImage
+    
 class SubcategoryAdmin(admin.ModelAdmin):
     change_form_template = 'shop/admin/change_form.html'
     
@@ -26,6 +33,8 @@ class SubcategoryAdmin(admin.ModelAdmin):
     list_filter = ['added']  
     search_fields = ['name']
     date_hierarchy = 'added'
+    
+    inlines = [ShopImageInline,]
   
 class CategoryAdmin(admin.ModelAdmin):
     change_form_template = 'shop/admin/change_form.html'
@@ -37,8 +46,10 @@ class CategoryAdmin(admin.ModelAdmin):
   
     prepopulated_fields = {"slug": ('short_name',)}
     
-  
+    inlines = [ShopImageInline,]
+    
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Subcategory, SubcategoryAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ShopImage, ShopImageAdmin)

@@ -20,6 +20,19 @@ class ProductImage(models.Model):
 
     def __unicode__(self):
       return u'%s' % self.image_title
+    
+class ShopImage(models.Model):
+    image_title = models.CharField(max_length=255, verbose_name="Picture Title", blank=True)
+    image = ImageField(upload_to="/media/products")    
+    
+    subcategory = models.ForeignKey('Subcategory', related_name="images", verbose_name="Associated Subcategory", blank=True, null=True)
+    category = models.ForeignKey('Category', related_name="images", verbose_name="Associated Category", blank=True, null=True)
+
+    def get_absolute_url(self):
+      return u'%s' % self.image.url
+
+    def __unicode__(self):
+      return u'%s' % self.image_title    
 
 class GenericForm(forms.Form):
     q = forms.CharField(max_length=60, initial="Type a product name or ID here")

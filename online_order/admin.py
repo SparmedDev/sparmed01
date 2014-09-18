@@ -31,7 +31,6 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user                  
                   
-                  
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
@@ -64,8 +63,8 @@ class SparmedUserAdmin(UserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('name', 'company_name', 'email', 'contact_person_name', 'is_admin')
-    list_filter = ('is_admin',)
+    list_display = ('name', 'company_name', 'email', 'contact_person_name', 'is_admin', 'country',)
+    list_filter = ('is_admin', 'country',)
     fieldsets = (
         (None, {'fields': ('name', 'email', 'password')}),
         ('Personal info', {'fields': ('company_name', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone',)}),
