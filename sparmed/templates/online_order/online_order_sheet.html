@@ -54,7 +54,7 @@
         <p>Add more products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a> or the box below.</p>
       </div>      
 
-        <form method="post" action="/search/add_to_cart/" class="autocomplete-me">
+        <form method="post" action="{% url 'add-to-cart' %}" class="autocomplete-me">
           {% csrf_token %}
           <div class="form-group">
             <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing to search for a product name or ID" required onblur="javascript: cleanupResults();" />
@@ -76,7 +76,7 @@
           {% for item in get_cart %}          
           <tr>
             <td>
-              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.description }} {{ item.product.name }}</a></p>
+              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.description|safe }}</a></p>
             </td>
             <td>
               <div class="form-group">

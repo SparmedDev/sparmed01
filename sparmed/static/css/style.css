@@ -152,7 +152,11 @@ img {
 }
 
 #home-button.active {
-  color: #ed1b2e;
+    color: #ed1b2e;
+}
+
+#account-button.active {
+    color: #ed1b2e;  
 }
 
 .btn-fancy > a {

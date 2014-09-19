@@ -39,9 +39,9 @@ class GenericForm(forms.Form):
     
 class Product(models.Model):
     product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
-    name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")
-    in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)
-    description = models.CharField(max_length=255, verbose_name="Product description", blank=True)
+    name = models.CharField(max_length=100, verbose_name="Product Short Name", default="Product 1")
+    description = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True)
+    in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)    
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")  

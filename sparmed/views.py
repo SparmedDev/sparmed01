@@ -34,9 +34,13 @@ def certificates(request):
   
   return render(request, "certificates.html")
 
+#from suds.client import Client
 @login_required
 def inventory(request, slug="0"):
   categories = Category.objects.all()      
+  
+  #url = 'api.e-conomic.com/secure/api1/economicwebservice.asmx'
+  #client = Client(url)
 
   return render(request, "inventory.html", {'categories':categories,})
 

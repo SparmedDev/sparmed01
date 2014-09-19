@@ -8,6 +8,10 @@
 {% block pagedescription %}View SparMED inventory - all products and their numbers on stock{% endblock %}
 {% block title %}Inventory{% endblock %}
 
+{% block head %}
+<script type="text/javascript" charset="utf-8" src="//raw.githubusercontent.com/e-conomic/rest-api-examples/master/RestPOC/Scripts/json2.js"></script>
+<script type="text/javascript" charset="utf-8" src="//raw.githubusercontent.com/e-conomic/rest-api-examples/master/RestPOC/Scripts/underscore.min.js"></script>
+{% endblock %}
 
 {% block body %}
 
@@ -59,5 +63,73 @@
   </div> 
   {% endfor %}
 </article>
+
+{% endblock %}
+
+{% block endbody %}
+
+<script>
+
+    var credentials = {
+      appId: "BqXTzE4dnGx80jHWctceXyc-J2cxQ5E-ip29HSh4XV41",
+      accessId: "_-vUMoL3KhyMXp7n1rN5jbo9nBDE9I3O7Mfe4Ukv6LI1"
+    }  
+  
+  function ajax(url, method, data, callback) {
+    $.ajax({
+      url: url,
+      dataType: "json",
+      headers: credentials,
+      data: JSON.stringify(data),
+      type: method,
+      success: callback,
+      fail: function (req,res) {
+        console.log("error request:");
+        console.log(req);
+        console.log("response:");
+        console.log(res);
+      }
+    });
+  }
+
+  $(document).ready(function() {
+    var url = 'https://restapi.e-conomic.com/products';
+    var method = 'GET';
+    
+    ajax(url, method, credentials, function(response) {
+      if (!response || !response.collection || !response.collection.length)
+      {
+        console.log("No products found :(");
+      }
+      else
+      {
+        console.log("Received a response! Products found: " + response.collection.length.toString());
+        /*for (var item in response.collection)
+        {
+          console.log("P: " + item.toString());
+          console.log("OrderID: " + item.orderId.toString());
+          console.log("netAmount: " + item.netAmount.toString());
+          console.log("Name: " + item.name.toString());
+        }*/
+        /*response.collection.forEach(function(item, index) {
+          console.log("P: " + item.toString());
+          console.log("Name: " + item.name);
+          console.log("ID: " + item.no);
+          console.log("Available: " + item.Available);
+          console.log("InStock: " + item.InStock);
+        });*/
+        _.each(response.collection, function (item, index) {
+          console.log("P: " + item);
+          console.log("name: " + item.name);
+          console.log("number: " + item.number);
+          console.log("id: " + item.id);
+          console.log("available: " + item.available);
+          console.log("inStock: " + item.inStock);      
+        });
+          
+      }
+    });
+  });
+</script>
 
 {% endblock %}
