@@ -225,7 +225,7 @@ img {
 
     border: 0px;
     border-radius: 15px;
-    box-shadow:2px 2px 5px #355;
+    
 }
   
 .btn-fancy-grid-top-left {
@@ -234,6 +234,8 @@ img {
     background: -ms-radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);
     background: -o-radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);
     background: radial-gradient(100% 100%, farthest-side, #9edeff 20%, #005e69);    
+  
+    box-shadow: -2px -2px 5px 0px #001619;
 }
   
 .btn-fancy-grid-top-right {
@@ -241,7 +243,9 @@ img {
     background: -moz-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
     background: -ms-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
     background: -o-radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);
-    background: radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);   
+    background: radial-gradient(0% 100%, farthest-side, #9edeff 20%, #005e69);  
+  
+    box-shadow: 2px -2px 5px 0px #001619;
 }
   
 .btn-fancy-grid-bot-left {
@@ -250,6 +254,8 @@ img {
     background: -ms-radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);
     background: -o-radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);
     background: radial-gradient(100% 0%, farthest-side, #9edeff 20%, #005e69);   
+  
+    box-shadow: -2px 2px 5px 0px #001619;
 }
   
 .btn-fancy-grid-bot-right {
@@ -257,7 +263,9 @@ img {
     background: -moz-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
     background: -ms-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
     background: -o-radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);
-    background: radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);       
+    background: radial-gradient(0% 0%, farthest-side, #9edeff 20%, #005e69);     
+  
+    box-shadow: 2px 2px 5px 0px #001619;
 }
 
 
