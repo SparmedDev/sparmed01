@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn sparmed.wsgi:application -w 3 -k gevent --max-requests 500
+web: python manage.py collectstatic --noinput; newrelic-admin run-program gunicorn sparmed.wsgi:application -w 3 -k gevent --max-requests 500
