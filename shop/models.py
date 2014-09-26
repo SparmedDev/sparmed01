@@ -46,6 +46,8 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")  
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
+    size = models.CharField(max_length=255, verbose_name="Size (LxDxH)", blank=True, null=True)
+    weight = models.CharField(max_length=255, verbose_name="Weight", blank=True, null=True)
 
     @property
     def category(self):
