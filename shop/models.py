@@ -57,7 +57,7 @@ class Product(models.Model):
         return reverse('shop.views.details', args=[self.category.slug, self.slug])
 
     class Meta:
-        ordering = ['order_index', '-added']
+        ordering = ['order_index', 'added']
 
     def __unicode__(self):
        return u'%s' % self.name
