@@ -152,6 +152,7 @@ THIRD_PARTY_APPS = (
   'django_wysiwyg',
   'validatedfile',
   'colorfield',
+  'cookielaw',
 )
 
 LOCAL_APPS = (

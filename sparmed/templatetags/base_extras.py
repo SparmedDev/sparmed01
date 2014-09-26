@@ -4,6 +4,22 @@ from django.conf import settings
 
 register = template.Library()
 
+from classytags.helpers import InclusionTag
+from django.template.loader import render_to_string
+
+class CookielawCustomBanner(InclusionTag):  
+    template = 'cookielaw_c/banner.html';
+    
+    def render_tag(self, context, **kwargs):
+        template = self.get_template(context, **kwargs)
+        if context['request'].COOKIES.get('cookielaw_accepted', False):
+            return ''
+        data = self.get_context(context, **kwargs)
+        return render_to_string(template, data)
+
+register.tag(CookielawCustomBanner)
+
+
 @register.simple_tag
 def navactive(request, urls):
     if request.path in ( reverse(url) for url in urls.split() ):

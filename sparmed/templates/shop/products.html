@@ -48,11 +48,13 @@
   <hr>
   {% if category.description %}<p class="text-center"><em>{{ category.description|safe }}</em></p>{% endif %}
   
-  {% if category.document %}
+  {% with image=category.images.all|first %}
+  {% if image %}  
   <section>
-    <h4 class="text-center"><a style="color: #ed1b2e;" href="{{ category.document.url }}">PDF <span class="glyphicon glyphicon-file"></span></a></h4>
-  </section>  
+      <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
+  </section>
   {% endif %}
+  {% endwith %}  
   
   {% if category.long_text %}
   <section class="two-column">
@@ -60,13 +62,11 @@
   </section>
   {% endif %}
   
-  {% with image=category.images.all|first %}
-  {% if image %}  
+  {% if category.document %}
   <section>
-      <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
-  </section>
+    <h4 class="text-center"><a style="color: #ed1b2e;" href="{{ category.document.url }}">PDF <span class="glyphicon glyphicon-file"></span></a></h4>
+  </section>  
   {% endif %}
-  {% endwith %}
   
   {% endcache %}
 

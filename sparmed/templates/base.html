@@ -41,25 +41,18 @@
     
     {# Load jQuery #}
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    {% compress js inline %}
-    <script type="text/javascript">
-      if (typeof jQuery == 'undefined') {
-        document.write(unescape("%3Cscript src='{% static 'js/jquery.min.js' %}' type='text/javascript'%3E%3C/script%3E"));
-      }
-    </script>
-    {% endcompress %}    
-
+    
     {% block head %}
     {% endblock %}
     
   </head>
-  <body>
+  <body>  
     {% block bodytop %}
-
-    {% endblock %}
-
-    <section id="main-container">      
+    {% endblock %} 
+    
+    {% cookielaw_custom_banner %}
+   
+    <section id="main-container">              
       <div id="dist-login">        
         {% if user.is_anonymous %}
         <a title="Login for expanded access to the Distributor Home Panel and Online Ordering" href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
@@ -165,8 +158,17 @@
 
     </section> <!-- /main-container -->
 
+    <a href="https://plus.google.com/117721401203157103617" rel="publisher"></a>    
+    
     {# Load javascript at bottom for speed optimization #}
-    <a href="https://plus.google.com/117721401203157103617" rel="publisher"></a>
+
+    {% compress js inline %}
+    <script type="text/javascript">
+      if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='{% static 'js/jquery.min.js' %}' type='text/javascript'%3E%3C/script%3E"));
+      }
+    </script>
+    {% endcompress %}        
       
     {# Load Bootstrap javascript #}
     {% bootstrap_javascript %}
@@ -200,6 +202,10 @@
         }, 1000);
       });      
     </script>    
+    {% endcompress %}
+    
+    {% compress js inline %}
+    <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
     {% endcompress %}
     
     {% block endbody %}
