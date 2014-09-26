@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
 import json
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from haystack.query import SearchQuerySet
 
 from shop.models import Product, Category, GenericForm
@@ -26,7 +26,11 @@ def products(request, slug="0"):
 @never_cache
 def details(request, category_slug, product_slug):
   category = get_object_or_404(Category, slug=category_slug)
-  product = category.products.get(slug=product_slug)
+  try:
+      product = category.products.get(slug=product_slug)
+  except Product.DoesNotExist:
+      raise Http404
+      
   images = product.images.all()
 
   return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images})
