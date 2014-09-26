@@ -290,7 +290,11 @@ img {
 .product-image {
     display: block;
     margin: 0px auto;    
-    max-height: 125px;
+    
+    min-height: 75px;
+    min-width: 50px;
+  
+    max-height: 150px;
     max-width: 190px;
 }
 

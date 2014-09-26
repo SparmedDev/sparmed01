@@ -41,7 +41,7 @@
     {% if user.is_anonymous %}
     <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
     {% else %}
-    <p class="text-center"><a style="color:{{ product.subcategory.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+    <p class="text-center"><a style="color: {{ product.subcategory.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
     {% endif %}
 </div>
 

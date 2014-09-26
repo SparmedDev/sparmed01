@@ -44,7 +44,7 @@
   
   {% cache 3600 products-category-article-top category.slug %}  
   <hr>
-  <h1 class="text-center">{{ category.name|safe }}</h1>
+  <h1 class="text-center">{% filter upper %}{{ category.name|safe }}{% endfilter %}</h1>
   <hr>
   {% if category.description %}<p class="text-center"><em>{{ category.description|safe }}</em></p>{% endif %}
   
@@ -74,14 +74,13 @@
   {% for subcat in subcats %}
   <hr>
   <div style="margin: 10px auto; padding: 20px 5px;">      
-      <h2 class="text-center" style="color:{{ subcat.color }};">{{ subcat.name|safe }}</h2>
+      <h2 class="text-center" style="color:{{ subcat.color }};">{% filter upper %}{{ subcat.name|safe }}{% endfilter %}</h2>
       {% if subcat.description %}<p class="text-center"><em>{{ subcat.description|safe }}</em></p>{% endif %}
     
       {% with image=subcat.images.all|first %}
       {% if image %}  
       <section>
           <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
-          <p class="text-center">{{ image.image_title }}</p>
       </section>
       {% endif %}
       {% endwith %}     
@@ -114,6 +113,9 @@
     <script type="text/javascript">
       $(document).ready(function() {
         var itemsLength = {{ subcat.products.all|length }};
+        if (itemsLength > 4)
+            itemsLength = 4;
+      
         $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
           items: itemsLength,
           itemsDesktop: [1199, itemsLength],  

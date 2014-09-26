@@ -26,11 +26,9 @@ def order_online(request):
             cart = Cart(request)
             
             if cart and order:
-                new_order = request.user.add_to_order_history(order, cart)
-                cart.clear()
+                new_order = request.user.add_to_order_history(order, cart)                
               
-                return HttpResponseRedirect(reverse('online_order.views.order_confirmation', kwargs={'order_id':new_order.pk, 'confirmed':False}))
-                #return HttpResponseRedirect(reverse('online_order.views.order_history'))              
+                return HttpResponseRedirect(reverse('online_order.views.order_confirmation', kwargs={'order_id':new_order.pk, 'confirmed':False}))         
             else:
                 raise ValueError('Cannot order online and set cart when cart is null')          
         else:
@@ -75,6 +73,8 @@ def order_confirmation(request, order_id, confirmed):
               # Mandrill errors are thrown as exceptions
               print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
               raise      
+              
+            cart.clear()              
             return HttpResponseRedirect(reverse('online_order.views.order_history'))
         else:
             raise ValueError('Cannot send order, order is not valid')

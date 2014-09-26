@@ -210,9 +210,6 @@
     }, 500);
   }
   
-  // In a perfect world, this would be its own library file that got included
-  // on the page and only the ``$(document).ready(...)`` below would be present.
-  // But this is an example.
   var Autocomplete = function(options) {
     this.form_selector = options.form_selector;
     this.url = options.url || '/search/autocomplete/';
@@ -272,8 +269,7 @@
     if (results.length > 0) {
       for (var res_offset in results) {
         var elem = base_elem.clone();
-        // Don't use .html(...) here, as you open yourself to XSS.
-        // Really, you should use some form of templating.
+        
         elem.find('.ac-result').text(results[res_offset]);
         results_wrapper.append(elem);
       }

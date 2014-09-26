@@ -42,15 +42,13 @@ def add_to_cart(request):
             try:
                 product = Product.objects.get(product_id=value)
             except Product.DoesNotExist:
-                product = Product.objects.get(name=value)
+                product = get_object_or_404(Product, name=value)  
                 
             if product:
-              cart = Cart(request)
-              cart.add(product)    
+                cart = Cart(request)
+                cart.add(product)    
             else:
               raise ValueError('Could not find product based on value: %s' % value)
-        #else:
-        #   raise ValueError('Form is invalid')
     else:
         raise ValueError('Cannot add to cart if request method is not POST')
       
@@ -59,17 +57,22 @@ def add_to_cart(request):
 
 @never_cache
 @login_required
-def autocomplete(request):
-    sqs1 = SearchQuerySet().autocomplete(product_id_auto=request.GET.get('q', ''))[:5]
-    sqs2 = SearchQuerySet().autocomplete(name_auto=request.GET.get('q', ''))[:5]
+def autocomplete(request):    
+    if request.method == 'GET':        
+        query = request.GET.get('q', '')
+      
+        sqs_desc = SearchQuerySet().autocomplete(description_auto=query)[:5]
+        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:5]
+
+        suggestions_id = ["%s - %s" % (result.product_id, result.name) for result in sqs_id]
+        suggestions_desc = ["%s - %s" % (result.product_id, result.name) for result in sqs_desc]
+
+        suggestions = list(set(suggestions_id + suggestions_desc))
+
+        auto_data = json.dumps({
+            'results': suggestions
+        })
+
+        return HttpResponse(auto_data, content_type='application/json')
     
-    suggestions1 = [result.product_id for result in sqs1]
-    suggestions2 = [result.name for result in sqs2]
-    # Make sure you return a JSON object, not a bare list.
-    # Otherwise, you could be vulnerable to an XSS attack.
-    suggestions = suggestions1 + suggestions2
-    #suggestions = list(set(suggestions1 + suggestions2))
-    the_data = json.dumps({
-        'results': suggestions
-    })
-    return HttpResponse(the_data, content_type='application/json')
+    return HttpResponseRedirect(reverse('online_order.views.order_online'))    
