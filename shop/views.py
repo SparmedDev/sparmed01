@@ -43,10 +43,8 @@ def add_to_cart(request):
         if form.is_valid():
             value = form.cleaned_data.get('q')
             
-            try:
-                product = Product.objects.get(product_id=value)
-            except Product.DoesNotExist:
-                product = get_object_or_404(Product, name=value)  
+            q_id = value.split(' ')[0]            
+            product = get_object_or_404(Product, product_id=q_id)
                 
             if product:
                 cart = Cart(request)
