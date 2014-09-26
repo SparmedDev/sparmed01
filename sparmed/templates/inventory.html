@@ -25,12 +25,14 @@
   <p class="text-center"><em>All SparMED products and their availability on stock</em></p>
 
   {% for category in categories %}
+  {% if category.products.all|length %}
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3>{{ category.name|safe }}</h3>
     </div>
 
     {% for subcategory in category.subcategories.all %}
+    {% if subcategory.products.all|length %}
     <div class="panel-body">
       <h4>{{ subcategory.name|safe }}</h4>
     </div>
@@ -58,9 +60,11 @@
       </tr>          
       {% endfor %}
     </table>
+    {% endif %}
     {% endfor %}
 
   </div> 
+  {% endif %}
   {% endfor %}
 </article>
 
