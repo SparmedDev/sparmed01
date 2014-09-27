@@ -9,35 +9,27 @@
 
 {% block bodytop %}
 {% compress css inline %}
-<style>
-    #world-map-container {
+<style>  
+    #distributors-map {
         display: block;
         position: relative;
-        width: 600px;
-        height: 299px;
-        margin: 10px auto;
-    }
-  
-    .world-map-continent {
-        display: block;
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        right: 0px;
-        left: 0px;
+        width: 100%;
+        height: 480px;
+        margin: 10px auto;   
       
-        -webkit-transition: 1s ease-in-out;
-        -moz-transition: 1s ease-in-out;
-        -o-transition: 1s ease-in-out;
-        transition: 1s ease-in-out;
+        background-image: url("{% static 'img/distributors/sparmed-background.jpg' %}");
+        background-size: 100% auto;
+        background-repeat: repeat-y;          
     }
   
-    .world-map-continent:hover {
-        -webkit-transform: scale(2);
-        -moz-transform: scale(2);
-        -o-transform: scale(2);
-        -ms-transform: scale(2);
-        transform: scale(2);
+    #distributors-map img {
+        display: block;
+        position: relative;
+      
+        width: 80%;
+        height: 99%;
+      
+        margin: 10px auto;
     }
 </style>
 {% endcompress %}
@@ -48,27 +40,17 @@
 <h2 class="text-center">Distributors</h2>
 <hr>
 
-<img class="img-responsive center-block" src="{% static 'img/distributors/world_map_fancy.jpg' %}">
-
-<span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span>
-
-<img class="img-responsive center-block" src="{% static 'img/distributors/world_map_plain_blue.jpg' %}">
-
-<span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span>
-
-<img class="img-responsive center-block" src="{% static 'img/distributors/world_map_tech_mesh_network.jpg' %}">
+<section id="distributors-map">
+  <!--<img src="{% static 'img/distributors/sparmed-background.jpg' %}">-->
+  <img src="{% static 'img/distributors/World_map.png' %}">
+</section>
 
 <hr>
 
-<span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span><span class="minor-skip"></span>
-
-<section id="world-map-container">
-    <img class="world-map-continent" src="{% static 'img/distributors/africa.png' %}">
-    <img class="world-map-continent" src="{% static 'img/distributors/asia.png' %}">
-    <img class="world-map-continent" src="{% static 'img/distributors/europe.png' %}">
-    <img class="world-map-continent" src="{% static 'img/distributors/north_america.png' %}">
-    <img class="world-map-continent" src="{% static 'img/distributors/oceania.png' %}">
-    <img class="world-map-continent" src="{% static 'img/distributors/south_america.png' %}">
-</section>
+<article>
+    <p class="text-center">
+        SparMED has premium distributors spread all over the globe.  <a href="{% url 'contact' %}">Contact us</a> for more information about our world-wide distributor network.
+    </p>
+</article>
 
 {% endblock %}
