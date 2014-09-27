@@ -40,7 +40,7 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = HTTPS
 
     # Fix admin login cookie not being set correctly 
-    SESSION_COOKIE_DOMAIN = 'www.sparmed.dk'
+    SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
