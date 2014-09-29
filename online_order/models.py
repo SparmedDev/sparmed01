@@ -182,7 +182,7 @@ class Order(models.Model):
       (BOX, 'Box'),
     )  
     
-    packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, blank=True)
+    packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, help_text="Please note if nothing is filled out SparMED will choose the best and safest way of packing your order.", blank=True)
     packing_remarks = models.TextField(verbose_name="Packaging Remarks/Comments", blank=True, null=True)
     
     CARDBOARD_BOX = 'CB'
