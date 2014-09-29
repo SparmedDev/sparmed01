@@ -22,6 +22,8 @@
 {% if news_posts %}
 {% for post in news_posts %}
 
+{# if no text only show picture #}
+
 {% if forloop.counter0|divisibleby:"2" or forloop.first %}
 {% include 'news/news_post_left.html' %}
 {% else %}

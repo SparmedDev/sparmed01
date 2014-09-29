@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-sm-6">
       <h3>{{ post.title }}</h3>
-      <p>Posted on: <time datetime="{{ post.added|date:'c' }}">{{ post.added|date }}</time>.</p>
       <p>{{ post.content|safe }}</p>
     </div>
     <div class="col-sm-6">

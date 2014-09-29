@@ -17,17 +17,19 @@
         height: 480px;
         margin: 10px auto;   
       
-        background-image: url("{% static 'img/distributors/sparmed-background.jpg' %}");
+        /*background-image: url("{% static 'img/distributors/sparmed-background-2.jpg' %}");
         background-size: 100% auto;
-        background-repeat: repeat-y;          
+        background-repeat: repeat-y;   */       
     }
   
     #distributors-map img {
         display: block;
         position: relative;
       
-        width: 80%;
-        height: 99%;
+       /* width: auto;
+        height: 99%;*/
+        width: 99%;
+        height: auto;
       
         margin: 10px auto;
     }
@@ -49,8 +51,7 @@
 
 <article>
     <p class="text-center">
-        SparMED has premium distributors spread all over the globe.  <a href="{% url 'contact' %}">Contact us</a> for more information about our world-wide distributor network.
-    </p>
+        SparMED has premium distributors spread all over the globe. For more information about our world-wide distributor network, or if you would like to become one of our distributors, please <a href="{% url 'contact' %}">contact us</a> </p>
 </article>
 
 {% endblock %}

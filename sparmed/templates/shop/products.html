@@ -53,6 +53,8 @@
   <section>
       <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
   </section>
+  
+  <hr>
   {% endif %}
   {% endwith %}  
   
@@ -75,7 +77,7 @@
   <hr>
   <div style="margin: 10px auto; padding: 20px 5px;">      
       <h2 class="text-center" style="color:{{ subcat.color }};">{% filter upper %}{{ subcat.name|safe }}{% endfilter %}</h2>
-      {% if subcat.description %}<p class="text-center"><em>{{ subcat.description|safe }}</em></p>{% endif %}
+      {% if subcat.description %}<p class="text-center" style="padding: 25px 0px;"><em>{{ subcat.description|safe }}</em></p>{% endif %}
     
       {% with image=subcat.images.all|first %}
       {% if image %}  
