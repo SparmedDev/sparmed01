@@ -25,9 +25,17 @@
 {# if no text only show picture #}
 
 {% if forloop.counter0|divisibleby:"2" or forloop.first %}
-{% include 'news/news_post_left.html' %}
+  {% if post.content|length > 2 %}
+    {% include 'news/news_post_left.html' %}
+  {% else %}
+    {% include 'news/news_post_no_text.html' %}
+  {% endif %}
 {% else %}
-{% include 'news/news_post_right.html' %}
+  {% if post.content|length > 2 %}
+    {% include 'news/news_post_right.html' %}
+  {% else %}
+    {% include 'news/news_post_no_text.html' %}
+  {% endif %}
 {% endif %}
 
 {% if not forloop.last %}<hr>{% endif %}
