@@ -63,13 +63,14 @@ def autocomplete(request):
     if request.method == 'GET':        
         query = request.GET.get('q', '')
       
-        sqs_desc = SearchQuerySet().autocomplete(description_auto=query)[:10]
-        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:10]
+        #sqs_desc = SearchQuerySet().autocomplete(description_auto=query)[:10]
+        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:15]
 
         suggestions_id = ["%s - %s" % (result.product_id, result.name) for result in sqs_id]
-        suggestions_desc = ["%s - %s" % (result.product_id, result.name) for result in sqs_desc]
+        #suggestions_desc = ["%s - %s" % (result.product_id, result.name) for result in sqs_desc]
 
-        suggestions = list(set(suggestions_id + suggestions_desc))
+        #suggestions = list(set(suggestions_id + suggestions_desc))
+        suggestions = list(set(suggestions_id))
         
         cart = Cart(request)
         cart = cart.get_item_list()

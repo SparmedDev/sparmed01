@@ -72,7 +72,7 @@ class SparmedUser(AbstractBaseUser):
     country = CountryField()
     address = models.CharField(max_length=255, verbose_name="Company Address")
     city = models.CharField(max_length=255, verbose_name="Company City")
-    postal_code = models.IntegerField(verbose_name="Company Postal Code")
+    postal_code = models.IntegerField(verbose_name="Company Postal Code", blank=True, null=True)
     contact_person_name = models.CharField(max_length=255, verbose_name="Company Contact Person Name")
     contact_telephone = models.IntegerField(max_length=20, unique=True, verbose_name="Contact Telephone Number")
     email = models.EmailField(verbose_name="Contact Email Address", max_length=255, unique=True)
