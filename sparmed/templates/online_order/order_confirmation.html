@@ -89,9 +89,7 @@
     </div>
     <div class="panel-body">
       {% if order.arranged_freight %}
-      <p>
-        SparMED Arranged freight: Yes
-      </p>    
+      <p>SparMED Arranged Freight: Yes</p>    
       {% else %}
       <p>
         SparMED Arranged Freight: No<br>
@@ -100,12 +98,16 @@
       </p>
       {% endif %}
 
+      {% if order.arranged_packing %}
+      <p>SparMED Arranged Packaging: Yes</p>        
+      {% else %}
       <p>Choice of Packaging: {{ order.packing_instructions }}<br>
         {% if order.packing_remarks|length %}
         Associated Remarks: <br>
         {{ order.packing_remarks }}
         {% endif %}
       </p>
+      {% endif %}
 
       {% if order.aircleaner_instructions|length %}
       {{ order.aircleaner_instructions }}

@@ -124,6 +124,7 @@ class SparmedUser(AbstractBaseUser):
                 freight_forwarder=order.freight_forwarder,
                 account_no=order.account_no,
               
+                arranged_packing=order.arranged_packing,
                 packing_instructions=order.packing_instructions,
                 packing_remarks=order.packing_remarks,
                 
@@ -182,6 +183,7 @@ class Order(models.Model):
       (BOX, 'Box'),
     )  
     
+    arranged_packing = models.BooleanField(verbose_name="SparMED Arranges Packaging?", default=True)
     packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, help_text="Please note if nothing is filled out SparMED will choose the best and safest way of packing your order.", blank=True)
     packing_remarks = models.TextField(verbose_name="Packaging Remarks/Comments", blank=True, null=True)
     
@@ -210,14 +212,14 @@ class Order(models.Model):
       
 class OrderForm(ModelForm):  
     arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True, required=False)
+    arranged_packing = forms.BooleanField(label="SparMED Arranges Packaging?", initial=True, required=False)
     insurance_desired = forms.BooleanField(label="Is insurance desired?", initial=False, required=False)
     shipping_and_invoice_same = forms.BooleanField(label="Shipping and invoice addresses are the same?", initial=True, required=False)
   
     class Meta:
         model = Order
         exclude = ['date']
-    
-    
+        
 
 class OrderHistoryItem(Order):
     user = models.ForeignKey('SparmedUser', related_name='orders', null=True, blank=True)

@@ -62,12 +62,16 @@
         </p>
         {% endif %}
 
+        {% if order.arranged_packing %}
+        <p>SparMED Arranged Packaging: Yes</p>        
+        {% else %}
         <p>Choice of Packaging: {{ order.packing_instructions }}<br>
           {% if order.packing_remarks|length %}
           Associated Remarks: <br>
           {{ order.packing_remarks }}
           {% endif %}
         </p>
+        {% endif %}
 
         {% if order.aircleaner_instructions|length %}
         {{ order.aircleaner_instructions }}

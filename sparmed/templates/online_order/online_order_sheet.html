@@ -152,11 +152,20 @@
     </article>
 
     <hr>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="arranged_packing">Packaging arranged by SparMED?</label>
+      <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked 
+             onclick="javascript:toggleVisible('arranged_packing_options');" />
+      <span class="help-block">Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order.</span>
+    </div>
+    
+    <article id="arranged_packing_options">
+      {% bootstrap_field form.packing_instructions %}
+      {% bootstrap_field form.packing_remarks %}
 
-    {% bootstrap_field form.packing_instructions %}
-    {% bootstrap_field form.packing_remarks %}
-
-    {% bootstrap_field form.aircleaner_instructions %}
+      {% bootstrap_field form.aircleaner_instructions %}
+    </article>
 
     {% bootstrap_field form.documents %}
 
@@ -193,6 +202,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("#arranged_freight_options").toggle();
+    $("#arranged_packing_options").toggle();
     $("#invoice_options").toggle();
   });
 
