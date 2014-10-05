@@ -54,7 +54,7 @@
         <p>Add more products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below.</p>
       </div>      
 
-        <form method="post" action="{% url 'add-to-cart' %}" class="autocomplete-me">
+        <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
           {% csrf_token %}
           <div class="form-group">
             <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing an ID to search for products matching that ID" required onblur="javascript: cleanupResults();" />
@@ -92,8 +92,9 @@
         
         <div style="display: block; margin: 20px; width: 100%;">
           <input class="btn btn-primary" type="submit" value="Update Cart" />
+          <a class="btn btn-warning" href="{% url 'clear-cart' %}">Clear Cart</a>
         </div>              
-        
+                
       </form>
       
       {% else %}

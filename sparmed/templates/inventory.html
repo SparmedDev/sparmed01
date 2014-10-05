@@ -4,6 +4,7 @@
 {% load bootstrap3 %}
 {% load compress %}
 {% load base_extras %}
+{% load cache %}
 
 {% block pagedescription %}View SparMED inventory - all products and their numbers on stock{% endblock %}
 {% block title %}Inventory{% endblock %}
@@ -20,7 +21,8 @@
   <li class="active">Inventory</li>
 </ol>
 
-<article>
+{% cache 6400 sparmed-inventory %}
+<article>  
   <h2 class="text-center">Inventory</h2>
   <p class="text-center"><em>All SparMED products and their availability on stock</em></p>
   
@@ -51,7 +53,7 @@
       {% for product in subcategory.products.all %}
       <tr>
         <td>
-          <p class="text-center"><a href="{% url 'add-to-cart' product.category.slug product.id %}"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+          <p class="text-center"><a href="{% url 'add-to-cart-inventory' product.category.slug product.id %}"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
         </td>
         <td>
           <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
@@ -69,6 +71,7 @@
   {% endif %}
   {% endfor %}
 </article>
+{% endcache %}
 
 {% endblock %}
 

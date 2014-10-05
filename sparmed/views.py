@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from news.models import NewsPost
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 from shop.models import Category
 
@@ -30,8 +31,9 @@ def privacy_policy(request):
   return render(request, "privacy_policy.html")
 
 #from suds.client import Client
+@never_cache
 @login_required
-def inventory(request, slug="0"):
+def inventory(request):
   categories = Category.objects.all()      
   
   #url = 'api.e-conomic.com/secure/api1/economicwebservice.asmx'

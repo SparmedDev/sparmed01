@@ -45,7 +45,8 @@ urlpatterns = patterns('',
 
                        url(r'^login/$', 'django.contrib.auth.views.login'),
                        url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
-
+                       
+                       url(r'^clear_cart/$', 'cart.views.clear_cart', name='clear-cart'),
                        url(r'^add_to_cart/(?P<category_slug>[\w\-]+)/(?P<object_id>[0-9]+)/$', 'cart.views.add_to_cart', name='add-to-cart'),
                        url(r'^remove_from_cart/(?P<object_id>[0-9]+)/$', 'cart.views.remove_from_cart', name='remove-from-cart'),
                        url(r'^set_quantity_cart/$', 'cart.views.set_quantity_on_product', name='set-quantity-cart'),
@@ -57,14 +58,15 @@ urlpatterns = patterns('',
                        url(r'^distributor-login/order-regret/(?P<order_id>[0-9]+)/$', 'online_order.views.order_regret', name='order-regret'),
         
                        url(r'^distributor-login/certificates/$', 'certificates.views.certificates', name='certificates'),
+                       url(r'^distributor-login/inventory/add_to_cart/(?P<category_slug>[\w\-]+)/(?P<object_id>[0-9]+)/$', 'cart.views.add_to_cart_inventory', name='add-to-cart-inventory'),
                        url(r'^distributor-login/inventory/$', views.inventory, name='inventory'),                        
                        url(r'^distributor-login/$', views.distributor_login, name='distributor-login'),                       
 
                        url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
                        url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products'),
                        url(r'^products/$', 'shop.views.products', name='products'), 
-  
-                       url(r'^search/add_to_cart/$', 'shop.views.add_to_cart', name='add-to-cart'),
+                         
+                       url(r'^search/add_to_cart/$', 'shop.views.add_to_cart', name='add-to-cart-search'),
                        url(r'^search/autocomplete/', 'shop.views.autocomplete'),
                        url(r'^search/', include('haystack.urls'), name='search'),
                        

@@ -55,7 +55,7 @@ def add_to_cart(request):
         raise ValueError('Cannot add to cart if request method is not POST')
       
     return HttpResponseRedirect(reverse('online_order.views.order_online'))      
-        
+             
 
 @never_cache
 @login_required
