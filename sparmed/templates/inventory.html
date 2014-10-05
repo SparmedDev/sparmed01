@@ -9,8 +9,8 @@
 {% block title %}Inventory{% endblock %}
 
 {% block head %}
-<script type="text/javascript" charset="utf-8" src="//raw.githubusercontent.com/e-conomic/rest-api-examples/master/RestPOC/Scripts/json2.js"></script>
-<script type="text/javascript" charset="utf-8" src="//raw.githubusercontent.com/e-conomic/rest-api-examples/master/RestPOC/Scripts/underscore.min.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="//raw.githubusercontent.com/e-conomic/rest-api-examples/master/RestPOC/Scripts/json2.js"></script>
+<script type="text/javascript" charset="utf-8" src="//raw.githubusercontent.com/e-conomic/rest-api-examples/master/RestPOC/Scripts/underscore.min.js"></script>-->
 {% endblock %}
 
 {% block body %}
@@ -44,8 +44,8 @@
         <th><p class="text-center">Add to Cart</p></th>
         <th>Product ID</th>
         <th>Product Name</th>
-        <th><p class="text-center">On Stock</p></th>
-        <th><p class="text-center">Available</p></th>
+        <!--<th><p class="text-center">On Stock</p></th>
+        <th><p class="text-center">Available</p></th>-->
       </tr>
 
       {% for product in subcategory.products.all %}
@@ -57,8 +57,8 @@
           <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
         </td>
         <td><p>{{ product.name }}</p></td>
-        <td><p class="text-center">{{ product.in_stock }}</p></td>
-        <td><p class="text-center">(available)</p></td>
+        <!--<td><p class="text-center">{{ product.in_stock }}</p></td>
+        <td><p class="text-center">(available)</p></td>-->
       </tr>          
       {% endfor %}
     </table>
@@ -75,7 +75,7 @@
 {% block endbody %}
 
 <script>
-
+/*
     var credentials = {
       appId: "BqXTzE4dnGx80jHWctceXyc-J2cxQ5E-ip29HSh4XV41",
       accessId: "_-vUMoL3KhyMXp7n1rN5jbo9nBDE9I3O7Mfe4Ukv6LI1"
@@ -123,7 +123,7 @@
           console.log("ID: " + item.no);
           console.log("Available: " + item.Available);
           console.log("InStock: " + item.InStock);
-        });*/
+        });*//*
         _.each(response.collection, function (item, index) {
           console.log("P: " + item);
           console.log("name: " + item.name);
@@ -135,7 +135,7 @@
           
       }
     });
-  });
+  });*/
 </script>
 
 {% endblock %}
