@@ -48,21 +48,21 @@
       <div class="panel-heading">
         <h3>Products in Cart</h3>
       </div>
-      
+
       {% if get_cart and get_cart.count > 0 %}
       <div class="panel-body">  
         <p>Add more products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below.</p>
       </div>      
 
-        <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
-          {% csrf_token %}
-          <div class="form-group">
-            <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing an ID to search for products matching that ID" required onblur="javascript: cleanupResults();" />
-          </div>
-          <div class="form-group col-sm-4">
-            <input class="btn btn-info form-control" type="submit" value="Add New Product" />
-          </div>
-        </form>  
+      <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing an ID to search for products matching that ID" required onblur="javascript: cleanupResults();" />
+        </div>
+        <div class="form-group col-sm-4">
+          <input class="btn btn-info form-control" type="submit" value="Add New Product" />
+        </div>
+      </form>  
 
       <form role="form" class="form" action="{% url 'set-quantity-cart' %}" method="post">
         {% csrf_token %}
@@ -89,14 +89,14 @@
           </tr>
           {% endfor %}          
         </table>    
-        
+
         <div style="display: block; margin: 20px; width: 100%;">
           <input class="btn btn-primary" type="submit" value="Update Cart" />
           <a style="margin: 5px 10px;" class="btn btn-warning" href="{% url 'clear-cart' %}">Clear Cart</a>
         </div>              
-                
+
       </form>
-      
+
       {% else %}
       <section>
         <p><span class="minor-skip"></span></p>
@@ -153,14 +153,14 @@
     </article>
 
     <hr>
-    
+
     <div class="form-group">
       <label class="control-label col-sm-4" for="arranged_packing">Packaging arranged by SparMED?</label>
       <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked 
              onclick="javascript:toggleVisible('arranged_packing_options');" />
       <span class="help-block">Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order.</span>
     </div>
-    
+
     <article id="arranged_packing_options">
       {% bootstrap_field form.packing_instructions %}
       {% bootstrap_field form.packing_remarks %}
@@ -220,7 +220,7 @@
       $('.ac-results').remove();
     }, 500);
   }
-  
+
   var Autocomplete = function(options) {
     this.form_selector = options.form_selector;
     this.url = options.url || '/search/autocomplete/';
@@ -280,7 +280,7 @@
     if (results.length > 0) {
       for (var res_offset in results) {
         var elem = base_elem.clone();
-        
+
         elem.find('.ac-result').text(results[res_offset]);
         results_wrapper.append(elem);
       }
