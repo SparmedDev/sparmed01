@@ -29,11 +29,6 @@ def privacy_policy(request):
   
   return render(request, "privacy_policy.html")
 
-@login_required
-def certificates(request):
-  
-  return render(request, "certificates.html")
-
 #from suds.client import Client
 @login_required
 def inventory(request, slug="0"):

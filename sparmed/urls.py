@@ -56,7 +56,7 @@ urlpatterns = patterns('',
                        url(r'^distributor-login/order-confirmation/(?P<order_id>[0-9]+)/(?P<confirmed>[\w\-]+)/$', 'online_order.views.order_confirmation', name='order-confirmation'),
                        url(r'^distributor-login/order-regret/(?P<order_id>[0-9]+)/$', 'online_order.views.order_regret', name='order-regret'),
         
-                       url(r'^distributor-login/certificates/$', views.certificates, name='certificates'),
+                       url(r'^distributor-login/certificates/$', 'certificates.views.certificates', name='certificates'),
                        url(r'^distributor-login/inventory/$', views.inventory, name='inventory'),                        
                        url(r'^distributor-login/$', views.distributor_login, name='distributor-login'),                       
 
