@@ -105,7 +105,7 @@
           <span class="glyphicon glyphicon-exclamation-sign"></span> Please add some products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a> or the form below.
         </div>    
 
-        <form method="post" action="/search/add_to_cart/" class="autocomplete-me">
+        <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
           {% csrf_token %}
           <div class="form-group">
             <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing to search for a product name or ID" required onblur="javascript: cleanupResults();" />
