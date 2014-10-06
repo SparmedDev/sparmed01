@@ -22,6 +22,7 @@
     {% if feedback %}
     <div class="alert alert-success">
       <p><span class="glyphicon glyphicon-exclamation-sign"></span> {{ feedback }}</p>
+      <p class="text-center"><a id="account-button" title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">Go back to <span class="glyphicon glyphicon-wrench"></span> Account Area</a>.</p>
     </div>
     {% else %}
     <form role="form" action="{{ request.user.get_absolute_url }}" method="post">
