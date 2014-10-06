@@ -48,7 +48,7 @@ def order_confirmation(request, order_id, confirmed):
         if order:
             recipients = [
             { 'email': 'admin@SparMED.dk',
-              'name': 'SparMed' },
+              'name': 'SparMED' },
             { 'email': order.user.email,
               'name': order.user.contact_person_name },
             ]            
@@ -76,6 +76,7 @@ def order_confirmation(request, order_id, confirmed):
               print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
               raise      
               
+            cart = Cart(request)
             cart.clear()              
             return HttpResponseRedirect(reverse('online_order.views.order_history'))
         else:
