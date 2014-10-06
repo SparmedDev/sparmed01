@@ -138,7 +138,7 @@
   <div class="form-group">
     <label class="control-label col-sm-4" for="arranged_freight">Freight arranged by SparMed?</label>  
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked 
-           onclick="javascript:toggleVisible('arranged_freight_options'); toggleVisible('arranged_freight_options_2');" />
+           onclick="javascript:toggleVisible('arranged_freight_options');" />
   </div>
 
   <article id="arranged_freight_options">
@@ -146,9 +146,9 @@
     {% bootstrap_field form.account_no %}
   </article>
 
-  <article id="arranged_freight_options_2">
-    {% bootstrap_field form.insurance_desired %}
-  </article>
+  <hr>
+  
+  {% bootstrap_field form.insurance_desired %}
 
   <hr>
 
