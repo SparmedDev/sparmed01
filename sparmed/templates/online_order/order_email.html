@@ -77,7 +77,7 @@
         <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
       </td>
       <td>
-        <p>{{ item.name }}</p>
+        <p>{{ item.description|safe }}</p>
       </td>
       <td>
         <p>{{ item.quantity }}</p>

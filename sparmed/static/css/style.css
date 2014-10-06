@@ -26,6 +26,16 @@ html, body {
     z-index: 9;
 }
 
+.extra-margin-top {
+    margin-top: 25px !important;
+    padding-top: 5px;
+}
+
+.extra-margin-bot {
+    margin-bottom: 25px !important;
+    padding-bottom: 5px;
+}
+
 #main-nav {
     display: block;
     position: absolute;
@@ -404,4 +414,8 @@ img {
   max-height: 300px;
 
   margin: 10px auto;
+}
+
+.td-max-col-width {
+  width:105px;
 }

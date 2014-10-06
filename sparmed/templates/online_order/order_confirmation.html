@@ -59,18 +59,18 @@
   {% if items %}
   <table class="table table-bordered table-hover">
     <tr>
-      <th>Product ID</th>
+      <th class="td-max-col-width">Product ID</th>
       <th>Product Name</th>
       <th>Quantity</th>
     </tr>
 
     {% for item in items %}
     <tr>
-      <td>
+      <td class="td-max-col-width">
         <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
       </td>
       <td>
-        <p>{{ item.name }}</p>
+        <p>{{ item.description|safe }}</p>
       </td>
       <td>
         <p>{{ item.quantity }}</p>

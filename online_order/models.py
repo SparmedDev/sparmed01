@@ -151,6 +151,7 @@ class SparmedUser(AbstractBaseUser):
 
                         product_id=item.product.product_id,
                         name=item.product.name,
+                        description=item.product.description,
                         slug=item.product.slug,
                       
                         category_slug=item.product.category.slug,
@@ -231,6 +232,7 @@ class OrderProduct(models.Model):
     
     product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
     name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")    
+    description = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
     category_slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
     slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
     
