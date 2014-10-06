@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn sparmed.wsgi:application -w 2 -k gevent --max-requests 1000
+web: newrelic-admin run-program gunicorn sparmed.wsgi:app -w $WEB_CONCURRENCY -k gevent --worker-class gevent --max-requests 500 --preload
