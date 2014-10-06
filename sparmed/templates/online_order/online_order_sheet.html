@@ -47,11 +47,11 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3>Products in Cart</h3>
-      </div>
+      </div>    
 
       {% if get_cart and get_cart.count > 0 %}
       <div class="panel-body">  
-        <p>Add more products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below.</p>
+        <p>Add more products to your cart through the <a href="{% url 'inventory' %}">inventory page</a>, the <a href="{% url 'products' %}">products page</a>, or the search box below.</p>        
       </div>      
 
       <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
@@ -98,12 +98,19 @@
       </form>
 
       {% else %}
-      <section>
+      <section>  
         <p><span class="minor-skip"></span></p>
+        {% if 'error' in order_feedback %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <p><span class="glyphicon glyphicon-exclamation-sign"></span> You must add some products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below, before being able to send an order.</p>
+        </div>
+        {% else %}
         <div class="alert alert-info alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <span class="glyphicon glyphicon-exclamation-sign"></span> Please add some products to your cart through the <a class="alert-link" href="{% url 'products' %}">products page</a> or the form below.
-        </div>    
+          <span class="glyphicon glyphicon-exclamation-sign"></span> Please add some products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below.
+        </div>         
+        {% endif %}   
 
         <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
           {% csrf_token %}
@@ -128,73 +135,65 @@
 
 <form class="form form-horizontal" role="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
-  {% if feedback %}
-  <div class="alert alert-success">
-    <p><span class="glyphicon glyphicon-exclamation-sign"></span> {{ feedback }}</p>
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="arranged_freight">Freight arranged by SparMed?</label>  
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked 
+           onclick="javascript:toggleVisible('arranged_freight_options'); toggleVisible('arranged_freight_options_2');" />
   </div>
-  {% else %}
-  <form role="form" action="{{ request.user.get_absolute_url }}" method="post">
-    {% csrf_token %}
-    {% bootstrap_form_errors form type='non_fields' %}
 
-    <div class="form-group">
-      <label class="control-label col-sm-4" for="arranged_freight">Freight arranged by SparMed?</label>  
-      <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked 
-             onclick="javascript:toggleVisible('arranged_freight_options'); toggleVisible('arranged_freight_options_2');" />
-    </div>
+  <article id="arranged_freight_options">
+    {% bootstrap_field form.freight_forwarder %}
+    {% bootstrap_field form.account_no %}
+  </article>
 
-    <article id="arranged_freight_options">
-      {% bootstrap_field form.freight_forwarder %}
-      {% bootstrap_field form.account_no %}
-    </article>
+  <article id="arranged_freight_options_2">
+    {% bootstrap_field form.insurance_desired %}
+  </article>
 
-    <article id="arranged_freight_options_2">
-      {% bootstrap_field form.insurance_desired %}
-    </article>
+  <hr>
 
-    <hr>
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="arranged_packing">Packaging arranged by SparMED?</label>
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked 
+           onclick="javascript:toggleVisible('arranged_packing_options');" />
+    <span class="help-block">Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order.</span>
+  </div>
 
-    <div class="form-group">
-      <label class="control-label col-sm-4" for="arranged_packing">Packaging arranged by SparMED?</label>
-      <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked 
-             onclick="javascript:toggleVisible('arranged_packing_options');" />
-      <span class="help-block">Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order.</span>
-    </div>
+  <article id="arranged_packing_options">
+    {% bootstrap_field form.packing_instructions %}
+    {% bootstrap_field form.packing_remarks %}
 
-    <article id="arranged_packing_options">
-      {% bootstrap_field form.packing_instructions %}
-      {% bootstrap_field form.packing_remarks %}
+    {% bootstrap_field form.aircleaner_instructions %}
+  </article>
+  
+  <hr>
 
-      {% bootstrap_field form.aircleaner_instructions %}
-    </article>
+  {% bootstrap_field form.documents %}
 
-    {% bootstrap_field form.documents %}
+  <hr>
 
-    <hr>
+  <div class="form-group">
+    <label class="control-label col-sm-6" for="shipping_and_invoice_same">Shipping and invoice addresses are the same?</label>  
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
+           onclick="javascript:toggleVisible('invoice_options'); " />
+  </div>
 
-    <div class="form-group">
-      <label class="control-label col-sm-6" for="shipping_and_invoice_same">Shipping and invoice addresses are the same?</label>  
-      <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
-             onclick="javascript:toggleVisible('invoice_options'); " />
-    </div>
+  <article id="invoice_options">
+    {% bootstrap_field form.invoice_company_name %}
+    {% bootstrap_field form.invoice_company_address %}
+    {% bootstrap_field form.invoice_company_postal_code  %}
+    {% bootstrap_field form.invoice_company_country %}            
+  </article>
 
-    <article id="invoice_options">
-      {% bootstrap_field form.invoice_company_name %}
-      {% bootstrap_field form.invoice_company_address %}
-      {% bootstrap_field form.invoice_company_postal_code  %}
-      {% bootstrap_field form.invoice_company_country %}            
-    </article>
+  <hr>
 
-    <hr>
+  {% bootstrap_field form.other_remarks %}
 
-    {% bootstrap_field form.other_remarks %}
+  <hr>
 
-    <hr>
-
-    {% buttons submit='Send Order' %}{% endbuttons %}
-  </form>
-  {% endif %}
+  {% buttons submit='Send Order' %}{% endbuttons %}
 </form>
+
 {% endblock %}
 
 {% block endbody %}

@@ -19,13 +19,15 @@ import mandrill
 @never_cache
 def order_online(request):  
     if request.method == 'POST':
-        form = OrderForm(request.POST)
+        cart = Cart(request)
+        if not cart or cart.count() <= 0:
+            form = OrderForm()
+            return render(request, 'online_order/online_order_sheet.html', {'form': form, 'order_feedback': 'error'})  
       
+        form = OrderForm(request.POST)      
         if form.is_valid():
-            order = form.save(commit=False)
-            cart = Cart(request)
-            
-            if cart and order:
+            order = form.save(commit=False)                      
+            if order:
                 new_order = request.user.add_to_order_history(order, cart)                
               
                 return HttpResponseRedirect(reverse('online_order.views.order_confirmation', kwargs={'order_id':new_order.pk, 'confirmed':False}))         
