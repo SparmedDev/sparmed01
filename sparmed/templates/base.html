@@ -22,6 +22,7 @@
     <link rel="icon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
     <link rel="favicon" type="image/x-icon"  href="{% static 'favicon.ico' %}" >
 
+    
     {% bootstrap_css %}
 
     {% compress css inline %}
@@ -40,8 +41,8 @@
     <![endif]-->
     
     {# Load jQuery #}
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    
+    <script type="text/javascript" src="{% bootstrap_jquery_url %}"></script>
+
     {% block head %}
     {% endblock %}
     
@@ -200,7 +201,7 @@
           $('.nav-pills').removeClass('nav-stacked');
           $('#main-nav').removeClass('stacked');
         }, 1000);
-      });      
+      });    
     </script>    
     {% endcompress %}
     
