@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -139,14 +139,14 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-  'gunicorn',
-  'compressor',  
-  'bootstrap3',
-  'robots',
-  'sorl.thumbnail',
+#  'gunicorn',
   'storages',
+  'compressor',  
   'collectfast',
   'haystack',
+  'bootstrap3',
+  'robots',
+  'sorl.thumbnail',      
   'django_countries',
   'django_extensions',
   'django_wysiwyg',
@@ -189,6 +189,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = "SparMed.dk <admin@SparMed.dk>"
+#SERVER_EMAIL = "SparMED TEST <rami@alphastagestudios.com>"
 
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
