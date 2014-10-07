@@ -1,1 +1,1 @@
-web: uwsgi --ini sparmed/uwsgi.ini
+web: newrelic-admin run-program uwsgi --ini sparmed/uwsgi.ini
