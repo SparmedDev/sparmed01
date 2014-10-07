@@ -1,1 +1,1 @@
-NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program uwsgi --ini sparmed/uwsgi.ini
+web: NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program uwsgi --ini sparmed/uwsgi.ini
