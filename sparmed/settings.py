@@ -139,7 +139,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-#  'gunicorn',
+  'gunicorn',
   'storages',
   'compressor',  
   'collectfast',
