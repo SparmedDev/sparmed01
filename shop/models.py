@@ -48,6 +48,7 @@ class Product(models.Model):
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     size = models.CharField(max_length=255, verbose_name="Size (LxDxH)", blank=True, null=True)
     weight = models.CharField(max_length=255, verbose_name="Weight", blank=True, null=True)
+    hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
 
     @property
     def category(self):
@@ -70,6 +71,7 @@ class Subcategory(models.Model):
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
     color = ColorField(null=True, blank=True, verbose_name="Subcategory Color")
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
+    hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
 
     @property
     def slug(self):
@@ -92,10 +94,10 @@ class Category(models.Model):
     long_text = models.TextField(verbose_name="Category Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
+    order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
+    hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
     
     document = ValidatedFileField(blank=True, null=True, verbose_name="PDF Document file (256 MB max)", upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*256)
-    
-    order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
 
     @property
     def products(self):

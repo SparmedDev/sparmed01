@@ -25,24 +25,36 @@
 </ol>
 
 <div style="display: block; width: 70%; margin: 10px auto; border-bottom: 2px solid {{ product.subcategory.color }};">
-    <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.description|safe }}</h2>
-    <h3 class="text-center"><strong>Product ID: {{ product.product_id }}</strong></h3>
-  
-    {% if product.size or product.weight %}
-    <p class="text-center"> 
-        {% if product.size %}Dimensions/Size: {{ product.size }}{% endif %}
-        {% if product.size and product.weight %} - {% endif %}
-        {% if product.weight %}Weight: {{ product.weight }}{% endif %}
-    </p>
-    {% endif %}
-  
-    {% endcache %}
+  <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.description|safe }}</h2>
+  <h3 class="text-center"><strong>Product ID: {{ product.product_id }}</strong></h3>
 
-    {% if user.is_anonymous %}
-    <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
-    {% else %}
-    <p class="text-center"><a style="color: {{ product.subcategory.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+  {% if product.size or product.weight %}
+  <p class="text-center"> 
+    {% if product.size %}Dimensions/Size: {{ product.size }}{% endif %}
+    {% if product.size and product.weight %} - {% endif %}
+    {% if product.weight %}Weight: {{ product.weight }}{% endif %}
+  </p>
+  {% endif %}
+  
+  <p class="text-center">
+    {% with prefix="Tariff No. / HS Code: " %}
+    {% if product.hs_code %}
+    {{prefix}}{{ product.hs_code }}
+    {% elif product.subcategory.hs_code %}
+    {{prefix}}{{ product.subcategory.hs_code }}
+    {% elif product.category.hs_code %}
+    {{prefix}}{{ product.category.hs_code }}
     {% endif %}
+    {% endwith %}
+  </p>  
+
+  {% endcache %}
+
+  {% if user.is_anonymous %}
+  <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
+  {% else %}
+  <p class="text-center"><a style="color: {{ product.subcategory.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+  {% endif %}
 </div>
 
 {% cache 3600 products-details-images product.slug %}
@@ -63,8 +75,8 @@
     {% else %}
     <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>
     {% endif %}
-    
-  {% if product.subcategory.long_text %}    
+
+    {% if product.subcategory.long_text %}    
   </div>
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
     {{ product.subcategory.long_text|safe }}     
@@ -73,7 +85,7 @@
 {% endif %}
 
 {% endcache %} 
-       
+
 
 {% endblock %}
 
