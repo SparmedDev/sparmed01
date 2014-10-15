@@ -88,10 +88,10 @@
         {% endif %}
 
         {% if order.shipping_and_invoice_same %}
-        <p>Invoice and delivery address were the same.</p>
+        <p>Invoice and delivery address was the same.</p>
         {% else %}
         <p>Delivery Address Details:<br>
-          Company Name: {{ order.invoice_company_name }}<br>
+          Name: {{ order.invoice_company_name }}<br>
           Address: {{ order.invoice_company_address }}<br>
           Postal Code: {{ order.invoice_company_postal_code }}<br>
           Country: {{ order.invoice_company_country }}

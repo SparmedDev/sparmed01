@@ -21,6 +21,10 @@
   time {
     font-size: 14px;
   }
+  
+  a:link:after, a:visited:after {
+      content: "";
+  }  
 </style>
 {% endcompress %}
 {% endblock %}
@@ -144,13 +148,13 @@
       {% endif %}
 
       {% if order.shipping_and_invoice_same %}
-      <p>Invoice and delivery address are the same.</p>
+      <p>Invoice and delivery address is the same.</p>
       {% else %}
-      <p>Invoice Address Details:<br>
-        Invoice Company Name: {{ order.invoice_company_name }}<br>
-        Invoice Company Address: {{ order.invoice_company_address }}<br>
-        Invoice Company Postal Code: {{ order.invoice_company_postal_code }}<br>
-        Invoice Company Country: {{ order.invoice_company_country }}
+      <p>Delivery Address Details:<br>
+        Name: {{ order.invoice_company_name }}<br>
+        Address: {{ order.invoice_company_address }}<br>
+        Postal Code: {{ order.invoice_company_postal_code }}<br>
+        Country: {{ order.invoice_company_country }}
       </p>
       {% endif %}
 

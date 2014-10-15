@@ -43,8 +43,9 @@ def add_to_cart(request):
         if form.is_valid():
             value = form.cleaned_data.get('q')
             
-            q_id = value.split(' ')[0]            
-            product = get_object_or_404(Product, product_id=q_id)
+            q_id = value.split(' ')[0]      
+            q_id = q_id.strip(' \t\n\r')            
+            product = get_object_or_404(Product, product_id=q_id)          
                 
             if product:
                 cart = Cart(request)
@@ -64,9 +65,9 @@ def autocomplete(request):
         query = request.GET.get('q', '')
       
         #sqs_desc = SearchQuerySet().autocomplete(description_auto=query)[:10]
-        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:15]
+        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:10]
 
-        suggestions_id = ["%s - %s" % (result.product_id, result.name) for result in sqs_id]
+        suggestions_id = ["%s - %s" % (result.product_id.strip(' \t\n\r') , result.name.strip(' \t\n\r') ) for result in sqs_id]
         #suggestions_desc = ["%s - %s" % (result.product_id, result.name) for result in sqs_desc]
 
         #suggestions = list(set(suggestions_id + suggestions_desc))
