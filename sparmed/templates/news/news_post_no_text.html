@@ -1,11 +1,11 @@
 <article id="{{ post.slug }}" class="news-article">
-  <h3 class="text-center">{{ post.title }}</h3>
+  <h3 class="text-center">{{ post.title|safe }}</h3>
 
   {% if post.images.all|length %}
   <div id="owl-{{ post.slug }}" class="owl-carousel">
     {% for image in post.images.all %}
 
-    <div><img class="img-responsive img-rounded owl-image extra-margin-top extra-margin-bot" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl"></div>
+    <div><img class="img-responsive img-rounded owl-image extra-margin-bot" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl"></div>
 
     {% endfor %}
   </div>

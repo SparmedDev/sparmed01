@@ -1,5 +1,5 @@
 <article id="{{ post.slug }}" class="news-article">
-  <div class="row">
+  <div class="row extra-margin-top extra-margin-bot">
     <div class="col-sm-6">
       {% if post.images %}
       <div id="owl-{{ post.slug }}" class="owl-carousel">
@@ -14,7 +14,7 @@
       {% endif %}
     </div>    
     <div class="col-sm-6">
-      <h3>{{ post.title }}</h3>
+      <h3>{{ post.title|safe }}</h3>
       <p>{{ post.content|safe }}</p>
     </div>
   </div>

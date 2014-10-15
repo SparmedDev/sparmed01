@@ -419,3 +419,14 @@ img {
 .td-max-col-width {
   width:105px;
 }
+
+.td-max-150-col-width {
+  width:150px;
+}
+
+.padding-lr-50 {
+    padding-right: 55px;
+    padding-left: 55px;
+    margin-right: 10px;
+    margin-left: 10px;
+}

@@ -162,7 +162,7 @@ LOCAL_APPS = (
   'news',
   'online_order',
   'cart',
-  'certificates'
+  'certificates',
 )
 
 INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

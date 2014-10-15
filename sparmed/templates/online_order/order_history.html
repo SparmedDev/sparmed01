@@ -88,13 +88,13 @@
         {% endif %}
 
         {% if order.shipping_and_invoice_same %}
-        <p>Shipping and invoice addresses were the same.</p>
+        <p>Invoice and delivery address were the same.</p>
         {% else %}
-        <p>Invoice Address Details:<br>
-          Invoice Company Name: {{ order.invoice_company_name }}<br>
-          Invoice Company Address: {{ order.invoice_company_address }}<br>
-          Invoice Company Postal Code: {{ order.invoice_company_postal_code }}<br>
-          Invoice Company Country: {{ order.invoice_company_country }}
+        <p>Delivery Address Details:<br>
+          Company Name: {{ order.invoice_company_name }}<br>
+          Address: {{ order.invoice_company_address }}<br>
+          Postal Code: {{ order.invoice_company_postal_code }}<br>
+          Country: {{ order.invoice_company_country }}
         </p>
         {% endif %}
 
@@ -120,7 +120,7 @@
         <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
       </td>
       <td>
-        <p>{{ item.name }}</p>
+        <p>{{ item.description|safe }}</p>
       </td>
       <td>
         <p>{{ item.quantity }}</p>

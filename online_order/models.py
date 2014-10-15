@@ -196,15 +196,15 @@ class Order(models.Model):
     )    
     aircleaner_instructions = models.CharField(verbose_name="Aircleaner Instructions (If applicable)", max_length=2, choices=AIRCLEANER_CHOICES, blank=True, null=True)
     
-    insurance_desired = models.BooleanField(verbose_name="Is insurance desired?", default=False, blank=True)
+    insurance_desired = models.BooleanField(verbose_name="Is insurance needed?", default=False, blank=True)
     
     documents = models.TextField(verbose_name="Please write down if you need any specific documents along with your shipment", blank=True, null=True)
     
-    shipping_and_invoice_same = models.BooleanField(verbose_name="Shipping and invoice addresses are the same?", default=True, blank=True)
-    invoice_company_name = models.CharField(max_length=255, verbose_name="Invoice Company Name", blank=True, null=True)
-    invoice_company_address = models.CharField(max_length=255, verbose_name="Invoice Company Address", blank=True, null=True)
-    invoice_company_postal_code = models.IntegerField(verbose_name="Invoice Company Postal Code", blank=True, null=True)    
-    invoice_company_country = CountryField(verbose_name="Invoice Company Country", blank=True, null=True)
+    shipping_and_invoice_same = models.BooleanField(verbose_name="Different delivery address?", default=True, blank=True)
+    invoice_company_name = models.CharField(max_length=255, verbose_name="Company Name", blank=True, null=True)
+    invoice_company_address = models.CharField(max_length=255, verbose_name="Delivery Address", blank=True, null=True)
+    invoice_company_postal_code = models.IntegerField(verbose_name="Delivery Postal Code", blank=True, null=True)    
+    invoice_company_country = CountryField(verbose_name="Delivery Country", blank=True, null=True)
     
     other_remarks = models.TextField(verbose_name="Any other remarks or comments regarding this order?", blank=True, null=True)
     
@@ -214,8 +214,8 @@ class Order(models.Model):
 class OrderForm(ModelForm):  
     arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True, required=False)
     arranged_packing = forms.BooleanField(label="SparMED Arranges Packaging?", initial=True, required=False)
-    insurance_desired = forms.BooleanField(label="Is insurance desired?", initial=False, required=False)
-    shipping_and_invoice_same = forms.BooleanField(label="Shipping and invoice addresses are the same?", initial=True, required=False)
+    insurance_desired = forms.BooleanField(label="Is insurance needed?", initial=False, required=False)
+    shipping_and_invoice_same = forms.BooleanField(label="Different delivery address?", initial=True, required=False)
   
     class Meta:
         model = Order
