@@ -148,7 +148,6 @@ THIRD_PARTY_APPS = (
   'robots',
   'sorl.thumbnail',      
   'django_countries',
-  'django_extensions',
   'django_wysiwyg',
   'validatedfile',
   'colorfield',
