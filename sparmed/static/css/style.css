@@ -4,6 +4,7 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
+    line-height: 28px;
 
     font-family: Verdana, Geneva, sans-serif;
     z-index: 0;
@@ -409,19 +410,19 @@ img {
 }
 
 .category-img {
-  display: block;
-  max-width: 90%;
-  max-height: 300px;
+    display: block;
+    max-width: 90%;
+    max-height: 400px;
 
-  margin: 10px auto;
+    margin: 10px auto;
 }
 
 .td-max-col-width {
-  width:105px;
+    width:105px;
 }
 
 .td-max-150-col-width {
-  width:150px;
+    width:150px;
 }
 
 .padding-lr-50 {
@@ -429,4 +430,9 @@ img {
     padding-left: 55px;
     margin-right: 10px;
     margin-left: 10px;
+}
+
+.news-article {
+    font-family: "Arial", sans-serif;  
+    font-size: 14px;
 }
