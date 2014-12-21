@@ -15,33 +15,28 @@
 <link rel="stylesheet" href="{% static 'owl-carousel/css/owl.theme.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block outerbody %}
 
-<h2 class="text-center">Remember to GO Oosafe<sup>&reg;</sup></h2>
-<hr>
-{% if news_posts %}
-{% for post in news_posts %}
+  <h2 class="text-center">Remember to GO Oosafe<sup>&reg;</sup></h2>
+  <hr>
 
-{# if no text only show picture #}
+  {% if news_posts %}
+    <article id="news-container">
+      {% for post in news_posts %}
+          {% if post.content|length > 2 %}
+              {% if forloop.counter0|divisibleby:"2" or forloop.first %}
+                  {% include 'news/news_post_left.html' %}
+              {% else %}
+                  {% include 'news/news_post_right.html' %}
+              {% endif %}
+          {% else %}
+              {% include 'news/news_post_no_text.html' %}
+          {% endif %}
 
-{% if forloop.counter0|divisibleby:"2" or forloop.first %}
-  {% if post.content|length > 2 %}
-    {% include 'news/news_post_left.html' %}
-  {% else %}
-    {% include 'news/news_post_no_text.html' %}
-  {% endif %}
-{% else %}
-  {% if post.content|length > 2 %}
-    {% include 'news/news_post_right.html' %}
-  {% else %}
-    {% include 'news/news_post_no_text.html' %}
-  {% endif %}
-{% endif %}
-
-{% if not forloop.last %}<hr>{% endif %}
-
-{% endfor %}
-{% endif %}
+          {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
+    </article>
+  {% endif %}  
 
 
 {% endblock %}
@@ -55,7 +50,7 @@
   $(document).ready(function() {
     $(".owl-carousel").owlCarousel({
       singleItem: true,
-      itemsScaleUp: false,
+      itemsScaleUp: true,
       slideSpeed: 600,
       paginationSpeed: 1200,
       rewindSpeed: 1500,
@@ -69,7 +64,7 @@
     });
   });
 </script>
-{% endcompress %}
+{% endcompress %} 
 
 {% endblock %}
 

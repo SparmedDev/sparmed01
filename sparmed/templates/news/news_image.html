@@ -1,0 +1,17 @@
+{% if post.images %}
+  {% if post.images.all|length > 1 %}
+    <div id="owl-{{ post.slug }}" class="owl-carousel">
+      {% for image in post.images.all %}
+      <div>
+        <img class="img-responsive img-rounded owl-image extra-margin-top extra-margin-bot" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl">
+      </div>
+      {% endfor %}
+    </div>    
+  {% else %}
+    <div>
+      {% with image=post.images.all|first %}
+      <img class="img-responsive img-rounded extra-margin-top extra-margin-bot" alt="{{ image.title }}" src="{{ image.get_absolute_url }}">
+      {% endwith %}
+    </div>
+  {% endif %}
+{% endif %}

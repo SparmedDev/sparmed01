@@ -1,0 +1,8 @@
+<div>
+  {% if post %}  
+      <h3>{{ post.title|safe }}</h3>
+      {% if post.content %}
+            <p>{{ post.content|safe }}</p>
+      {% endif %}
+  {% endif %}
+</div>

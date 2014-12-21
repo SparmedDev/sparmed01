@@ -1,21 +1,13 @@
+<section class="content-container">
 <article id="{{ post.slug }}" class="news-article">
-  <div class="row extra-margin-top extra-margin-bot">
+  <div class="news-article-content row extra-margin-top extra-margin-bot">
     <div class="col-sm-6">
-      <h3>{{ post.title|safe }}</h3>
-      <p>{{ post.content|safe }}</p>
+      {% include 'news/news_text.html' %}
     </div>
     <div class="col-sm-6">
-      {% if post.images %}
-      <div id="owl-{{ post.slug }}" class="owl-carousel">
-        {% for image in post.images.all %}
-
-        <div><img class="img-responsive img-rounded owl-image extra-margin-top extra-margin-bot" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl"></div>
-
-        {% endfor %}
-      </div>
-      {% else %}
-      <p class="text-center text-muted">No pictures available</p>
-      {% endif %}
+      {% include 'news/news_image.html' %}
     </div>
   </div>
-</article>
+
+</article> 
+</section>
