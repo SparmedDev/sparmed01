@@ -34,6 +34,10 @@
         margin: 0px auto;
         padding: 20px 0px;
     }
+  
+    .text-dark-blue {
+        color: RGB(54,95,145); 
+    }
 </style>
 {% endcompress %}
 {% endblock %}
@@ -43,18 +47,24 @@
 <h2 class="text-center">Distributors</h2>
 <hr>
 
-<section id="distributors-map">
-  <!--<img src="{% static 'img/distributors/sparmed-background.jpg' %}">-->
-  <img src="{% static 'img/distributors/World_map_full.jpg' %}">
-</section>
-
-<hr>
-
-<article>
-  <span class="minor-skip"></span>
-  <p class="text-center">
-    SparMED has premium distributors spread all over the globe. For more information about our world-wide distributor network, or if you would like to become one of our distributors, please <a href="{% url 'contact' %}">contact us</a>.
+<section>
+  <p class="text-center text-dark-blue">
+    SparMED has a premium distributor network spread all over the globe. <br>
+    Are you looking for a distributor in your area? Please <a href="{% url 'contact' %}">contact us</a>.
   </p>
-</article>
+
+  <hr>
+
+  <article id="distributors-map">
+    <!--<img src="{% static 'img/distributors/sparmed-background.jpg' %}">-->
+    <img src="{% static 'img/distributors/World_map_full.jpg' %}">
+  </article>
+
+  <hr>
+  
+  <p class="text-center text-dark-blue">
+    Would you like to become one of our distributors and join our world-wide distributor network? <a href="{% url 'contact' %}">CONTACT US</a>.
+  </p>
+</section>
 
 {% endblock %}
