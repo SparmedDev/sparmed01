@@ -53,6 +53,7 @@ urlpatterns = patterns('',
                        
                        url(r'^distributor-login/account-area/(?P<account_slug>[\w\-]+)/$', 'online_order.views.account_area', name='account-area'),
                        url(r'^distributor-login/order-history/re-order/(?P<order_pk>[0-9]+)/$', 'online_order.views.reorder_online', name='re-order-history'),
+                       url(r'^distributor-login/order-history/print/(?P<order_id>[0-9]+)/$', 'online_order.views.order_print', name='order-print'),
                        url(r'^distributor-login/order-history/$', 'online_order.views.order_history', name='order-history'),
                        url(r'^distributor-login/order-online/$', 'online_order.views.order_online', name='order-online'),
                        url(r'^distributor-login/order-confirmation/(?P<order_id>[0-9]+)/(?P<confirmed>[\w\-]+)/$', 'online_order.views.order_confirmation', name='order-confirmation'),

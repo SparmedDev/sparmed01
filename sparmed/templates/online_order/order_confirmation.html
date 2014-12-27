@@ -1,67 +1,11 @@
-{% extends 'bare_base.html' %}
-
-{% load static from staticfiles %}
-{% load bootstrap3 %}
-{% load compress %}
+{% extends 'online_order/order_conf_stub.html' %}
 
 {% block pagedescription %}This Order Confirmation page shows the details concerning a specific order{% endblock %}
 {% block title %}Order Confirmation{% endblock %}
 
-{% block head %}
-{% compress css inline %}
-<style type="text/css" media="print">
-  .non-printable {
-    display: none;
-  }
-  
-  h2 {
-    font-size: 20px;
-  }
-  
-  time {
-    font-size: 14px;
-  }
-  
-  a:link:after, a:visited:after {
-      content: "";
-  }  
-</style>
-{% endcompress %}
-{% endblock %}
-
-{% block body %}
-<div class="container">
-  <table class="table table-responsive">
-    <tr>
-      <td>
-        <h2>Purchase Order Sheet Receipt</h2>
-        <h4>
-          <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>       
-        </h4>
-        <div>
-          <a type="button" class="btn btn-default non-printable" href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span></a>
-        </div>
-      </td>
-
-      <td>
-        <img style="display: block; max-width: 300px; width: 50%; margin: 5px auto;" class="img-responsive" src="{% static 'img/sparmed-logo.png' %}" alt="Sparmed Logo - GOosafe in IVF Laboratories">
-      </td>
-    </tr>   
-  </table>
-
-  {% include 'online_order/order_to_from.html' %}
-
-  {% with items=order.items.all %}
-      {% include 'online_order/order_items.html' %}
-  {% endwith %}  
-
-  {% include 'online_order/order_details.html' %}
-
-  <div class="non-printable">
-    <a type="button" class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}">Confirm Order</a>
-    <a type="button" class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}">Regret Order</a>
-  </div>
-
+{% block containerend %}
+<div class="non-printable">
+  <a type="button" class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}">Confirm Order</a>
+  <a type="button" class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}">Regret Order</a>
 </div>
-
 {% endblock %}

@@ -62,12 +62,21 @@ def reorder_online(request, order_pk):
         form = OrderForm()
     
     return render(request, 'online_order/online_order_sheet.html', {'form': form})
-  
+ 
+@login_required  
+@never_cache
+def order_print(request, order_id):
+    order = OrderHistoryItem.objects.get(pk=order_id)
+    if order:
+        return render(request, 'online_order/order_history_print.html', {'order':order})
+    else:
+        raise ValueError('Cannot render order confirmation without valid order object')    
+    
 @login_required  
 @never_cache
 def order_confirmation(request, order_id, confirmed):
-    if confirmed == 'True':
-        order = OrderHistoryItem.objects.get(pk=order_id)
+    order = OrderHistoryItem.objects.get(pk=order_id)
+    if confirmed == 'True':        
         if order:
             recipients = [
             { 'email': 'admin@SparMED.dk',
@@ -105,7 +114,6 @@ def order_confirmation(request, order_id, confirmed):
         else:
             raise ValueError('Cannot send order, order is not valid')
     else:
-        order = OrderHistoryItem.objects.get(pk=order_id)
         if order:
             return render(request, 'online_order/order_confirmation.html', {'order':order})
         else:
