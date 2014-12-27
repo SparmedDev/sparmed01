@@ -23,7 +23,13 @@
   {% if news_posts %}
     <article id="news-container">
       {% for post in news_posts %}
+      {% if forloop.first %}
+      <section id="first-news-article">
+      {% endif %}      
           {% if post.content|length > 2 %}
+      
+
+                
               {% if forloop.counter0|divisibleby:"2" or forloop.first %}
                   {% include 'news/news_post_left.html' %}
               {% else %}
@@ -31,9 +37,14 @@
               {% endif %}
           {% else %}
               {% include 'news/news_post_no_text.html' %}
-          {% endif %}
-
+            
+       
+          
           {% if not forloop.last %}<hr>{% endif %}
+        {% endif %}
+        {% if forloop.first %}
+        </section>
+        {% endif %}                   
       {% endfor %}
     </article>
   {% endif %}  
