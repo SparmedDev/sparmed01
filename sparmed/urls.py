@@ -58,6 +58,7 @@ urlpatterns = patterns('',
                        url(r'^distributor-login/order-regret/(?P<order_id>[0-9]+)/$', 'online_order.views.order_regret', name='order-regret'),
         
                        url(r'^distributor-login/certificates/$', 'certificates.views.certificates', name='certificates'),
+                       url(r'^distributor-login/inventory/add_to_cart/(?P<category_slug>[\w\-]+)/(?P<object_id>[0-9]+)/(?P<quantity>[0-9]+)/$', 'cart.views.add_to_cart_inventory', name='add-to-cart-inventory'),
                        url(r'^distributor-login/inventory/add_to_cart/(?P<category_slug>[\w\-]+)/(?P<object_id>[0-9]+)/$', 'cart.views.add_to_cart_inventory', name='add-to-cart-inventory'),
                        url(r'^distributor-login/inventory/$', views.inventory, name='inventory'),                        
                        url(r'^distributor-login/$', views.distributor_login, name='distributor-login'),                       

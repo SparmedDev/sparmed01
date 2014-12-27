@@ -43,6 +43,7 @@
     <table class="table table-hover table-bordered table-condensed">
       <tr>
         <th class="td-max-col-width"><p class="text-center">Add to Cart</p></th>
+        <th class="td-max-col-width"><p class="text-center">Quantity</p></th>
         <th class="td-max-150-col-width">Product ID</th>
         <th>Product Name</th>
         <!--<th><p class="text-center">On Stock</p></th>
@@ -50,9 +51,34 @@
       </tr>
 
       {% for product in subcategory.products.all %}
+      <form role="form" class="form">
+        {#% csrf_token %#}   
       <tr>
         <td class="td-max-col-width">
-          <p class="text-center"><a href="{% url 'add-to-cart-inventory' product.category.slug product.id %}"><span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+          <script type="text/javascript">
+            //$(function(){
+                $("#{{ product.id }}_add_to_cart").on("click", function(event) {
+                    console.log("add to cart");
+                    var quantity = $("#{{ product.id }}_quantity_field").val(); 
+                    var post_url = "{% url 'add-to-cart-inventory' product.category.slug product.id %}";
+
+                    var post = post_url + "/" + quantity;
+                    //window.location.href = post;
+                    $.post(post, function(data){ 
+                      console.log("posted to: " + post);
+                    });
+                    return false;
+                });
+            //});
+          </script>          
+          
+          <p class="text-center" style="cursor:pointer; color:red; padding: 5px;" id="{{ product.id }}_add_to_cart"><span class="glyphicon glyphicon-shopping-cart"></span></p>        
+
+        </td>
+        <td>           
+          <div class="form-group">
+            <input class="form-control" name="field" id="{{ product.id }}_quantity_field" type="number" value="1" min="1" required />
+          </div>
         </td>
         <td>
           <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
@@ -61,6 +87,7 @@
         <!--<td><p class="text-center">{{ product.in_stock }}</p></td>
         <td><p class="text-center">(available)</p></td>-->
       </tr>          
+      </form>
       {% endfor %}
     </table>
     {% endif %}
@@ -79,69 +106,4 @@
 {% endblock %}
 
 {% block endbody %}
-
-<script>
-/*
-    var credentials = {
-      appId: "BqXTzE4dnGx80jHWctceXyc-J2cxQ5E-ip29HSh4XV41",
-      accessId: "_-vUMoL3KhyMXp7n1rN5jbo9nBDE9I3O7Mfe4Ukv6LI1"
-    }  
-  
-  function ajax(url, method, data, callback) {
-    $.ajax({
-      url: url,
-      dataType: "json",
-      headers: credentials,
-      data: JSON.stringify(data),
-      type: method,
-      success: callback,
-      fail: function (req,res) {
-        console.log("error request:");
-        console.log(req);
-        console.log("response:");
-        console.log(res);
-      }
-    });
-  }
-
-  $(document).ready(function() {
-    var url = 'https://restapi.e-conomic.com/products';
-    var method = 'GET';
-    
-    ajax(url, method, credentials, function(response) {
-      if (!response || !response.collection || !response.collection.length)
-      {
-        console.log("No products found :(");
-      }
-      else
-      {
-        console.log("Received a response! Products found: " + response.collection.length.toString());
-        /*for (var item in response.collection)
-        {
-          console.log("P: " + item.toString());
-          console.log("OrderID: " + item.orderId.toString());
-          console.log("netAmount: " + item.netAmount.toString());
-          console.log("Name: " + item.name.toString());
-        }*/
-        /*response.collection.forEach(function(item, index) {
-          console.log("P: " + item.toString());
-          console.log("Name: " + item.name);
-          console.log("ID: " + item.no);
-          console.log("Available: " + item.Available);
-          console.log("InStock: " + item.InStock);
-        });*//*
-        _.each(response.collection, function (item, index) {
-          console.log("P: " + item);
-          console.log("name: " + item.name);
-          console.log("number: " + item.number);
-          console.log("id: " + item.id);
-          console.log("available: " + item.available);
-          console.log("inStock: " + item.inStock);      
-        });
-          
-      }
-    });
-  });*/
-</script>
-
 {% endblock %}
