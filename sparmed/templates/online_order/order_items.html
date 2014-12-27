@@ -1,0 +1,25 @@
+{% if items %}
+<table class="table table-bordered table-hover table-responsive">
+  <tr>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Quantity</th>
+  </tr>
+
+  {% for item in items %}
+  <tr>
+    <td>
+      <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
+    </td>
+    <td>
+      <p>{{ item.description|safe }}</p>
+    </td>
+    <td>
+      <p>{{ item.quantity }}</p>
+    </td>
+  </tr> 
+  {% endfor %}
+</table>
+{% else %}
+<div class="alert alert-error"><span class="glyphicon glyphicon-exclamation-sign"></span> No product items found in the order.</div>
+{% endif %}

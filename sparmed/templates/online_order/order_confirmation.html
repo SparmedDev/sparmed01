@@ -49,120 +49,13 @@
     </tr>   
   </table>
 
-  <table class="table table-responsive">
-    <tr>
-      <td>
-        <p>TO:</p>
-        <p>
-          <strong>SparMED ApS</strong><br>
-          Toppevadvej 34-38<br>
-          DK-3660 Stenløse<br>
-          Denmark
-        </p>
-        <p>
-          Phone: +45 3940 2503<br>
-          Email: info@sparmed.dk<br>
-          Web: www.sparmed.dk
-        </p>
-      </td>
-
-      <td>
-        <p>FROM:</p>
-        <p>
-          <strong>{{ order.user.company_name }}</strong><br>
-          {{ order.user.address}}<br>
-          {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
-        </p>
-        <p>
-          Att: {{ order.user.contact_person_name }}<br>
-          Telephone: {{ order.user.contact_telephone }}<br>
-          Email: {{ order.user.email }}
-        </p>
-      </td>    
-    </tr>
-  </table>
+  {% include 'online_order/order_to_from.html' %}
 
   {% with items=order.items.all %}
-  <table class="table table-bordered table-hover">
-    <tr>
-      <th class="td-max-col-width">Product ID</th>
-      <th>Product Name</th>
-      <th>Quantity</th>
-    </tr>
-
-    {% for item in items %}
-    <tr>
-      <td class="td-max-col-width">
-        <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
-      </td>
-      <td>
-        <p>{{ item.description|safe }}</p>
-      </td>
-      <td>
-        <p>{{ item.quantity }}</p>
-      </td>
-    </tr> 
-    {% endfor %}
-  </table>
+      {% include 'online_order/order_items.html' %}
   {% endwith %}  
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3>Order Details</h3>
-    </div>
-    <div class="panel-body">
-      {% if order.arranged_freight %}
-      <p>SparMED Arranged Freight: Yes</p>    
-      {% else %}
-      <p>
-        SparMED Arranged Freight: No<br>
-        Freight Forwarder: {{ order.freight_forwarder }}<br>
-        Account Number: {{ order.account_no }}
-      </p>
-      {% endif %}
-
-      {% if order.arranged_packing %}
-      <p>SparMED Arranged Packaging: Yes</p>        
-      {% else %}
-      <p>Choice of Packaging: {{ order.packing_instructions }}<br>
-        {% if order.packing_remarks|length %}
-        Associated Remarks: <br>
-        {{ order.packing_remarks }}
-        {% endif %}
-      </p>
-      
-      {% if order.aircleaner_instructions|length %}
-      {{ order.aircleaner_instructions }}
-      {% endif %}      
-      
-      {% endif %}
-
-      {% if order.insurance_desired %}
-      <p>Insurance chosen and included</p>
-      {% else %}
-      <p>Insurance not chosen and therefore not included.</p>
-      {% endif %}
-
-      {% if order.documents|length %}
-      <p>Specific Documents Requested:<br> {{ order.documents }}</p>
-      {% endif %}
-
-      {% if order.shipping_and_invoice_same %}
-      <p>Invoice and delivery address is the same.</p>
-      {% else %}
-      <p>Delivery Address Details:<br>
-        Name: {{ order.invoice_company_name }}<br>
-        Address: {{ order.invoice_company_address }}<br>
-        Postal Code: {{ order.invoice_company_postal_code }}<br>
-        Country: {{ order.invoice_company_country }}
-      </p>
-      {% endif %}
-
-      {% if order.other_remarks|length %}
-      <p>Other Remarks given to SparMed: <br> {{ order.other_remarks }}</p>
-      {% endif %}
-    </div>
-  </div>
+  {% include 'online_order/order_details.html' %}
 
   <div class="non-printable">
     <a type="button" class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}">Confirm Order</a>

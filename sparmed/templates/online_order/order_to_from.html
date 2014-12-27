@@ -1,0 +1,32 @@
+<table class="table table-responsive">
+  <tr>
+    <td>
+      <p>TO:</p>
+      <p>
+        <strong>SparMED ApS</strong><br>
+        Toppevadvej 34-38<br>
+        DK-3660 Stenløse<br>
+        Denmark
+      </p>
+      <p>
+        Phone: +45 3940 2503<br>
+        Email: info@sparmed.dk<br>
+        Web: www.sparmed.dk
+      </p>
+    </td>
+
+    <td>
+      <p>FROM:</p>
+      <p>
+        <strong>{{ order.user.company_name }}</strong><br>
+        {{ order.user.address}}<br>
+        {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
+      </p>
+      <p>
+        Att: {{ order.user.contact_person_name }}<br>
+        Telephone: {{ order.user.contact_telephone }}<br>
+        Email: {{ order.user.email }}
+      </p>
+    </td>    
+  </tr>
+</table>

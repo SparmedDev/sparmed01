@@ -20,123 +20,65 @@
 
 <hr>
 
-{% for order in orders %}
-<h3>Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time></h3>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-<div class="row">
-  <div class="col-sm-5">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Company Details</h3>
-      </div>
-      <div class="panel-body">          
-        <p class="text-muted">
-          <strong>{{ order.user.company_name }}</strong><br>
-          {{ order.user.address}}<br>
-          {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
-        </p>
-        <p class="text-muted">
-          Att: {{ order.user.contact_person_name }}<br>
-          Telephone: {{ order.user.contact_telephone }}<br>
-          Email: {{ order.user.email }}
-        </p>
-      </div>
+  {% for order in orders %}
+  <div class="panel panel-default">
+
+    <div class="panel-heading" role="tab" id="order_h_{{ order.pk }}">
+      <h3 class="panel-title text-center">
+          <a data-toggle="collapse" data-parent="#accordion" href="#order_c_{{ order.pk }}" aria-expanded="false" aria-controls="order_c_{{ order.pk }}">
+              Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>
+          </a>
+      </h3>
     </div>
-  </div>
 
-  <div class="col-sm-7">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Order Details</h3>
+    <div id="order_c_{{ order.pk }}" class="panel-collapse collapse" role="tab-panel" aria-labelledby="order_h_{{ order.pk }}" style="margin:15px;">
+
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Company Details</h3>
+            </div>
+            <div class="panel-body">          
+              <p class="text-muted">
+                <strong>{{ order.user.company_name }}</strong><br>
+                {{ order.user.address}}<br>
+                {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
+              </p>
+              <p class="text-muted">
+                Att: {{ order.user.contact_person_name }}<br>
+                Telephone: {{ order.user.contact_telephone }}<br>
+                Email: {{ order.user.email }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-7">
+          {% include 'online_order/order_details.html' %}
+        </div>
       </div>
-      <div class="panel-body">
-        {% if order.arranged_freight %}
-        <p>
-          SparMED Arranged freight: Yes
-        </p>    
-        {% else %}
-        <p>
-          SparMED Arranged Freight: No<br>
-          Freight Forwarder: {{ order.freight_forwarder }}<br>
-          Account Number: {{ order.account_no }}
-        </p>
-        {% endif %}
 
-        {% if order.arranged_packing %}
-        <p>SparMED Arranged Packaging: Yes</p>        
-        {% else %}
-        <p>Choice of Packaging: {{ order.packing_instructions }}<br>
-          {% if order.packing_remarks|length %}
-          Associated Remarks: <br>
-          {{ order.packing_remarks }}
-          {% endif %}
-        </p>
-        {% endif %}
-
-        {% if order.aircleaner_instructions|length %}
-        {{ order.aircleaner_instructions }}
-        {% endif %}
-
-        {% if order.insurance_desired %}
-        <p>Insurance chosen and included</p>
-        {% else %}
-        <p>Insurance not chosen and therefore not included.</p>
-        {% endif %}
-
-        {% if order.documents|length %}
-        <p>Specific Documents Requested:<br> {{ order.documents }}</p>
-        {% endif %}
-
-        {% if order.shipping_and_invoice_same %}
-        <p>Invoice and delivery address was the same.</p>
-        {% else %}
-        <p>Delivery Address Details:<br>
-          Name: {{ order.invoice_company_name }}<br>
-          Address: {{ order.invoice_company_address }}<br>
-          Postal Code: {{ order.invoice_company_postal_code }}<br>
-          Country: {{ order.invoice_company_country }}
-        </p>
-        {% endif %}
-
-        {% if order.other_remarks|length %}
-        <p>Other Remarks given to SparMed: <br> {{ order.other_remarks }}</p>
-        {% endif %}
+      <div class="row">
+        <div class="col-sm-12">
+          <span class="minor-skip"> </span>
+        </div>
       </div>
-    </div>
-  </div>
 
-  {% with items=order.items.all %}
-  {% if items %}
-  <table class="table table-bordered table-hover">
-    <tr>
-      <th>Product ID</th>
-      <th>Product Name</th>
-      <th>Quantity</th>
-    </tr>
+      {% with items=order.items.all %}
+        {% include 'online_order/order_items.html' %}
+      {% endwith %}
 
-    {% for item in items %}
-    <tr>
-      <td>
-        <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
-      </td>
-      <td>
-        <p>{{ item.description|safe }}</p>
-      </td>
-      <td>
-        <p>{{ item.quantity }}</p>
-      </td>
-    </tr> 
-    {% endfor %}
-  </table>
-  {% else %}
-  <div class="alert alert-error"><span class="glyphicon glyphicon-exclamation-sign"></span> No product items found in the order.</div>
-  {% endif %}
-  {% endwith %}
-</div>
-{% if not forloop.last %}<hr>{% endif %}
+    </div> <!-- /panel-collapse -->
 
-{% empty %}
-<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No orders found in the order history.</div>
-{% endfor %}
+  </div><!--  /panel-default -->  
+
+  {% empty %}
+  <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No orders found in the order history.</div>
+  {% endfor %}
+
+</div><!--/panel-group accordion -->
 
 {% endblock %}
