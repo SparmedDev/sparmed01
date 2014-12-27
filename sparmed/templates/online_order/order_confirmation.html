@@ -1,11 +1,11 @@
-{% extends 'online_order/order_conf_stub.html' %}
+{% extends 'online_order/order_conf_base.html' %}
 
 {% block pagedescription %}This Order Confirmation page shows the details concerning a specific order{% endblock %}
 {% block title %}Order Confirmation{% endblock %}
 
 {% block containerend %}
 <div class="non-printable">
-  <a type="button" class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}">Confirm Order</a>
-  <a type="button" class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}">Regret Order</a>
+    <a class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}" title="Confirm Order"><span class="glyphicon glyphicon-ok"></span> Confirm Order</a>
+    <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}" title="Regret Order"><span class="glyphicon glyphicon-remove"></span> Regret Order</a>
 </div>
 {% endblock %}

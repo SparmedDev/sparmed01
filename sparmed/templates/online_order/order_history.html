@@ -27,13 +27,13 @@
 
     <div class="panel-heading" role="tab" id="order_h_{{ order.pk }}">
       <h3 class="panel-title text-center">
-          <a data-toggle="collapse" data-parent="#accordion" href="#order_c_{{ order.pk }}" aria-expanded="false" aria-controls="order_c_{{ order.pk }}">
+          <a data-toggle="collapse" data-parent="#accordion" href="#order_c_{{ order.pk }}" aria-expanded="{% if forloop.first%}true{% else %}false{% endif %}" aria-controls="order_c_{{ order.pk }}">
               Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>
           </a>
       </h3>
     </div>
 
-    <div id="order_c_{{ order.pk }}" class="panel-collapse collapse" role="tab-panel" aria-labelledby="order_h_{{ order.pk }}" style="margin:15px;">
+    <div id="order_c_{{ order.pk }}" class="panel-collapse collapse {% if forloop.first %}in{% endif %}" role="tab-panel" aria-labelledby="order_h_{{ order.pk }}" style="margin:15px;">
 
       <div class="row">
         <div class="col-sm-5">
@@ -76,8 +76,8 @@
         
         <div class="col-sm-8">
           <br>
-          <a class="btn btn-lg btn-info btn-block" href="{% url 'order-print' order.pk %}" title="View in Print-Friendly Format">View in Print-Friendly Format</a>
-          <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Repeat Previous Order">Re-Order</a>
+          <a class="btn btn-lg btn-info btn-block" href="{% url 'order-print' order.pk %}" title="View in Print-Friendly Format"><span class="glyphicon glyphicon-print"></span> View in Print-Friendly Format</a>
+          <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Repeat Previous Order"><span class="glyphicon glyphicon-shopping-cart"></span> Repeat Order</a>
         </div>
           
         <div class="col-sm-2"></div>

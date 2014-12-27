@@ -1,9 +1,11 @@
-{% extends 'online_order/order_conf_stub.html' %}
+{% extends 'online_order/order_conf_base.html' %}
 
 {% block pagedescription %}This Order History item is shown in print-friendly format{% endblock %}
-{% block title %}Order History - Print Friendly{% endblock %}
+{% block title %}Print Friendly Order History{% endblock %}
 
 {% block containerend %}
-<a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Repeat Previous Order">Re-Order</a>
-<a class="btn btn-lg btn-danger btn-block" href="{% url 'order-history' %}" title="Back to Order History">Back</a>
+<div class="non-printable">
+    <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Repeat Previous Order"><span class="glyphicon glyphicon-shopping-cart"></span> Repeat Order</a>
+    <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-history' %}" title="Back to Order History"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+</div>
 {% endblock %}
