@@ -1,7 +1,7 @@
 html, body {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     margin: 0px;
     padding: 0px;
     line-height: 28px;
@@ -10,7 +10,7 @@ html, body {
     z-index: 0;
 }
 
-#header, header {
+#header {
     display: block;
     position: relative;
 
@@ -65,7 +65,7 @@ html, body {
     bottom: 5px;
 }
 
-#footer, footer {
+#footer {
     display: block;
     margin: 0px auto;
     margin-top: 25px;
@@ -74,7 +74,7 @@ html, body {
 
     background-color: #005e69;
     font-size: 10px;
-    color: #aaaaaa;
+    color: #888;
     
     z-index: 88;
   
@@ -137,6 +137,7 @@ html, body {
     display: block;
     margin: 5px;
     padding: 5px;
+    overflow: hidden;
 
     z-index: 9;
 }
@@ -457,6 +458,13 @@ img {
 .news-article {
     font-family: "Arial", sans-serif;  
     font-size: 14px;
+}
+
+hr {
+    position: relative;
+    width: 1000%;
+    margin-left: -500%;  
+    height: 1px;
 }
 /*
 #news-container .content-container:first-of-type { 
