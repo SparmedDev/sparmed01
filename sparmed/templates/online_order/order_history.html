@@ -70,6 +70,13 @@
       {% with items=order.items.all %}
         {% include 'online_order/order_items.html' %}
       {% endwith %}
+      
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
+          <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Re-Order">Re-Order</a>
+        </div>
+      </div>
 
     </div> <!-- /panel-collapse -->
 

@@ -7,17 +7,13 @@ from django.contrib.auth.decorators import login_required
 from cart import Cart
 from shop.models import Product, Category
 
-
 @login_required
 def add_to_cart(request, category_slug, object_id, quantity=1):
     product = Product.objects.get(id=object_id)
     if product:
         cart = Cart(request)
         cart.add(product, quantity)    
-    
-    categories = Category.objects.all()    
-    category = categories.get(slug=category_slug)  
-    
+        
     return HttpResponseRedirect(reverse('shop.views.products'))
   
 @login_required
@@ -26,10 +22,6 @@ def add_to_cart_inventory(request, category_slug, object_id, quantity=1):
     if product:
         cart = Cart(request)
         cart.add(product, quantity)    
-    
-    categories = Category.objects.all()    
-    category = categories.get(slug=category_slug)  
-      
     return HttpResponseRedirect(reverse('sparmed.views.inventory'))     
 
 @login_required

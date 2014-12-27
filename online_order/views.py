@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict  
 
 from online_order.models import OrderForm, SparmedUser, OrderHistoryItem
 from online_order.admin import SparmedUserChangeForm
 
-from shop.models import Category
+from shop.models import Category, Product
 
 from cart import Cart
 
@@ -38,6 +39,28 @@ def order_online(request):
     else:
         form = OrderForm()
         
+    return render(request, 'online_order/online_order_sheet.html', {'form': form})
+
+@login_required
+@never_cache  
+def reorder_online(request, order_pk):  
+    user = request.user
+    order = user.orders.get(pk=order_pk)
+    if order:
+        cart = Cart(request)
+        if cart.count() > 0:
+            cart.clear()           
+
+        order_dict = model_to_dict(order)          
+        form = OrderForm(initial=order_dict, auto_id=True)        
+        
+        for product in order.items.all():
+          p = Product.objects.get(id=product.object_id)  
+          if p:
+              cart.add(p, product.quantity)
+    else:
+        form = OrderForm()
+    
     return render(request, 'online_order/online_order_sheet.html', {'form': form})
   
 @login_required  
