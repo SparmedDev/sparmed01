@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from cart import Cart
 from shop.models import Product, Category
+from online_order.models import InventoryAddToCartForm
 
 @login_required
 def add_to_cart(request, category_slug, object_id, quantity=1):
@@ -17,11 +18,18 @@ def add_to_cart(request, category_slug, object_id, quantity=1):
     return HttpResponseRedirect(reverse('shop.views.products'))
   
 @login_required
-def add_to_cart_inventory(request, category_slug, object_id, quantity=1):
-    product = Product.objects.get(id=object_id)
-    if product:
-        cart = Cart(request)
-        cart.add(product, quantity)    
+def add_to_cart_inventory(request):
+    if request.method == 'POST':
+        form = InventoryAddToCartForm(request.POST)
+        if form.is_valid():
+            product_id = form.cleaned_data['product_id']
+            quantity = form.cleaned_data['quantity']
+            
+            product = Product.objects.get(id=product_id)
+            if product:
+                cart = Cart(request)
+                cart.add(product, quantity)
+        
     return HttpResponseRedirect(reverse('sparmed.views.inventory'))     
 
 @login_required

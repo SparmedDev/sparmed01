@@ -243,3 +243,8 @@ class OrderProduct(models.Model):
       
     def __unicode__(self):
        return u'%s - %s' % (self.product_id, self.name)
+      
+      
+class InventoryAddToCartForm(forms.Form):
+    product_id = forms.CharField()
+    quantity = forms.IntegerField(min_value=1, initial=1)
