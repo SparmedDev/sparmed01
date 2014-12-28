@@ -69,7 +69,7 @@ def autocomplete(request):
         cart = Cart(request)
         cart = cart.get_item_list()
         
-        p_ids = ["{0} - {1}".format(p.product.product_id, p.product.name) for p in cart]
+        p_ids = ["{0} - {1}".format(p.product.product_id.strip(' \t\n\r'), p.product.name.strip(' \t\n\r')) for p in cart]
 
         suggestions = [s for s in suggestions_set if s not in p_ids]
 
