@@ -80,11 +80,11 @@
             </td>
             <td>
               <div class="form-group">
-                <input class="form-control" name="{{ item.object_id }}_quantity-field" id="{{ item.object_id }}_quantity-field" type="number" value="{{ item.quantity }}" required />
+                <input class="form-control" name="{{ item.object_id }}_quantity-field" id="{{ item.object_id }}_quantity-field" type="number" min=1 value="{{ item.quantity }}" required />
               </div>
             </td>
             <td>
-              <p class="text-center"><a href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a></p>
+              <a class="btn btn-lg btn-block" href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a>
             </td>
           </tr>
           {% endfor %}          
