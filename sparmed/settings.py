@@ -206,6 +206,8 @@ AUTH_USER_MODEL = "online_order.SparmedUser"
 
 
 # Haystack Settings
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 from urlparse import urlparse
 es = urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
 
@@ -222,6 +224,9 @@ HAYSTACK_CONNECTIONS = {
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
+    
+    
+# Logging    
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

@@ -42,18 +42,15 @@ def add_to_cart(request):
         form = GenericForm(request.POST)
         if form.is_valid():
             value = form.cleaned_data.get('q')
-            
-            q_id = value.split(' ')[0]      
-            q_id = q_id.strip(' \t\n\r')            
-            product = get_object_or_404(Product, product_id=q_id)          
+            q_id = value.split(' ')[0]
+            q_id = q_id.strip(' \t\n\r')  
+            try:
+                product = Product.objects.get(product_id=q_id)
+            except Product.DoesNotExist:
+                product = get_object_or_404(Product, slug=q_id.lower())
                 
-            if product:
-                cart = Cart(request)
-                cart.add(product)    
-            else:
-              raise ValueError('Could not find product based on value: %s' % value)
-    else:
-        raise ValueError('Cannot add to cart if request method is not POST')
+            cart = Cart(request)
+            cart.add(product)    
       
     return HttpResponseRedirect(reverse('online_order.views.order_online'))      
              
@@ -64,21 +61,17 @@ def autocomplete(request):
     if request.method == 'GET':        
         query = request.GET.get('q', '')
       
-        #sqs_desc = SearchQuerySet().autocomplete(description_auto=query)[:10]
-        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:10]
+        sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:6]
 
         suggestions_id = ["%s - %s" % (result.product_id.strip(' \t\n\r') , result.name.strip(' \t\n\r') ) for result in sqs_id]
-        #suggestions_desc = ["%s - %s" % (result.product_id, result.name) for result in sqs_desc]
-
-        #suggestions = list(set(suggestions_id + suggestions_desc))
-        suggestions = list(set(suggestions_id))
+        suggestions_set = list(set(suggestions_id))
         
         cart = Cart(request)
         cart = cart.get_item_list()
         
         p_ids = ["{0} - {1}".format(p.product.product_id, p.product.name) for p in cart]
 
-        suggestions = [s for s in suggestions if s not in p_ids]
+        suggestions = [s for s in suggestions_set if s not in p_ids]
 
         auto_data = json.dumps({
             'results': suggestions

@@ -7,5 +7,6 @@
 <div class="non-printable">
     <a class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}" title="Confirm Order"><span class="glyphicon glyphicon-ok"></span> Confirm Order</a>
     <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}" title="Regret Order"><span class="glyphicon glyphicon-remove"></span> Regret Order</a>
+  <br><span class="minor-skip"></span><br><br><br>
 </div>
 {% endblock %}
