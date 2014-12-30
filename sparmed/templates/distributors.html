@@ -14,7 +14,7 @@
     display: block;
     position: relative;
 /*    width: 1028px;*/
-    height: 500px;
+    height: 600px;
     margin: 15px auto;    
   }
 
@@ -23,9 +23,11 @@
     position: relative;
 
  /*   width: 1028px;*/
-    max-height: 500px;
-    max-width: 1028px;
-
+/*    max-height: 600px;
+    max-width: 1028px;*/
+    height: 100%;
+    width: 100%;
+    
     margin: 0px auto;
     padding: 20px 0px;
     z-index: 56;
@@ -35,9 +37,9 @@
     position: absolute;
 
     background-color: red;
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
     border: 1px solid black;
 
     z-index: 57;
@@ -88,12 +90,14 @@
   }
 
   #japan-dot:hover {
-    -moz-animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    -moz-animation-name: expand;
-    -webkit-animation-name: expand;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
+      -moz-animation-duration: 1s;
+      -webkit-animation-duration: 1s;
+      -moz-animation-name: expand;
+      -webkit-animation-name: expand;
+    
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;   
   }
 
   #australia-dot:hover {
@@ -101,13 +105,17 @@
     -webkit-animation-duration: 1s;
     -moz-animation-name: contract;
     -webkit-animation-name: contract;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;    
   }  
 
   #brazil-dot:hover {
     -moz-animation-duration: 1s;
     -webkit-animation-duration: 1s;
     -moz-animation-name: chromorphism;
-    -webkit-animation-name: chromorphism;    
+    -webkit-animation-name: chromorphism;  
+    
+    background-color: green;
   }
 
   @-moz-keyframes chromorphism {
@@ -132,57 +140,57 @@
 
   @-moz-keyframes expand {
     from {
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
     }
 
     to {
-      width: 32px;
-      height: 32px;
-      border-radius: 16px;
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
     }
   }
 
   @-webkit-keyframes expand {
     from {
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
     }
 
     to {
-      width: 32px;
-      height: 32px;
-      border-radius: 16px;
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
     }
   }  
 
   @-moz-keyframes contract {
     from {
-      width: 32px;
-      height: 32px;
-      border-radius: 16px;      
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;   
     }
 
     to {
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
     }
   }
 
   @-webkit-keyframes contract {
     from {
-      width: 32px;
-      height: 32px;
-      border-radius: 16px;      
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;   
     }
 
     to {
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
     }
   }    
 </style>
@@ -203,7 +211,7 @@
   <hr>
 
   <article id="distributors-map">
-    <img id="distributors-map-image" src="{% static 'img/distributors/world_map_1028x500.jpg' %}">
+    <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj.jpg' %}">
   </article>
 
   <hr>
@@ -268,7 +276,8 @@
     };
 
     var lngSign = getSign(lng), latSign = getSign(lat); //deals with negatives
-    lng = Math.abs(lng); lat = Math.abs(lat); //all calculations positive
+    lng = Math.abs(lng); 
+    lat = Math.abs(lat); //all calculations positive
     var radian = 0.017453293; //pi/180
     var low = roundToNearest(5, lat-0.0000000001); //want exact numbers to round down
     low = (lat == 0) ? 0 : low; //except when at 0
@@ -315,8 +324,8 @@
       },
       {
         country: "Australia",
-        latitude: -33.867487,
-        longitude: 151.206990
+        latitude: -25.274398,
+        longitude: 133.775136
       },
       {
         country: "Brazil",
@@ -339,12 +348,12 @@
 
           var map = $("#distributors-map-image");
           var mapWidth = map.width();
-          var mapHeight = map.outerHeight(); 
+          var mapHeight = map.outerHeight(true); 
 
           console.log("map width: " + mapWidth);
           console.log("map height: " + mapHeight);
 
-          var robinson = new Robinson(mapWidth, mapHeight);
+          var robinson = new Robinson(mapWidth, mapHeight, -30, -15);
 
           distributors.forEach(function(value, index, ar) {          
               var country = value.country;
