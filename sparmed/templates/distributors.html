@@ -11,187 +11,105 @@
 {% compress css inline %}
 <style>  
   #distributors-map {
-    display: block;
-    position: relative;
-    
-    height: 600px;
-    margin: 15px auto;    
+      display: block;
+      position: relative;
+
+      height: 600px;
+      margin: -15px auto -150px;    
   }
 
   #distributors-map img {
-    display: block;
-    position: relative;
+      display: block;
+      position: relative;
 
-    max-height: 100%;
-    min-width: 700px;
-    width: 100%;
-    max-width: 1028px;
-    
-    margin: 0px auto;
-    padding: 20px 0px;
-    z-index: 56;
+      max-height: 100%;
+      min-width: 700px;
+      width: 100%;
+      max-width: 1028px;
+
+      margin: 0px auto;
+      padding: 0px 0px;
+      z-index: 56;
+
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;     
   }
 
   #distributors-map .map-dot {
-    position: absolute;
+      position: absolute;
 
-    background-color: red;
-    width: 12px;
-    height: 12px;
-    border-radius: 6px;
-    border: 1px solid black;
+      background-color: red;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
 
-    z-index: 57;
+      z-index: 57;
 
-    cursor: pointer;
+      cursor: pointer;
+
+      -webkit-box-shadow: inset 0 0 5px #3a0a0c;
+      -moz-box-shadow: inset 0 0 5px #3a0a0c;
+      -ms-box-shadow: inset 0 0 5px #3a0a0c;
+      box-shadow: inset 0 0 5px #3a0a0c;    
+
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;        
   }
-
+  
   #distributors-map .map-dot p {
-    display: none;
-    cursor: pointer;
-    position: absolute;
+      display: none;
+      cursor: pointer;
+      position: absolute;
 
-    padding: 2px;
+      padding: 1px;
+      margin: 0px;
+      line-height: 16px;
 
-    text-align: center;
+      text-align: center;
 
-    top: -30px;
-    left: -20px;
+      top: -10px;
+      left: 20px;
 
-    color: white;
-    background-color: rgba(1, 1, 1, 0.5);
-    border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #1c184f;
+      border-radius: 5px;
+
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;    
+  }
+  
+  #distributors-map .map-dot:hover,
+  #distributors-map .map-dot:active {
+      -webkit-box-shadow: inset 0 0 5px #ffffff;  
+      -moz-box-shadow: inset 0 0 5px #ffffff;
+      -ms-box-shadow: inset 0 0 5px #ffffff;
+      box-shadow: inset 0 0 5px #ffffff;     
   }
 
   #distributors-map .map-dot:hover p,
   #distributors-map .map-dot:active p{
-    display: block;
+      display: block;
   }
 
   .text-dark-blue {
-    color: RGB(54,95,145); 
+      color: RGB(54,95,145); 
   }
 
-  #denmark-dot:hover {
-    -webkit-box-shadow: 0px 0px 75px 25px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 75px 25px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 75px 25px rgba(0,0,0,0.75);
-  }
-
-  #germany-dot:hover {
-    font-size: 22px;
-  }
-
-  #france-dot:hover {
-    -webkit-box-shadow: 0px 0px 75px 25px rgba(255,0,0,1);
-    -moz-box-shadow: 0px 0px 75px 25px rgba(255,0,0,1);
-    box-shadow: 0px 0px 75px 25px rgba(255,0,0,1);    
-  }
-
-  #japan-dot:hover {
-      -moz-animation-duration: 1s;
-      -webkit-animation-duration: 1s;
-      -moz-animation-name: expand;
-      -webkit-animation-name: expand;
-    
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;   
-  }
-
-  #australia-dot:hover {
-    -moz-animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    -moz-animation-name: contract;
-    -webkit-animation-name: contract;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;    
-  }  
-
-  #brazil-dot:hover {
-    -moz-animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    -moz-animation-name: chromorphism;
-    -webkit-animation-name: chromorphism;  
-    
-    background-color: green;
-  }
-
-  @-moz-keyframes chromorphism {
-    from {
-      background-color: red;
-    }
-
-    to {
-      background-color: green;
-    }
-  }
-
-  @-webkit-keyframes chromorphism {
-    from {
-      background-color: red;
-    }
-
-    to {
-      background-color: green;
-    }
-  }   
-
-  @-moz-keyframes expand {
-    from {
-      width: 12px;
-      height: 12px;
-      border-radius: 6px;
-    }
-
-    to {
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;
-    }
-  }
-
-  @-webkit-keyframes expand {
-    from {
-      width: 12px;
-      height: 12px;
-      border-radius: 6px;
-    }
-
-    to {
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;
-    }
-  }  
-
-  @-moz-keyframes contract {
-    from {
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;   
-    }
-
-    to {
-      width: 12px;
-      height: 12px;
-      border-radius: 6px;
-    }
-  }
-
-  @-webkit-keyframes contract {
-    from {
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;   
-    }
-
-    to {
-      width: 12px;
-      height: 12px;
-      border-radius: 6px;
-    }
-  }    
 </style>
 {% endcompress %}
 {% endblock %}
@@ -199,12 +117,15 @@
 {% block body %}
 
 <h2 class="text-center">Distributors</h2>
+<p><br></p>
 <hr>
 
 <section>
   <p class="text-center text-dark-blue">
+    <strong>      
     SparMED has a premium distributor network spread all over the globe. <br>
     Are you looking for a distributor in your area? Please <a href="{% url 'contact' %}">contact us</a>.
+    </strong>
   </p>
 
   <hr>
@@ -216,7 +137,9 @@
   <hr>
 
   <p class="text-center text-dark-blue">
+    <strong>
     Would you like to become one of our distributors and join our world-wide distributor network? <br> <a href="{% url 'contact' %}">CONTACT US</a>
+    </strong>
   </p>
 </section>
 
@@ -298,9 +221,7 @@
     };
 
     return point;
-
   };
-
 
 
   function setupDots()
@@ -349,10 +270,7 @@
           var mapWidth = map.width();
           var mapHeight = map.outerHeight(true); 
 
-          console.log("map width: " + mapWidth);
-          console.log("map height: " + mapHeight);
-
-          var robinson = new Robinson(mapWidth, mapHeight, -30, -15);
+          var robinson = new Robinson(mapWidth, mapHeight, -23, -13);
 
           distributors.forEach(function(value, index, ar) {          
               var country = value.country;
@@ -360,12 +278,9 @@
               var lng = value.longitude;
 
               var id = "" + country.toLowerCase() + "-dot";
-
               var newDiv = "<div id='" + id + "' class='map-dot'><p>" + country + "</p></div>";      
               $("#distributors-map").append(newDiv);
 
-              //var y = ((-1 * lat) + 90) * (mapHeight / 180);
-              //var x = (lng + 180 - 20) * (mapWidth / 360);
               var p = robinson.projectToCSS(lat, lng);
               var x = p.x;
               var y = p.y;
@@ -373,10 +288,6 @@
               var elem = "#" + id;
               $(elem).css("top", y + "px");
               $(elem).css("left", x + "px");
-
-              console.log("did id: " + id);
-              console.log("lat, lng: " + lat + ", " + lng);
-              console.log("x, y: " + x + ", " + y);
           });
       };
 

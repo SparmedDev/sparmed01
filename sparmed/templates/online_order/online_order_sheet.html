@@ -21,7 +21,7 @@
   <div class="col-sm-5">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3>Company Details</h3>
+        <h4>Company Details</h4>
       </div>
       <div class="panel-body">          
         <p class="text-muted text-small">
@@ -46,7 +46,7 @@
   <div class="col-sm-7">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3>Products in Cart</h3>
+        <h4>Products in Cart</h4>
       </div>    
 
       {% if get_cart and get_cart.count > 0 %}
@@ -60,7 +60,7 @@
           <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing an ID to search for products matching that ID" required />
         </div>
         <div class="form-group col-sm-4">
-          <input class="btn btn-info form-control" type="submit" value="Add New Product" />
+          <input class="btn btn-info" type="submit" value="Add New Product" />
         </div>
       </form>  
 
@@ -76,7 +76,7 @@
           {% for item in get_cart %}          
           <tr>
             <td>
-              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.description|safe }}</a></p>
+              <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.name|safe }}</a></p>
             </td>
             <td>
               <div class="form-group">
@@ -146,10 +146,6 @@
   </article>
 
   <hr>
-  
-  {% bootstrap_field form.insurance_desired %}
-
-  <hr>
 
   <div class="form-group">
     <label class="control-label col-sm-4" for="arranged_packing">Packaging arranged by SparMED?</label>
@@ -164,15 +160,11 @@
 
     {% bootstrap_field form.aircleaner_instructions %}
   </article>
-  
-  <hr>
-
-  {% bootstrap_field form.documents %}
 
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-6" for="shipping_and_invoice_same">Different delivery address?</label>  
+    <label class="control-label col-sm-4" for="shipping_and_invoice_same">Same delivery address?</label>  
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
            onclick="javascript:toggleVisible('invoice_options'); " />
   </div>
@@ -182,12 +174,29 @@
     {% bootstrap_field form.invoice_company_address %}
     {% bootstrap_field form.invoice_company_postal_code  %}
     {% bootstrap_field form.invoice_company_country %}            
-  </article>
+  </article>  
 
   <hr>
 
-  {% bootstrap_field form.other_remarks %}
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="insurance_desired">Insurance desired?</label>  
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="insurance_desired" name="insurance_desired"  checked />
+  </div>  
 
+  <hr>
+
+  <div class="form-group">
+    <label class="control-label" for="documents">Any specific documents along with your shipment?</label>  
+    <textarea class="form-control" rows="2" id="documents" name="documents" placeholder="Please write down here if you need any specific documents along with your shipment"></textarea>
+  </div>    
+
+  <hr>
+
+  <div class="form-group">
+    <label class="control-label" for="other_remarks">Any other remarks or comments regarding this order?</label>  
+    <textarea class="form-control" rows="2" id="other_remarks" name="other_remarks" placeholder="Please write down here if you have any other remarks or comments regarding this order"></textarea>
+  </div>
+  
   <hr>
 
   {% buttons submit='Send Order' %}{% endbuttons %}
@@ -218,7 +227,7 @@
 <script type="text/javascript">  
   $(function() {   
     var self = $("#id_q");
-    
+
     $("#id_q").autocomplete({
       delay: 400,
       minLength: 3,
