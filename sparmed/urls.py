@@ -69,8 +69,10 @@ urlpatterns = patterns('',
                        url(r'^products/$', 'shop.views.products', name='products'), 
                          
                        url(r'^search/add_to_cart/$', 'shop.views.add_to_cart', name='add-to-cart-search'),
-                       url(r'^search/autocomplete/', 'shop.views.autocomplete'),
+                       url(r'^search/autocomplete/', 'shop.views.autocomplete', name='autocomplete-url'),
                        url(r'^search/', include('haystack.urls'), name='search'),
+                       
+                       url(r'^cookies/remove_account_change/$', 'online_order.views.remove_account_change_cookie', name='remove-account-change-cookie'),
                        
                        url(r'^privacy-policy/$', views.privacy_policy, name='privacy-policy'),
                        url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),

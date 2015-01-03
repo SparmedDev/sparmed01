@@ -39,8 +39,19 @@ def order_online(request):
     else:
         form = OrderForm()
         
-    return render(request, 'online_order/online_order_sheet.html', {'form': form})
+        
+    account_change = not request.session.get('removed_account_change_notice')
+        
+    return render(request, 'online_order/online_order_sheet.html', {'form': form, 'cookie_account_change':account_change })
 
+from django.views.decorators.csrf import ensure_csrf_cookie
+@ensure_csrf_cookie  
+def remove_account_change_cookie(request):
+    if request.method == 'POST':
+      request.session['removed_account_change_notice'] = True
+      
+    return HttpResponseRedirect(reverse('online_order.views.order_online'))
+  
 @login_required
 @never_cache  
 def reorder_online(request, order_pk):  
@@ -60,8 +71,10 @@ def reorder_online(request, order_pk):
               cart.add(p, product.quantity)
     else:
         form = OrderForm()
+        
+    account_change = not request.session.get('removed_account_change_notice')
     
-    return render(request, 'online_order/online_order_sheet.html', {'form': form})
+    return render(request, 'online_order/online_order_sheet.html', {'form': form, 'cookie_account_change':account_change })
  
 @login_required  
 @never_cache
@@ -111,13 +124,9 @@ def order_confirmation(request, order_id, confirmed):
             cart = Cart(request)
             cart.clear()              
             return HttpResponseRedirect(reverse('online_order.views.order_history'))
-        else:
-            raise ValueError('Cannot send order, order is not valid')
     else:
         if order:
             return render(request, 'online_order/order_confirmation.html', {'order':order})
-        else:
-            raise ValueError('Cannot render order confirmation without valid order object')
             
     return HttpResponseRedirect(reverse('online_order.views.order_online'))
     

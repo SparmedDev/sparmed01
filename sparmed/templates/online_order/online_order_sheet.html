@@ -35,10 +35,12 @@
           Email: {{ user.email }}<br>
         </p>
 
+        {% if cookie_account_change %}
         <div class="alert alert-warning alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <button id="close-account-change-btn" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <span class="glyphicon glyphicon-exclamation-sign"></span> If you need to change your company details, click on the account <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-wrench"></span></a> button almost in the top-right corner of your screen.
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -233,7 +235,7 @@
       minLength: 3,
       source: function(request, response) {
         $.ajax({
-          url: '/search/autocomplete/', 
+          url: "{% url 'autocomplete-url' %}", 
           data: {
             'q': self.val(),
           }, 
@@ -244,6 +246,26 @@
       }
     });
   });  
+</script>
+{% endcompress %}
+
+{% compress js inline %}
+<script type="text/javascript">
+  $(function() {
+    var csrftoken = getCookie('csrftoken');
+
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });      
+  });
+
+  $("#close-account-change-btn").click(function(event) {
+    $.post("{% url 'remove-account-change-cookie' %}");          
+  });
 </script>
 {% endcompress %}
 
