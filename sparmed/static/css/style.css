@@ -466,14 +466,117 @@ hr {
     margin-left: -500%;  
     height: 1px;
 }
-/*
-#news-container .content-container:first-of-type { 
-    position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%); 
+
+
+
+
+/*** DISTRIBUTORS MAP *****/
+#distributors-map {
+  display: block;
+  position: relative;
+
+  height: 600px;
+  margin: -15px auto -150px;   
+  
+  z-index: 55;  
 }
 
-#news-container first-news-article {
-    max-width: 55%;
-    margin: 0px auto;
-}*/
+#distributors-map img {
+  display: block;
+  position: relative;
+
+  max-height: 100%;
+  min-width: 700px;
+  width: 100%;
+  max-width: 1028px;
+
+  margin: 0px auto;
+  padding: 0px 0px;
+  z-index: 56;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;     
+}
+
+#distributors-map .map-dot {
+  position: absolute;
+
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+
+  z-index: 57;
+
+  cursor: pointer;
+
+  -webkit-box-shadow: inset 0 0 5px #3a0a0c;
+  -moz-box-shadow: inset 0 0 5px #3a0a0c;
+  -ms-box-shadow: inset 0 0 5px #3a0a0c;
+  box-shadow: inset 0 0 5px #3a0a0c;    
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;   
+  
+  z-index: 57;
+}
+
+#distributors-map .map-dot p {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+
+  padding: 1px;
+  margin: 0px;
+  line-height: 16px;
+
+  text-align: center;
+
+  top: -10px;
+  left: 20px;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #1c184f;
+  border-radius: 5px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;    
+  
+  z-index: 58;
+}
+
+#distributors-map .map-dot:hover,
+#distributors-map .map-dot:active {
+  -webkit-box-shadow: inset 0 0 5px #ffffff;  
+  -moz-box-shadow: inset 0 0 5px #ffffff;
+  -ms-box-shadow: inset 0 0 5px #ffffff;
+  box-shadow: inset 0 0 5px #ffffff;     
+  
+  z-index: 59;
+}
+
+#distributors-map .map-dot:hover p,
+#distributors-map .map-dot:active p{
+  display: block;
+  
+  z-index: 60;
+}
+
+.text-dark-blue {
+  color: RGB(54,95,145); 
+}

@@ -18,10 +18,6 @@ def contact(request):
 
   return render(request, "contact.html")
 
-def distributors(request):
-
-  return render(request, "distributors.html")
-
 def terms_conditions(request):
   
   return render(request, "terms_conditions.html")
