@@ -24,67 +24,83 @@
 {% cache 6400 sparmed-inventory %}
 <article>  
   <h2 class="text-center">Inventory</h2>
-  
+
   <hr>
 
-  {% for category in categories %}
-  {% if category.products.all|length %}
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3>{{ category.name|safe }}</h3>
-    </div>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-    {% for subcategory in category.subcategories.all %}
-    {% if subcategory.products.all|length %}
-    <div class="panel-body">
-      <h4>{{ subcategory.name|safe }}</h4>
-    </div>
+    {% for category in categories %}
+    {% if category.products.all|length %}
+    <div class="panel panel-default">
 
-    <table class="table table-hover table-bordered table-condensed">
-      <tr>
-        <th class="td-max-col-width"><p class="text-center">Add to Cart</p></th>
-        <th class="td-max-col-width"><p class="text-center">Quantity</p></th>
-        <th class="td-max-150-col-width">Product ID</th>
-        <th>Product Name</th>
-        <!--<th><p class="text-center">On Stock</p></th>
-        <th><p class="text-center">Available</p></th>-->
-      </tr>
+      <div class="panel-heading" role="tab" id="inv_{{ category.slug }}_h">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#inv_{{ category.slug }}_b" aria-expanded="false" aria-controls="inv_{{ category.slug }}_b">
+            {{ category.name|safe }}
+          </a>
+        </h3>
+      </div>
 
-      {% for product in subcategory.products.all %}
-      <form role="form" class="form" action="{% url 'add-to-cart-inventory' %}" method="post">
-        {% csrf_token %}   
-        <input type="hidden" name="product_id" value="{{ product.id }}" />
-      <tr>
-        <td class="td-max-col-width">
-          <div class="form-group">
-            <button class="btn btn-block btn-lg" style="color:red; background-color: transparent;" name="submit" type="submit" value=""><span class="glyphicon glyphicon-shopping-cart"></span></button>
-          </div>
-        </td>
-        <td>           
-          <div class="form-group">
-            <input class="form-control" name="quantity" type="number" value="1" min="1" required />
-          </div>
-        </td>
-        <td>
-          <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
-        </td>
-        <td><p>{{ product.name }}</p></td>
-        <!--<td><p class="text-center">{{ product.in_stock }}</p></td>
-        <td><p class="text-center">(available)</p></td>-->
-      </tr>          
-      </form>
-      {% endfor %}
-    </table>
+      <div id="inv_{{ category.slug }}_b" class="panel-collapse collapse" role="tab-panel" aria-labelledby="inv_{{ category.slug }}_h">
+
+        {% for subcategory in category.subcategories.all %}
+        {% if subcategory.products.all|length %}
+        <div class="panel-body">
+          <h4>{{ subcategory.name|safe }}</h4>
+        </div>
+
+        <table class="table table-hover table-bordered table-condensed">
+          <tr>
+            <th class="td-max-col-width"><p class="text-center">Add to Cart</p></th>
+            <th class="td-max-col-width"><p class="text-center">Quantity</p></th>
+            <th class="td-max-150-col-width">Product ID</th>
+            <th>Product Name</th>
+            <!--<th><p class="text-center">On Stock</p></th>
+<th><p class="text-center">Available</p></th>-->
+          </tr>
+
+          {% for product in subcategory.products.all %}
+          <form role="form" class="form" action="{% url 'add-to-cart-inventory' %}" method="post">
+            {% csrf_token %}   
+            <input type="hidden" name="product_id" value="{{ product.id }}" />
+            <tr>
+              <td class="td-max-col-width">
+                <div class="form-group">
+                  <button class="btn btn-block btn-lg" style="color:red; background-color: transparent;" name="submit" type="submit" value=""><span class="glyphicon glyphicon-shopping-cart"></span></button>
+                </div>
+              </td>
+              <td>           
+                <div class="form-group">
+                  <input class="form-control" name="quantity" type="number" value="1" min="1" required />
+                </div>
+              </td>
+              <td>
+                <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
+              </td>
+              <td><p>{{ product.name }}</p></td>
+              <!--<td><p class="text-center">{{ product.in_stock }}</p></td>
+<td><p class="text-center">(available)</p></td>-->
+            </tr>          
+          </form>
+          {% endfor %}
+        </table>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+    </div> <!-- /.collapse -->
     {% endif %}
     {% endfor %}
+    
+    <p><br></p>
 
-  </div> 
-  {% endif %}
-  {% endfor %}
-  
-  <p class="text-center">
-      Can't find the product you're looking for? <a href="{% url 'contact' %}">Contact us</a> for information on unlisted products.
-  </p>
+    <div class="alert alert-warning" role="alert">
+      <p class="text-center">
+        Can't find the product you're looking for? <a href="{% url 'contact' %}">Contact us</a> for information on unlisted products.
+      </p>
+    </div>
+
+  </div><!-- /#accordion -->
 </article>
 {% endcache %}
 
