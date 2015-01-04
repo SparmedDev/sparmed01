@@ -40,11 +40,7 @@
     <![endif]-->
 
     <!--[if gte IE 9]>
-        <style type="text/css">
-            .gradient {
-                filter: none;
-            }  
-        </style>
+        <style type="text/css"> .gradient { filter: none; } </style>
     <![endif]-->    
 
     {# Load jQuery #}
@@ -206,7 +202,7 @@
 
     {% compress js inline %}
     <script>
-      //Stack menu when collapsed
+      /* Stack menu when collapsed */
       $('.navbar-collapse').on('show.bs.collapse', function() {
         $('.nav-pills').addClass('nav-stacked');
         $('#main-nav').addClass('stacked');
@@ -234,7 +230,7 @@
           var cookies = document.cookie.split(';');
           for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
+            /* Does this cookie string begin with the name we want? */
             if (cookie.substring(0, name.length + 1) == (name + '=')) {
               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
               break;
@@ -245,7 +241,7 @@
       }
 
       function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
+        /* these HTTP methods do not require CSRF protection */
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
       }
     </script>
