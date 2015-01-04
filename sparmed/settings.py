@@ -32,15 +32,15 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
-if not DEBUG:
-  from memcacheify import memcacheify
-  CACHES = memcacheify()
+#if not DEBUG:
+from memcacheify import memcacheify
+CACHES = memcacheify()
 
-  # Enable for HTTPS
-  SESSION_COOKIE_SECURE = HTTPS
+# Enable for HTTPS
+SESSION_COOKIE_SECURE = HTTPS
 
-  # Fix admin login cookie not being set correctly 
-  SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
+# Fix admin login cookie not being set correctly 
+SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'

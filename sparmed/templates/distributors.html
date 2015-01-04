@@ -56,28 +56,27 @@
     {% endfor %}
   ];
 
-  function setupDots()
-  {   
+  function setupDots() {   
     $(".map-dot").remove();
 
     var map = $("#distributors-map-image");
     var mapWidth = map.width();
-    var mapHeight = map.outerHeight(true); 
+    var mapHeight = map.outerHeight(true); // get map height including padding & margin
     var robinson = new Robinson(mapWidth, mapHeight, -27, -17);
 
     distributors.forEach(function(value, index, ar) {          
       var country = value.country;
-      var lat = value.latitude;
-      var lng = value.longitude;
-
       var id = country.replace(/\s/g, "").toLowerCase() + "-dot";
       var newDiv = "<div id='" + id + "' class='map-dot'><p>" + country + "</p></div>";
       $("#distributors-map").append(newDiv);
 
-      var p = robinson.projectToCSS(lat, lng);
-      $("#" + id).css("top", p.y + "px");
-      $("#" + id).css("left", p.x + "px");
+      var p = robinson.projectToCSS(value.latitude, value.longitude);
+      $("#" + id).css({
+        "left": Math.round(p.x) + 'px',
+        "top": Math.round(p.y) + 'px',
+      });      
     });
+    
   };
 
   $(window).load(function() {
