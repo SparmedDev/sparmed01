@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -14,6 +14,7 @@ SECURE_FRAME_DENY = HTTPS
 SECURE_CONTENT_TYPE_NOSNIFF = HTTPS
 SECURE_BROWSER_XSS_FILTER = HTTPS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = HTTPS
 
 ADMINS = (
   ('RamiAhmed', 'rami@alphastagestudios.com'),
@@ -35,9 +36,6 @@ DATABASES = postgresify()
 #if not DEBUG:
 from memcacheify import memcacheify
 CACHES = memcacheify()
-
-# Enable for HTTPS
-SESSION_COOKIE_SECURE = HTTPS
 
 # Fix admin login cookie not being set correctly 
 SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
@@ -91,7 +89,7 @@ if COMPRESS_ENABLED:
     COMPRESS_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
     COMPRESS_URL = STATIC_URL
     COMPRESS_OFFLINE = False
-
+    
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -169,7 +167,6 @@ INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
-  'htmlmin.middleware.HtmlMinifyMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
@@ -178,7 +175,6 @@ MIDDLEWARE_CLASSES = (
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
   'django.middleware.http.ConditionalGetMiddleware',
   'django.middleware.cache.FetchFromCacheMiddleware',
-  'htmlmin.middleware.MarkRequestMiddleware',
 )
 
 # Mandrill email settings
@@ -224,6 +220,7 @@ HAYSTACK_CONNECTIONS = {
 
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
+
 
     
     
