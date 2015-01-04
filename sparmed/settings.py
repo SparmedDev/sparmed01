@@ -1,7 +1,7 @@
 import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
-
+# Debug settings
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
@@ -16,29 +16,34 @@ SECURE_BROWSER_XSS_FILTER = HTTPS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = HTTPS
 
+# Admins
 ADMINS = (
   ('RamiAhmed', 'rami@alphastagestudios.com'),
 )
 
 MANAGERS = ADMINS
 
+# Secret key
 from django.utils.crypto import get_random_string
 SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"))
 
 # Django Sites ID
 SITE_ID = 1
 
+# Allowed hosts
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 
+# Postgres database
 from postgresify import postgresify
 DATABASES = postgresify()
 
-#if not DEBUG:
-from memcacheify import memcacheify
-CACHES = memcacheify()
+if not DEBUG:
+  # Memcached
+  from memcacheify import memcacheify
+  CACHES = memcacheify()
 
-# Fix admin login cookie not being set correctly 
-SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
+  # Fix admin login cookie not being set correctly 
+  SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
