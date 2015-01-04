@@ -39,8 +39,8 @@ from postgresify import postgresify
 DATABASES = postgresify()
 
 if not DEBUG:
-  from memcacheify import memcacheify
-  CACHES = memcacheify()
+  #from memcacheify import memcacheify
+  #CACHES = memcacheify()
 
   # Enable for HTTPS
   SESSION_COOKIE_SECURE = HTTPS
