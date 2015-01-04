@@ -101,12 +101,21 @@ STATICFILES_FINDERS = (
 )
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
+# Using django-template-minifier
+TEMPLATE_MINIFIER = True
+
+if not DEBUG:
+  TEMPLATE_LOADERS = (
     ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )),
-)
+        'template_minifier.template.loaders.filesystem.Loader',
+        'template_minifier.template.loaders.app_directories.Loader',
+      )),
+  )
+else:
+  TEMPLATE_LOADERS = (
+    'template_minifier.template.loaders.filesystem.Loader',
+    'template_minifier.template.loaders.app_directories.Loader',
+  )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
