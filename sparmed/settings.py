@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -245,6 +245,11 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'elasticsearch': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
