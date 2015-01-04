@@ -43,7 +43,7 @@ if not DEBUG:
   CACHES = memcacheify()
 
   # Fix admin login cookie not being set correctly 
-  SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
+  SESSION_COOKIE_DOMAIN = 'www.sparmed.dk'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
