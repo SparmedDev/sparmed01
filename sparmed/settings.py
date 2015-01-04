@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -27,28 +27,28 @@ SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, "abcdefghijklmno
 # Django Sites ID
 SITE_ID = 1
 
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
+
+from postgresify import postgresify
+DATABASES = postgresify()
+
+#if not DEBUG:
+from memcacheify import memcacheify
+CACHES = memcacheify()
+
+# Enable for HTTPS
+SESSION_COOKIE_SECURE = HTTPS
+
+# Fix admin login cookie not being set correctly 
+SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
+
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = False
 USE_L10N = True
 USE_TZ = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
-
-from postgresify import postgresify
-DATABASES = postgresify()
-
-if not DEBUG:
-  #from memcacheify import memcacheify
-  #CACHES = memcacheify()
-
-  # Enable for HTTPS
-  SESSION_COOKIE_SECURE = HTTPS
-
-  # Fix admin login cookie not being set correctly 
-  SESSION_COOKIE_DOMAIN = 'sparmed.herokuapp.com'#'www.sparmed.dk'
-  
-PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))  
+PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 # Amazon AWS S3 credientials
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
@@ -81,7 +81,7 @@ AWS_REDUCED_REDUNDANCY = False
 AWS_IS_GZIPPED = False
 AWS_PRELOAD_METADATA = True
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 #COMPRESS_ENABLED = DEBUG is False
 if COMPRESS_ENABLED:
     COMPRESS_CSS_FILTERS = [
