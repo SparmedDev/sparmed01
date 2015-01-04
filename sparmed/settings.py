@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 # Debug settings
-DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 TEMPLATE_DEBUG = DEBUG
 HTTPS = False
 
@@ -84,8 +84,7 @@ AWS_REDUCED_REDUNDANCY = False
 AWS_IS_GZIPPED = False
 AWS_PRELOAD_METADATA = True
 
-COMPRESS_ENABLED = True
-#COMPRESS_ENABLED = DEBUG is False
+COMPRESS_ENABLED = DEBUG is False
 if COMPRESS_ENABLED:
     COMPRESS_CSS_FILTERS = [
         'compressor.filters.css_default.CssAbsoluteFilter',
