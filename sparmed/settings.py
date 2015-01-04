@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(50, "abcdefghijklmno
 # Django Sites ID
 SITE_ID = 1
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
+ALLOWED_HOSTS = ['*']#os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 
 from postgresify import postgresify
 DATABASES = postgresify()
