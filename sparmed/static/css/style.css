@@ -22,10 +22,6 @@ a {
     text-decoration: none;
 }
 
-/*img {
-    max-height: 600px;
-}*/
-
 hr {
     position: relative;
     width: 1000%;
@@ -106,11 +102,11 @@ hr {
     background-color: transparent;
     border: 0px;
   
-    z-index: 48;
+    z-index: 998;
 }
 
 #main-nav.stacked {
-    top: 10px;
+    top: 80px;
 }
 
 .navbar-collapse {
