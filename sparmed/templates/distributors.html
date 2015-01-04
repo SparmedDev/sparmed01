@@ -62,7 +62,7 @@
     var map = $("#distributors-map-image");
     var mapWidth = map.width();
     var mapHeight = map.outerHeight(true); /* get map height including padding & margin */
-    var robinson = new Robinson(mapWidth, mapHeight, mapWidth < 1100 ? -27 : -33, mapWidth < 1100 ? -17 : -22);
+    var robinson = new Robinson(mapWidth, mapHeight, mapWidth < 1100 ? -27 : -33, mapWidth < 1100 ? -17 : -19);
 
     distributors.forEach(function(value, index, ar) {          
       var country = value.country;
