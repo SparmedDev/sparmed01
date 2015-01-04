@@ -7,7 +7,7 @@
 {% block pagedescription %}Distributors in the GOosafe SparMed family{% endblock %}
 {% block title %}Distributors{% endblock %}
 
-{% block body %}
+{% block outerbody %}
 
 <h2 class="text-center">Distributors</h2>
 <p><br></p>
@@ -23,11 +23,11 @@
 
   <hr>
 
-  <article id="distributors-map">
+  <article id="distributors-map" class="hidden-xs">
     <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj_2.jpg' %}">
   </article>
 
-  <hr>
+  <hr class="hidden-xs">
 
   <p class="text-center text-dark-blue">
     <strong>
@@ -45,7 +45,7 @@
 {% endcompress %}
 
 {% compress js inline %}
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
   var distributors = [
     {% for distributor in distributors %}
     {
@@ -63,7 +63,7 @@
     var map = $("#distributors-map-image");
     var mapWidth = map.width();
     var mapHeight = map.outerHeight(true); 
-    var robinson = new Robinson(mapWidth, mapHeight, -30, -15);
+    var robinson = new Robinson(mapWidth, mapHeight, -27, -17);
 
     distributors.forEach(function(value, index, ar) {          
       var country = value.country;
