@@ -41,9 +41,12 @@ if not DEBUG:
   # Memcached
   from memcacheify import memcacheify
   CACHES = memcacheify()
+  
+  SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+  SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
 
   # Fix admin login cookie not being set correctly 
-  SESSION_COOKIE_DOMAIN = 'www.sparmed.dk'
+  SESSION_COOKIE_DOMAIN = '.sparmed.dk'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
@@ -234,8 +237,6 @@ HAYSTACK_CONNECTIONS = {
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
-
-    
     
 # Logging    
 LOGGING = {
@@ -251,6 +252,10 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
         }
     },
     'loggers': {
@@ -258,6 +263,9 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        "django": {
+            "handlers": ["console"],
         },
         'elasticsearch': {
             'handlers': ['mail_admins'],
