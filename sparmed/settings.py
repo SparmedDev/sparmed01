@@ -42,8 +42,8 @@ if not DEBUG:
   from memcacheify import memcacheify
   CACHES = memcacheify()
   
-  SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-  SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
+  #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+  #SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
 
   # Fix admin login cookie not being set correctly 
   SESSION_COOKIE_DOMAIN = '.sparmed.dk'
