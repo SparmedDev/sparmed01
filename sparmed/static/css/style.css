@@ -505,10 +505,10 @@ hr {
 
     cursor: pointer;
 
-    -webkit-box-shadow: inset 0 0 5px #ffffff;
-    -moz-box-shadow: inset 0 0 5px #ffffff;
-    -ms-box-shadow: inset 0 0 5px #ffffff;
-    box-shadow: inset 0 0 5px #ffffff;    
+    -webkit-box-shadow: inset 0 0 5px #3a0a0c;
+    -moz-box-shadow: inset 0 0 5px #3a0a0c;
+    -ms-box-shadow: inset 0 0 5px #3a0a0c;
+    box-shadow: inset 0 0 5px #3a0a0c;    
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -553,10 +553,10 @@ hr {
 
 #distributors-map .map-dot:hover,
 #distributors-map .map-dot:active {
-    -webkit-box-shadow: inset 0 0 5px #3a0a0c;  
-    -moz-box-shadow: inset 0 0 5px #3a0a0c;
-    -ms-box-shadow: inset 0 0 5px #3a0a0c;
-    box-shadow: inset 0 0 5px #3a0a0c;     
+    -webkit-box-shadow: inset 0 0 5px #ffffff;  
+    -moz-box-shadow: inset 0 0 5px #ffffff;
+    -ms-box-shadow: inset 0 0 5px #ffffff;
+    box-shadow: inset 0 0 5px #ffffff;     
 
     z-index: 59;
 }
