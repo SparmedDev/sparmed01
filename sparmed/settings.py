@@ -37,10 +37,38 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
+## MemCachier Settings
+## ===================
+def get_cache():
+  # We do this complicated cache defenition so that on a local machine (where
+  # MEMCACHIER_SERVERS won't be defined), the try fails and so we use the
+  # inbuilt local memory cache of django.
+  try:
+    os.environ['MEMCACHE_SERVERS'] = os.environ['MEMCACHIER_SERVERS'].replace(',', ';')
+    os.environ['MEMCACHE_USERNAME'] = os.environ['MEMCACHIER_USERNAME']
+    os.environ['MEMCACHE_PASSWORD'] = os.environ['MEMCACHIER_PASSWORD']
+    return {
+      'default': {
+        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
+        'TIMEOUT': 500,
+        'BINARY': True,
+        'OPTIONS': { 'tcp_nodelay': True }
+      }
+    }
+  except:
+    # Use django local development cache (for local development).
+    return {
+      'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+      }
+    }
+
+CACHES = get_cache()
+
 if not DEBUG:
   # Memcached
-  from memcacheify import memcacheify
-  CACHES = memcacheify()
+  #from memcacheify import memcacheify
+  #CACHES = memcacheify()  
   
   #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
   #SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
