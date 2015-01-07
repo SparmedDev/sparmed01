@@ -43,7 +43,7 @@ MEMCACHEIFY_USE_LOCAL=DEBUG
 
 if not DEBUG:
   # Use (mem)cache for sessions 
-  SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+  #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
   # Fix admin login cookie not being set correctly 
   SESSION_COOKIE_DOMAIN = '.sparmed.dk'
