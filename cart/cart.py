@@ -85,7 +85,7 @@ class Cart:
     def count(self):
         result = 0
         for item in self.cart.item_set.all():
-            result += 1 * item.quantity
+            result += item.quantity
         return result
 
     def clear(self):

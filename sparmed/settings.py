@@ -78,17 +78,19 @@ if not DEBUG:
   #from memcacheify import memcacheify
   #CACHES = memcacheify()  
   
-  SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-  SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
+  #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+  #SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
 
   # Fix admin login cookie not being set correctly 
   SESSION_COOKIE_DOMAIN = '.sparmed.dk'
+  CSRF_COOKIE_DOMAIN = '.sparmed.dk'
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = False
 USE_L10N = True
 USE_TZ = True
+FIRST_DAY_OF_WEEK = 1 # start week on Monday
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -144,17 +146,17 @@ STATICFILES_FINDERS = (
 TEMPLATE_MINIFIER = True
 
 if not DEBUG:
-  TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
-        'template_minifier.template.loaders.filesystem.Loader',
-        'template_minifier.template.loaders.app_directories.Loader',
-      )),
-  )
+    TEMPLATE_LOADERS = (
+      ('django.template.loaders.cached.Loader', (
+          'template_minifier.template.loaders.filesystem.Loader',
+          'template_minifier.template.loaders.app_directories.Loader',
+        )),
+    )
 else:
-  TEMPLATE_LOADERS = (
-    'template_minifier.template.loaders.filesystem.Loader',
-    'template_minifier.template.loaders.app_directories.Loader',
-  )
+    TEMPLATE_LOADERS = (
+      'template_minifier.template.loaders.filesystem.Loader',
+      'template_minifier.template.loaders.app_directories.Loader',
+    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
@@ -219,9 +221,9 @@ INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
-  'django.contrib.sessions.middleware.SessionMiddleware',
-  'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
+  'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.common.CommonMiddleware',  
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',

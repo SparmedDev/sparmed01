@@ -9,6 +9,19 @@
 
 {% block outerbody %}
 
+<style>
+  #distributors-map-alt-image {
+      position: absolute;
+      top: 10%;
+      left: 1px;
+    
+      max-width: 20%;
+      max-height: 99%;
+    
+      z-index: 60;
+  }
+</style>
+
 <h2 class="text-center">Distributors</h2>
 <p><br></p>
 <hr>
@@ -23,9 +36,15 @@
 
   <hr>
 
-  <article id="distributors-map" class="hidden-xs">
-    <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj_2.jpg' %}">
-  </article>
+  <section style="display: block; position: relative; width:100%; height:100%;">
+      <article id="distributors-map" class="hidden-xs">
+        <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj_2.jpg' %}" alt="SparMED Global Distributor Network">   
+      </article>
+    
+    <img id="distributors-map-alt-image" src="{% static 'img/girl_balls_img.jpg' %}" alt="Girl with falling balls">
+  </section>
+  
+  
 
   <hr class="hidden-xs">
 
