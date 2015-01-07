@@ -42,8 +42,8 @@ CACHES = memcacheify()
 MEMCACHEIFY_USE_LOCAL=DEBUG
 
 if not DEBUG:
+  # Use (mem)cache for sessions 
   SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-  #SESSION_COOKIE_AGE = 1209600 # 2 weeks in seconds
 
   # Fix admin login cookie not being set correctly 
   SESSION_COOKIE_DOMAIN = '.sparmed.dk'
@@ -68,7 +68,6 @@ STATICFILES_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
 STATIC_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 
 STATIC_ROOT = STATIC_URL
-#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
 
@@ -107,9 +106,9 @@ STATICFILES_FINDERS = (
 
 # List of callables that know how to import templates from various sources.
 # Using django-template-minifier
-TEMPLATE_MINIFIER = True
-
 if not DEBUG:
+    TEMPLATE_MINIFIER = True
+    
     TEMPLATE_LOADERS = (
       ('django.template.loaders.cached.Loader', (
           'template_minifier.template.loaders.filesystem.Loader',
@@ -118,8 +117,8 @@ if not DEBUG:
     )
 else:
     TEMPLATE_LOADERS = (
-      'template_minifier.template.loaders.filesystem.Loader',
-      'template_minifier.template.loaders.app_directories.Loader',
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -203,7 +202,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = "SparMed.dk <admin@SparMed.dk>"
-#SERVER_EMAIL = "SparMED TEST <rami@alphastagestudios.com>"
 
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
