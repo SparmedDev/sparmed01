@@ -14,9 +14,10 @@ django-cookie-law==1.0.1
 django-countries==3.0.2
 django-grappelli==2.6.3
 django-haystack==2.3.1
+django-heroku-memcacheify==0.8
 django-heroku-postgresify==0.3
 django-html5-colorfield==1.0  
-django-pylibmc-sasl==0.2.4
+django-pylibmc==0.5.0
 django-robots==1.0
 django-storages==1.1.8
 django-template-minifier==1.0
