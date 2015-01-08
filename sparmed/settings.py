@@ -1,6 +1,9 @@
 import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
+# Current domain
+DOMAIN_NAME = "www.sparmed.dk"
+
 # Debug settings
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 TEMPLATE_DEBUG = DEBUG
@@ -46,8 +49,8 @@ if not DEBUG:
   #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
   # Fix admin login cookie not being set correctly 
-  SESSION_COOKIE_DOMAIN = '.sparmed.dk'
-  CSRF_COOKIE_DOMAIN = '.sparmed.dk'
+  SESSION_COOKIE_DOMAIN = DOMAIN_NAME
+  CSRF_COOKIE_DOMAIN = DOMAIN_NAME
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
