@@ -2,13 +2,20 @@
 html, body {
     display: block;
     width: 100%;
-    height: 100%;
     margin: 0px;
     padding: 0px;
     line-height: 28px;
 
     font-family: Verdana, Geneva, sans-serif;
     z-index: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
 }
 
 h1, h2 {
@@ -68,15 +75,14 @@ hr {
 /*** HEADER & NAV BAR ***/
 #header {
     display: block;
-    position: relative;
-
-    margin-right: auto;
-    margin-left: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+  
     margin-bottom: 5px;
-
     padding: 10px;
     height: 160px;
-    width: 100%;
   
     z-index: 90;
   
@@ -123,7 +129,11 @@ hr {
 /*** FOOTER ***/
 #footer {
     display: block;
-    margin: 0px auto;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+  
     margin-top: 25px;
     padding: 15px;
 
@@ -187,7 +197,7 @@ hr {
 
 #content {
     display: block;
-    margin: 5px;
+    margin: 160px 5px 15px;
     padding: 5px;
     overflow: hidden;
 

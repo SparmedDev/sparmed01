@@ -2,7 +2,7 @@ import os
 BASE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..').replace('\\', '/')
 
 # Current domain
-DOMAIN_NAME = ".sparmed.dk"
+DOMAIN_NAME = os.environ.get('DOMAIN_NAME', '.sparmed.dk')
 
 # Debug settings
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))

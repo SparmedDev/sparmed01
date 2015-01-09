@@ -65,8 +65,8 @@ def reorder_online(request, order_pk):
         form = OrderForm(initial=order_dict, auto_id=True)        
         
         for product in order.items.all():
-          p = Product.objects.get(id=product.object_id)  
-          cart.add(p, product.quantity)
+            p = Product.objects.get(id=product.object_id)  
+            cart.add(p, product.quantity)
     else:
         form = OrderForm()
         
@@ -133,26 +133,21 @@ def order_regret(request, order_id):
         
     return HttpResponseRedirect(reverse('online_order.views.order_online'))
     
-  
 @login_required
 @never_cache
 def order_history(request):  
     orders = request.user.orders.all()
-
     return render(request, 'online_order/order_history.html', {'orders':orders})
-
 
 @login_required
 @never_cache
 def account_area(request, account_slug):  
-  user = request.user
-  
   if request.method == 'POST':
-      form = SparmedUserChangeForm(request.POST, instance=user)
+      form = SparmedUserChangeForm(request.POST, instance=request.user)
       if form.is_valid():
           form.save()
           return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'})
   else:
-      form = SparmedUserChangeForm(instance=user)
+      form = SparmedUserChangeForm(instance=request.user)
   
   return render(request, 'online_order/account_area.html', {'form':form})
