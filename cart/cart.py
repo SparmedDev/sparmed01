@@ -1,5 +1,6 @@
 import datetime
 import models
+from django.core.cache import cache
 
 CART_ID = 'CART-ID'
 
@@ -11,7 +12,8 @@ class ItemDoesNotExist(Exception):
 
 class Cart:
     def __init__(self, request):
-        cart_id = request.session.get(CART_ID)
+        #cart_id = request.session.get(CART_ID)
+        cart_id = cache.get(CART_ID)
         if cart_id:
             try:
                 cart = models.Cart.objects.get(id=cart_id, checked_out=False)
@@ -32,7 +34,8 @@ class Cart:
     def new(self, request):
         cart = models.Cart(creation_date=datetime.datetime.now())
         cart.save()
-        request.session[CART_ID] = cart.id
+        #request.session[CART_ID] = cart.id
+        cache.set(CART_ID, cart.id)
         return cart
 
     def add(self, product, quantity=1):
