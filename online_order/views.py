@@ -37,7 +37,8 @@ def order_online(request):
     else:
         form = OrderForm()        
         
-    account_change = not request.session.get('removed_account_change_notice')
+    #account_change = not request.session.get('removed_account_change_notice')
+    account_change = not cache.get('removed_account_change_notice')
         
     return render(request, 'online_order/online_order_sheet.html', {'form': form, 'cookie_account_change': account_change })
 
@@ -78,10 +79,7 @@ def reorder_online(request, order_pk):
 @never_cache
 def order_print(request, order_id):
     order = OrderHistoryItem.objects.get(pk=order_id)
-    if order:
-        return render(request, 'online_order/order_history_print.html', {'order':order})
-    else:
-        raise ValueError('Cannot render order confirmation without valid order object')    
+    return render(request, 'online_order/order_history_print.html', {'order':order})  
     
 @login_required  
 @never_cache
