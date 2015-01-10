@@ -75,10 +75,8 @@ hr {
 /*** HEADER & NAV BAR ***/
 #header {
     display: block;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
+    position: relative;
+    width: 100%;
   
     margin-bottom: 5px;
     padding: 10px;
@@ -129,10 +127,8 @@ hr {
 /*** FOOTER ***/
 #footer {
     display: block;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
+    position: relative;
+    width: 100%;
   
     margin-top: 25px;
     padding: 15px;
@@ -197,7 +193,7 @@ hr {
 
 #content {
     display: block;
-    margin: 160px 5px 15px;
+    margin: 5px 5px 15px;
     padding: 5px;
     overflow: hidden;
 
