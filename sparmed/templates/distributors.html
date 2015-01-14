@@ -9,19 +9,6 @@
 
 {% block outerbody %}
 
-<style>
-  #distributors-map-alt-image {
-      position: absolute;
-      top: 10%;
-      left: 1px;
-    
-      max-width: 20%;
-      max-height: 99%;
-    
-      z-index: 60;
-  }
-</style>
-
 <h2 class="text-center">Distributors</h2>
 <p><br></p>
 <hr>
@@ -36,17 +23,15 @@
 
   <hr>
 
-  <section style="display: block; position: relative; width:100%; height:100%;">
-      <article id="distributors-map" class="hidden-xs">
+  <section class="hidden-xs">
+      <article id="distributors-map">
         <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj_2.jpg' %}" alt="SparMED Global Distributor Network">   
-      </article>
+      </article>   
     
-  <!--    <img id="distributors-map-alt-image" src="{% static 'img/girl_balls_img.jpg' %}" alt="Girl with falling balls"> -->
-  </section>
-  
-  <hr class="hidden-xs">
+      <hr>
+  </section>  
 
-  <p class="text-center text-dark-blue">
+  <p class="text-center text-dark-blue extra-margin-bot">
     <strong>
     Would you like to become one of our distributors and join our world-wide distributor network? <br> <a href="{% url 'contact' %}">CONTACT US</a>
     </strong>
