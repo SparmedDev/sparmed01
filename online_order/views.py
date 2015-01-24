@@ -114,10 +114,9 @@ def order_confirmation(request, order_id, confirmed):
         except mandrill.Error, e:
           # Mandrill errors are thrown as exceptions
           print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
-          raise      
+          pass      
 
         cart = Cart(request)
-        cart.clear()   
         cart.delete()
             
         return HttpResponseRedirect(reverse('online_order.views.order_history'))

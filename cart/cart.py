@@ -94,3 +94,15 @@ class Cart:
     def clear(self):
         for item in self.cart.item_set.all():
             item.delete()
+            
+    def delete(self):
+      self.clear()
+
+      cart_id = cache.get(CART_ID)
+      if cart_id:
+          try:
+              models.Cart.objects.get(id=cart_id).delete()
+          except models.Cart.DoesNotExist: 
+              pass
+            
+          cache.delete(cart_id)

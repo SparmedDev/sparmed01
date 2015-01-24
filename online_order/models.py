@@ -143,29 +143,27 @@ class SparmedUser(AbstractBaseUser):
                 user=self,
             )
             
-            if o_new:     
-                for item in items_list:
-                    o_new.items.create(
-                        quantity=item.quantity,
-                        object_id=item.object_id,
+            for item in items_list:
+              o_new.items.create(
+                quantity=item.quantity,
+                object_id=item.object_id,
 
-                        product_id=item.product.product_id,
-                        name=item.product.name,
-                        description=item.product.description,
-                        slug=item.product.slug,
-                      
-                        category_slug=item.product.category.slug,
+                product_id=item.product.product_id,
+                name=item.product.name,
+                description=item.product.description,
+                slug=item.product.slug,
 
-                        order_history=o_new,  
-                     )
-              
-                o_new.save()
-                self.save()
-                return o_new
-            else:
-                raise ValueError('Order history item instantiation failed, o new is null')
+                category_slug=item.product.category.slug,
+
+                order_history=o_new,  
+              )
+
+              o_new.save()
+              self.save()
+              return o_new
         else:
-            raise ValueError('Cannot add null order or empty items list to order history')
+            #raise ValueError('Cannot add null order or empty items list to order history')
+            pass
 
       
 class Order(models.Model):
