@@ -1,6 +1,7 @@
 /*** GENERAL RULES ***/
 html, body {
     display: block;
+    height: 100%;
     width: 100%;
     margin: 0px;
     padding: 0px;
@@ -8,14 +9,6 @@ html, body {
 
     font-family: Verdana, Geneva, sans-serif;
     z-index: 0;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    min-height: 100%;
 }
 
 h1, h2 {
@@ -233,6 +226,16 @@ hr {
 .news-article {
     font-family: "Arial", sans-serif;  
     font-size: 14px;
+}
+
+/*** ACCORDION PANEL TITLE LINKS ***/
+.panel-title a {
+    color: #ed1b2e;
+    text-decoration: none;
+}
+
+.panel-title a.collapsed {
+    color: #008393;    
 }
 
 /*** HELPER CLASSES ***/

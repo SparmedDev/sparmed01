@@ -10,7 +10,6 @@
 
 
 {% block body %}
-
 <ol class="breadcrumb">
   <li><a href="{% url 'distributor-login' %}">Distributor Home Panel</a></li>
   <li class="active">Certificates</li>
@@ -21,44 +20,52 @@
 
 <hr>
 
-{% for group in groups %}
-{% if group.items.all|length %}
-<table class="table table-hover table-bordered">
-  {% if group.title|length > 2 %}
-  <tr>
-    <th colspan="2">
-      <h4 class="text-center"><strong>{% filter upper %}{{ group.title|safe }}{% endfilter %}</strong></h4>
-    </th>
-  </tr>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  {% for group in groups %}
+  {% if group.items.all|length %}
+  <div class="panel panel-default">
+
+    <div class="panel-heading" role="tab" id="cert_{{ group.pk }}_h">
+      <h3 class="text-center panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#cert_{{ group.pk }}_b" aria-expanded="false" aria-controls="cert_{{ group.pk }}_b">
+          {% filter upper %}{{ group.title|safe }}{% endfilter %}
+        </a>
+      </h3>
+    </div>
+
+    <div id="cert_{{ group.pk }}_b" class="panel-collapse collapse" role="tab-panel" aria-labelledby="cert_{{ group.pk }}_h">
+
+      {% for subgroup in group.subgroups.all %}
+      <div class="panel-body">
+        {% if subgroup.title|length > 2 %}    
+        <h4><strong>{{ subgroup.title|safe }}</strong></h4>
+        {% endif %}
+      </div>
+
+      <table class="table table-hover table-bordered">
+        {% for certificate in subgroup.items.all %}
+        {% if certificate.document %}
+        <tr>
+          <td class="td-max-col-width">
+            <p class="text-center"><a style="color: #ed1b2e;" href="{{ certificate.document.url }}" target="_blank">PDF <span class="glyphicon glyphicon-file"></span></a></p>
+          </td>
+          <td>
+            {{ certificate.title|safe }}
+          </td>
+        </tr>
+        {% endif %}
+        {% endfor %}  
+      </table>
+      {% endfor %}
+
+    </div> <!-- /panel-collapse -->
+  </div><!-- /panel-default -->
+  
+  {% if not forloop.last %}<hr>{% endif %}
   {% endif %}
-
-  {% for subgroup in group.subgroups.all %}
-    {% if subgroup.title|length > 2 %}
-    <tr>    
-      <td colspan="2">   
-        <h5 class="text-center"><strong>{{ subgroup.title|safe }}</strong></h5>
-      </td>    
-    </tr>
-    {% endif %}
-
-    {% for certificate in subgroup.items.all %}
-    {% if certificate.document %}
-    <tr>
-      <td class="td-max-col-width">
-        <p class="text-center"><a style="color: #ed1b2e;" href="{{ certificate.document.url }}" target="_blank">PDF <span class="glyphicon glyphicon-file"></span></a></p>
-      </td>
-      <td>
-        {{ certificate.title|safe }}
-      </td>
-    </tr>
-    {% endif %}
-    {% endfor %}  
-
   {% endfor %}
 
-</table>
-{% if not forloop.last %}<hr>{% endif %}
-{% endif %}
-{% endfor %}
+</div> <!-- /panel-group -->
 
 {% endblock %}
