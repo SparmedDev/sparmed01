@@ -240,9 +240,6 @@ HAYSTACK_CONNECTIONS = {
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
-# Redis / Celery
-BROKER_URL = os.environ.get('REDISTOGO_URL', '')
-CELERY_RESULT_BACKEND = os.environ.get('REDISTOGO_URL', '')
     
 # Logging    
 LOGGING = {
