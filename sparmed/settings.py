@@ -269,6 +269,7 @@ LOGGING = {
         },
         "django": {
             "handlers": ["console"],
+            'level': 'INFO',
         },
         'elasticsearch': {
             'handlers': ['mail_admins'],
