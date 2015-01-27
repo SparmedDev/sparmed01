@@ -130,10 +130,7 @@
     $.ajax({
       url: "https://restapi.e-conomic.com/products?pagesize=999",
       dataType: "json",
-      headers: {
-        appId: 'OxKf30TPeqqDj3JXyOKYcK027-wO5ydYvcMr08Q_B9M1', 
-        accessId: 'vshDszEegEPEpLm8_uV0NwVWtfOSlviMuUlmSBVxip01'
-      },
+      headers: {appId: 'OxKf30TPeqqDj3JXyOKYcK027-wO5ydYvcMr08Q_B9M1', accessId: 'vshDszEegEPEpLm8_uV0NwVWtfOSlviMuUlmSBVxip01'},
       type: "GET",
       success: fillProducts,
       fail: function (req, res) {
