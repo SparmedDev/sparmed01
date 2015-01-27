@@ -100,36 +100,12 @@
   </div><!-- /#accordion -->
 </article>
 {% endcache %}
-
 {% endblock %}
 
-
 {% block endbody %}
+{% cache 6400 sparmed-inventory-scripts %}
 {% compress js inline %}
-<script>
-  function credentials() {
-      return {
-        appId: 'OxKf30TPeqqDj3JXyOKYcK027-wO5ydYvcMr08Q_B9M1', 
-        accessId: 'vshDszEegEPEpLm8_uV0NwVWtfOSlviMuUlmSBVxip01'
-      }
-  }
-  
-  function ajax(url, method, callback) {
-    $.ajax({
-      url: url,
-      dataType: "json",
-      headers: credentials(),
-      type: method,
-      success: callback,
-      fail: function (req, res) {
-        console.log("error request:");
-        console.log(req);
-        console.log("response:");
-        console.log(res);
-      }
-    });
-  }
-  
+<script> 
   function fillProducts(response) {
     if (response && response.collection && response.collection.length) {
       response.collection.forEach(function(item) {
@@ -151,8 +127,24 @@
   }
 
   $(document).ready(function () {
-    ajax("https://restapi.e-conomic.com/products?pagesize=999", "GET", fillProducts);
+    $.ajax({
+      url: "https://restapi.e-conomic.com/products?pagesize=999",
+      dataType: "json",
+      headers: {
+        appId: 'OxKf30TPeqqDj3JXyOKYcK027-wO5ydYvcMr08Q_B9M1', 
+        accessId: 'vshDszEegEPEpLm8_uV0NwVWtfOSlviMuUlmSBVxip01'
+      },
+      type: "GET",
+      success: fillProducts,
+      fail: function (req, res) {
+        console.log("error request:");
+        console.log(req);
+        console.log("response:");
+        console.log(res);
+      }
+    });    
   });
 </script>
 {% endcompress %}
+{% endcache %}
 {% endblock %}
