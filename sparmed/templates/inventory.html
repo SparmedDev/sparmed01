@@ -44,12 +44,12 @@
           <h4>{{ subcategory.name|safe }}</h4>
         </div>
 
-        <table class="table table-hover table-bordered table-condensed">
+        <table class="table table-hover table-bordered table-condensed table-responsive">
           <tr>
             <th class="td-max-col-width"><p class="text-center">Add to Cart</p></th>
             <th class="td-max-col-width"><p class="text-center">Quantity</p></th>
-            <th class="td-max-150-col-width">Product ID</th>
-            <th>Product Name</th>
+            <th class="td-max-150-col-width"><p class="text-center">Product ID</p></th>
+            <th><p>Product Name</p></th>
             <th><p class="text-center">In Stock</p></th>
             <th><p class="text-center">Available</p></th>
           </tr>
@@ -70,7 +70,7 @@
                 </div>
               </td>
               <td>
-                <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
+                <p class="text-center"><a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a></p>
               </td>
               <td><p>{{ product.description|safe }}</p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_instock" class="text-center"></p></td>

@@ -238,6 +238,20 @@ hr {
     color: #008393;    
 }
 
+/*** CONDENSED TABLE MODIFICATION */
+.table-condensed > tbody > tr > th,
+.table-condensed > tbody > tr > td,
+.table-condensed > tbody > tr > th > p,
+.table-condensed > tbody > tr > td > p{
+    vertical-align: middle;
+    margin-bottom: 0px;
+}
+
+.table-condensed > tbody > tr > th > .form-group,
+.table-condensed > tbody > tr > td > .form-group {
+    margin-bottom: 0px;
+}  
+
 /*** HELPER CLASSES ***/
 .max-height-600 {
     max-height: 600px;
