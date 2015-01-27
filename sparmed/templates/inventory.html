@@ -50,8 +50,8 @@
             <th class="td-max-col-width"><p class="text-center">Quantity</p></th>
             <th class="td-max-150-col-width">Product ID</th>
             <th>Product Name</th>
-            <!--<th><p class="text-center">On Stock</p></th>
-<th><p class="text-center">Available</p></th>-->
+            <th><p class="text-center">In Stock</p></th>
+            <th><p class="text-center">Available</p></th>
           </tr>
 
           {% for product in subcategory.products.all %}
@@ -73,8 +73,8 @@
                 <a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a>
               </td>
               <td><p>{{ product.name }}</p></td>
-              <!--<td><p class="text-center">{{ product.in_stock }}</p></td>
-<td><p class="text-center">(available)</p></td>-->
+              <td><p id="{{ product.product_id|slugify }}_instock" class="text-center">(Unavailable)</p></td>
+              <td><p id="{{ product.product_id|slugify }}_available" class="text-center">(Unavailable)</p></td>
             </tr>          
           </form>
           {% endfor %}
@@ -101,5 +101,59 @@
 
 {% endblock %}
 
+
 {% block endbody %}
+<script type="text/javascript" src="{% static 'js/underscore-min.js' %}" charset="utf-8"></script>
+
+{% compress js inline %}
+<script>
+  function credentials() {
+      return {
+        appId: 'OxKf30TPeqqDj3JXyOKYcK027-wO5ydYvcMr08Q_B9M1', 
+        accessId: 'vshDszEegEPEpLm8_uV0NwVWtfOSlviMuUlmSBVxip01'
+      }
+  }
+  
+  function ajax(url, method, callback) {
+    $.ajax({
+      url: url,
+      dataType: "json",
+      headers: credentials(),
+      type: method,
+      success: callback,
+      fail: function (req, res) {
+        console.log("error request:");
+        console.log(req);
+        console.log("response:");
+        console.log(res);
+      }
+    });
+  }
+  
+  function fillProducts(response) {
+    if (response && response.collection && response.collection.length) {
+      _.each(response.collection, function (item, index) {        
+        var productNumber = item.productNumber.trim().replace(/[^a-zA-Z0-9-._~]/g, '-').toLowerCase().replace(/^-+/, '').replace(/-+$/, '').replace(/-+/g, '-');
+        
+        var instockElem = $("#" + productNumber + "_instock");
+        if ($(instockElem).length) {
+            instockElem.empty();
+            instockElem.text(item.inventory.inStock >= 0 ? Math.floor(item.inventory.inStock) : 0);
+        }
+        
+        var availableElem = $("#" + productNumber + "_available");
+        if ($(availableElem).length) {
+            availableElem.empty();
+            availableElem.text(item.inventory.available >= 0 ? Math.floor(item.inventory.available) : 0);
+        }
+      })
+    }
+  }
+
+  $(document).ready(function () {
+    ajax("https://restapi.e-conomic.com/products?pagesize=999", "GET", fillProducts);
+  });
+</script>
+{% endcompress %}
+
 {% endblock %}
