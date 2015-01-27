@@ -242,7 +242,7 @@ hr {
 .table-condensed > tbody > tr > th,
 .table-condensed > tbody > tr > td,
 .table-condensed > tbody > tr > th > p,
-.table-condensed > tbody > tr > td > p{
+.table-condensed > tbody > tr > td > p {
     vertical-align: middle;
     margin-bottom: 0px;
 }
