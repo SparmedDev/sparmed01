@@ -31,8 +31,10 @@
               {% endif %}
           {% else %}
               {% include 'news/news_post_no_text.html' %}
+              
+          {% endif %}      
+      
           {% if not forloop.last %}<hr>{% endif %}
-        {% endif %}               
       {% endfor %}
     </article>
   {% endif %}  

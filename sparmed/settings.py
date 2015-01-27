@@ -187,13 +187,14 @@ INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
-  'django.middleware.csrf.CsrfViewMiddleware',
+  'django.middleware.http.ConditionalGetMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.common.CommonMiddleware',  
+  'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
+  'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
-  'django.middleware.clickjacking.XFrameOptionsMiddleware',
-  'django.middleware.http.ConditionalGetMiddleware',
+  'django.middleware.clickjacking.XFrameOptionsMiddleware',  
   'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
@@ -227,12 +228,12 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 from urlparse import urlparse
 es = urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
 
-port = es.port or 80
+es_port = es.port or 80
 
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': es.scheme + '://' + es.hostname + ':' + str(port),
+        'URL': es.scheme + '://' + es.hostname + ':' + str(es_port),
         'INDEX_NAME': 'haystack',
     },
 }

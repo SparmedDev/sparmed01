@@ -2,18 +2,13 @@
 
 {% load wysiwyg %}
 
-{% block extrahead %}
-	
-	{{ block.super }}
-	
-	{% wysiwyg_setup %}
-	
+{% block extrahead %}	
+	{{ block.super }}	
+	{% wysiwyg_setup %}	
 {% endblock %}
 
-{% block extrastyle %}
-	
-	{{ block.super }}
-	
+{% block extrastyle %}	
+	{{ block.super }}	
 	<style type="text/css">
 		<!--
 			
@@ -55,12 +50,10 @@
 			}
 			
 		-->
-	</style>
-	
+	</style>	
 {% endblock %}
 
-{% block content %}
-	
+{% block content %}	
 	{{ block.super }}
 	
 	{# Replace XXXXXXXX with field name: #}

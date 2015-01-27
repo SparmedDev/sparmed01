@@ -27,7 +27,7 @@
       </p>
     </div>
     {% else %}
-    <form role="form" action="{{ user.get_absolute_url }}" method="post">
+    <form class="form-horizontal" role="form" action="{{ user.get_absolute_url }}" method="post">
         {% csrf_token %}
         {% bootstrap_form_errors form type='non_fields' %}
       
@@ -36,16 +36,38 @@
         <hr>
       
         {% bootstrap_field form.company_name layout='vertical' %}
+      
         {% bootstrap_field form.address layout='vertical' %}
-        {% bootstrap_field form.postal_code layout='horizontal' %}        
-        {% bootstrap_field form.city layout='inline' %}
+      
+        <div class="row">
+          <div class="col-xs-6">
+            <label class="control-label" for="city">Company City</label>
+            <input class="form-control" type="text" id="city" placeholder="{{ form.city.value }}">
+          </div>             
+          
+          <div class="col-xs-6">
+            <label class="control-label" for="postal_code">Company Postal Code</label>
+            <input class="form-control" type="text" id="postal_code" placeholder="{{ form.postal_code.value }}">
+          </div>         
+        </div>
+        
         {% bootstrap_field form.country layout='vertical' %}   
       
         <hr>
        
         {% bootstrap_field form.contact_person_name layout='vertical' %}
-        {% bootstrap_field form.contact_telephone layout='vertical' %}
-        {% bootstrap_field form.email layout='vertical' %}
+      
+        <div class="row">
+          <div class="col-xs-6">
+            <label class="control-label" for="contact_telephone">Contact Telephone Number</label>
+            <input class="form-control" type="text" id="contact_telephone" placeholder="{{ form.contact_telephone.value }}">
+          </div>
+          
+          <div class="col-xs-6">
+            <label class="control-label" for="email">Contact Email Address</label>
+            <input class="form-control" type="text" id="email" placeholder="{{ form.email.value }}">
+          </div>             
+        </div>      
       
         <hr>
 
@@ -54,6 +76,7 @@
     {% endif %}
     
     <a class="btn btn-warning" href="{% url 'password_reset' %}">Reset Password</a>
+    <span class="minor-skip"></span>
 </section>
     
 
