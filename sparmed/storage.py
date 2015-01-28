@@ -13,5 +13,5 @@ class CachedS3BotoStorage(S3BotoStorage):
 
     def save(self, name, content):
         name = super(CachedS3BotoStorage, self).save(name, content)
-        self.local_storage._save(name, content)
+        #self.local_storage._save(name, content)
         return name
