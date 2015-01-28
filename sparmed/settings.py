@@ -129,6 +129,7 @@ if COMPRESS_ENABLED:
         'compressor.filters.datauri.CssDataUriFilter',
         'compressor.filters.cssmin.CSSMinFilter',
     ]
+    
     COMPRESS_JS_FILTERS = [
         'compressor.filters.jsmin.SlimItFilter',
     ]
