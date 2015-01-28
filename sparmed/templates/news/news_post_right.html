@@ -1,12 +1,14 @@
 <section class="content-container">
-<article id="{{ post.slug }}" class="news-article">
-  <div class="news-article-content row extra-margin-top extra-margin-bot">
-    <div class="col-sm-6">
-      {% include 'news/news_image.html' %}
-    </div>    
-    <div class="col-sm-6">
-      {% include 'news/news_text.html' %}
+  <article id="{{ post.slug }}" class="news-article">
+    <div class="news-article-content row">
+      <div class="row-same-height">    
+        <div class="col-sm-6 col-sm-height col-middle">
+          {% include 'news/news_image.html' %}
+        </div>    
+        <div class="col-sm-6 col-sm-height col-middle">
+          {% include 'news/news_text.html' %}
+        </div>
+      </div>      
     </div>
-  </div>
-</article>
-  </section>
+  </article>
+</section>

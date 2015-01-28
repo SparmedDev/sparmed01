@@ -166,7 +166,7 @@ hr {
 #content {
     display: block;
     margin: 5px 5px 0px;
-    padding-bottom: 400px;
+    padding-bottom: 410px;
     overflow: hidden;
 
     z-index: 9;
@@ -174,7 +174,7 @@ hr {
 
 @media (min-width: 768px) { 
     #content {
-        padding-bottom: 235px;
+        padding-bottom: 250px;
     }
   
     #footer {
@@ -252,7 +252,63 @@ hr {
     margin-bottom: 0px;
 }  
 
+/*** SAME HEIGHT RESPONSIVE COLUMN ROWS ***/
+.container-xs-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
+}
+.row-xs-height {
+    display: table;
+    width: 100%;
+}
+.col-xs-height {
+    display: table-cell;
+    float: none !important;
+}
+
+@media (min-width: 768px) {
+    .row-sm-height {
+        display: table;
+        width: 100%;
+    }
+    .col-sm-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+@media (min-width: 992px) {
+    .row-md-height {
+        display: table;
+        width: 100%;
+    }
+    .col-md-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+@media (min-width: 1200px) {
+    .row-lg-height {
+        display: table;
+        width: 100%;
+    }
+    .col-lg-height {
+        display: table-cell;
+        float: none !important;
+    }
+}
+
 /*** HELPER CLASSES ***/
+.col-top {
+    vertical-align:top;
+}
+.col-middle {
+    vertical-align:middle;
+}
+.col-bottom {
+    vertical-align:bottom;
+}  
+
 .max-height-600 {
     max-height: 600px;
 }

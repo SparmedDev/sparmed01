@@ -30,8 +30,7 @@
                   {% include 'news/news_post_right.html' %}
               {% endif %}
           {% else %}
-              {% include 'news/news_post_no_text.html' %}
-              
+              {% include 'news/news_post_no_text.html' %}              
           {% endif %}      
       
           {% if not forloop.last %}<hr>{% endif %}
@@ -42,7 +41,6 @@
 {% endblock %}
 
 {% block endbody %}
-<!-- Include js plugin -->
 <script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8" defer></script>
 
 {% compress js inline %}
@@ -62,6 +60,8 @@
       lazyLoad: true,      
       autoHeight: false,
     });
+    
+    $(".owl-carousel").parent().removeClass('col-sm-height');
   });
 </script>
 {% endcompress %} 
