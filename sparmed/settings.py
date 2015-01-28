@@ -165,11 +165,12 @@ THIRD_PARTY_APPS = (
   'bootstrap3',
   'robots',
   'sorl.thumbnail',      
-  'django_countries',
-  'django_wysiwyg',
+  'django_countries', 
   'validatedfile',
   'colorfield',
   'cookielaw',
+  'tinymce',
+  'django_wysiwyg',
 )
 
 LOCAL_APPS = (
@@ -240,6 +241,20 @@ HAYSTACK_CONNECTIONS = {
 
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
+
+    
+    
+    
+# TinyMC Editor
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = True
+
+DJANGO_WYSIWYG_FLAVOR = "tinymce_advanced"
 
     
 # Logging    
