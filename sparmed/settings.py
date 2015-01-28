@@ -126,9 +126,15 @@ COMPRESS_ENABLED = DEBUG is False
 if COMPRESS_ENABLED:
     COMPRESS_CSS_FILTERS = [
         'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.datauri.CssDataUriFilter',
         'compressor.filters.cssmin.CSSMinFilter',
     ]
+    COMPRESS_JS_FILTERS = [
+        'compressor.filters.jsmin.SlimItFilter',
+    ]
+    
     COMPRESS_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
+    COMPRESS_ROOT = STATIC_ROOT
     COMPRESS_URL = STATIC_URL
     COMPRESS_OFFLINE = False
     
