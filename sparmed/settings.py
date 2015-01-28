@@ -255,11 +255,10 @@ HAYSTACK_CONNECTIONS = {
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
-    
+
+# CKEditor    
 DJANGO_WYSIWYG_MEDIA_URL = MEDIA_URL + 'ckeditor/'  
 CKEDITOR_UPLOAD_PATH = DJANGO_WYSIWYG_MEDIA_URL
-    
-#DJANGO_WYSIWYG_FLAVOR = "tinymce_advanced"
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
     
