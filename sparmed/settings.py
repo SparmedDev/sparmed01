@@ -44,14 +44,6 @@ from memcacheify import memcacheify
 CACHES = memcacheify()
 MEMCACHEIFY_USE_LOCAL=DEBUG
 
-if not DEBUG:
-  # Use (mem)cache for sessions 
-  #SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
-  # Fix admin login cookie not being set correctly 
-  SESSION_COOKIE_DOMAIN = DOMAIN_NAME
-  CSRF_COOKIE_DOMAIN = DOMAIN_NAME
-
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = False
@@ -62,6 +54,10 @@ FIRST_DAY_OF_WEEK = 1 # start week on Monday
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 if not DEBUG:
+    # Fix admin login cookie not being set correctly 
+    SESSION_COOKIE_DOMAIN = DOMAIN_NAME
+    CSRF_COOKIE_DOMAIN = DOMAIN_NAME  
+  
     # Amazon AWS S3 credientials
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
@@ -158,7 +154,7 @@ ROOT_URLCONF = 'sparmed.urls'
 WSGI_APPLICATION = 'sparmed.wsgi.application'
 
 # Grappelli Admin Site Settings
-GRAPPELLI_ADMIN_TITLE = "Admin | Sparmed.dk"
+GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
 
 
 GRAPPELLI = (
@@ -226,11 +222,11 @@ EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
 EMAIL_USE_TLS = True
 
-SERVER_EMAIL = "SparMed.dk <admin@SparMed.dk>"
+SERVER_EMAIL = "SparMED.dk <admin@SparMED.dk>"
 
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
-EMAIL_SUBJECT_PREFIX = "SparMed.dk"
+EMAIL_SUBJECT_PREFIX = "SparMED.dk"
 
 # Robots caching
 ROBOTS_CACHE_TIMEOUT = 60*60*24 # = 24 hours
