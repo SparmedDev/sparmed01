@@ -118,53 +118,48 @@ class SparmedUser(AbstractBaseUser):
         return reverse('online_order.views.account_area', args=[self.slug])
       
     def add_to_order_history(self, order, items_list):
-        if order and items_list:
-            o_new = self.orders.create(
-                arranged_freight=order.arranged_freight,
-                freight_forwarder=order.freight_forwarder,
-                account_no=order.account_no,
-              
-                arranged_packing=order.arranged_packing,
-                packing_instructions=order.packing_instructions,
-                packing_remarks=order.packing_remarks,
-                
-                aircleaner_instructions=order.aircleaner_instructions,
-                insurance_desired=order.insurance_desired,
-                documents=order.documents,
-              
-                shipping_and_invoice_same=order.shipping_and_invoice_same,
-                invoice_company_name=order.invoice_company_name,
-                invoice_company_address=order.invoice_company_address,
-                invoice_company_postal_code=order.invoice_company_postal_code,
-                invoice_company_country=order.invoice_company_country,
-              
-                other_remarks=order.other_remarks,            
-                
-                user=self,
-            )
-            
-            for item in items_list:
-              o_new.items.create(
-                quantity=item.quantity,
-                object_id=item.object_id,
+        o_new = self.orders.create(
+            arranged_freight=order.arranged_freight,
+            freight_forwarder=order.freight_forwarder,
+            account_no=order.account_no,
 
-                product_id=item.product.product_id,
-                name=item.product.name,
-                description=item.product.description,
-                slug=item.product.slug,
+            arranged_packing=order.arranged_packing,
+            packing_instructions=order.packing_instructions,
+            packing_remarks=order.packing_remarks,
 
-                category_slug=item.product.category.slug,
+            aircleaner_instructions=order.aircleaner_instructions,
+            insurance_desired=order.insurance_desired,
+            documents=order.documents,
 
-                order_history=o_new,  
-              )
+            shipping_and_invoice_same=order.shipping_and_invoice_same,
+            invoice_company_name=order.invoice_company_name,
+            invoice_company_address=order.invoice_company_address,
+            invoice_company_postal_code=order.invoice_company_postal_code,
+            invoice_company_country=order.invoice_company_country,
 
-              o_new.save()
-              self.save()
-              return o_new
-        else:
-            #raise ValueError('Cannot add null order or empty items list to order history')
-            pass
+            other_remarks=order.other_remarks,            
 
+            user=self,
+        )
+
+        for item in items_list:
+          o_new.items.create(
+              quantity=item.quantity,
+              object_id=item.object_id,
+
+              product_id=item.product.product_id,
+              name=item.product.name,
+              description=item.product.description,
+              slug=item.product.slug,
+
+              category_slug=item.product.category.slug,
+
+              order_history=o_new,  
+          )
+
+        o_new.save()
+        self.save()
+        return o_new
       
 class Order(models.Model):
     date = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time of order")
