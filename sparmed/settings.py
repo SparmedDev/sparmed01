@@ -61,36 +61,67 @@ FIRST_DAY_OF_WEEK = 1 # start week on Monday
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-# Amazon AWS S3 credientials
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+if not DEBUG:
+    # Amazon AWS S3 credientials
+    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
-STATIC_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
+    STATIC_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 
-STATIC_ROOT = STATIC_URL
-MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
-MEDIA_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
+    STATIC_ROOT = STATIC_URL
+    MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+    MEDIA_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
 
-MEDIA_URL = STATIC_URL + 'media/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    MEDIA_URL = STATIC_URL + 'media/'
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-from datetime import date, timedelta
-yearfromtoday = date.today() + timedelta(days=365)
-AWS_HEADERS = {
-  'Cache-Control': 'public, max-age=86400',
-  'Expires': yearfromtoday.strftime('%a, %d %b %Y 20:00:00 GMT'),
-}
-AWS_AUTO_CREATE_BUCKET = True
-AWS_S3_FILE_OVERWRITE = False
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_SECURE_URLS = True
-AWS_REDUCED_REDUNDANCY = False
-AWS_IS_GZIPPED = False
-AWS_PRELOAD_METADATA = True
+    from datetime import date, timedelta
+    yearfromtoday = date.today() + timedelta(days=365)
+    AWS_HEADERS = {
+      'Cache-Control': 'public, max-age=86400',
+      'Expires': yearfromtoday.strftime('%a, %d %b %Y 20:00:00 GMT'),
+    }
+    AWS_AUTO_CREATE_BUCKET = True
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_SECURE_URLS = True
+    AWS_REDUCED_REDUNDANCY = False
+    AWS_IS_GZIPPED = False
+    AWS_PRELOAD_METADATA = True   
+    
+    TEMPLATE_MINIFIER = True
+    
+    TEMPLATE_LOADERS = (
+      ('django.template.loaders.cached.Loader', (
+          'template_minifier.template.loaders.filesystem.Loader',
+          'template_minifier.template.loaders.app_directories.Loader',
+      )),
+    )    
+else:
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  
+  
+    STATIC_ROOT = PROJECT_ROOT + "/staticfiles/"
+    STATIC_URL = STATIC_ROOT
+    MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+    MEDIA_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'uploads')
 
+    MEDIA_URL = STATIC_URL + 'media/'
+    ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    
+    TEMPLATE_LOADERS = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )    
+
+STATICFILES_FINDERS = (
+  'django.contrib.staticfiles.finders.FileSystemFinder',
+  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)    
+    
 COMPRESS_ENABLED = DEBUG is False
 if COMPRESS_ENABLED:
     COMPRESS_CSS_FILTERS = [
@@ -101,28 +132,10 @@ if COMPRESS_ENABLED:
     COMPRESS_URL = STATIC_URL
     COMPRESS_OFFLINE = False
     
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
+    STATICFILES_FINDERS += (
+        'compressor.finders.CompressorFinder',
+    )
 
-# List of callables that know how to import templates from various sources.
-# Using django-template-minifier
-if not DEBUG:
-    TEMPLATE_MINIFIER = True
-    
-    TEMPLATE_LOADERS = (
-      ('django.template.loaders.cached.Loader', (
-          'template_minifier.template.loaders.filesystem.Loader',
-          'template_minifier.template.loaders.app_directories.Loader',
-        )),
-    )
-else:
-    TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
@@ -169,7 +182,7 @@ THIRD_PARTY_APPS = (
   'validatedfile',
   'colorfield',
   'cookielaw',
-  'tinymce',
+  'ckeditor',
   'django_wysiwyg',
 )
 
@@ -243,18 +256,11 @@ if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
     
+DJANGO_WYSIWYG_MEDIA_URL = MEDIA_URL + 'ckeditor/'  
+CKEDITOR_UPLOAD_PATH = DJANGO_WYSIWYG_MEDIA_URL
     
-    
-# TinyMC Editor
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': "advanced",
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 10,
-}
-TINYMCE_SPELLCHECKER = False
-TINYMCE_COMPRESSOR = True
-
-DJANGO_WYSIWYG_FLAVOR = "tinymce_advanced"
+#DJANGO_WYSIWYG_FLAVOR = "tinymce_advanced"
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
     
 # Logging    

@@ -85,7 +85,7 @@ urlpatterns = patterns('',
                        url(r'^grappelli/', include('grappelli.urls')),
                        url(r'^admin/', include(admin.site.urls)),
 
-                       url(r'^tinymce/', include('tinymce.urls')),
+                       url(r'^ckeditor/', include('ckeditor.urls')),
                        
                        url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
                        url(r'^robots\.txt$', include('robots.urls')),

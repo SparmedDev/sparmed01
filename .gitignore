@@ -1,3 +1,10 @@
+# Project specific
+venv/
+*.pyc
+*.pyo
+staticfiles/
+sparmed/staticfiles/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -48,11 +55,3 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
-
-venv_old/
-venv/
-py27env/
-*.pyc
-staticfiles/
-keys-ignore/
-
