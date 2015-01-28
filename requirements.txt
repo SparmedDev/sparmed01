@@ -9,6 +9,7 @@ dj-static==0.0.6
 django-appconf==0.6  
 django-bootstrap3==5.1.1
 django-classy-tags==0.5.2
+git+https://h3@github.com/h3/django-colorfield.git   
 django-compressor==1.4
 django-cookie-law==1.0.1 
 django-countries==3.1.1
@@ -16,7 +17,6 @@ django-grappelli==2.6.3
 django-haystack==2.3.1
 django-heroku-memcacheify==0.8
 django-heroku-postgresify==0.3
-django-html5-colorfield==1.0  
 django-pylibmc==0.5.0
 django-robots==1.0
 django-storages==1.1.8

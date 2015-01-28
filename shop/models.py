@@ -69,7 +69,7 @@ class Subcategory(models.Model):
     long_text = models.TextField(verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
-    color = ColorField(null=True, blank=True, verbose_name="Subcategory Color")
+    color = ColorField(verbose_name="Subcategory Color", default='008393')
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
 
@@ -97,7 +97,7 @@ class Category(models.Model):
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
     
-    document = ValidatedFileField(blank=True, null=True, verbose_name="PDF Document file (256 MB max)", upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*256)
+    document = ValidatedFileField(blank=True, null=True, verbose_name="PDF Document file (56 MB max)", upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*56)
 
     @property
     def products(self):
