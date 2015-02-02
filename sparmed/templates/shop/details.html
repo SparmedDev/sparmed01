@@ -75,7 +75,7 @@
     </div>
     {% elif images|length > 0 %}
     {% with image=images|first %}
-    <img class="img-responsive img-rounded center-block" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
+    <img class="img-responsive img-rounded center-block max-height-600" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
     {% endwith %}
     {% else %}
     <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>
