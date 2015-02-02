@@ -141,7 +141,7 @@
     });  
     
     {% for category in categories %}
-    {% for product in category.products.all %}
+    {% for product in category.products.all %}    
     $("#{{ product.pk }}_add").click(function() {
       quantity = $("#{{ product.pk }}_quantity").val();
       addToCart({{ product.pk }}, quantity);

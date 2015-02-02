@@ -131,6 +131,7 @@
     var itemsLength = 0;
 
     {% for subcat in category.subcategories.all %}
+    {% if subcat.products.all|length %}
     itemsLength = {{ subcat.products.all|length }};
     if (itemsLength > 4) { itemsLength = 4; }
 
@@ -152,6 +153,8 @@
       addToCart({{ product.pk }});
     });    
     {% endfor %}
+    
+    {% endif %}
     {% endfor %}
   });
 </script>
