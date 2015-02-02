@@ -60,11 +60,10 @@
 {% cache 3600 products-details-images product.slug %}
 <span class="minor-skip"></span>
 
-{% if product.subcategory.long_text %}
 <div class="row">  
-  <div class="col-md-6">
-    {% endif %}    
-    {% if images %}
+  
+  <div class="col-md-6" style="padding-top:12.5%";>
+    {% if images|length > 1 %}
     <div class="owl-carousel">
       {% for image in images %}
       <div>
@@ -73,16 +72,18 @@
       {% endfor %}
     </div>
     {% else %}
-    <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>
-    {% endif %}
-
-    {% if product.subcategory.long_text %}    
+    <img class="img-responsive img-rounded center-block" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
+    <!--<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>-->
+    {% endif %}    
   </div>
+   
+  {% if product.subcategory.long_text %}    
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
     {{ product.subcategory.long_text|safe }}     
   </div>  
+  {% endif %}
+  
 </div>
-{% endif %}
 
 {% endcache %} 
 
