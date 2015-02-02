@@ -53,7 +53,9 @@
   {% if user.is_anonymous %}
   <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
   {% else %}
-  <p class="text-center"><a style="color: {{ product.subcategory.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+  <p class="text-center">
+    <button id="add_btn" style="color: {{ product.subcategory.color }}; background-color: transparent;">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
+  </p>
   {% endif %}
 </div>
 
@@ -113,7 +115,13 @@
       lazyLoad: true,      
       autoHeight: false,
     });
+    
+    $("#add_btn").click(function() {
+      addToCart({{ product.pk }});
+    });   
+    
   });
+  
 </script>
 {% endcompress %}
 

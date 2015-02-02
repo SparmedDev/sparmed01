@@ -246,6 +246,23 @@
         /* these HTTP methods do not require CSRF protection */
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
       }
+      
+      function addToCart(product_pk, quantity) {
+        quantity = quantity > 1 ? quantity : 1;
+        $.ajax({
+          type: "POST",
+          url: "{% url 'add-to-cart' %}",
+          dataType: "json",
+          data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            product_pk: product_pk,
+            quantity: quantity,
+          }
+        })
+        .always(function(msg) {
+            window.location.reload();
+        });            
+      }      
     </script>
     
     {% endcompress %}

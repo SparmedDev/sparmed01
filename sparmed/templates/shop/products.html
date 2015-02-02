@@ -104,40 +104,58 @@
         {% if user.is_anonymous %}
         <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>(Login required)</p>
         {% else %}
-        <p class="text-center"><a style="color:{{ subcat.color }};" href="{% url 'add-to-cart' category.slug product.id %}">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></p>
+        <p class="text-center">
+          <a id="{{ product.pk }}_add" href="#" style="color:{{ subcat.color }}; background-color: transparent;border: 0px;">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a>
+        </p>
+        
         {% endif %}
       </div>    
       {% if forloop.last %}</div>{% endif %}
       {% endfor %}
-    
-    {% cache 3600 products-scripts subcat.slug %}
-    {% compress js inline %}
-    <script type="text/javascript">
-      $(document).ready(function() {
-        var itemsLength = {{ subcat.products.all|length }};
-        if (itemsLength > 4)
-            itemsLength = 4;
-      
-        $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
-          items: itemsLength,
-          itemsDesktop: [1199, itemsLength],  
-          itemsDesktopSmall: [980, itemsLength],
-          singleItem: false,
-          itemsScaleUp: false,
-          autoPlay: false,   
-          scrollPerPage: false,      
-          responsiveBaseWidth: '#content',      
-          lazyLoad: true,      
-          autoHeight: false,
-        });
-      });
-    </script>
-    {% endcompress %}  
-    {% endcache %}    
+
   </div>
   
   {% endfor %}
   {% endwith %}
   
 </article>
+{% endblock %}
+
+{% block endbody %}
+{% cache 3600 products-scripts subcat.slug %}
+
+{% compress js inline %}
+<script type="text/javascript">
+
+  $(document).ready(function() {    
+    var itemsLength = 0;
+
+    {% for subcat in category.subcategories.all %}
+    itemsLength = {{ subcat.products.all|length }};
+    if (itemsLength > 4) { itemsLength = 4; }
+
+    $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
+      items: itemsLength,
+      itemsDesktop: [1199, itemsLength],  
+      itemsDesktopSmall: [980, itemsLength],
+      singleItem: false,
+      itemsScaleUp: false,
+      autoPlay: false,   
+      scrollPerPage: false,      
+      responsiveBaseWidth: '#content',      
+      lazyLoad: true,      
+      autoHeight: false,
+    });
+
+    {% for product in subcat.products.all %}
+    $("#{{ product.pk }}_add").click(function() {
+      addToCart({{ product.pk }});
+    });    
+    {% endfor %}
+    {% endfor %}
+  });
+</script>
+{% endcompress %}  
+
+{% endcache %}
 {% endblock %}

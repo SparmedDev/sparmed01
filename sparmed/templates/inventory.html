@@ -55,19 +55,18 @@
           </tr>
 
           {% for product in subcategory.products.all %}
-          <form role="form" class="form" action="{% url 'add-to-cart-inventory' %}" method="post">
-            {% csrf_token %}   
-            <input type="hidden" name="product_id" value="{{ product.id }}" />
             <tr>
               <td class="td-max-col-width">
-                <div class="form-group">
-                  <button class="btn btn-block btn-lg" style="color:red; background-color: transparent;" name="submit" type="submit" value=""><span class="glyphicon glyphicon-shopping-cart"></span></button>
-                </div>
+              <div>
+                  <button id="{{ product.pk }}_add" class="btn btn-block btn-lg" style="color:red; background-color: transparent;"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+              </div>
               </td>
-              <td>           
-                <div class="form-group">
-                  <input class="form-control" name="quantity" type="number" value="1" min="1" required />
-                </div>
+              <td>     
+                <form>
+                    <div class="form-group">
+                      <input id="{{ product.pk }}_quantity" class="form-control" name="quantity" type="number" value="1" min="1" required />
+                    </div>                  
+                </form>
               </td>
               <td>
                 <p class="text-center"><a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a></p>
@@ -76,7 +75,7 @@
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_instock" class="text-center"></p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_available" class="text-center"></p></td>
             </tr>          
-          </form>
+       
           {% endfor %}
         </table>
         {% endif %}
@@ -139,7 +138,17 @@
         console.log("response:");
         console.log(res);
       }
-    });    
+    });  
+    
+    {% for category in categories %}
+    {% for product in category.products.all %}
+    $("#{{ product.pk }}_add").click(function() {
+      quantity = $("#{{ product.pk }}_quantity").val();
+      addToCart({{ product.pk }}, quantity);
+    });       
+    {% endfor %}
+    {% endfor %}
+    
   });
 </script>
 {% endcompress %}

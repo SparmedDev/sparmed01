@@ -3,32 +3,25 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 from cart import Cart
 from shop.models import Product, Category
 from online_order.models import InventoryAddToCartForm
 
 @login_required
-def add_to_cart(request, category_slug, object_id, quantity=1):
-    product = Product.objects.get(id=object_id)
-    cart = Cart(request)
-    cart.add(product, quantity)    
-        
-    return HttpResponseRedirect(reverse('shop.views.products'))
-  
-@login_required
-def add_to_cart_inventory(request):
+def add_to_cart(request):
     if request.method == 'POST':
-        form = InventoryAddToCartForm(request.POST)
-        if form.is_valid():
-            product_id = form.cleaned_data['product_id']
-            quantity = form.cleaned_data['quantity']
-            
-            product = Product.objects.get(id=product_id)
-            cart = Cart(request)
-            cart.add(product, quantity)
+        product_pk = request.POST.get("product_pk")              
+        quantity = request.POST.get("quantity", 1) 
         
-    return HttpResponseRedirect(reverse('sparmed.views.inventory'))     
+        product = get_object_or_404(Product, pk=product_pk)
+        cart = Cart(request)
+        cart.add(product, quantity)
+    
+        return HttpResponse('success')
+    
+    return HttpResponse('error')
 
 @login_required
 def remove_from_cart(request, object_id):

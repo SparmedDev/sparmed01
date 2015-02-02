@@ -37,7 +37,7 @@ def details(request, category_slug, product_slug):
 
 @never_cache
 @login_required
-def add_to_cart(request):
+def autocomplete_add_to_cart(request):
     if request.method == 'POST':
         form = GenericForm(request.POST)
         if form.is_valid():
