@@ -124,14 +124,14 @@
               </div>
 
               <div class="col-sm-4">
-                <p class="text-center">Email: <a href="mailto:info@sparmed.dk">info@SparMED.dk</a></p>
-                <p class="text-center">Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a></p>
-                <p class="text-center">Fax: <a href="fax:004539402564">(+45) 39 40 25 64</a></p>
+                <p class="text-center">Email: <a href="mailto:info@sparmed.dk" title="Contact Email">info@SparMED.dk</a></p>
+                <p class="text-center">Phone: <a href="tel:004539402503" title="Telephone Number">(+45) 39 40 25 03</a></p>
+                <p class="text-center">Fax: <a href="fax:004539402564" title="Fax Number">(+45) 39 40 25 64</a></p>
               </div>
 
               <div class="col-sm-4">
-                <p class="text-left"><a href="{% url 'privacy-policy' %}">Privacy Policy</a></p>
-                <p class="text-left"><a href="{% url 'terms-conditions' %}">Terms &amp; Conditions</a></p>            
+                <p class="text-left"><a href="{% url 'privacy-policy' %}" title="Privacy Policy">Privacy Policy</a></p>
+                <p class="text-left"><a href="{% url 'terms-conditions' %}" title="Terms and Conditions">Terms &amp; Conditions</a></p>            
                 <p class="text-left">&copy; Copyright 2015 SparMED ApS</p>
               </div>
             </div>
@@ -149,16 +149,16 @@
 
               <div class="col-sm-4">
                 <p class="text-center">
-                  Email: <a href="mailto:info@sparmed.dk">info@SparMED.dk</a><br>
-                  Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a><br>
-                  Fax: <a href="fax:004539402564">(+45) 39 40 25 64</a>
+                  Email: <a href="mailto:info@sparmed.dk" title="Contact Email">info@SparMED.dk</a><br>
+                  Phone: <a href="tel:004539402503" title="Telephone Number">(+45) 39 40 25 03</a><br>
+                  Fax: <a href="fax:004539402564" title="Fax Number">(+45) 39 40 25 64</a>
                 </p>
               </div>
 
               <div class="col-sm-4">
                 <p class="text-center">
-                  <a href="{% url 'privacy-policy' %}">Privacy Policy</a><br>
-                  <a href="{% url 'terms-conditions' %}">Terms &amp; Conditions</a><br>
+                  <a href="{% url 'privacy-policy' %}" title="Privacy Policy">Privacy Policy</a><br>
+                  <a href="{% url 'terms-conditions' %}" title="Terms and Conditions">Terms &amp; Conditions</a><br>
                   &copy; Copyright 2015 SparMED ApS
                 </p>
               </div>
@@ -204,18 +204,20 @@
 
     {% compress js inline %}
     <script>
-      /* Stack menu when collapsed */
-      $('.navbar-collapse').on('show.bs.collapse', function() {
-        $('.nav-pills').addClass('nav-stacked');
-        $('#main-nav').addClass('stacked');
-      });
+      $(document).ready(function() {
+          /* Stack menu when collapsed */
+          $('.navbar-collapse').on('show.bs.collapse', function() {
+            $('.nav-pills').addClass('nav-stacked');
+            $('#main-nav').addClass('stacked');
+          });
 
-      $('.navbar-collapse').on('hide.bs.collapse', function() {
-        setTimeout(function() {
-          $('.nav-pills').removeClass('nav-stacked');
-          $('#main-nav').removeClass('stacked');
-        }, 1000);
-      });    
+          $('.navbar-collapse').on('hide.bs.collapse', function() {
+            setTimeout(function() {
+              $('.nav-pills').removeClass('nav-stacked');
+              $('#main-nav').removeClass('stacked');
+            }, 1000);
+          });    
+      });
     </script>    
     {% endcompress %}
 
@@ -223,8 +225,7 @@
     <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}" async></script>
     {% endcompress %}
     
-    {% compress js inline %}
-    
+    {% compress js inline %}    
     <script type="text/javascript">
       function getCookie(name) {
         var cookieValue = null;
@@ -263,8 +264,7 @@
             window.location.reload();
         });            
       }      
-    </script>
-    
+    </script>    
     {% endcompress %}
 
     {% block endbody %}
