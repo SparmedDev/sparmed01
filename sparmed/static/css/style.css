@@ -309,6 +309,11 @@ hr {
     vertical-align:bottom;
 }  
 
+.add-to-cart-btn {
+    background-color: transparent;
+    border: 0px;
+}
+
 .max-height-600 {
     max-height: 600px;
 }

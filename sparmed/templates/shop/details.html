@@ -54,7 +54,7 @@
   <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
   {% else %}
   <p class="text-center">
-    <button id="add_btn" style="color: {{ product.subcategory.color }}; background-color: transparent;">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
+    <button id="add_btn" class="btn add-to-cart-btn btn-lg" style="color: {{ product.subcategory.color }};">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
   </p>
   {% endif %}
 </div>
@@ -73,9 +73,10 @@
       </div>
       {% endfor %}
     </div>
-    {% else %}
+    {% elif images|length > 0 %}
     <img class="img-responsive img-rounded center-block" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
-    <!--<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>-->
+    {% else %}
+    <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>
     {% endif %}    
   </div>
    

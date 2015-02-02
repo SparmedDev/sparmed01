@@ -105,7 +105,7 @@
         <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>(Login required)</p>
         {% else %}
         <p class="text-center">
-          <a id="{{ product.pk }}_add" href="#" style="color:{{ subcat.color }}; background-color: transparent;border: 0px;">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></a>
+          <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
         </p>
         
         {% endif %}

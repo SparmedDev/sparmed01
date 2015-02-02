@@ -48,7 +48,6 @@ urlpatterns = patterns('',
                        
                        url(r'^clear_cart/$', 'cart.views.clear_cart', name='clear-cart'),
                        url(r'^add_to_cart/$', 'cart.views.add_to_cart', name='add-to-cart'),
-                       #url(r'^add_to_cart/(?P<category_slug>[\w\-]+)/(?P<object_id>[0-9]+)/$', 'cart.views.add_to_cart', name='add-to-cart'),
                        url(r'^remove_from_cart/(?P<object_id>[0-9]+)/$', 'cart.views.remove_from_cart', name='remove-from-cart'),
                        url(r'^set_quantity_cart/$', 'cart.views.set_quantity_on_product', name='set-quantity-cart'),
                        
@@ -62,7 +61,6 @@ urlpatterns = patterns('',
                           url(r'^order-regret/(?P<order_id>[0-9]+)/$', 'online_order.views.order_regret', name='order-regret'),
 
                           url(r'^certificates/$', 'certificates.views.certificates', name='certificates'),
-                          #url(r'^inventory/add_to_cart/$', 'cart.views.add_to_cart_inventory', name='add-to-cart-inventory'),
                           url(r'^inventory/$', views.inventory, name='inventory'),                        
                           url(r'^$', views.distributor_login, name='distributor-login'),                       
 
