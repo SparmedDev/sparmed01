@@ -149,6 +149,7 @@ class SparmedUser(AbstractBaseUser):
 
               product_id=item.product.product_id,
               name=item.product.name,
+              long_name=item.product.long_name,
               description=item.product.description,
               slug=item.product.slug,
 
@@ -225,11 +226,15 @@ class OrderProduct(models.Model):
     
     product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
     name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")    
-    description = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
+    long_name = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
+    description = models.CharField(max_length=255, verbose_name="Product Description", blank=True, null=True)
     category_slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
     slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
     
     order_history = models.ForeignKey('OrderHistoryItem', related_name='items')
+    
+    def get_name(self):
+        return self.long_name if self.long_name else self.name
     
     def get_absolute_url(self):
         return reverse('shop.views.details', args=[self.category_slug, self.slug,])   

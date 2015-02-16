@@ -40,7 +40,8 @@ class GenericForm(forms.Form):
 class Product(models.Model):
     product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
     name = models.CharField(max_length=100, verbose_name="Product Short Name", default="Product 1")
-    description = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True)
+    long_name = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
+    description = models.CharField(max_length=255, verbose_name="Product Description", blank=True)
     in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)    
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
@@ -53,6 +54,9 @@ class Product(models.Model):
     @property
     def category(self):
         return self.subcategory.category
+      
+    def get_name(self):
+        return self.long_name if self.long_name else self.name
     
     def get_absolute_url(self):
         return reverse('shop.views.details', args=[self.category.slug, self.slug])

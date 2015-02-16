@@ -12,7 +12,7 @@
       <a title="View the product details page" href="{{ item.get_absolute_url }}">{{ item.product_id }}</a>
     </td>
     <td>
-      <p>{{ item.description|safe }}</p>
+      <p>{{ item.get_name|safe }}</p>
     </td>
     <td>
       <p>{{ item.quantity }}</p>

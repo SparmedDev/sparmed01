@@ -24,7 +24,7 @@
   <li class="active">{{ product.subcategory.name|safe }}</li>
 </ol>
 
-<div style="display: block; width: 70%; margin: 10px auto; border-bottom: 2px solid {{ product.subcategory.color }};">
+<div style="border-bottom: 2px solid {{ product.subcategory.color }};">
   <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.description|safe }}</h2>
   <h3 class="text-center"><strong>Product ID: {{ product.product_id }}</strong></h3>
 

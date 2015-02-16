@@ -62,6 +62,8 @@
   <section class="two-column">
       {{ category.long_text|safe }}
   </section>
+  
+  <hr>
   {% endif %}
   
   {% if category.document %}
@@ -75,7 +77,7 @@
   {% with subcats=category.subcategories.all %}
   {% for subcat in subcats %}
   <hr>
-  <div style="margin: 10px auto; padding: 20px 5px;">      
+  <div>      
       <h2 class="text-center" style="color:{{ subcat.color }};">{% filter upper %}{{ subcat.name|safe }}{% endfilter %}</h2>
       {% if subcat.description %}<p class="text-center" style="padding-top: 25px;"><em>{{ subcat.description|safe }}</em></p>{% endif %}
     
@@ -88,28 +90,28 @@
       {% endwith %}     
 
       {% for product in subcat.products.all %}
-      {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel">{% endif %}
-      <div>
-        <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
-        <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
+      {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel" class="owl-carousel">{% endif %}
+          <div>
+            <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.get_name }}</a></h4>
+            <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
 
-        {% for image in product.images.all reversed %}
-        {% if forloop.first %}
-          {% if image %}
-          <p><a href="{{ product.get_absolute_url }}"><img class="img-responsive img-rounded product-image lazyOwl" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></a></p>
-          {% endif %}
-        {% endif %}
-        {% endfor %}
+            {% for image in product.images.all reversed %}
+            {% if forloop.first %}
+              {% if image %}
+              <p><a href="{{ product.get_absolute_url }}"><img class="img-responsive img-rounded product-image lazyOwl" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></a></p>
+              {% endif %}
+            {% endif %}
+            {% endfor %}
 
-        {% if user.is_anonymous %}
-        <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>(Login required)</p>
-        {% else %}
-        <p class="text-center">
-          <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
-        </p>
-        
-        {% endif %}
-      </div>    
+            {% if user.is_anonymous %}
+            <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>(Login required)</p>
+            {% else %}
+            <p class="text-center">
+              <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
+            </p>
+
+            {% endif %}
+          </div>    
       {% if forloop.last %}</div>{% endif %}
       {% endfor %}
 

@@ -1,3 +1,4 @@
 {{ object.product_id }}
 {{ object.name }}
+{{ object.long_name }}
 {{ object.description }}

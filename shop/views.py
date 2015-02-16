@@ -62,14 +62,15 @@ def autocomplete(request):
         query = request.GET.get('q', '')
       
         sqs_id = SearchQuerySet().autocomplete(product_id_auto=query)[:6]
-
-        suggestions_id = ["%s - %s" % (result.product_id.strip(' \t\n\r') , result.name.strip(' \t\n\r') ) for result in sqs_id]
+        
+        suggestions_id = ["%s - %s" % (result.product_id.strip(' \t\n\r') , (result.long_name if result.long_name else result.name).strip(' \t\n\r') ) for result in sqs_id]
         suggestions_set = list(set(suggestions_id))
         
         cart = Cart(request)
         cart = cart.get_item_list()
         
-        p_ids = ["{0} - {1}".format(p.product.product_id.strip(' \t\n\r'), p.product.name.strip(' \t\n\r')) for p in cart]
+        #p_ids = ["{0} - {1}".format(p.product.product_id.strip(' \t\n\r'), p.product.name.strip(' \t\n\r')) for p in cart]
+        p_ids = ["{0} - {1}".format(p.product.product_id.strip(' \t\n\r'), p.product.get_name().strip(' \t\n\r')) for p in cart]
 
         suggestions = [s for s in suggestions_set if s not in p_ids]
 

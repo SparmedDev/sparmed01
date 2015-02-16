@@ -71,7 +71,7 @@
               <td>
                 <p class="text-center"><a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a></p>
               </td>
-              <td><p>{{ product.description|safe }}</p></td>
+              <td><p>{{ product.get_name|safe }}</p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_instock" class="text-center"></p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_available" class="text-center"></p></td>
             </tr>          
@@ -83,7 +83,7 @@
       </div>
     </div> <!-- /.collapse -->
     
-     {% if not forloop.last %}<hr>{% endif %}  
+     {% if not forloop.last %}<hr class="compact">{% endif %}  
     
     {% endif %}
     {% endfor %}

@@ -29,6 +29,11 @@ hr {
     height: 1px;
 }
 
+hr.compact {  
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /*** TOP RIGHT BUTTONS ***/
 #home-button.active {
     color: #ed1b2e;
@@ -300,13 +305,13 @@ hr {
 
 /*** HELPER CLASSES ***/
 .col-top {
-    vertical-align:top;
+    vertical-align: top;
 }
 .col-middle {
-    vertical-align:middle;
+    vertical-align: middle;
 }
 .col-bottom {
-    vertical-align:bottom;
+    vertical-align: bottom;
 }  
 
 .add-to-cart-btn {
@@ -335,6 +340,11 @@ hr {
     padding-left: 55px;
     margin-right: 10px;
     margin-left: 10px;
+}
+
+.padding-lr-10 {
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .minor-skip {
