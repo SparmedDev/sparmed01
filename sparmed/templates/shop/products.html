@@ -124,7 +124,6 @@
 {% endblock %}
 
 {% block endbody %}
-{% cache 3600 products-scripts subcat.slug %}
 
 {% compress js inline %}
 <script type="text/javascript">
@@ -162,5 +161,4 @@
 </script>
 {% endcompress %}  
 
-{% endcache %}
 {% endblock %}
