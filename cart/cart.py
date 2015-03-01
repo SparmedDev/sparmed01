@@ -12,7 +12,6 @@ class ItemDoesNotExist(Exception):
 
 class Cart:
     def __init__(self, request):
-        #cart_id = request.session.get(CART_ID)
         cart_id = cache.get(CART_ID)
         if cart_id:
             try:
@@ -34,7 +33,6 @@ class Cart:
     def new(self, request):
         cart = models.Cart(creation_date=timezone.now())
         cart.save()
-        #request.session[CART_ID] = cart.id
         cache.set(CART_ID, cart.id)
         return cart
 
