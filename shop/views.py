@@ -10,6 +10,8 @@ from haystack.query import SearchQuerySet
 from shop.models import Product, Category, GenericForm
 from cart import Cart
 
+from django.template.defaultfilters import removetags
+
 # Create your views here.
 @never_cache
 def products(request, slug="0"):
@@ -31,9 +33,17 @@ def details(request, category_slug, product_slug):
   except Product.DoesNotExist:
       raise Http404
       
+  long_text = ''
+  if product.subcategory.long_text:
+      long_text = product.subcategory.long_text
+  elif category.long_text:
+      long_text = removetags(category.long_text, 'br')
+  elif category.description:
+      long_text = category.description
+    
   images = product.images.all()
 
-  return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images})
+  return render(request, 'shop/details.html', {'category':category, 'product':product, 'images':images, 'long_text':long_text})
 
 @never_cache
 @login_required

@@ -82,11 +82,11 @@
     {% endif %}    
   </div>
    
-  {% if product.subcategory.long_text %}    
+  
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
-    {{ product.subcategory.long_text|safe }}     
+      {{ long_text|safe }}
   </div>  
-  {% endif %}
+  
   
 </div>
 
