@@ -1,17 +1,18 @@
 from django.utils import timezone
 from haystack import indexes
 from shop.models import Product
+from sparmed.search_backends import CustomEdgeNgramField
 
 class ProductIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     
     name = indexes.CharField(model_attr='name')
     long_name = indexes.CharField(model_attr='long_name', null=True)
-    product_id = indexes.CharField(model_attr='product_id', boost=1.25)    
+    product_id = indexes.CharField(model_attr='product_id')    
     added = indexes.DateTimeField(model_attr='added')
     
-    product_id_auto = indexes.EdgeNgramField(model_attr='product_id', boost=1.25)
-    long_name_auto = indexes.EdgeNgramField(model_attr='long_name', null=True)
+    product_id_auto = CustomEdgeNgramField(model_attr='product_id', index_analyzer="edgengram_analyzer", search_analyzer="suggest_analyzer")
+    long_name_auto = CustomEdgeNgramField(model_attr='long_name', null=True, index_analyzer="edgengram_analyzer", search_analyzer="suggest_analyzer")
     
     def get_model(self): 
         return Product 

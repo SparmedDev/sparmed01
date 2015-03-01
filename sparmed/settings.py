@@ -247,7 +247,8 @@ es_port = es.port or 80
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'ENGINE': 'sparmed.search_backends.CustomElasticSearchEngine',
+        #'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': es.scheme + '://' + es.hostname + ':' + str(es_port),
         'INDEX_NAME': 'haystack',
     },
@@ -256,6 +257,58 @@ HAYSTACK_CONNECTIONS = {
 if es.username:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
 
+ELASTICSEARCH_INDEX_SETTINGS = {
+    'settings': {
+        "analysis": {
+            "analyzer": {
+                "ngram_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "lowercase",
+                    "filter": ["haystack_ngram"]
+                },
+                "edgengram_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "lowercase",
+                    "filter": ["haystack_edgengram"]
+                },
+                "suggest_analyzer": {
+                    "type":"custom",
+                    "tokenizer":"standard",
+                    "filter":[
+                        "standard",
+                        "lowercase",
+                        "asciifolding"
+                    ]
+                },
+            },
+            "tokenizer": {
+                "haystack_ngram_tokenizer": {
+                    "type": "nGram",
+                    "min_gram": 3,
+                    "max_gram": 15,
+                },
+                "haystack_edgengram_tokenizer": {
+                    "type": "edgeNGram",
+                    "min_gram": 2,
+                    "max_gram": 15,
+                    "side": "front"
+                }
+            },
+            "filter": {
+                "haystack_ngram": {
+                    "type": "nGram",
+                    "min_gram": 3,
+                    "max_gram": 15
+                },
+                "haystack_edgengram": {
+                    "type": "edgeNGram",
+                    "min_gram": 2,
+                    "max_gram": 15
+                }
+            }
+        }
+    }
+}
 
 # CKEditor    
 CKEDITOR_UPLOAD_PATH = "admin-uploads/"
