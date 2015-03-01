@@ -12,7 +12,6 @@ class ProductIndex(indexes.SearchIndex, indexes.Indexable):
     added = indexes.DateTimeField(model_attr='added')
     
     product_id_auto = CustomEdgeNgramField(model_attr='product_id', index_analyzer="edgengram_analyzer", search_analyzer="suggest_analyzer")
-    long_name_auto = CustomEdgeNgramField(model_attr='long_name', null=True, index_analyzer="edgengram_analyzer", search_analyzer="suggest_analyzer")
     
     def get_model(self): 
         return Product 

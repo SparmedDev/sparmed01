@@ -319,10 +319,11 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar_Full': [
             [ 'Source','-', 'Preview','-', 'Print'],
-            [ 'Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', '-', 'Undo', 'Redo' ],
+            [ 'FontSize', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', '-', 'Undo', 'Redo' ],
             [ 'Cut','Copy','Paste', '-', 'PasteText','PasteFromWord' ],
             [ 'Find','Replace','-','SelectAll','-','SpellChecker' ],
-            [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            [ 'NumberedList','BulletedList','-','Outdent','Indent',],
+            [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
             [ 'Link','Unlink' ],
             [ 'TextColor','BGColor' ],       
         ],

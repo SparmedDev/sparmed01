@@ -3,7 +3,6 @@ from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend
 from haystack.backends.elasticsearch_backend import ElasticsearchSearchEngine
 from haystack.fields import EdgeNgramField as BaseEdgeNgramField
 
-
 # Custom Backend 
 class CustomElasticBackend(ElasticsearchSearchBackend):
     DEFAULT_ANALYZER = None
@@ -11,7 +10,7 @@ class CustomElasticBackend(ElasticsearchSearchBackend):
     def __init__(self, connection_alias, **connection_options):
         super(CustomElasticBackend, self).__init__(connection_alias, **connection_options)
         user_settings = getattr(settings, 'ELASTICSEARCH_INDEX_SETTINGS', None)
-        self.DEFAULT_ANALYZER = getattr(settings, 'ELASTICSEARCH_DEFAULT_ANALYZER', "snowball")
+        self.DEFAULT_ANALYZER = getattr(settings, 'ELASTICSEARCH_DEFAULT_ANALYZER', "suggest_analyzer")
         if user_settings:
             setattr(self, 'DEFAULT_SETTINGS', user_settings)
 
