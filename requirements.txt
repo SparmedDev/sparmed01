@@ -6,12 +6,10 @@ argparse==1.3.0
 beautifulsoup4==4.3.2
 boto==2.36.0
 docopt==0.6.2
-Pillow==2.7.0
 dj-database-url==0.3.0
 dj-static==0.0.6
 django-appconf==1.0.1
 django-bootstrap3==5.1.1
-django-ckeditor==4.4.7
 django-classy-tags==0.6.1
 git+https://h3@github.com/h3/django-colorfield.git   
 django-compressor==1.4

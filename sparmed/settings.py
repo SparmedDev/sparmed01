@@ -185,7 +185,6 @@ THIRD_PARTY_APPS = (
   'validatedfile',
   'colorfield',
   'cookielaw',
-  'ckeditor',
   'django_wysiwyg',
 )
 
