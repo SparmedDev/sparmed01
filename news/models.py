@@ -1,7 +1,7 @@
 from django.db import models
 from sorl.thumbnail import ImageField
 from ckeditor.fields import RichTextField
-import datetime
+from django.utils import timezone
 
 class NewsImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
@@ -16,7 +16,7 @@ class NewsImage(models.Model):
     
 class NewsPost(models.Model):
   title = models.CharField(max_length=60)
-  added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
+  added = models.DateTimeField(default=timezone.now, verbose_name="Date and time added")
   content = RichTextField(verbose_name="Write your news post here (Please do not attempt to insert images here, instead use the news image below)", blank=True, null=True)
   slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
   

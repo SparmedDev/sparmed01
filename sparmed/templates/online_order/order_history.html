@@ -4,6 +4,7 @@
 {% load bootstrap3 %}
 {% load compress %}
 {% load base_extras %}
+{% load tz %}
 
 {% block pagedescription %}View you Order History with SparMED{% endblock %}
 {% block title %}Order History{% endblock %}
@@ -28,7 +29,9 @@
     <div class="panel-heading" role="tab" id="order_h_{{ order.pk }}">
       <h3 class="panel-title text-center">
           <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#order_c_{{ order.pk }}" aria-expanded="{% if forloop.first%}true{% else %}false{% endif %}" aria-controls="order_c_{{ order.pk }}">
+              {% localtime on %}
               Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>
+              {% endlocaltime %}
           </a>
       </h3>
     </div>

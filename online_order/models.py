@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-import datetime
+from django.utils import timezone
 
 from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
@@ -163,7 +163,7 @@ class SparmedUser(AbstractBaseUser):
         return o_new
       
 class Order(models.Model):
-    date = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time of order")
+    date = models.DateTimeField(default=timezone.now, verbose_name="Date and time of order")
     
     arranged_freight = models.BooleanField(verbose_name="SparMED Arranges Freight?", default=True)
     freight_forwarder = models.CharField(max_length=255, verbose_name="Freight Forwarder", blank=True, null=True)

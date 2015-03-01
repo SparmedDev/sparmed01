@@ -84,9 +84,13 @@
             <td>
               <h2>Purchase Order Sheet Receipt</h2>
               <h4>
+                {% localtime on %}
                 <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>       
+                {% endlocaltime %}
               </h4>
-              <p>You can also view this order receipt online on SparMED.DK through the <a title="Visit Your SparMED.dk Order History" href="http://www.sparmed.dk{% url 'order-history' %}" target="_blank">Order History</a>.</p>
+              <p>
+                You can also view this order receipt online on SparMED.DK through the <a title="Visit Your SparMED.dk Order History" href="http://www.sparmed.dk{% url 'order-history' %}" target="_blank">Order History</a>.
+              </p>
             </td>
 
             <td>

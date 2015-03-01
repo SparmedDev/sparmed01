@@ -4,7 +4,7 @@ from django import forms
 from django.core.urlresolvers import reverse
 
 from sorl.thumbnail import ImageField
-import datetime
+from django.utils import timezone
 from validatedfile.fields import ValidatedFileField
 from colorfield.fields import ColorField
 
@@ -45,7 +45,7 @@ class Product(models.Model):
     long_name = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
     description = models.CharField(max_length=255, verbose_name="Product Description", blank=True)
     in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)    
-    added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
+    added = models.DateTimeField(default=timezone.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name="Associated Subcategory")  
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
@@ -73,7 +73,7 @@ class Subcategory(models.Model):
     name = models.CharField(max_length=255, verbose_name="Subcategory Name", default="Subcategory 1")
     description = models.CharField(max_length=255, verbose_name="Subcategory description", blank=True)
     long_text = RichTextField(verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
-    added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
+    added = models.DateTimeField(default=timezone.now, verbose_name="Date and time added")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
     color = ColorField(verbose_name="Subcategory Color", default='008393')
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
@@ -98,7 +98,7 @@ class Category(models.Model):
     short_name = models.CharField(max_length=40, verbose_name="Category Short Name (for navigation bar)", default="Cat1")
     description = models.CharField(max_length=255, verbose_name="Category description", blank=True)
     long_text = RichTextField(verbose_name="Category Long Text (Please do not insert images!)", blank=True)
-    added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
+    added = models.DateTimeField(default=timezone.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)

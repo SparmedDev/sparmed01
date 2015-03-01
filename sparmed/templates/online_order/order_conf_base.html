@@ -33,7 +33,9 @@
       <td>
         <h2>Purchase Order Sheet Receipt</h2>
         <h4>
+          {% localtime on %}
           <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>       
+          {% endlocaltime %}
         </h4>
         <div>
           <a type="button" class="btn btn-default non-printable" href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span></a>

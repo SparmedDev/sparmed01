@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 import models
 from django.core.cache import cache
 
@@ -32,7 +32,7 @@ class Cart:
         return self.cart.item_set.all()
 
     def new(self, request):
-        cart = models.Cart(creation_date=datetime.datetime.now())
+        cart = models.Cart(creation_date=timezone.now())
         cart.save()
         #request.session[CART_ID] = cart.id
         cache.set(CART_ID, cart.id)
