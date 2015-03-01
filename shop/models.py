@@ -10,6 +10,8 @@ from colorfield.fields import ColorField
 
 from django.template.defaultfilters import slugify
 
+from ckeditor.fields import RichTextField
+
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name="Picture Title", blank=True)
     image = ImageField(upload_to="/media/products")
@@ -70,7 +72,7 @@ class Product(models.Model):
 class Subcategory(models.Model):
     name = models.CharField(max_length=255, verbose_name="Subcategory Name", default="Subcategory 1")
     description = models.CharField(max_length=255, verbose_name="Subcategory description", blank=True)
-    long_text = models.TextField(verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
+    long_text = RichTextField(verbose_name="Subcategory Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     category = models.ForeignKey('Category', related_name="subcategories", verbose_name="Associated Category")
     color = ColorField(verbose_name="Subcategory Color", default='008393')
@@ -95,7 +97,7 @@ class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name="Category Name", default="Category 1")
     short_name = models.CharField(max_length=40, verbose_name="Category Short Name (for navigation bar)", default="Cat1")
     description = models.CharField(max_length=255, verbose_name="Category description", blank=True)
-    long_text = models.TextField(verbose_name="Category Long Text (Please do not insert images!)", blank=True)
+    long_text = RichTextField(verbose_name="Category Long Text (Please do not insert images!)", blank=True)
     added = models.DateTimeField(default=datetime.datetime.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)

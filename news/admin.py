@@ -11,8 +11,6 @@ class NewsImageInline(admin.StackedInline):
     model = NewsImage 
     
 class NewsPostAdmin(admin.ModelAdmin):
-    change_form_template = 'news/admin/change_form.html'
-    
     list_display = ['title', 'added']
     list_filter = ['added']
     search_fields = ['title', 'content']

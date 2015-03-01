@@ -185,7 +185,7 @@ THIRD_PARTY_APPS = (
   'validatedfile',
   'colorfield',
   'cookielaw',
-  'django_wysiwyg',
+  'ckeditor',
 )
 
 LOCAL_APPS = (
@@ -259,10 +259,24 @@ if es.username:
 
 
 # CKEditor    
-DJANGO_WYSIWYG_MEDIA_URL = STATIC_URL + 'ckeditor/'  
-CKEDITOR_UPLOAD_PATH = DJANGO_WYSIWYG_MEDIA_URL
-DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//code.jquery.com/jquery.min.js'
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar_Full': [
+            [ 'Source','-', 'Preview','-', 'Print'],
+            [ 'Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', '-', 'Undo', 'Redo' ],
+            [ 'Cut','Copy','Paste', '-', 'PasteText','PasteFromWord' ],
+            [ 'Find','Replace','-','SelectAll','-','SpellChecker' ],
+            [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            [ 'Link','Unlink' ],
+            [ 'TextColor','BGColor' ],       
+        ],
+        'toolbar': 'Full',
+    },
+}
     
 # Logging    
 LOGGING = {

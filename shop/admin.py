@@ -27,8 +27,6 @@ class ShopImageInline(admin.StackedInline):
     model = ShopImage
     
 class SubcategoryAdmin(admin.ModelAdmin):
-    change_form_template = 'shop/admin/change_form.html'
-    
     list_display = ['name', 'added', 'order_index', 'category']
     list_filter = ['added']  
     search_fields = ['name']
@@ -37,8 +35,6 @@ class SubcategoryAdmin(admin.ModelAdmin):
     inlines = [ShopImageInline,]
   
 class CategoryAdmin(admin.ModelAdmin):
-    change_form_template = 'shop/admin/change_form.html'
-  
     list_display = ['name', 'added', 'order_index']
     list_filter = ['added']  
     search_fields = ['name']
