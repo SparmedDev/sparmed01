@@ -88,8 +88,7 @@ if not DEBUG:
     AWS_IS_GZIPPED = False
     AWS_PRELOAD_METADATA = True   
     
-    TEMPLATE_MINIFIER = True
-    
+    TEMPLATE_MINIFIER = True    
     TEMPLATE_LOADERS = (
       ('django.template.loaders.cached.Loader', (
           'template_minifier.template.loaders.filesystem.Loader',
@@ -259,8 +258,8 @@ if es.username:
 
 
 # CKEditor    
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_UPLOAD_PATH = "admin-uploads/"
+CKEDITOR_IMAGE_BACKEND = "Pillow"
 CKEDITOR_JQUERY_URL = '//code.jquery.com/jquery.min.js'
 
 CKEDITOR_CONFIGS = {
