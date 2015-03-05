@@ -185,6 +185,7 @@ THIRD_PARTY_APPS = (
   'colorfield',
   'cookielaw',
   'ckeditor',
+  'captcha',
 )
 
 LOCAL_APPS = (
@@ -236,6 +237,11 @@ LOGIN_URL = 'django.contrib.auth.views.login'
 # Custom user model
 AUTH_USER_MODEL = "online_order.SparmedUser"
 
+# Recaptcha for Contact Form
+RECAPTCHA_PUBLIC_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
+RECAPTCHA_PRIVATE_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
+RECAPTCHA_USE_SSL = HTTPS
+CAPTCHA_AJAX = True
 
 # Haystack Settings
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
@@ -319,9 +325,9 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar_Full': [
             [ 'Source','-', 'Preview','-', 'Print'],
-            [ 'FontSize', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', '-', 'Undo', 'Redo' ],
+            [ 'FontSize', '-', 'Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Undo', 'Redo' ],
             [ 'Cut','Copy','Paste', '-', 'PasteText','PasteFromWord' ],
-            [ 'Find','Replace','-','SelectAll','-','SpellChecker' ],
+            [ 'Find','Replace','-','SelectAll'],
             [ 'NumberedList','BulletedList','-','Outdent','Indent',],
             [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
             [ 'Link','Unlink' ],

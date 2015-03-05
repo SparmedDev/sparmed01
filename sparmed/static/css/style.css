@@ -313,6 +313,12 @@ hr.compact {
     -ms-filter: "FlipH";
 }
 
+/*** FIX FOR CENTERING RECAPTCHA ***/
+#recaptcha_area {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*** HELPER CLASSES ***/
 .col-top {
     vertical-align: top;
