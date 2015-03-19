@@ -44,6 +44,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name="Product Short Name", default="Product 1")
     long_name = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
     description = models.CharField(max_length=255, verbose_name="Product Description", blank=True)
+    long_text = models.TextField(verbose_name="Product Long Text", blank=True, null=True)
     in_stock = models.IntegerField(verbose_name="Amount on Stock", default=0)    
     added = models.DateTimeField(default=timezone.now, verbose_name="Date and time added")
     slug = models.SlugField(unique=True, max_length=255, verbose_name="URL; Never modify this value!")
