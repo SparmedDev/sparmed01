@@ -7,11 +7,6 @@
 {% block pagedescription %}Contact SparMED for the best products for GOosafe IVF Laboratories{% endblock %}
 {% block title %}Contact{% endblock %}
 
-{% block head %}
-<!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
-<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
-{% endblock %}
-
 {% block body %}
 
 <h2 class="text-center">Contact Us</h2>
@@ -87,7 +82,6 @@
         {% else %}
         <form class="form" role="form" action="{% url 'contact' %}" method="post">
           {% csrf_token %}
-          {#% bootstrap_form form %#}
           {% bootstrap_field form.sender_name %}
           {% bootstrap_field form.sender %}
           {% bootstrap_field form.cc_myself %}

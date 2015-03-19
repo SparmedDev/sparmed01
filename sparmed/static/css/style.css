@@ -19,7 +19,7 @@ h1, h2 {
 a {
     font-weight: bold;
     color: #008393;
-    text-decoration: none;
+    text-decoration: none;½
 }
 
 hr {
@@ -314,9 +314,9 @@ hr.compact {
 }
 
 /*** FIX FOR CENTERING RECAPTCHA ***/
-#recaptcha_area {
-    margin-left: auto;
-    margin-right: auto;
+#recaptcha_table {
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 /*** HELPER CLASSES ***/

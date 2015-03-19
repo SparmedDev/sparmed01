@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from contact.models import ContactForm
+from contact.forms import ContactForm
 
 # Create your views here.
 def contact(request):
