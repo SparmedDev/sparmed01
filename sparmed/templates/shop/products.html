@@ -92,7 +92,7 @@
       {% for product in subcat.products.all %}
       {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel" class="owl-carousel">{% endif %}
           <div>
-            <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.get_name }}</a></h4>
+            <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
             <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
 
             {% for image in product.images.all reversed %}
