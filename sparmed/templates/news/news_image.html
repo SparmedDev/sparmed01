@@ -10,7 +10,7 @@
   {% else %}
     <div>
       {% with image=post.images.all|first %}
-      <img class="img-responsive img-rounded center-block" alt="{{ image.title }}" src="{{ image.get_absolute_url }}">
+      <img class="img-responsive img-rounded center-block" style="width:100%;" alt="{{ image.title }}" src="{{ image.get_absolute_url }}">
       {% endwith %}
     </div>
   {% endif %}
