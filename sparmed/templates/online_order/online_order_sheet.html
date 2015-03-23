@@ -65,6 +65,8 @@
           <input class="btn btn-info" type="submit" value="Add New Product" />
         </div>
       </form>  
+      
+      <div class="clearfix"></div>
 
       <form role="form" class="form" action="{% url 'set-quantity-cart' %}" method="post">
         {% csrf_token %}
