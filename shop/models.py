@@ -54,6 +54,13 @@ class Product(models.Model):
     weight = models.CharField(max_length=255, verbose_name="Weight", blank=True, null=True)
     hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        new_slug = slugify(self.name)
+        if new_slug != self.slug:
+            self.slug = new_slug
+
+        super(Product, self).save(*args, **kwargs)    
+
     @property
     def category(self):
         return self.subcategory.category
@@ -106,6 +113,13 @@ class Category(models.Model):
     
     document = ValidatedFileField(blank=True, null=True, verbose_name="PDF Document file (56 MB max)", upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*56)
 
+    def save(self, *args, **kwargs):
+        new_slug = slugify(self.short_name)
+        if new_slug != self.slug:
+            self.slug = new_slug
+
+        super(Category, self).save(*args, **kwargs)    
+        
     @property
     def products(self):
         id_list = []
