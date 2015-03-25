@@ -55,7 +55,7 @@ class Product(models.Model):
     hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        new_slug = slugify(self.name)
+        new_slug = slugify(self.product_id)
         if new_slug != self.slug:
             self.slug = new_slug
 
