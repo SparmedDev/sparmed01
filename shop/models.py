@@ -53,6 +53,7 @@ class Product(models.Model):
     size = models.CharField(max_length=255, verbose_name="Size (LxDxH)", blank=True, null=True)
     weight = models.CharField(max_length=255, verbose_name="Weight", blank=True, null=True)
     hs_code = models.CharField(max_length=255, verbose_name="Tariff No. / HS Code", blank=True, null=True)
+    price = models.FloatField(verbose_name="Price", blank=True, null=True)
 
     def save(self, *args, **kwargs):
         new_slug = slugify(self.product_id)
