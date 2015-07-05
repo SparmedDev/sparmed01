@@ -61,6 +61,7 @@ class Product(models.Model):
             self.slug = new_slug
 
         super(Product, self).save(*args, **kwargs)    
+        
 
     @property
     def category(self):
