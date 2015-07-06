@@ -2,7 +2,6 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 
 {% block pagedescription %}Distributors in the GOosafe SparMed family{% endblock %}
 {% block title %}Distributors{% endblock %}
@@ -46,7 +45,6 @@
 <script type="text/javascript" src="{% static 'js/robinson.js' %}" charset="utf-8"></script>
 {% endcompress %}
 
-{% compress js inline %}
 <script type="text/javascript" charset="utf-8">
   var distributors = [
     {% for distributor in distributors %}
@@ -87,7 +85,5 @@
   });
 
 </script>
-
-{% endcompress %}
 
 {% endblock %}

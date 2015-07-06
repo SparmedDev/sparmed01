@@ -2,7 +2,6 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 {% load cache %}
 
 {% block pagedescription %}Browse the finest quality IVF Laboratory Equipment{% endblock %}
@@ -101,7 +100,6 @@
 <!-- Include js plugin -->
 <script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8"></script>
 
-{% compress js inline %}
 <script type="text/javascript">
   $(document).ready(function() {
     $(".owl-carousel").owlCarousel({
@@ -124,7 +122,6 @@
     });       
   });  
 </script>
-{% endcompress %}
 
 {% endcache %}
 

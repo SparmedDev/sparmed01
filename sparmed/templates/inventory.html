@@ -2,7 +2,6 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 {% load base_extras %}
 {% load cache %}
 
@@ -103,7 +102,6 @@
 
 {% block endbody %}
 {% cache 6400 sparmed-inventory-scripts %}
-{% compress js inline %}
 <script> 
   function fillProducts(response) {
     if (response && response.collection && response.collection.length) {
@@ -151,6 +149,5 @@
     
   });
 </script>
-{% endcompress %}
 {% endcache %}
 {% endblock %}

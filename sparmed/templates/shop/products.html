@@ -2,7 +2,6 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 {% load base_extras %}
 {% load cache %}
 
@@ -125,7 +124,6 @@
 
 {% block endbody %}
 
-{% compress js inline %}
 <script type="text/javascript">
 
   $(document).ready(function() {    
@@ -159,6 +157,5 @@
     {% endfor %}
   });
 </script>
-{% endcompress %}  
 
 {% endblock %}

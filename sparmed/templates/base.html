@@ -2,7 +2,6 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 {% load base_extras %}
 
 <html lang="en">
@@ -22,12 +21,9 @@
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" >
     <link rel="favicon" type="image/x-icon" href="{% static 'favicon.ico' %}" >
 
-
     {% bootstrap_css %}
 
-    {% compress css inline %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" charset="utf-8">
-    {% endcompress %}
 
     <title>
       {% block title %}{% endblock %} | SparMED
@@ -50,7 +46,6 @@
     {% endblock %}
 
     {# Load Google Analytics Javascript #}
-    {% compress js inline %}
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -61,7 +56,6 @@
       ga('require', 'displayfeatures');      
       ga('send', 'pageview');  
     </script>
-    {% endcompress %}    
     
   </head>
   
@@ -193,18 +187,15 @@
 
     {# Load javascript at bottom for speed optimization #}
 
-    {% compress js inline %}
     <script type="text/javascript">
       if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='{% static 'js/jquery.min.js' %}' type='text/javascript'%3E%3C/script%3E"));
       }
-    </script>
-    {% endcompress %}        
+    </script>    
 
     {# Load Bootstrap javascript #}
     {% bootstrap_javascript %}
 
-    {% compress js inline %}
     <script>
       $(document).ready(function() {
           /* Stack menu when collapsed */
@@ -221,13 +212,10 @@
           });    
       });
     </script>    
-    {% endcompress %}
-
-    {% compress js inline %}
-    <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}" async></script>
-    {% endcompress %}
     
-    {% compress js inline %}    
+    <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}" async></script>
+
+     
     <script type="text/javascript">
       function getCookie(name) {
         var cookieValue = null;
@@ -267,7 +255,6 @@
         });            
       }      
     </script>    
-    {% endcompress %}
 
     {% block endbody %}
     {% endblock %}

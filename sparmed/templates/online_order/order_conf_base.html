@@ -2,10 +2,8 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 
 {% block head %}
-{% compress css inline %}
 <style type="text/css" media="print">
     .non-printable {
       display: none;
@@ -23,7 +21,6 @@
         content: "";
     }  
 </style>
-{% endcompress %}
 {% endblock %}
 
 {% block body %}

@@ -131,28 +131,6 @@ STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )    
-    
-COMPRESS_ENABLED = False# DEBUG is False
-if COMPRESS_ENABLED:
-    COMPRESS_CSS_FILTERS = [
-        'compressor.filters.css_default.CssAbsoluteFilter',
-        'compressor.filters.datauri.CssDataUriFilter',
-        'compressor.filters.cssmin.CSSMinFilter',
-    ]
-    
-    COMPRESS_JS_FILTERS = [
-        'compressor.filters.jsmin.SlimItFilter',
-    ]
-    
-    COMPRESS_STORAGE = 'sparmed.storage.CachedS3BotoStorage'
-    COMPRESS_ROOT = STATIC_ROOT
-    COMPRESS_URL = STATIC_URL
-    COMPRESS_OFFLINE = False
-    
-    STATICFILES_FINDERS += (
-        'compressor.finders.CompressorFinder',
-    )
-
 
 TEMPLATE_CONTEXT_PROCESSORS = (
   'django.core.context_processors.request',
@@ -193,7 +171,6 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
   'gunicorn',
   'storages',
-  'compressor',  
   'collectfast',
   'haystack',
   'bootstrap3',

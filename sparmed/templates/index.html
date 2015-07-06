@@ -2,7 +2,6 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load compress %}
 
 {% block pagedescription %}Index - GOosafe in IVF Laboratories{% endblock %}
 {% block title %}GOosafe in IVF Laboratories{% endblock %}
@@ -43,7 +42,6 @@
 {% block endbody %}
 <script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8" defer></script>
 
-{% compress js inline %}
 <script type="text/javascript">
   $(document).ready(function() {
     $(".owl-carousel").owlCarousel({
@@ -64,7 +62,6 @@
     $(".owl-carousel").parent().removeClass('col-sm-height');
   });
 </script>
-{% endcompress %} 
 
 {% endblock %}
 
