@@ -3,10 +3,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 #from django.contrib.contenttypes import generic
 
+from django.utils.translation import ugettext as _
+
 # Create your models here.
 class Cart(models.Model):
-    creation_date = models.DateTimeField(verbose_name='creation date')
-    checked_out = models.BooleanField(default=False, verbose_name='checked out')
+    creation_date = models.DateTimeField(verbose_name=_('creation date'))
+    checked_out = models.BooleanField(default=False, verbose_name=_('checked out'))
 
     app_label = 'cart'
     
@@ -28,8 +30,8 @@ class ItemManager(models.Manager):
         return super(ItemManager, self).get(*args, **kwargs)      
       
 class Item(models.Model):
-    cart = models.ForeignKey(Cart, verbose_name='cart')
-    quantity = models.PositiveIntegerField(verbose_name='quantity')
+    cart = models.ForeignKey(Cart, verbose_name=_('cart'))
+    quantity = models.PositiveIntegerField(verbose_name=_('quantity'))
     # product as generic relation
     content_type = models.ForeignKey(ContentType)    
     object_id = models.PositiveIntegerField()

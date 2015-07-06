@@ -51,6 +51,16 @@ USE_L10N = True
 USE_TZ = True
 FIRST_DAY_OF_WEEK = 1 # start week on Monday
 
+from django.utils.translation import ugettext_lazy as _
+LANGUAGES = (
+  ('en', _('English')),
+  ('ru', _('Russian')),
+  ('pt-br', _('Brazilian')),
+  ('es', _('Spansih')),
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 if not DEBUG:
@@ -159,6 +169,10 @@ GRAPPELLI = (
   'grappelli',
 )
 
+MODELTRANSLATION = (
+  'modeltranslation',  
+)
+
 DJANGO_APPS = (
   'django.contrib.admin',
   'django.contrib.auth',
@@ -184,7 +198,7 @@ THIRD_PARTY_APPS = (
   'colorfield',
   'cookielaw',
   'ckeditor',
-  'captcha',
+  'captcha',  
 )
 
 LOCAL_APPS = (
@@ -198,12 +212,13 @@ LOCAL_APPS = (
   'distributors',
 )
 
-INSTALLED_APPS = GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = MODELTRANSLATION + GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
   'django.middleware.http.ConditionalGetMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.locale.LocaleMiddleware',
   'django.middleware.common.CommonMiddleware',  
   'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',

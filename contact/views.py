@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext as _
 
 from contact.forms import ContactForm
 
@@ -46,6 +47,6 @@ def contact(request):
     return render(request, 'contact.html', {'form': form})
 
 def thanks(request):
-    feedback = "Thank you for contacting us. We will return to you as soon as possible."
+    feedback = _("Thank you for contacting us. We will return to you as soon as possible.")
 
     return render(request, 'contact.html', {'feedback': feedback})

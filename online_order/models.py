@@ -6,7 +6,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from django.utils import timezone
-
+from django.utils.translation import ugettext as _
 from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
 
@@ -14,23 +14,23 @@ from django_countries.fields import CountryField
 class SparmedUserManager(BaseUserManager):
     def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
         if not name:
-            raise ValueError('Users must have a Sparmed website account name')
+            raise ValueError(_('Users must have a Sparmed website account name'))
         if not company_name:
-            raise ValueError('Users must have a company name')
+            raise ValueError(_('Users must have a company name'))
         elif not country:
-            raise ValueError('Users must have a company country')
+            raise ValueError(_('Users must have a company country'))
         elif not address:
-            raise ValueError('Users must have a company address')
+            raise ValueError(_('Users must have a company address'))
         elif not city:
-            raise ValueError('Users must have a company city')
+            raise ValueError(_('Users must have a company city'))
         elif not postal_code:
-            raise ValueError('Users must have a company postal code')
+            raise ValueError(_('Users must have a company postal code'))
         elif not contact_person_name:
-            raise ValueError('Users must have a valid contact person name')
+            raise ValueError(_('Users must have a valid contact person name'))
         elif not contact_telephone:
-            raise ValueError('Users must have a valid contact telephone number')
+            raise ValueError(_('Users must have a valid contact telephone number'))
         elif not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError(_('Users must have an email address'))
             
         user = self.model(
             name=name,
@@ -67,15 +67,15 @@ class SparmedUserManager(BaseUserManager):
         return user
     
 class SparmedUser(AbstractBaseUser):
-    name = models.CharField(max_length=255, verbose_name="Sparmed Website Account Name", unique=True)
-    company_name = models.CharField(max_length=255, verbose_name="Company Name")
+    name = models.CharField(max_length=255, verbose_name=_("Sparmed Website Account Name"), unique=True)
+    company_name = models.CharField(max_length=255, verbose_name=("Company Name"))
     country = CountryField()
-    address = models.CharField(max_length=255, verbose_name="Company Address")
-    city = models.CharField(max_length=255, verbose_name="Company City")
-    postal_code = models.CharField(max_length=255, verbose_name="Company Postal Code", blank=True, null=True)
-    contact_person_name = models.CharField(max_length=255, verbose_name="Company Contact Person Name")
-    contact_telephone = models.CharField(max_length=50, verbose_name="Contact Telephone Number")
-    email = models.EmailField(verbose_name="Contact Email Address", max_length=255, unique=True)
+    address = models.CharField(max_length=255, verbose_name=("Company Address"))
+    city = models.CharField(max_length=255, verbose_name=_("Company City"))
+    postal_code = models.CharField(max_length=255, verbose_name=_("Company Postal Code"), blank=True, null=True)
+    contact_person_name = models.CharField(max_length=255, verbose_name=_("Company Contact Person Name"))
+    contact_telephone = models.CharField(max_length=50, verbose_name=_("Contact Telephone Number"))
+    email = models.EmailField(verbose_name=_("Contact Email Address"), max_length=255, unique=True)
     
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -163,53 +163,58 @@ class SparmedUser(AbstractBaseUser):
         return o_new
       
 class Order(models.Model):
-    date = models.DateTimeField(default=timezone.now, verbose_name="Date and time of order")
+    date = models.DateTimeField(default=timezone.now, verbose_name=_("Date and time of order"))
     
-    arranged_freight = models.BooleanField(verbose_name="SparMED Arranges Freight?", default=True)
-    freight_forwarder = models.CharField(max_length=255, verbose_name="Freight Forwarder", blank=True, null=True)
-    account_no = models.CharField(max_length=255, verbose_name="Account Number", blank=True, null=True)
+    arranged_freight = models.BooleanField(verbose_name=_("SparMED Arranges Freight?"), default=True)
+    freight_forwarder = models.CharField(max_length=255, verbose_name=_("Freight Forwarder"), blank=True, null=True)
+    account_no = models.CharField(max_length=255, verbose_name=_("Account Number"), blank=True, null=True)
     
-    EURO_PALLET = 'EP'
-    HALF_PALLET = 'HP'
-    BOX = 'BX'    
+    # Translators: Euro Pallet abbreviation 'EP'
+    EURO_PALLET = _('EP')
+    # Translators: Half Pallet abbreviation 'HP'
+    HALF_PALLET = _('HP')
+    # Translators: Box abbreviation 'BX'
+    BOX = _('BX')
     PACKING_CHOICES = (
-      (EURO_PALLET, 'Euro Pallet'),
-      (HALF_PALLET, 'Half Pallet'),
-      (BOX, 'Box'),
+      (EURO_PALLET, _('Euro Pallet')),
+      (HALF_PALLET, _('Half Pallet')),
+      (BOX, _('Box')),
     )  
     
-    arranged_packing = models.BooleanField(verbose_name="SparMED Arranges Packaging?", default=True)
-    packing_instructions = models.CharField(verbose_name="Packaging Instructions", max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, help_text="Please note if nothing is filled out SparMED will choose the best and safest way of packing your order.", blank=True)
-    packing_remarks = models.TextField(verbose_name="Packaging Remarks/Comments", blank=True, null=True)
+    arranged_packing = models.BooleanField(verbose_name=_("SparMED Arranges Packaging?"), default=True)
+    packing_instructions = models.CharField(verbose_name=_("Packaging Instructions"), max_length=2, choices=PACKING_CHOICES, default=EURO_PALLET, help_text=_("Please note if nothing is filled out SparMED will choose the best and safest way of packing your order."), blank=True)
+    packing_remarks = models.TextField(verbose_name=_("Packaging Remarks/Comments"), blank=True, null=True)
     
-    CARDBOARD_BOX = 'CB'
-    WOODEN_FRAMES = 'WF'
+    # Translators: Carboard Box abbreviation 'CB'
+    CARDBOARD_BOX = _('CB')
+    # Translators: Wooden Frames abbreviation 'WF'
+    WOODEN_FRAMES = _('WF')
     AIRCLEANER_CHOICES = (
-      (CARDBOARD_BOX, 'Cardboard Box'),
-      (WOODEN_FRAMES, 'Wooden Frames'),
+      (CARDBOARD_BOX, _('Cardboard Box')),
+      (WOODEN_FRAMES, _('Wooden Frames')),
     )    
-    aircleaner_instructions = models.CharField(verbose_name="Aircleaner Instructions (If applicable)", max_length=2, choices=AIRCLEANER_CHOICES, blank=True, null=True)
+    aircleaner_instructions = models.CharField(verbose_name=_("Aircleaner Instructions (If applicable)"), max_length=2, choices=AIRCLEANER_CHOICES, blank=True, null=True)
     
-    insurance_desired = models.BooleanField(verbose_name="Is insurance needed?", default=False, blank=True)
+    insurance_desired = models.BooleanField(verbose_name=_("Is insurance needed?"), default=False, blank=True)
     
-    documents = models.TextField(verbose_name="Please write down if you need any specific documents along with your shipment", blank=True, null=True)
+    documents = models.TextField(verbose_name=_("Please write down if you need any specific documents along with your shipment"), blank=True, null=True)
     
-    shipping_and_invoice_same = models.BooleanField(verbose_name="Different delivery address?", default=True, blank=True)
-    invoice_company_name = models.CharField(max_length=255, verbose_name="Company Name", blank=True, null=True)
-    invoice_company_address = models.CharField(max_length=255, verbose_name="Delivery Address", blank=True, null=True)
-    invoice_company_postal_code = models.IntegerField(verbose_name="Delivery Postal Code", blank=True, null=True)    
-    invoice_company_country = CountryField(verbose_name="Delivery Country", blank=True, null=True)
+    shipping_and_invoice_same = models.BooleanField(verbose_name=_("Different delivery address?"), default=True, blank=True)
+    invoice_company_name = models.CharField(max_length=255, verbose_name=_("Company Name"), blank=True, null=True)
+    invoice_company_address = models.CharField(max_length=255, verbose_name=_("Delivery Address"), blank=True, null=True)
+    invoice_company_postal_code = models.IntegerField(verbose_name=_("Delivery Postal Code"), blank=True, null=True)    
+    invoice_company_country = CountryField(verbose_name=_("Delivery Country"), blank=True, null=True)
     
-    other_remarks = models.TextField(verbose_name="Any other remarks or comments regarding this order?", blank=True, null=True)
+    other_remarks = models.TextField(verbose_name=_("Any other remarks or comments regarding this order?"), blank=True, null=True)
     
     class Meta:
         ordering = ['-date']        
       
 class OrderForm(ModelForm):  
-    arranged_freight = forms.BooleanField(label="SparMED Arranges Freight?", initial=True, required=False)
-    arranged_packing = forms.BooleanField(label="SparMED Arranges Packaging?", initial=True, required=False)
-    insurance_desired = forms.BooleanField(label="Is insurance needed?", initial=False, required=False)
-    shipping_and_invoice_same = forms.BooleanField(label="Different delivery address?", initial=True, required=False)
+    arranged_freight = forms.BooleanField(label=_("SparMED Arranges Freight?"), initial=True, required=False)
+    arranged_packing = forms.BooleanField(label=_("SparMED Arranges Packaging?"), initial=True, required=False)
+    insurance_desired = forms.BooleanField(label=_("Is insurance needed?"), initial=False, required=False)
+    shipping_and_invoice_same = forms.BooleanField(label=_("Different delivery address?"), initial=True, required=False)
   
     class Meta:
         model = Order
@@ -224,12 +229,12 @@ class OrderProduct(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='quantity')
     object_id = models.PositiveIntegerField()
     
-    product_id = models.CharField(max_length=255, verbose_name="Product ID", default="OOOO-0000")
-    name = models.CharField(max_length=255, verbose_name="Product Name", default="Product 1")    
-    long_name = models.CharField(max_length=255, verbose_name="Product Long Name", blank=True, null=True)
-    description = models.CharField(max_length=255, verbose_name="Product Description", blank=True, null=True)
-    category_slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
-    slug = models.SlugField(max_length=255, verbose_name="URL; Never modify this value!")
+    product_id = models.CharField(max_length=255, verbose_name=_("Product ID"), default="OOOO-0000")
+    name = models.CharField(max_length=255, verbose_name=_("Product Name"), default="Product 1")    
+    long_name = models.CharField(max_length=255, verbose_name=_("Product Long Name"), blank=True, null=True)
+    description = models.CharField(max_length=255, verbose_name=_("Product Description"), blank=True, null=True)
+    category_slug = models.SlugField(max_length=255, verbose_name=_("URL; Never modify this value!"))
+    slug = models.SlugField(max_length=255, verbose_name=_("URL; Never modify this value!"))
     
     order_history = models.ForeignKey('OrderHistoryItem', related_name='items')
     
