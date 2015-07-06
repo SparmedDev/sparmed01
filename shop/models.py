@@ -41,7 +41,7 @@ class GenericForm(forms.Form):
     
 class Product(models.Model):
     product_id = models.CharField(max_length=255, verbose_name=_("Product ID"), default="OOOO-0000")
-    name = models.CharField(max_length=100, verbose_name=_("Product Short Name"), default="Product 1")
+    name = models.CharField(max_length=100, verbose_name=_("Product Short Name"))
     long_name = models.CharField(max_length=255, verbose_name=_("Product Long Name"), blank=True, null=True)
     description = models.CharField(max_length=255, verbose_name=_("Product Description"), blank=True)
     long_text = RichTextField(verbose_name=_("Product Long Text"), blank=True, null=True)
@@ -80,7 +80,7 @@ class Product(models.Model):
        return u'%s' % self.name
 
 class Subcategory(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_("Subcategory Name"), default="Subcategory 1")
+    name = models.CharField(max_length=255, verbose_name=_("Subcategory Name"))
     description = models.CharField(max_length=255, verbose_name=_("Subcategory description"), blank=True)
     long_text = RichTextField(verbose_name=_("Subcategory Long Text (Please do not insert images!)"), blank=True)
     added = models.DateTimeField(default=timezone.now, verbose_name=_("Date and time added"))
@@ -104,8 +104,8 @@ class Subcategory(models.Model):
        return u'%s' % self.name
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_("Category Name"), default="Category 1")
-    short_name = models.CharField(max_length=40, verbose_name=_("Category Short Name (for navigation bar)"), default="Cat1")
+    name = models.CharField(max_length=255, verbose_name=_("Category Name"))
+    short_name = models.CharField(max_length=40, verbose_name=_("Category Short Name (for navigation bar)"))
     description = models.CharField(max_length=255, verbose_name=_("Category description"), blank=True)
     long_text = RichTextField(verbose_name=_("Category Long Text (Please do not insert images!)"), blank=True)
     added = models.DateTimeField(default=timezone.now, verbose_name=_("Date and time added"))

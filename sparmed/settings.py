@@ -172,6 +172,7 @@ GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
 
 GRAPPELLI = (
   'grappelli',
+  'grappelli_modeltranslation',
 )
 
 MODELTRANSLATION = (
@@ -217,7 +218,7 @@ LOCAL_APPS = (
   'distributors',
 )
 
-INSTALLED_APPS = MODELTRANSLATION + GRAPPELLI + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',

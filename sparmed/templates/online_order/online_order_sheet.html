@@ -40,31 +40,35 @@
         <div class="alert alert-warning alert-dismissible" role="alert">
           {% comment "Translators: Close as in 'Close window' %}
           <button id="close-account-change-btn" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span></button>
-          <span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "If you need to change your company details, click on the account" %} <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-wrench"></span></a> button almost in the top-right corner of your screen.
+          <span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "If you need to change your company details, click on the account" %} <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-wrench"></span></a> {% trans "button almost in the top-right corner of your screen." %}
         </div>
         {% endif %}
       </div>
     </div>
   </div>
+  
+  {% url 'inventory' as inventory_url %}
+  {% url 'products' as products_url %}          
 
   <div class="col-sm-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4>Products in Cart</h4>
+        <h4>{% trans "Products in Cart" %}</h4>
       </div>    
 
       {% if get_cart and get_cart.count > 0 %}
       <div class="panel-body">  
-        <p>Add more products to your cart through the <a href="{% url 'inventory' %}">inventory page</a>, the <a href="{% url 'products' %}">products page</a>, or the search box below.</p>        
+
+        <p>{% blocktrans %}Add more products to your cart through the <a href="{{ inventory_url }}">inventory page</a>, the <a href="{{ products_url }}">products page</a>, or the search box below.{% endblocktrans %}</p>        
       </div>      
 
       <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
         {% csrf_token %}
         <div class="form-group">
-          <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing an ID to search for products matching that ID" required />
+          <input type="text" id="id_q" name="q" class="form-control" placeholder="{% trans 'Start typing an ID to search for products matching that ID' %}" required />
         </div>
         <div class="form-group col-sm-4">
-          <input class="btn btn-info" type="submit" value="Add New Product" />
+          <input class="btn btn-info" type="submit" value="{% trans 'Add New Product' %}" />
         </div>
       </form>  
       
@@ -74,9 +78,9 @@
         {% csrf_token %}
         <table class="table table-bordered table-hover">
           <tr>
-            <th>Product (ID-Name)</th>
-            <th>Quantity</th>
-            <th>Remove?</th>
+            <th>{% trans "Product (ID-Name)" %}</th>
+            <th>{% trans "Quantity" %}</th>
+            <th>{% trans "Remove?" %}</th>
           </tr>
 
           {% for item in get_cart %}          
@@ -90,7 +94,7 @@
               </div>
             </td>
             <td>
-              <a class="btn btn-lg btn-block" href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></a>
+              <a class="btn btn-lg btn-block" href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Remove" %}</span></a>
             </td>
           </tr>
           {% endfor %}          
@@ -98,7 +102,7 @@
 
         <div style="display: block; margin: 20px; width: 100%;">
           <input class="btn btn-primary" type="submit" value="Update Cart" />
-          <a style="margin: 5px 10px;" class="btn btn-warning" href="{% url 'clear-cart' %}">Clear Cart</a>
+          <a style="margin: 5px 10px;" class="btn btn-warning" href="{% url 'clear-cart' %}">{% trans "Clear Cart" %}</a>
         </div>              
 
       </form>
@@ -108,23 +112,23 @@
         <p><span class="minor-skip"></span></p>
         {% if 'error' in order_feedback %}
         <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <p><span class="glyphicon glyphicon-exclamation-sign"></span> You must add some products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below, before being able to send an order.</p>
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span></button>
+          <p><span class="glyphicon glyphicon-exclamation-sign"></span> {% blocktrans %} You must add some products to your cart through the <a class="alert-link" href="{{ inventory_url }}">inventory page</a>, the <a class="alert-link" href="{{ products_url }}">products page</a>, or the search box below, before being able to send an order.{% endblocktrans %}</p>
         </div>
         {% else %}
         <div class="alert alert-info alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <span class="glyphicon glyphicon-exclamation-sign"></span> Please add some products to your cart through the <a class="alert-link" href="{% url 'inventory' %}">inventory page</a>, the <a class="alert-link" href="{% url 'products' %}">products page</a>, or the search box below.
+          <span class="glyphicon glyphicon-exclamation-sign"></span> {% blocktrans %} Please add some products to your cart through the <a class="alert-link" href="{{ inventory_url }}">inventory page</a>, the <a class="alert-link" href="{{ products_url }}">products page</a>, or the search box below.{% endblocktrans %}
         </div>         
         {% endif %}   
 
         <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
           {% csrf_token %}
           <div class="form-group">
-            <input type="text" id="id_q" name="q" class="form-control" placeholder="Start typing an ID to search for products matching that ID" required />
+            <input type="text" id="id_q" name="q" class="form-control" placeholder="{% trans 'Start typing an ID to search for products matching that ID' %}" required />
           </div>
           <div class="form-group col-sm-4">
-            <input class="btn btn-info form-control" type="submit" value="Add New Product" />
+            <input class="btn btn-info form-control" type="submit" value="{% trans 'Add New Product' %}" />
           </div>
         </form>    
       </section>
@@ -141,7 +145,7 @@
 <form class="form form-horizontal" role="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
-    <label class="control-label col-sm-4" for="arranged_freight">Freight arranged by SparMed?</label>  
+    <label class="control-label col-sm-4" for="arranged_freight">{% trans "Freight arranged by SparMed?" %}</label>  
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked 
            onclick="javascript:toggleVisible('arranged_freight_options');" />
   </div>
@@ -154,10 +158,10 @@
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-4" for="arranged_packing">Packaging arranged by SparMED?</label>
+    <label class="control-label col-sm-4" for="arranged_packing">{% trans "Packaging arranged by SparMED?" %}</label>
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked 
            onclick="javascript:toggleVisible('arranged_packing_options');" />
-    <span class="help-block">Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order.</span>
+    <span class="help-block">{% trans "Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order." %}</span>
   </div>
 
   <article id="arranged_packing_options">
@@ -170,7 +174,7 @@
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-4" for="shipping_and_invoice_same">Same delivery address?</label>  
+    <label class="control-label col-sm-4" for="shipping_and_invoice_same">{% "Same delivery address?" %}</label>  
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
            onclick="javascript:toggleVisible('invoice_options'); " />
   </div>
@@ -185,27 +189,27 @@
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-4" for="insurance_desired">Insurance Chosen?</label>  
+    <label class="control-label col-sm-4" for="insurance_desired">{% trans "Insurance Chosen?" %}</label>  
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="insurance_desired" name="insurance_desired"  checked />
   </div>  
 
   <hr>
 
   <div class="form-group">
-    <label class="control-label" for="documents">Any specific documents along with your shipment?</label>  
-    <textarea class="form-control" rows="2" id="documents" name="documents" placeholder="Please write down here if you need any specific documents along with your shipment"></textarea>
+    <label class="control-label" for="documents">{% trans "Any specific documents along with your shipment?" %}</label>  
+    <textarea class="form-control" rows="2" id="documents" name="documents" placeholder="{% trans 'Please write down here if you need any specific documents along with your shipment' %}"></textarea>
   </div>    
 
   <hr>
 
   <div class="form-group">
-    <label class="control-label" for="other_remarks">Any other remarks or comments regarding this order?</label>  
-    <textarea class="form-control" rows="2" id="other_remarks" name="other_remarks" placeholder="Please write down here if you have any other remarks or comments regarding this order"></textarea>
+    <label class="control-label" for="other_remarks">{% trans "Any other remarks or comments regarding this order?" %}</label>  
+    <textarea class="form-control" rows="2" id="other_remarks" name="other_remarks" placeholder="{% trans 'Please write down here if you have any other remarks or comments regarding this order' %}"></textarea>
   </div>
   
   <hr>
 
-  {% buttons submit='Send Order' %}{% endbuttons %}
+  {% buttons submit='{% trans "Send Order" %}' %}{% endbuttons %}
 </form>
 
 {% endblock %}
