@@ -30,7 +30,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added', 'order_index', 'category']
     list_filter = ['added']  
     search_fields = ['name']
-    date_hierarchy = 'added'
+#    date_hierarchy = 'added'
     
     inlines = [ShopImageInline,]
   
@@ -38,7 +38,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'added', 'order_index']
     list_filter = ['added']  
     search_fields = ['name']
-    date_hierarchy = 'added'
+#    date_hierarchy = 'added'
   
     prepopulated_fields = {"slug": ('short_name',)}
     

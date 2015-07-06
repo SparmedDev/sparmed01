@@ -14,7 +14,7 @@ class NewsPostAdmin(admin.ModelAdmin):
     list_display = ['title', 'added']
     list_filter = ['added']
     search_fields = ['title', 'content']
-    date_hierarchy = 'added'
+    #date_hierarchy = 'added'
     
     prepopulated_fields = {"slug": ('title',)}
     
