@@ -56,7 +56,7 @@ LANGUAGES = (
   ('en', _('English')),
   ('ru', _('Russian')),
   ('pt-br', _('Brazilian')),
-  ('es', _('Spansih')),
+  ('es', _('Spanish')),
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'

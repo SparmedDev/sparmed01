@@ -9,11 +9,11 @@
 
 {% block body %}
 <ol class="breadcrumb">
-  <li><a href="{% url 'distributor-login' %}">Distributor Home Panel</a></li>
-  <li class="active">Online Order Sheet</li>
+  <li><a href="{% url 'distributor-login' %}">{% trans "Distributor Home Panel" %}</a></li>
+  <li class="active">{% trans "Online Order Sheet" %}</li>
 </ol>
 
-<h2 class="text-center">Online Order Sheet</h2>
+<h2 class="text-center">{% trans "Online Order Sheet" %}</h2>
 
 <hr>
 
@@ -21,7 +21,7 @@
   <div class="col-sm-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4>Company Details</h4>
+        <h4>{% trans "Company Details" %}</h4>
       </div>
       <div class="panel-body">          
         <p class="text-muted text-small">
@@ -30,15 +30,17 @@
           {{ user.postal_code }} {{ user.city}}, {{ user.country }}
         </p>
         <p class="text-muted text-small">
-          Att: {{ user.contact_person_name }}<br>
-          Telephone: {{ user.contact_telephone }}<br>
-          Email: {{ user.email }}<br>
+          {% comment "Translators: Att abbreviation for 'attention', as used in letters " %}
+          {% trans "Att" %}: {{ user.contact_person_name }}<br>
+          {% trans "Telephone" %}: {{ user.contact_telephone }}<br>
+          {% trans "Email" %}: {{ user.email }}<br>
         </p>
 
         {% if cookie_account_change %}
         <div class="alert alert-warning alert-dismissible" role="alert">
-          <button id="close-account-change-btn" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <span class="glyphicon glyphicon-exclamation-sign"></span> If you need to change your company details, click on the account <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-wrench"></span></a> button almost in the top-right corner of your screen.
+          {% comment "Translators: Close as in 'Close window' %}
+          <button id="close-account-change-btn" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span></button>
+          <span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "If you need to change your company details, click on the account" %} <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-wrench"></span></a> button almost in the top-right corner of your screen.
         </div>
         {% endif %}
       </div>

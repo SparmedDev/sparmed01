@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from validatedfile.fields import ValidatedFileField
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 class CertificateItem(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Certificate/Document Title"))

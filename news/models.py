@@ -2,7 +2,7 @@ from django.db import models
 from sorl.thumbnail import ImageField
 from ckeditor.fields import RichTextField
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 class NewsImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name=_("Picture Title"), blank=True)
