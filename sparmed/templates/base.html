@@ -114,6 +114,7 @@
             <a id="account-button" class="{% productnavactive request 'account-area' %}" title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
             <a title="Logout from SparMED Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
             {% endif %}
+            
           </div>  
         </section><!-- /content-container -->        
       </header>
