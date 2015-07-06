@@ -155,7 +155,6 @@ WSGI_APPLICATION = 'sparmed.wsgi.application'
 # Grappelli Admin Site Settings
 GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
 
-
 GRAPPELLI = (
   'grappelli',
 )
@@ -190,11 +189,11 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
   'sparmed',
+  'cart',
   'contact',
   'shop',
   'news',
   'online_order',
-  'cart',
   'certificates',
   'distributors',
 )

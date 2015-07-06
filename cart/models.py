@@ -1,12 +1,15 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
+#from django.contrib.contenttypes import generic
 
 # Create your models here.
 class Cart(models.Model):
     creation_date = models.DateTimeField(verbose_name='creation date')
     checked_out = models.BooleanField(default=False, verbose_name='checked out')
 
+    app_label = 'cart'
+    
     class Meta:
         verbose_name = 'cart'
         verbose_name_plural = 'carts'
@@ -28,9 +31,12 @@ class Item(models.Model):
     cart = models.ForeignKey(Cart, verbose_name='cart')
     quantity = models.PositiveIntegerField(verbose_name='quantity')
     # product as generic relation
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType)    
     object_id = models.PositiveIntegerField()
-
+    content_object = GenericForeignKey('content_type', 'object_id')
+    
+    app_label = 'cart'    
+    
     objects = ItemManager()
 
     class Meta:
@@ -55,3 +61,4 @@ class Item(models.Model):
             self.save()
 
     product = property(get_product, set_product)      
+    
