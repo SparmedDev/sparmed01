@@ -63,6 +63,11 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+
 if not DEBUG:
     # Fix admin login cookie not being set correctly 
     SESSION_COOKIE_DOMAIN = DOMAIN_NAME
@@ -127,7 +132,7 @@ STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )    
     
-COMPRESS_ENABLED = DEBUG is False
+COMPRESS_ENABLED = False# DEBUG is False
 if COMPRESS_ENABLED:
     COMPRESS_CSS_FILTERS = [
         'compressor.filters.css_default.CssAbsoluteFilter',

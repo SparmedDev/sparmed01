@@ -4,26 +4,27 @@
 {% load bootstrap3 %}
 {% load compress %}
 {% load base_extras %}
+{% load i18n %}
 
-{% block pagedescription %}Change or view your company account details at SparMED.dk{% endblock %}
-{% block title %}Account Area{% endblock %}
+{% block pagedescription %}{% trans "Change or view your company account details at SparMED.dk" %}{% endblock %}
+{% block title %}{% trans "Account Area" %}{% endblock %}
 
 
 {% block body %}
 
 <ol class="breadcrumb">
-  <li><a href="{% url 'distributor-login' %}">Distributor Home Panel</a></li>
-  <li class="active">Account Area</li>
+  <li><a href="{% url 'distributor-login' %}">{% trans "Distributor Home Panel" %}</a></li>
+  <li class="active">{% trans "Account Area" %}</li>
 </ol>
 
-<h2 class="text-center">Account Area</h2>
+<h2 class="text-center">{% trans "Account Area" %}</h2>
 
   <section id="account-form">
     {% if feedback %}
     <div class="alert alert-success">
       <p><span class="glyphicon glyphicon-exclamation-sign"></span> {{ feedback }}</p>
       <p class="text-center">
-        <a id="account-button" title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">Go back to <span class="glyphicon glyphicon-wrench"></span> Account Area</a>.
+        <a id="account-button" title="{% trans 'Go to Account Area - view or change company account details' %}" href="{{ user.get_absolute_url }}">{% trans "Go back to" %} <span class="glyphicon glyphicon-wrench"></span> {% trans "Account Area" %}</a>.
       </p>
     </div>
     {% else %}
