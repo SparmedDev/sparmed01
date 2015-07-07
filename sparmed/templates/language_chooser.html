@@ -1,0 +1,32 @@
+{% load static %}
+{% load base_extras %}
+{% load i18n %}
+
+<div>
+    <div id="language-chooser" class="dropdown">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="languageDropdown" type="button">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_language_info for LANGUAGE_CODE as lang %}
+            <img alt="{{ lang.name_local }}" src="{% static '' %}{% get_flag lang.code %}" title='{{ lang.name_local }}' />
+            <span class="caret"></span>
+        </button>
+      
+        <ul class="dropdown-menu language-min-width">
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}          
+            {% for language in languages %}
+              <li>
+                  <form action="{% url 'set_language' %}" method='post'>
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}" />
+                    <input name="language" type="hidden" value="{{ language.code }}" />
+                    <button class="btn form-control" type="submit">
+                      <img alt="{{ language.name_local }}" title="{{ language.name_local }}" src="{% static '' %}{% get_flag language.code %}" />
+                    </button>                    
+                  </form>
+              </li>
+            {% endfor %}
+            
+        </ul>
+    </div>
+</div>

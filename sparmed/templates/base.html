@@ -3,6 +3,7 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load base_extras %}
+{% load i18n %}
 
 <html lang="en">
   <head>
@@ -109,6 +110,7 @@
             <a title="Logout from SparMED Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
             {% endif %}
             
+            {% include 'language_chooser.html' %}
           </div>  
         </section><!-- /content-container -->        
       </header>

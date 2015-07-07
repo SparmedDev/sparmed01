@@ -70,6 +70,17 @@ hr.compact {
     margin: 0px auto;
 }
 
+#language-chooser {
+    display: inline-block;
+    min-width: 56px;
+    padding-left: 5px;
+}
+
+.language-min-width {
+    min-width: 56px;
+    margin-left: 5px;
+}
+
 /*** HEADER & NAV BAR ***/
 #header {
     display: block;

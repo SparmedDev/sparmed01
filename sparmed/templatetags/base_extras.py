@@ -19,6 +19,13 @@ class CookielawCustomBanner(InclusionTag):
 
 register.tag(CookielawCustomBanner)
 
+@register.simple_tag
+def get_flag(language_code):
+    if language_code == 'en':
+        language_code = 'gb'
+    langs = language_code.split('-')
+    return 'flags/%s.gif' % langs[-1]
+
 
 @register.simple_tag
 def navactive(request, urls):

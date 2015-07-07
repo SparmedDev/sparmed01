@@ -104,12 +104,33 @@ if not DEBUG:
     AWS_PRELOAD_METADATA = True   
     
     TEMPLATE_MINIFIER = True    
-    TEMPLATE_LOADERS = (
-      ('django.template.loaders.cached.Loader', (
-          'template_minifier.template.loaders.filesystem.Loader',
-          'template_minifier.template.loaders.app_directories.Loader',
-      )),
-    )    
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+                # insert your TEMPLATE_DIRS here
+            ],
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.i18n',
+                    'django.template.context_processors.media',
+                    'django.template.context_processors.static',
+                    'django.template.context_processors.tz',
+                    'django.contrib.messages.context_processors.messages',
+                    'cart.context_processors.get_cart',
+                ],
+                'loaders': [
+                    ('django.template.loaders.cached.Loader', (
+                        'template_minifier.template.loaders.filesystem.Loader',
+                        'template_minifier.template.loaders.app_directories.Loader',
+                    )),
+                ]
+            },
+        },
+    ]    
 else:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  
@@ -122,24 +143,45 @@ else:
     MEDIA_URL = STATIC_URL + 'media/'
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
     
-    TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )    
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+                # insert your TEMPLATE_DIRS here
+            ],
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',            
+                    'django.contrib.auth.context_processors.auth',
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.i18n',
+                    'django.template.context_processors.media',
+                    'django.template.context_processors.static',
+                    'django.template.context_processors.tz',
+                    'django.contrib.messages.context_processors.messages',
+                    'cart.context_processors.get_cart',
+                ],
+                'loaders': [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]
+            },
+        },
+    ]      
 
 STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )    
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-  'django.core.context_processors.request',
-  "django.contrib.auth.context_processors.auth",
-  "django.core.context_processors.i18n",
-  "django.core.context_processors.tz",
-  'django.contrib.messages.context_processors.messages',
-  'cart.context_processors.get_cart',
-)
+#TEMPLATE_CONTEXT_PROCESSORS = (
+#  'django.template.context_processors.request',
+#  "django.contrib.auth.context_processors.auth",
+#  "django.core.context_processors.i18n",
+#  "django.core.context_processors.tz",
+#  'django.contrib.messages.context_processors.messages',
+#  'cart.context_processors.get_cart',
+#)
 
 ROOT_URLCONF = 'sparmed.urls'
 

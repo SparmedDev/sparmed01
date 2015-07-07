@@ -48,6 +48,8 @@ urlpatterns = [
 
   url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
   url(r'^robots\.txt$', include('robots.urls')),
+  
+  url(r'^i18n/', include('django.conf.urls.i18n')),
 ]
 
 distributor_login_patterns = [
