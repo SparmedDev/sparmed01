@@ -1,6 +1,8 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.core.urlresolvers import resolve
+from django.utils import translation
 
 register = template.Library()
 
@@ -44,21 +46,25 @@ def productnavactive(request, name):
     
     return ""
 
-class TranslatedURL(template.Node):
-    def __init__(self, language):
-        self.language = language
-    def render(self, context):
-        view = resolve(context['request'].path)
-        request_language = translation.get_language()
-        translation.activate(self.language)
-        url = reverse(view.url_name, args=view.args, kwargs=view.kwargs)
-        translation.activate(request_language)
-        return url
+@register.simple_tag(takes_context=True)
+def change_lang(context, lang=None, *args, **kwargs):
+    """
+    Get active page's url by a specified language
+    Usage: {% change_lang 'en' %}
+    """
 
-@register.tag(name='translate_url')
-def do_translate_url(parser, token):
-    language = token.split_contents()[1]
-    return TranslatedURL(language)  
+    path = context['request'].path
+    url_parts = resolve( path )
+
+    url = path
+    cur_language = translation.get_language()
+    try:
+        translation.activate(lang)
+        url = reverse( url_parts.view_name, kwargs=url_parts.kwargs )
+    finally:
+        translation.activate(cur_language)
+
+    return "%s" % url  
   
 @register.tag
 def settings_value(parser, token):

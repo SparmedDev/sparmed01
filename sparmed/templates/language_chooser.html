@@ -14,17 +14,18 @@
     {% get_available_languages as LANGUAGES %}
     {% get_language_info_list for LANGUAGES as languages %}          
     {% for language in languages %}
+    {% if language.code != lang.code %}
     <li role="presentation">
       <form role="form" class="form form-horizontal" action="{% url 'set_language' %}" method='post'>
         {% csrf_token %}
-        <input name="next" type="hidden" value="{% translate_url language.code %}" /> 
-        <!-- TODO: FIX NEXT INPUT FIELD -->
+        <input name="next" type="hidden" value="{% change_lang language.code %}" /> 
         <input name="language" type="hidden" value="{{ language.code }}" />
         <button class="btn form-control" type="submit">
           <img alt="{{ language.name_local }}" title="{{ language.name_local }}" src="{% static '' %}{% get_flag language.code %}" />
         </button>                    
       </form>
     </li>
+    {% endif %}
     {% endfor %}
   </ul>
 </div>
