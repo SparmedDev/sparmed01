@@ -1,6 +1,6 @@
 {% load static %}
-{% load base_extras %}
 {% load i18n %}
+{% load base_extras %}
 
 <div id="language-chooser" class="dropdown">
   <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="languageDropdown" type="button">
@@ -17,7 +17,8 @@
     <li role="presentation">
       <form role="form" class="form form-horizontal" action="{% url 'set_language' %}" method='post'>
         {% csrf_token %}
-        <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3' }}" />
+        <input name="next" type="hidden" value="{{ language.code }}{{ request.get_full_path }}" /> 
+        <!-- TODO: FIX NEXT INPUT FIELD -->
         <input name="language" type="hidden" value="{{ language.code }}" />
         <button class="btn form-control" type="submit">
           <img alt="{{ language.name_local }}" title="{{ language.name_local }}" src="{% static '' %}{% get_flag language.code %}" />
@@ -25,6 +26,5 @@
       </form>
     </li>
     {% endfor %}
-
   </ul>
 </div>
