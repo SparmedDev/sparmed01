@@ -17,7 +17,7 @@
     <li role="presentation">
       <form role="form" class="form form-horizontal" action="{% url 'set_language' %}" method='post'>
         {% csrf_token %}
-        <input name="next" type="hidden" value="{{ redirect_to }}" />
+        <input name="next" type="hidden" value="{{ request.get_full_path }}" />
         <input name="language" type="hidden" value="{{ language.code }}" />
         <button class="btn form-control" type="submit">
           <img alt="{{ language.name_local }}" title="{{ language.name_local }}" src="{% static '' %}{% get_flag language.code %}" />
