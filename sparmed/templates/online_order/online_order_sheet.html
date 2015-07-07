@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
 {% block pagedescription %}Place an order online easily and safely using SparMED's online order sheet{% endblock %}
 {% block title %}Online Order Sheet{% endblock %}
@@ -215,7 +216,6 @@
 
 {% block endbody %}
 
-{% compress js inline %}
 <script type="text/javascript">
   $(function() {  
     $("#arranged_freight_options").toggle();
@@ -227,12 +227,10 @@
     $("#" + divid).toggle(500); 
   }
 </script>
-{% endcompress %}
 
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
 
-{% compress js inline %}
 <script type="text/javascript">  
   $(function() {   
     var self = $("#id_q");
@@ -254,9 +252,7 @@
     });
   });  
 </script>
-{% endcompress %}
 
-{% compress js inline %}
 <script type="text/javascript">
   $(function() {
     var csrftoken = getCookie('csrftoken');
@@ -274,6 +270,5 @@
     $.post("{% url 'remove-account-change-cookie' %}");          
   });
 </script>
-{% endcompress %}
 
 {% endblock %}

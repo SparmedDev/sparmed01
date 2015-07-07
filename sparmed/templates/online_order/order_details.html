@@ -1,26 +1,30 @@
+{% load i18n %}
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>Order Details</h3>
+    <h3>{% trans "Order Details" %}</h3>
   </div>
   <div class="panel-body">
     {% if order.arranged_freight %}
     <p>
-      SparMED Arranged freight: Yes
+      {% trans "SparMED Arranged freight: Yes" %}
     </p>    
     {% else %}
     <p>
+      {% blocktrans %}
       SparMED Arranged Freight: No<br>
       Freight Forwarder: {{ order.freight_forwarder }}<br>
       Account Number: {{ order.account_no }}
+      {% endblocktrans %}
     </p>
     {% endif %}
 
     {% if order.arranged_packing %}
-    <p>SparMED Arranged Packaging: Yes</p>        
+    <p>{% trans "SparMED Arranged Packaging: Yes" %}</p>        
     {% else %}
-    <p>Choice of Packaging: {{ order.packing_instructions }}<br>
+    <p>{% trans "Choice of Packaging" %}: {{ order.packing_instructions }}<br>
       {% if order.packing_remarks|length %}
-      Associated Remarks: <br>
+      {% trans "Associated Remarks" %}: <br>
       {{ order.packing_remarks }}
       {% endif %}
     </p>
@@ -31,28 +35,28 @@
     {% endif %}
 
     {% if order.insurance_desired %}
-    <p>Insurance chosen and included</p>
+    <p>{% trans "Insurance chosen and included" %}</p>
     {% else %}
-    <p>Insurance not chosen and therefore not included.</p>
+    <p>{% trans "Insurance not chosen and therefore not included." %}</p>
     {% endif %}
 
     {% if order.documents|length %}
-    <p>Specific Documents Requested:<br> {{ order.documents }}</p>
+    <p>{% trans "Specific Documents Requested" %}:<br> {{ order.documents }}</p>
     {% endif %}
 
     {% if order.shipping_and_invoice_same %}
-    <p>Invoice and delivery address was the same.</p>
+    <p>{% trans "Invoice and delivery address was the same" %}.</p>
     {% else %}
-    <p>Delivery Address Details:<br>
-      Name: {{ order.invoice_company_name }}<br>
-      Address: {{ order.invoice_company_address }}<br>
-      Postal Code: {{ order.invoice_company_postal_code }}<br>
-      Country: {{ order.invoice_company_country }}
+    <p>{% trans "Delivery Address Details" %}:<br>
+      {% trans "Name" %}: {{ order.invoice_company_name }}<br>
+      {% tarns "Address" %}: {{ order.invoice_company_address }}<br>
+      {% trans "Postal Code" %}: {{ order.invoice_company_postal_code }}<br>
+      {% trans "Country" %}: {{ order.invoice_company_country }}
     </p>
     {% endif %}
 
     {% if order.other_remarks|length %}
-    <p>Other Remarks given to SparMed: <br> {{ order.other_remarks }}</p>
+    <p>{% trans "Other Remarks given to SparMED" %}: <br> {{ order.other_remarks }}</p>
     {% endif %}
   </div>
 </div>

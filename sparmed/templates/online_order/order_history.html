@@ -4,19 +4,20 @@
 {% load bootstrap3 %}
 {% load base_extras %}
 {% load tz %}
+{% load i18n %}
 
-{% block pagedescription %}View you Order History with SparMED{% endblock %}
-{% block title %}Order History{% endblock %}
+{% block pagedescription %}{% trans "View you Order History with SparMED" %}{% endblock %}
+{% block title %}{% trans "Order History" %}{% endblock %}
 
 
 {% block body %}
 
 <ol class="breadcrumb">
-  <li><a href="{% url 'distributor-login' %}">Distributor Home Panel</a></li>
-  <li class="active">Order History</li>
+  <li><a href="{% url 'distributor-login' %}">{% trans "Distributor Home Panel" %}</a></li>
+  <li class="active">{% trans "Order History" %}</li>
 </ol>
 
-<h2 class="text-center">Order History</h2>
+<h2 class="text-center">{% trans "Order History" %}</h2>
 
 <hr>
 
@@ -29,7 +30,7 @@
       <h3 class="panel-title text-center">
           <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#order_c_{{ order.pk }}" aria-expanded="{% if forloop.first%}true{% else %}false{% endif %}" aria-controls="order_c_{{ order.pk }}">
               {% localtime on %}
-              Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>
+              {% blocktrans %}Order of <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>{% endblocktrans %}
               {% endlocaltime %}
           </a>
       </h3>
@@ -41,7 +42,7 @@
         <div class="col-sm-5">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3>Company Details</h3>
+              <h3>{% trans "Company Details" %}</h3>
             </div>
             <div class="panel-body">          
               <p class="text-muted">
@@ -50,9 +51,10 @@
                 {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
               </p>
               <p class="text-muted">
-                Att: {{ order.user.contact_person_name }}<br>
-                Telephone: {{ order.user.contact_telephone }}<br>
-                Email: {{ order.user.email }}
+                {% comment "Translators: 'Att' is short for Attention, as used in letters" %}
+                {% trans "Att" %}: {{ order.user.contact_person_name }}<br>
+                {% trans "Telephone" %}: {{ order.user.contact_telephone }}<br>
+                {% trans "Email" %}: {{ order.user.email }}
               </p>
             </div>
           </div>
@@ -78,8 +80,8 @@
         
         <div class="col-sm-8">
           <br>
-          <a class="btn btn-lg btn-info btn-block" href="{% url 'order-print' order.pk %}" title="View in Print-Friendly Format"><span class="glyphicon glyphicon-print"></span> View in Print-Friendly Format</a>
-          <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Repeat Previous Order"><span class="glyphicon glyphicon-shopping-cart"></span> Repeat Order</a>
+          <a class="btn btn-lg btn-info btn-block" href="{% url 'order-print' order.pk %}" title="{% trans 'View in Print-Friendly Format' %}"><span class="glyphicon glyphicon-print"></span> {% trans "View in Print-Friendly Format" %}</a>
+          <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="{% trans 'Repeat Previous Order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> {% trans "Repeat Order" %}</a>
         </div>
           
         <div class="col-sm-2"></div>
@@ -92,7 +94,7 @@
   {% if not forloop.last %}<hr class="compact">{% endif %}  
 
   {% empty %}
-  <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No orders found in the order history.</div>
+  <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "No orders found in the order history." %}</div>
   {% endfor %}
 
 </div><!--/panel-group accordion -->

@@ -2,12 +2,13 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
-{% block pagedescription %}Place an order online easily and safely using SparMED's online order sheet{% endblock %}
-{% block title %}Online Order Sheet{% endblock %}
+{% block pagedescription %}{% trans "Place an order online easily and safely using SparMED's online order sheet" %}{% endblock %}
+{% block title %}{% trans "Online Order Sheet" %}{% endblock %}
 
 {% block body %}
-<h2 class="text-center">Search Results</h2>
+<h2 class="text-center">{% trans "Search Results" %}</h2>
 
 <form method="get" action=".">
   <table>
@@ -16,27 +17,27 @@
     <tr>
       <td>&nbsp;</td>
       <td>
-        <input type="submit" value="Search">
+        <input type="submit" value="{% trans 'Search' %}">
       </td>
     </tr>
   </table>
 
   {% if query %}
-  <h3>Results</h3>
+  <h3>{% trans "Results" %}</h3>
 
   {% for result in page.object_list %}
   <p>
     {{ result.object.subcategory.name|safe }}: <a href="{{ result.object.get_absolute_url }}">{{ result.object.product_id }}</a> - {{ result.object.name|safe }}
   </p>
   {% empty %}
-  <p>No results found.</p>
+  <p>{% trans "No results found." %}</p>
   {% endfor %}
 
   {% if page.has_previous or page.has_next %}
   <div>
-    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; {% trans "Previous" %}{% if page.has_previous %}</a>{% endif %}
     |
-    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}{% trans "Next" %} &raquo;{% if page.has_next %}</a>{% endif %}
   </div>
   {% endif %}
   {% else %}

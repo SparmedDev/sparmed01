@@ -3,9 +3,10 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load cache %}
+{% load i18n %}
 
-{% block pagedescription %}Browse the finest quality IVF Laboratory Equipment{% endblock %}
-{% block title %}Products{% endblock %}
+{% block pagedescription %}{% trans "Browse the finest quality IVF Laboratory Equipment" %}{% endblock %}
+{% block title %}{% trans "Products" %}{% endblock %}
 
 {% block head %}
 <!-- Important Owl stylesheet -->
@@ -25,18 +26,18 @@
 
 <div style="border-bottom: 2px solid {{ product.subcategory.color }};">
   <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.description|safe }}</h2>
-  <h3 class="text-center"><strong>Product ID: {{ product.product_id }}</strong></h3>
+  <h3 class="text-center"><strong>{% trans "Product ID" %}: {{ product.product_id }}</strong></h3>
 
   {% if product.size or product.weight %}
   <p class="text-center"> 
-    {% if product.size %}Dimensions/Size: {{ product.size }}{% endif %}
+    {% if product.size %}{% trans "Dimensions/Size" %}: {{ product.size }}{% endif %}
     {% if product.size and product.weight %} - {% endif %}
-    {% if product.weight %}Weight: {{ product.weight }}{% endif %}
+    {% if product.weight %}{% trans "Weight" %}: {{ product.weight }}{% endif %}
   </p>
   {% endif %}
   
   <p class="text-center">
-    {% with prefix="Tariff No. / HS Code: " %}
+    {% trans "Tariff No. / HS Code" as prefix %}
     {% if product.hs_code %}
     {{prefix}}{{ product.hs_code }}
     {% elif product.subcategory.hs_code %}
@@ -44,16 +45,15 @@
     {% elif product.category.hs_code %}
     {{prefix}}{{ product.category.hs_code }}
     {% endif %}
-    {% endwith %}
   </p>  
 
   {% endcache %}
 
   {% if user.is_anonymous %}
-  <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br> (Login required)</p>
+  <p class="text-muted text-center">{% trans "Add to Cart" %} <span class="glyphicon glyphicon-shopping-cart"></span><br> ({% trans "Login required" %})</p>
   {% else %}
   <p class="text-center">
-    <button id="add_btn" class="btn add-to-cart-btn btn-lg" style="color: {{ product.subcategory.color }};">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
+    <button id="add_btn" class="btn add-to-cart-btn btn-lg" style="color: {{ product.subcategory.color }};">{% trans "Add to Cart" %} <span class="glyphicon glyphicon-shopping-cart"></span></button>
   </p>
   {% endif %}
 </div>
@@ -77,20 +77,18 @@
     <img class="img-responsive img-rounded center-block max-height-600" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
     {% endwith %}
     {% else %}
-    <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> No pictures available</div>
+    <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "No pictures available" %}</div>
     {% endif %}    
   </div>
    
   
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
       {{ long_text|safe }}
-  </div>  
-  
+  </div>    
   
 </div>
 
 {% endcache %} 
-
 
 {% endblock %}
 

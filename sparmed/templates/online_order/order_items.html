@@ -1,9 +1,11 @@
+{% load i18n %}
+
 {% if items %}
 <table class="table table-bordered table-hover table-responsive">
   <tr>
-    <th>Product ID</th>
-    <th>Product Name</th>
-    <th>Quantity</th>
+    <th>{% trans "Product ID" %}</th>
+    <th>{% trans "Product Name" %}</th>
+    <th>{% trans "Quantity" %}</th>
   </tr>
 
   {% for item in items %}
@@ -21,5 +23,5 @@
   {% endfor %}
 </table>
 {% else %}
-<div class="alert alert-error"><span class="glyphicon glyphicon-exclamation-sign"></span> No product items found in the order.</div>
+<div class="alert alert-error"><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "No product items found in the order." %}</div>
 {% endif %}

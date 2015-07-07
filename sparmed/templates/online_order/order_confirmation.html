@@ -1,12 +1,13 @@
 {% extends 'online_order/order_conf_base.html' %}
+{% load i18n %}
 
-{% block pagedescription %}This Order Confirmation page shows the details concerning a specific order{% endblock %}
-{% block title %}Order Confirmation{% endblock %}
+{% block pagedescription %}{% trans "This Order Confirmation page shows the details concerning a specific order" %}{% endblock %}
+{% block title %}{% trans "Order Confirmation" %}{% endblock %}
 
 {% block containerend %}
 <div class="non-printable">
-    <a class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}" title="Send Order"><span class="glyphicon glyphicon-envelope"></span> Send Order</a>
-    <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}" title="Back"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+    <a class="btn btn-lg btn-primary btn-block" href="{% url 'order-confirmation' order.pk True %}" title="{% trans 'Send Order' %}"><span class="glyphicon glyphicon-envelope"></span> {% trans "Send Order" %}</a>
+    <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-regret' order.pk %}" title="{% trans 'Back' %}"><span class="glyphicon glyphicon-arrow-left"></span> {% trans 'Back' %}</a>
   <br><span class="minor-skip"></span><br><br><br>
 </div>
 {% endblock %}

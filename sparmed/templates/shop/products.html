@@ -4,9 +4,10 @@
 {% load bootstrap3 %}
 {% load base_extras %}
 {% load cache %}
+{% load i18n %}
 
-{% block pagedescription %}Browse the finest quality IVF Laboratory Equipment{% endblock %}
-{% block title %}Products{% endblock %}
+{% block pagedescription %}{% trans "Browse the finest quality IVF Laboratory Equipment" %}{% endblock %}
+{% block title %}{% trans "Products" %}{% endblock %}
 
 {% block head %}
 <!-- Important Owl stylesheet -->
@@ -103,10 +104,10 @@
             {% endfor %}
 
             {% if user.is_anonymous %}
-            <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>(Login required)</p>
+            <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>({% trans "Login required" %})</p>
             {% else %}
             <p class="text-center">
-              <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
+              <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">{% trans "Add to Cart" %} <span class="glyphicon glyphicon-shopping-cart"></span></button>
             </p>
 
             {% endif %}
@@ -125,7 +126,6 @@
 {% block endbody %}
 
 <script type="text/javascript">
-
   $(document).ready(function() {    
     var itemsLength = 0;
 

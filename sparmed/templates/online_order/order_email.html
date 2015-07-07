@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
 {% block head %}
 <style>
@@ -77,19 +78,22 @@
           <col style="width: 50%">
           <tr>
             <td>
-              <h2>Purchase Order Sheet Receipt</h2>
+              <h2>{% trans "Purchase Order Sheet Receipt" %}</h2>
               <h4>
                 {% localtime on %}
                 <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>       
                 {% endlocaltime %}
               </h4>
               <p>
-                You can also view this order receipt online on SparMED.DK through the <a title="Visit Your SparMED.dk Order History" href="http://www.sparmed.dk{% url 'order-history' %}" target="_blank">Order History</a>.
+                {% url 'order-history' as order_history_url %}
+                {% blocktrans %}
+                You can also view this order receipt online on SparMED.DK through the <a title="Visit Your SparMED.dk Order History" href="http://www.sparmed.dk{{ order_history_url }}" target="_blank">Order History</a>.
+                {% endblocktrans %}
               </p>
             </td>
 
             <td>
-              <img style="display: block; width: 400px; margin: 5px auto;" class="img-responsive" src="{% static 'img/sparmed-logo-email.jpg' %}" alt="Sparmed Logo - GOosafe in IVF Laboratories">
+              <img style="display: block; width: 400px; margin: 5px auto;" class="img-responsive" src="{% static 'img/sparmed-logo-email.jpg' %}" alt="{% trans 'Sparmed Logo - GOosafe in IVF Laboratories' %}">
             </td>
           </tr>   
         </table>

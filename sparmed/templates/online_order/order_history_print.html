@@ -1,11 +1,12 @@
 {% extends 'online_order/order_conf_base.html' %}
+{% load i18n %}
 
-{% block pagedescription %}This Order History item is shown in print-friendly format{% endblock %}
-{% block title %}Print Friendly Order History{% endblock %}
+{% block pagedescription %}{% trans "This Order History item is shown in print-friendly format" %}{% endblock %}
+{% block title %}{% trans "Print Friendly Order History" %}{% endblock %}
 
 {% block containerend %}
 <div class="non-printable">
-    <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="Repeat Previous Order"><span class="glyphicon glyphicon-shopping-cart"></span> Repeat Order</a>
-    <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-history' %}" title="Back to Order History"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+    <a class="btn btn-lg btn-success btn-block" href="{% url 're-order-history' order.pk %}" title="{% trans 'Repeat Previous Order' %}"><span class="glyphicon glyphicon-shopping-cart"></span> {% trans "Repeat Order" %}</a>
+    <a class="btn btn-lg btn-danger btn-block" href="{% url 'order-history' %}" title="{% trans 'Back to Order History' %}"><span class="glyphicon glyphicon-arrow-left"></span> {% trans "Back" %}</a>
 </div>
 {% endblock %}

@@ -1,31 +1,35 @@
+{% load i18n %}
+
 <table class="table table-responsive">
   <tr>
     <td>
-      <p>TO:</p>
+      {% comment "Translators: 'TO' as used in mails (to and from - receiver and sender) %}
+      <p>{% trans "TO" %}:</p>
       <p>
         <strong>SparMED ApS</strong><br>
         Toppevadvej 34-38<br>
         DK-3660 Stenløse<br>
-        Denmark
+        {% trans "Denmark" %}
       </p>
       <p>
-        Phone: +45 3940 2503<br>
-        Email: info@sparmed.dk<br>
-        Web: www.sparmed.dk
+        {% trans "Phone" %}: +45 3940 2503<br>
+        {% trans "Email" %}: info@sparmed.dk<br>
+        {% trans "Web" %}: <a href="/" title='SparMED.dk'>www.SparMED.dk</a>
       </p>
     </td>
 
     <td>
-      <p>FROM:</p>
+      {% comment "Translators: 'FROM' as used in mails (to and from - receiver and sender) %}
+      <p>{% trans "FROM" %}:</p>
       <p>
         <strong>{{ order.user.company_name }}</strong><br>
         {{ order.user.address}}<br>
         {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
       </p>
       <p>
-        Att: {{ order.user.contact_person_name }}<br>
-        Telephone: {{ order.user.contact_telephone }}<br>
-        Email: {{ order.user.email }}
+        {% trans "Att" %}: {{ order.user.contact_person_name }}<br>
+        {% trans "Telephone" %}: {{ order.user.contact_telephone }}<br>
+        {% trans "Email" %}: {{ order.user.email }}
       </p>
     </td>    
   </tr>

@@ -2,13 +2,14 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
-{% block pagedescription %}Login to SparMED distributor area{% endblock %}
-{% block title %}Login{% endblock %}
+{% block pagedescription %}{% trans "Login to SparMED distributor area" %}{% endblock %}
+{% block title %}{% trans "Login" %}{% endblock %}
 
 {% block body %}
 
-<h2 class="text-center">Distributor Login</h2>
+<h2 class="text-center">{% trans "Distributor Login" %}</h2>
 
 <hr>
 
@@ -16,9 +17,10 @@
     <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
     {% csrf_token %}
     {% bootstrap_form form %}
-
-    {% buttons submit='Login' %}{% endbuttons %}
-    <a class="btn btn-warning" href="{% url 'password_reset' %}">Reset Password</a>
+    
+    {% trans "Login" as login_trans %}
+    {% buttons submit='{{ login_trans }}' %}{% endbuttons %}
+    <a class="btn btn-warning" href="{% url 'password_reset' %}">{% trans "Reset Password" %}</a>
     <input type="hidden" name="next" value="{{ next }}" />
     </form>
 </section>
