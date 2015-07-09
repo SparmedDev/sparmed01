@@ -71,7 +71,7 @@
       <header id="header" class="gradient">
         <section class="content-container">        
           <div id="nav-logo">
-            <img class="img-responsive" src="{% static 'img/sparmed-logo.png' %}" alt="SparMED Logo - GOosafe in IVF Laboratories">
+            <img class="img-responsive" src="{% static 'img/sparmed-logo.png' %}" alt="{% trans 'SparMED Logo - GOosafe in IVF Laboratories' %}">
           </div>
 
           <div id="main-nav" class="navbar navbar-default" role="navigation">
@@ -79,7 +79,7 @@
 
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
+                  <span class="sr-only">{% trans "Toggle navigation" %}</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
@@ -88,11 +88,11 @@
 
               <div class="navbar-collapse collapse">
                 <ul class="nav nav-pills">
-                  <li class="btn-fancy{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>
-                  <li class="btn-fancy{% navactive request 'products' %}"><a href="{% url 'products' %}">Products</a></li>
-                  <li class="btn-fancy{% navactive request 'distributors' %}"><a href="{% url 'distributors' %}">Distributors</a></li>                
-                  <li class="btn-fancy{% navactive request 'about' %}"><a href="{% url 'about' %}">About Us</a></li>
-                  <li class="btn-fancy{% navactive request 'contact' %}"><a href="{% url 'contact' %}">Contact Us</a></li>                
+                  <li class="btn-fancy{% navactive request 'home' %}"><a title="{% trans 'Home' %}" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                  <li class="btn-fancy{% navactive request 'products' %}"><a title="{% trans 'Products' %}" href="{% url 'products' %}">{% trans "Products" %}</a></li>
+                  <li class="btn-fancy{% navactive request 'distributors' %}"><a title="{% trans 'Distributors' %}" href="{% url 'distributors' %}">{% trans "Distributors" %}</a></li>                
+                  <li class="btn-fancy{% navactive request 'about' %}"><a title="{% trans 'About Us' %}" href="{% url 'about' %}">{% trans "About Us" %}</a></li>
+                  <li class="btn-fancy{% navactive request 'contact' %}"><a title="{% trans 'Contact Us' %}" href="{% url 'contact' %}">{% trans "Contact Us" %}</a></li>                
                 </ul>
               </div>
             </div>
@@ -100,14 +100,14 @@
 
           <div id="dist-login">        
             {% if user.is_anonymous %}
-            <a title="Login for expanded access to the Distributor Home Panel and Online Ordering" href="{% url 'django.contrib.auth.views.login' %}">Login <span class="glyphicon glyphicon-user"></span></a>
+            <a title="{% trans 'Login for expanded access to the Distributor Home Panel and Online Ordering' %}" href="{% url 'django.contrib.auth.views.login' %}">{% trans "Login" %} <span class="glyphicon glyphicon-user"></span></a>
             {% else %}
             {% if get_cart and get_cart.count > 0 %}
-            <a title="Go to Online Order Sheet to view your cart with your chosen products" href="{% url 'order-online' %}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{ get_cart.count }}</span></a> |
+            <a title="{% trans 'Go to Online Order Sheet to view your cart with your chosen products' %}" href="{% url 'order-online' %}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{ get_cart.count }}</span></a> |
             {% endif %}
-            <a id="home-button" title="Go to Distributor Home Panel - online ordering, certificates, inventory and more" class="{% productnavactive request 'distributor-login' %}" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
-            <a id="account-button" class="{% productnavactive request 'account-area' %}" title="Go to Account Area - view or change company account details" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
-            <a title="Logout from SparMED Distributor Panel" href="{% url 'django.contrib.auth.views.logout_then_login' %}">Logout <span class="glyphicon glyphicon-off"></span></a>
+            <a id="home-button" title="{% trans 'Go to Distributor Home Panel - online ordering, certificates, inventory and more' %}" class="{% productnavactive request 'distributor-login' %}" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
+            <a id="account-button" class="{% productnavactive request 'account-area' %}" title="{% trans 'Go to Account Area - view or change company account details' %}" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
+            <a title="{% trans 'Logout from SparMED Distributor Panel' %}" href="{% url 'django.contrib.auth.views.logout_then_login' %}">{% trans "Logout" %} <span class="glyphicon glyphicon-off"></span></a>
             {% endif %}
             
             {% include 'language_chooser.html' %}
@@ -136,14 +136,14 @@
               </div>
 
               <div class="col-sm-4">
-                <p class="text-center">Email: <a href="mailto:info@sparmed.dk" title="Contact Email">info@SparMED.dk</a></p>
-                <p class="text-center">Phone: <a href="tel:004539402503" title="Telephone Number">(+45) 39 40 25 03</a></p>
-                <p class="text-center">Fax: <a href="fax:004539402564" title="Fax Number">(+45) 39 40 25 64</a></p>
+                <p class="text-center">{% trans "Email" %}: <a href="mailto:info@sparmed.dk" title="Contact Email">info@SparMED.dk</a></p>
+                <p class="text-center">{% trans "Phone" %}: <a href="tel:004539402503" title="Telephone Number">(+45) 39 40 25 03</a></p>
+                <p class="text-center">{% trans "Fax" %}: <a href="fax:004539402564" title="Fax Number">(+45) 39 40 25 64</a></p>
               </div>
 
               <div class="col-sm-4">
-                <p class="text-left"><a href="{% url 'privacy-policy' %}" title="Privacy Policy">Privacy Policy</a></p>
-                <p class="text-left"><a href="{% url 'terms-conditions' %}" title="Terms and Conditions">Terms &amp; Conditions</a></p>            
+                <p class="text-left"><a href="{% url 'privacy-policy' %}" title="{% trans 'Privacy Policy' %}">{% trans "Privacy Policy" %}</a></p>
+                <p class="text-left"><a href="{% url 'terms-conditions' %}" title="{% trans 'Terms and Conditions' %}">{% trans "Terms &amp; Conditions" %}</a></p>            
                 <p class="text-left">&copy; Copyright 2015 SparMED ApS</p>
               </div>
             </div>
@@ -161,16 +161,16 @@
 
               <div class="col-sm-4">
                 <p class="text-center">
-                  Email: <a href="mailto:info@sparmed.dk" title="Contact Email">info@SparMED.dk</a><br>
-                  Phone: <a href="tel:004539402503" title="Telephone Number">(+45) 39 40 25 03</a><br>
-                  Fax: <a href="fax:004539402564" title="Fax Number">(+45) 39 40 25 64</a>
+                  {% trans "Email" %}: <a href="mailto:info@sparmed.dk" title="{% trans 'Contact Email' %}">info@SparMED.dk</a><br>
+                  {% trans "Phone" %}: <a href="tel:004539402503" title="{% trans 'Telephone Number' %}">(+45) 39 40 25 03</a><br>
+                  {% trans "Fax" %}: <a href="fax:004539402564" title="{% trans 'Fax Number' %}">(+45) 39 40 25 64</a>
                 </p>
               </div>
 
               <div class="col-sm-4">
                 <p class="text-center">
-                  <a href="{% url 'privacy-policy' %}" title="Privacy Policy">Privacy Policy</a><br>
-                  <a href="{% url 'terms-conditions' %}" title="Terms and Conditions">Terms &amp; Conditions</a><br>
+                  <a href="{% url 'privacy-policy' %}" title="{% trans 'Privacy Policy' %}">{% trans "Privacy Policy" %}</a><br>
+                  <a href="{% url 'terms-conditions' %}" title="{% trans 'Terms and Conditions' %}">{% trans "Terms &amp; Conditions" %}</a><br>
                   &copy; Copyright 2015 SparMED ApS
                 </p>
               </div>
@@ -178,7 +178,7 @@
           </section>
 
           <p><span class="minor-skip"></span><span class="minor-skip"></span></p>
-          <p class="text-center"><em>Website by <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>       
+          <p class="text-center"><em>{% trans "Website by" %} <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>       
 
         </section><!-- /content-container -->
       </footer>

@@ -3,19 +3,20 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load base_extras %}
+{% load i18n %}
 
-{% block pagedescription %}View and download Sparmed certificates{% endblock %}
-{% block title %}Certificates{% endblock %}
+{% block pagedescription %}{% trans "View and download SparMED certificates" %}{% endblock %}
+{% block title %}{% trans "Certificates" %}{% endblock %}
 
 
 {% block body %}
 <ol class="breadcrumb">
-  <li><a href="{% url 'distributor-login' %}">Distributor Home Panel</a></li>
-  <li class="active">Certificates</li>
+  <li><a href="{% url 'distributor-login' %}">{% trans "Distributor Home Panel" %}</a></li>
+  <li class="active">{% trans "Certificates" %}</li>
 </ol>
 
 
-<h2 class="text-center">Certificates and Documents</h2>
+<h2 class="text-center">{% trans "Certificates and Documents" %}</h2>
 
 <hr>
 

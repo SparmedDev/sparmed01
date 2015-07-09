@@ -3,12 +3,12 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 
-{% block pagedescription %}Contact SparMED for the best products for GOosafe IVF Laboratories{% endblock %}
-{% block title %}Contact{% endblock %}
+{% block pagedescription %}{% trans "Contact SparMED for the best products for GOosafe IVF Laboratories" %}{% endblock %}
+{% block title %}{% trans "Contact" %}{% endblock %}
 
 {% block body %}
 
-<h2 class="text-center">Contact Us</h2>
+<h2 class="text-center">{% trans "Contact Us" %}</h2>
 <hr>
 
 <div class="row">
@@ -16,45 +16,49 @@
     <p>
       <strong>SparMED ApS</strong><br>
       CVR: DK-30 89 85 75<br>
-      Address: Toppevadvej 34-38, 3660 Stenløse, DENMARK
+      {% trans "Address" %}: Toppevadvej 34-38, 3660 Stenløse, {% trans "DENMARK" %}
     </p>
     
     <p>
       
     <p>
-      <strong>Opening Hours:</strong><br>
+      <strong>{% trans "Opening Hours" %}:</strong><br>
+      {% blocktrans %}
       Monday - Thursday 7:30 - 16:00<br>
       Friday 7:30 - 13:00
+      {% endblocktrans %}
     </p>
     
     <p>
-      Phone: <a href="tel:004539402503">(+45) 39 40 25 03</a><br>
-      Fax: <a href="fax:004539402564">(+45) 39 40 25 64</a>
+      {% trans "Phone" %}: <a href="tel:004539402503">(+45) 39 40 25 03</a><br>
+      {% trans "Fax" %}: <a href="fax:004539402564">(+45) 39 40 25 64</a>
     </p>
     
     <p>
       <br>
-      General Support: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a><br>
-      Sales: <a href="mailto:katrine@sparmed.dk">katrine@sparmed.dk</a> or <a href="mailto:ulrik@sparmed.dk">ulrik@sparmed.dk</a><br>
-      Finance: <a href="mailto:agnes@sparmed.dk">agnes@sparmed.dk</a><br>
-      IVF and ART: <a href="mailto:evrim@sparmed.dk">evrim@sparmed.dk</a><br>
-      Marketing: <a href="mailto:onur@sparmed.dk">onur@sparmed.dk</a><br>
-      Regulatory Affairs: <a href="mailto:inesa@sparmed.dk">inesa@sparmed.dk</a><br>
-      IT: <a href="mailto:rami@sparmed.dk">rami@sparmed.dk</a>      
+      {% trans "General Support" %}: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a><br>
+      {% trans "Sales" %}: <a href="mailto:katrine@sparmed.dk">katrine@sparmed.dk</a> {% trans "or" %} <a href="mailto:ulrik@sparmed.dk">ulrik@sparmed.dk</a><br>
+      {% trans "Finance" %}: <a href="mailto:agnes@sparmed.dk">agnes@sparmed.dk</a><br>
+      {% trans "IVF and ART" %}: <a href="mailto:evrim@sparmed.dk">evrim@sparmed.dk</a><br>
+      {% trans "Marketing" %}: <a href="mailto:onur@sparmed.dk">onur@sparmed.dk</a><br>
+      {% trans "Regulatory Affairs" %}: <a href="mailto:inesa@sparmed.dk">inesa@sparmed.dk</a><br>
+      {% trans "IT" %}: <a href="mailto:rami@sparmed.dk">rami@sparmed.dk</a>      
     </p>
   </div>
   <div class="col-md-6">
     <p>
       <br>
-      <strong>Bank information:</strong><br>
+      <strong>{% trans "Bank information" %}:</strong><br>
       Danske Bank A/S<br>
-      Address: Holmens Kanal 2-12,1092 Copenhagen, Denmark
+      {% trans "Address" %}: Holmens Kanal 2-12,1092 Copenhagen, Denmark
     </p>
     <p>
+      {% blocktrans %}
       BIC/SWIFT code: DABADKKK<br>
       EUR Account IBAN: DK86 3000 4779 7776 18<br>
       USD Account IBAN: DK98 3000 4779 7775 96<br>
       DKK Account: Regnr.: 3543, Kontonr.: 0011400884
+      {% endblocktrans %}
     </p>
     
     <img class="img-responsive center-block max-height-250" src="{% static 'img/heart_logo_img.jpg' %}" alt="Heart Logo">

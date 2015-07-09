@@ -2,6 +2,7 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
 {% block pagedescription %}Distributor Home Panel - premium distributor access to online ordering, order history, SparMED product inventory and SparMED certificates{% endblock %}
 {% block title %}Distributor Home Panel{% endblock %}
@@ -9,15 +10,15 @@
 
 {% block body %}
 
-<h2 class="text-center">Distributor Home Panel</h2>
+<h2 class="text-center">{% trans "Distributor Home Panel" %}"</h2>
 <hr>
 
 <section id="distributor-panel-btn-container">
-    <a class="btn btn-fancy-grid text-center btn-fancy-grid-top-left" href="{% url 'order-online' %}">Order Sheet</a>
-    <a class="btn btn-fancy-grid text-center btn-fancy-grid-top-right" href="{% url 'order-history' %}">Order History</a>
+    <a class="btn btn-fancy-grid text-center btn-fancy-grid-top-left" href="{% url 'order-online' %}">{% trans "Order Sheet" %}</a>
+    <a class="btn btn-fancy-grid text-center btn-fancy-grid-top-right" href="{% url 'order-history' %}">{% trans "Order History" %}</a>
 
-    <a class="btn btn-fancy-grid text-center btn-fancy-grid-bot-left" href="{% url 'inventory' %}">View Stock</a>
-    <a class="btn btn-fancy-grid text-center btn-fancy-grid-bot-right" href="{% url 'certificates' %}">View Docs</a>
+    <a class="btn btn-fancy-grid text-center btn-fancy-grid-bot-left" href="{% url 'inventory' %}">{% trans "View Stock" %}</a>
+    <a class="btn btn-fancy-grid text-center btn-fancy-grid-bot-right" href="{% url 'certificates' %}">{% trans "View Docs" %}</a>
 </section>
   
   

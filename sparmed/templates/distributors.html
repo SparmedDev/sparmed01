@@ -2,21 +2,25 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
-{% block pagedescription %}Distributors in the GOosafe SparMed family{% endblock %}
-{% block title %}Distributors{% endblock %}
+{% block pagedescription %}{% trans "Distributors in the GOosafe SparMED family" %}{% endblock %}
+{% block title %}{% tras "Distributors" %}{% endblock %}
 
 {% block outerbody %}
 
-<h2 class="text-center">Distributors</h2>
+<h2 class="text-center">{% trans "Distributors" %}</h2>
 <p><br></p>
 <hr>
 
 <section>
   <p class="text-center text-dark-blue">
     <strong>      
+      {% url 'contact' as contact_url %}
+      {% blocktrans %}
     SparMED has a premium distributor network spread all over the globe. <br>
-    Are you looking for a distributor in your area? Please <a href="{% url 'contact' %}">contact us</a>.
+    Are you looking for a distributor in your area? Please <a href="{{ contact_url }}">contact us</a>.
+      {% endblocktrans %}
     </strong>
   </p>
 

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block pagedescription %}500 error - Internal server error{% endblock %}
-{% block title %}500 error - Internal server error{% endblock %}
+{% block pagedescription %}500 {% trans "Error - Internal Server Error" %}{% endblock %}
+{% block title %}500 {% trans "Error - Internal Server Error" %}{% endblock %}
 
 {% block body %}
-<h2>Internal Server Error</h2>
-<div class="alert alert-error">Unfortunately, an internal server error has occured. Please try later or contact SparMED directly.</div>
+<h2>{% trans "Internal Server Error" %}</h2>
+<div class="alert alert-error">{% trans "Unfortunately, an internal server error has occured. Please try later or contact SparMED directly" %}.</div>
 
 {% endblock %}
