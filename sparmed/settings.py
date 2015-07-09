@@ -224,6 +224,7 @@ THIRD_PARTY_APPS = (
   'cookielaw',
   'ckeditor',
   'captcha',  
+  'rosetta',
 )
 
 LOCAL_APPS = (

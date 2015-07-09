@@ -4,20 +4,21 @@
 {% load bootstrap3 %}
 {% load base_extras %}
 {% load cache %}
+{% load i18n %}
 
-{% block pagedescription %}View SparMED inventory - all products and their numbers on stock{% endblock %}
-{% block title %}Inventory{% endblock %}
+{% block pagedescription %}{% trans "View SparMED inventory - all products and their numbers on stock" %}{% endblock %}
+{% block title %}{% trans "Inventory" %}{% endblock %}
 
 {% block body %}
 
 <ol class="breadcrumb">
-  <li><a href="{% url 'distributor-login' %}">Distributor Home Panel</a></li>
-  <li class="active">Inventory</li>
+  <li><a href="{% url 'distributor-login' %}">{% trans "Distributor Home Panel" %}</a></li>
+  <li class="active">{% trans "Inventory" %}</li>
 </ol>
 
 {% cache 6400 sparmed-inventory %}
 <article>  
-  <h2 class="text-center">Inventory</h2>
+  <h2 class="text-center">{% trans "Inventory" %}</h2>
 
   <hr>
 
@@ -45,9 +46,9 @@
 
         <table class="table table-hover table-bordered table-condensed table-responsive">
           <tr>
-            <th class="td-max-col-width"><p class="text-center">Add to Cart</p></th>
-            <th class="td-max-col-width"><p class="text-center">Quantity</p></th>
-            <th class="td-max-150-col-width"><p class="text-center">Product ID</p></th>
+            <th class="td-max-col-width"><p class="text-center">{% trans "Add to Cart" %}</p></th>
+            <th class="td-max-col-width"><p class="text-center">{% trans "Quantity" %}</p></th>
+            <th class="td-max-150-col-width"><p class="text-center">{% trans "Product ID" %}</p></th>
             <th><p>Product Name</p></th>
             <th><p class="text-center">In Stock</p></th>
             <th><p class="text-center">Available</p></th>

@@ -5,7 +5,7 @@
 {% load i18n %}
 
 {% block pagedescription %}{% trans "Distributors in the GOosafe SparMED family" %}{% endblock %}
-{% block title %}{% tras "Distributors" %}{% endblock %}
+{% block title %}{% trans "Distributors" %}{% endblock %}
 
 {% block outerbody %}
 
@@ -13,10 +13,11 @@
 <p><br></p>
 <hr>
 
+{% url 'contact' as contact_url %}
+
 <section>
   <p class="text-center text-dark-blue">
     <strong>      
-      {% url 'contact' as contact_url %}
       {% blocktrans %}
     SparMED has a premium distributor network spread all over the globe. <br>
     Are you looking for a distributor in your area? Please <a href="{{ contact_url }}">contact us</a>.
@@ -28,7 +29,7 @@
 
   <section class="hidden-xs">
       <article id="distributors-map">
-        <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj_2.jpg' %}" alt="SparMED Global Distributor Network">   
+        <img id="distributors-map-image" src="{% static 'img/distributors/world_map_full_robproj_2.jpg' %}" alt="{% trans 'SparMED Global Distributor Network' %}">   
       </article>   
     
       <hr>
@@ -36,7 +37,9 @@
 
   <p class="text-center text-dark-blue extra-margin-bot">
     <strong>
-    Would you like to become one of our distributors and join our world-wide distributor network? <br> <a href="{% url 'contact' %}">CONTACT US</a>
+      {% blocktrans %}
+    Would you like to become one of our distributors and join our world-wide distributor network? <br> <a href="{{ contact_url }}">CONTACT US</a>
+      {% endblocktrans %}
     </strong>
   </p>
 </section>

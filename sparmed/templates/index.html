@@ -2,9 +2,10 @@
 
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load i18n %}
 
-{% block pagedescription %}Index - GOosafe in IVF Laboratories{% endblock %}
-{% block title %}GOosafe in IVF Laboratories{% endblock %}
+{% block pagedescription %}{% trans "Index - GOosafe in IVF Laboratories" %}{% endblock %}
+{% block title %}{% trans "GOosafe in IVF Laboratories" %}{% endblock %}
 
 {% block head %}
 <!-- Important Owl stylesheet -->
@@ -16,7 +17,7 @@
 
 {% block outerbody %}
 
-  <h2 class="text-center">Remember to GO Oosafe<sup>&reg;</sup></h2>
+  <h2 class="text-center">{% trans "Remember to GO Oosafe" %}<sup>&reg;</sup></h2>
   <hr>
 
   {% if news_posts %}
