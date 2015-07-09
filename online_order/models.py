@@ -111,6 +111,10 @@ class SparmedUser(AbstractBaseUser):
         return self.is_admin
       
     @property
+    def is_superuser(self):
+      return self.is_superuser
+      
+    @property
     def slug(self):
         return slugify(self.name)
       
