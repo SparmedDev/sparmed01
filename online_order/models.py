@@ -3,7 +3,7 @@ from django.db import models
 from django.forms import ModelForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
+    BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -12,7 +12,7 @@ from django_countries.fields import CountryField
 
 
 class SparmedUserManager(BaseUserManager):
-    def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):
+    def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password, **kwargs):
         if not name:
             raise ValueError(_('Users must have a Sparmed website account name'))
         if not company_name:
@@ -42,13 +42,14 @@ class SparmedUserManager(BaseUserManager):
             contact_person_name=contact_person_name,
             contact_telephone=contact_telephone,
             email=self.normalize_email(email),
+            **kwargs
         )
         
         user.set_password(password)
         user.save(using=self._db)
         return user
       
-    def create_superuser(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password):                   
+    def create_superuser(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password, **kwargs):                   
         user = self.create_user(
             name=name,
             company_name=company_name,
@@ -60,13 +61,14 @@ class SparmedUserManager(BaseUserManager):
             contact_telephone=contact_telephone,
             email=self.normalize_email(email),
             password=password,
+            **kwargs
         )
       
         user.is_admin = True
         user.save(using=self._db)
         return user
     
-class SparmedUser(AbstractBaseUser):
+class SparmedUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255, verbose_name=_("Sparmed Website Account Name"), unique=True)
     company_name = models.CharField(max_length=255, verbose_name=("Company Name"))
     country = CountryField()
@@ -93,27 +95,13 @@ class SparmedUser(AbstractBaseUser):
 
     def __unicode__(self):
         return self.name    
-    
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
-
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
-        return True
 
     @property
     def is_staff(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-      
-    @property
-    def is_superuser(self):
-      return self.is_superuser
-      
+            
     @property
     def slug(self):
         return slugify(self.name)
@@ -121,7 +109,7 @@ class SparmedUser(AbstractBaseUser):
     def get_absolute_url(self):
         return reverse('online_order.views.account_area', args=[self.slug])
       
-    def add_to_order_history(self, order, items_list):
+    def add_to_order_history(self, order, items_list, **kwargs):
         o_new = self.orders.create(
             arranged_freight=order.arranged_freight,
             freight_forwarder=order.freight_forwarder,
@@ -144,6 +132,7 @@ class SparmedUser(AbstractBaseUser):
             other_remarks=order.other_remarks,            
 
             user=self,
+            **kwargs
         )
 
         for item in items_list:

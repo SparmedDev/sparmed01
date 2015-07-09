@@ -84,4 +84,4 @@ class SparmedUserAdmin(UserAdmin):
 
     
 admin.site.register(SparmedUser, SparmedUserAdmin)
-admin.site.unregister(Group)
+#admin.site.unregister(Group)
