@@ -49,9 +49,9 @@
             <th class="td-max-col-width"><p class="text-center">{% trans "Add to Cart" %}</p></th>
             <th class="td-max-col-width"><p class="text-center">{% trans "Quantity" %}</p></th>
             <th class="td-max-150-col-width"><p class="text-center">{% trans "Product ID" %}</p></th>
-            <th><p>Product Name</p></th>
-            <th><p class="text-center">In Stock</p></th>
-            <th><p class="text-center">Available</p></th>
+            <th><p>{% trans "Product Name" %}</p></th>
+            <th><p class="text-center">{% trans "In Stock" %}</p></th>
+            <th><p class="text-center">{% trans "Available" %}</p></th>
           </tr>
 
           {% for product in subcategory.products.all %}
@@ -92,7 +92,11 @@
 
     <div class="alert alert-warning" role="alert">
       <p class="text-center">
-        <span class="glyphicon glyphicon-exclamation-sign"></span> Can't find the product you're looking for? <a href="{% url 'contact' %}">Contact us</a> for information on unlisted products.
+        {% url 'contact' as contact_url %}
+        <span class="glyphicon glyphicon-exclamation-sign"></span> 
+        {% blocktrans %}
+        Can't find the product you're looking for? <a href="{{ contact_url }}">Contact us</a> for information on unlisted products.
+        {% endblocktrans %}
       </p>
     </div>
 
