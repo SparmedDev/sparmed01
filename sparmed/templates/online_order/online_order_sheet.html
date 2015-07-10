@@ -30,7 +30,7 @@
           {{ user.postal_code }} {{ user.city}}, {{ user.country }}
         </p>
         <p class="text-muted text-small">
-          {% comment "Translators: Att abbreviation for 'attention', as used in letters " %}
+          {% comment %}Translators: Att abbreviation for 'attention', as used in letters{% endcomment %}
           {% trans "Att" %}: {{ user.contact_person_name }}<br>
           {% trans "Telephone" %}: {{ user.contact_telephone }}<br>
           {% trans "Email" %}: {{ user.email }}<br>
@@ -38,7 +38,7 @@
 
         {% if cookie_account_change %}
         <div class="alert alert-warning alert-dismissible" role="alert">
-          {% comment "Translators: Close as in 'Close window' %}
+          {% comment %}Translators: Close as in 'Close window' {% endcomment %}
           <button id="close-account-change-btn" type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span></button>
           <span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "If you need to change your company details, click on the account" %} <a class="alert-link" href="{{ user.get_absolute_url }}"><span class="glyphicon glyphicon-wrench"></span></a> {% trans "button almost in the top-right corner of your screen." %}
         </div>

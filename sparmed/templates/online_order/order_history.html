@@ -51,7 +51,7 @@
                 {{ order.user.postal_code }} {{ order.user.city}}, {{ order.user.country }}
               </p>
               <p class="text-muted">
-                {% comment "Translators: 'Att' is short for Attention, as used in letters" %}
+                {% comment %}Translators: 'Att' is short for Attention, as used in letters{% endcomment %}
                 {% trans "Att" %}: {{ order.user.contact_person_name }}<br>
                 {% trans "Telephone" %}: {{ order.user.contact_telephone }}<br>
                 {% trans "Email" %}: {{ order.user.email }}
