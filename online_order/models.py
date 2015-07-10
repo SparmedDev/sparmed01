@@ -5,68 +5,42 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
+from django.utils.http import urlquote
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
 from django_countries.fields import CountryField
-
+from django.core.mail import send_mail
 
 class SparmedUserManager(BaseUserManager):
-    def create_user(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password, **kwargs):
-        if not name:
-            raise ValueError(_('Users must have a Sparmed website account name'))
-        if not company_name:
-            raise ValueError(_('Users must have a company name'))
-        elif not country:
-            raise ValueError(_('Users must have a company country'))
-        elif not address:
-            raise ValueError(_('Users must have a company address'))
-        elif not city:
-            raise ValueError(_('Users must have a company city'))
-        elif not postal_code:
-            raise ValueError(_('Users must have a company postal code'))
-        elif not contact_person_name:
-            raise ValueError(_('Users must have a valid contact person name'))
-        elif not contact_telephone:
-            raise ValueError(_('Users must have a valid contact telephone number'))
-        elif not email:
-            raise ValueError(_('Users must have an email address'))
-            
-        user = self.model(
-            name=name,
-            company_name=company_name,
-            country=country,
-            address=address,
-            city=city,
-            postal_code=postal_code,
-            contact_person_name=contact_person_name,
-            contact_telephone=contact_telephone,
-            email=self.normalize_email(email),
-            **kwargs
-        )
+  
+    def _create_user(self, name, email, password,
+                     is_staff, is_superuser, **extra_fields):
+        """
+        Creates and saves a User with the given email and password.
+        """       
+        if not email:
+            raise ValueError('The given email must be set')
+        elif not name:
+            raise ValueError('An account name must be given')
         
+        now = timezone.now()
+        email = self.normalize_email(email)
+        user = self.model(name=name, email=email,
+                          is_staff=is_staff, is_active=True,
+                          is_superuser=is_superuser, last_login=now,
+                          date_joined=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
-      
-    def create_superuser(self, name, company_name, country, address, city, postal_code, contact_person_name, contact_telephone, email, password, **kwargs):                   
-        user = self.create_user(
-            name=name,
-            company_name=company_name,
-            country=country,
-            address=address,
-            city=city,
-            postal_code=postal_code,
-            contact_person_name=contact_person_name,
-            contact_telephone=contact_telephone,
-            email=self.normalize_email(email),
-            password=password,
-            **kwargs
-        )
-      
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
+
+    def create_user(self, name, email, password=None, **extra_fields):
+        return self._create_user(name, email, password, False, False,
+                                 **extra_fields)
+
+    def create_superuser(self, name, email, password, **extra_fields):
+        return self._create_user(name, email, password, True, True,
+                                 **extra_fields)
     
 class SparmedUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255, verbose_name=_("Sparmed Website Account Name"), unique=True)
@@ -78,23 +52,31 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     contact_person_name = models.CharField(max_length=255, verbose_name=_("Company Contact Person Name"))
     contact_telephone = models.CharField(max_length=50, verbose_name=_("Contact Telephone Number"))
     email = models.EmailField(verbose_name=_("Contact Email Address"), max_length=255, unique=True)
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(_('active'), default=True,
+        help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
+    is_admin = models.BooleanField(default=False,
+        help_text=_('Designates whether the user can log into this admin site.'))
     
     objects = SparmedUserManager()
     
     USERNAME_FIELD = 'name'
     REQUIRED_FIELDS = ['company_name', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone', 'email']
     
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    def __unicode__(self):
+        return self.name    
+
+      
     def get_full_name(self):
         return self.company_name
 
     def get_short_name(self):
         return self.name
-
-    def __unicode__(self):
-        return self.name    
 
     @property
     def is_staff(self):
@@ -108,7 +90,13 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
       
     def get_absolute_url(self):
         return reverse('online_order.views.account_area', args=[self.slug])
-      
+           
+    def email_user(self, subject, message, from_email=None):
+        """
+        Sends an email to this User.
+        """
+        send_mail(subject, message, from_email, [self.email])
+        
     def add_to_order_history(self, order, items_list, **kwargs):
         o_new = self.orders.create(
             arranged_freight=order.arranged_freight,
