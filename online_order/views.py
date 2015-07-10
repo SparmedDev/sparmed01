@@ -98,14 +98,14 @@ def order_confirmation(request, order_id, confirmed):
         try:
           mandrill_client = mandrill.Mandrill('Bml5XQ7DhMZLvw3NDwykrQ')
           message = {
-            'from_email': 'info@sparmed.dk',
-            'from_name': 'SparMED.dk',
-            'subject': 'Online Order Confirmation Receipt | SparMED',
-            'html': html_content,
-            'to': recipients,
-            'headers': {"Reply-To": "info@sparmed.dk"},
+            "from_email": 'info@sparmed.dk',
+            "from_name": 'SparMED.dk',
+            "subject": 'Online Order Confirmation Receipt | SparMED',
+            "html": html_content,
+            "to": recipients,
+            "headers": {"Reply-To": "info@sparmed.dk"},
             "auto_html": True,
-            'inline_css': True,
+            "inline_css": True,
             "metadata": {"website": "www.sparmed.dk"}, 
             "async": True,
           }
@@ -141,12 +141,15 @@ def order_history(request):
 @login_required
 @never_cache
 def account_area(request, account_slug):  
+  feedback = ''
   if request.method == 'POST':
       form = SparmedUserChangeForm(request.POST, instance=request.user)
       if form.is_valid():
           form.save()
-          return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'})
+          feedback = 'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'
+          #return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'})
   else:
       form = SparmedUserChangeForm(instance=request.user)
   
-  return render(request, 'online_order/account_area.html', {'form':form})
+  contexts = { 'feedback' : feedback } if feedback else { 'form': form }
+  return render(request, 'online_order/account_area.html', contexts)

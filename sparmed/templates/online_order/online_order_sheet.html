@@ -174,7 +174,7 @@
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-4" for="shipping_and_invoice_same">{% "Same delivery address?" %}</label>  
+    <label class="control-label col-sm-4" for="shipping_and_invoice_same">{% trans "Same delivery address?" %}</label>  
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
            onclick="javascript:toggleVisible('invoice_options'); " />
   </div>
@@ -209,7 +209,10 @@
   
   <hr>
 
-  {% buttons submit='{% trans "Send Order" %}' %}{% endbuttons %}
+  <button type="submit" class="btn btn-primary">
+    {% trans "Send Order" %}
+  </button>
+
 </form>
 
 {% endblock %}

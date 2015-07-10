@@ -9,19 +9,14 @@ from online_order.models import SparmedUser
 # Register your models here.
 
 class SparmedUserChangeForm(UserChangeForm):
+    class Meta:
+        model = SparmedUser
+        fields = '__all__'
   
-  def __init__(self, *args, **kwargs):
-      super(SparmedUserChangeForm, self).__init__(*args, **kwargs)
-      self.fields['email'].required = True
-      #self.fields['name'].required = True
-      #self.fields['company_name'].required = True
-      #self.fields['country'].required = True
-      #self.fields['address'].required = True
-      #self.fields['city'].required = True
-      #self.fields['postal_code'].required = True      
-      #self.fields['contact_person_name'].required = True
-      #self.fields['contact_telephone'].required = True
-
+    def __init__(self, *args, **kwargs):
+        super(SparmedUserChangeForm, self).__init__(*args, **kwargs)
+        self.fields['email'].required = True
+        self.fields['name'].required = True
       
 class SparmedUserAdmin(UserAdmin):
     # The forms to add and change user instances

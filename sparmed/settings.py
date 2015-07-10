@@ -123,6 +123,8 @@ MIDDLEWARE_CLASSES = (
   'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
+MAX_ENTRIES = 200
+
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-gb'
 USE_I18N = True
