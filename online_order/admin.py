@@ -12,15 +12,15 @@ class SparmedUserChangeForm(UserChangeForm):
   
   def __init__(self, *args, **kwargs):
       super(SparmedUserChangeForm, self).__init__(*args, **kwargs)
-      self.fields['name'].required = True
-      self.fields['company_name'].required = True
-      self.fields['country'].required = True
-      self.fields['address'].required = True
-      self.fields['city'].required = True
-      self.fields['postal_code'].required = True
       self.fields['email'].required = True
-      self.fields['contact_person_name'].required = True
-      self.fields['contact_telephone'].required = True
+      #self.fields['name'].required = True
+      #self.fields['company_name'].required = True
+      #self.fields['country'].required = True
+      #self.fields['address'].required = True
+      #self.fields['city'].required = True
+      #self.fields['postal_code'].required = True      
+      #self.fields['contact_person_name'].required = True
+      #self.fields['contact_telephone'].required = True
 
       
 class SparmedUserAdmin(UserAdmin):
