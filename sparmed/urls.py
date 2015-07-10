@@ -47,7 +47,7 @@ urlpatterns = [
   url(r'^grappelli/', include('grappelli.urls')),
   url(r'^admin/', include(admin.site.urls)),  
   url(r'^i18n/', include('django.conf.urls.i18n')),
-  url(r'^rosetta/', include('rosetta.urls')),
+  url(r'^translate/', include('rosetta.urls')),
   url(r'^ckeditor/', include('ckeditor.urls')),
 
   url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

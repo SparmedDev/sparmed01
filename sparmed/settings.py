@@ -49,6 +49,77 @@ from memcacheify import memcacheify
 CACHES = memcacheify()
 MEMCACHEIFY_USE_LOCAL=DEBUG
 
+ROOT_URLCONF = 'sparmed.urls'
+
+WSGI_APPLICATION = 'sparmed.wsgi.application'
+
+# Grappelli Admin Site Settings
+GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
+
+GRAPPELLI = (
+  'grappelli',
+  'grappelli_modeltranslation',
+)
+
+MODELTRANSLATION = (
+  'modeltranslation',  
+)
+
+DJANGO_APPS = (
+  'django.contrib.admin',
+  'django.contrib.auth',
+  'django.contrib.contenttypes',
+  'django.contrib.messages',
+  'django.contrib.sessions',
+  'django.contrib.sites',
+  'django.contrib.sitemaps',
+  'django.contrib.staticfiles',
+)
+
+THIRD_PARTY_APPS = (
+  'gunicorn',
+  'storages',
+  'collectfast',
+  'haystack',
+  'bootstrap3',
+  'robots',
+  'sorl.thumbnail',      
+  'django_countries', 
+  'validatedfile',
+  'colorfield',
+  'cookielaw',
+  'ckeditor',
+  'captcha',  
+  'rosetta',
+)
+
+LOCAL_APPS = (
+  'sparmed',
+  'cart',
+  'contact',
+  'shop',
+  'news',
+  'online_order',
+  'certificates',
+  'distributors',
+)
+
+INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+MIDDLEWARE_CLASSES = (
+  'django.middleware.cache.UpdateCacheMiddleware',
+  'django.middleware.http.ConditionalGetMiddleware',
+  'django.contrib.sessions.middleware.SessionMiddleware',
+  'django.middleware.locale.LocaleMiddleware',
+  'django.middleware.common.CommonMiddleware',  
+  'django.middleware.csrf.CsrfViewMiddleware',
+  'django.contrib.auth.middleware.AuthenticationMiddleware',
+  'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+  'django.contrib.messages.middleware.MessageMiddleware',
+  'django.middleware.clickjacking.XFrameOptionsMiddleware',  
+  'django.middleware.cache.FetchFromCacheMiddleware',
+)
+
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en-gb'
 USE_I18N = True
@@ -68,6 +139,7 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 ROSETTA_WSGI_AUTO_RELOAD  = True
 ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
 ROSETTA_GOOGLE_TRANSLATE = True
+ROSETTA_EXCLUDED_APPLICATIONS = GRAPPELLI + MODELTRANSLATION + DJANGO_APPS + THIRD_PARTY_APPS
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -190,77 +262,6 @@ STATICFILES_FINDERS = (
 #  'django.contrib.messages.context_processors.messages',
 #  'cart.context_processors.get_cart',
 #)
-
-ROOT_URLCONF = 'sparmed.urls'
-
-WSGI_APPLICATION = 'sparmed.wsgi.application'
-
-# Grappelli Admin Site Settings
-GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
-
-GRAPPELLI = (
-  'grappelli',
-  'grappelli_modeltranslation',
-)
-
-MODELTRANSLATION = (
-  'modeltranslation',  
-)
-
-DJANGO_APPS = (
-  'django.contrib.admin',
-  'django.contrib.auth',
-  'django.contrib.contenttypes',
-  'django.contrib.messages',
-  'django.contrib.sessions',
-  'django.contrib.sites',
-  'django.contrib.sitemaps',
-  'django.contrib.staticfiles',
-)
-
-THIRD_PARTY_APPS = (
-  'gunicorn',
-  'storages',
-  'collectfast',
-  'haystack',
-  'bootstrap3',
-  'robots',
-  'sorl.thumbnail',      
-  'django_countries', 
-  'validatedfile',
-  'colorfield',
-  'cookielaw',
-  'ckeditor',
-  'captcha',  
-  'rosetta',
-)
-
-LOCAL_APPS = (
-  'sparmed',
-  'cart',
-  'contact',
-  'shop',
-  'news',
-  'online_order',
-  'certificates',
-  'distributors',
-)
-
-INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-MIDDLEWARE_CLASSES = (
-  'django.middleware.cache.UpdateCacheMiddleware',
-  'django.middleware.http.ConditionalGetMiddleware',
-  'django.contrib.sessions.middleware.SessionMiddleware',
-  'django.middleware.locale.LocaleMiddleware',
-  'django.middleware.common.CommonMiddleware',  
-  'django.middleware.csrf.CsrfViewMiddleware',
-  'django.contrib.auth.middleware.AuthenticationMiddleware',
-  'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-  'django.contrib.messages.middleware.MessageMiddleware',
-  'django.middleware.clickjacking.XFrameOptionsMiddleware',  
-  'django.middleware.cache.FetchFromCacheMiddleware',
-)
 
 # Mandrill email settings
 EMAIL_HOST = 'smtp.mandrillapp.com'
