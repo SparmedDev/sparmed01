@@ -65,6 +65,10 @@ MODELTRANSLATION = (
   'modeltranslation',  
 )
 
+COLLECTFAST = (
+  'collectfast',  
+)
+
 DJANGO_APPS = (
   'django.contrib.admin',
   'django.contrib.auth',
@@ -79,7 +83,6 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
   'gunicorn',
   'storages',
-  'collectfast',
   'haystack',
   'bootstrap3',
   'robots',
@@ -104,7 +107,7 @@ LOCAL_APPS = (
   'distributors',
 )
 
-INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + COLLECTFAST + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
