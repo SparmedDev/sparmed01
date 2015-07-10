@@ -68,7 +68,7 @@ class SparmedUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('name', 'email', 'password')}),
         ('Personal info', {'fields': ('company_name', 'country', 'address', 'city', 'postal_code', 'contact_person_name', 'contact_telephone',)}),
-        ('Permissions', {'fields': ('is_active', 'is_admin',)}),
+        ('Permissions', {'fields': ('is_active', 'is_admin','is_superuser',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
