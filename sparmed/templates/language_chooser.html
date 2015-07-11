@@ -9,7 +9,7 @@
   <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="languageDropdown" type="button">
     {% get_current_language as LANGUAGE_CODE %}
     {% get_language_info for LANGUAGE_CODE as lang %}
-    <img alt="{{ lang.name_local }}" src="{% static '' %}{% get_flag lang.code %}" title='{{ lang.name_local }}' />
+    <img alt="{{ lang.name_local }}" src="{% static '' %}{% get_flag lang.code %}" title='{{ lang.name_local }}' /> 
     <span class="caret"></span>
   </button>
 
