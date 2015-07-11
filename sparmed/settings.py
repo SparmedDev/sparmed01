@@ -142,6 +142,13 @@ LANGUAGES = (
   ('es', _('Spanish')),
 )
 
+COMPLETED_LANGUAGES = (
+  'en',
+  #'ru',
+  #'pt-br',
+  #'es',
+)
+
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 ROSETTA_WSGI_AUTO_RELOAD  = True
 ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
