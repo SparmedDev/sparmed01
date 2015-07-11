@@ -3,6 +3,7 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load base_extras %}
+{% load humanize %}
 
 {% block pagedescription %}Customer E-conomic Web Interface for SparMED{% endblock %}
 {% block title %}Customer E-conomics Interface{% endblock %}
@@ -17,27 +18,43 @@
   <div class="col-sm-6">
     <strong>{{ customer.name }}</strong><br />
     {{ customer.address }}<br />
-    {{ customer.city }}, {{ customer.country }}<br />
-    <a href="mailto:{{ customer.email }}" title="{{ customer.email}}">{{ customer.email }}</a>
+    {{ customer.zip }}, {{ customer.city }}<br />
+    {{ customer.country }}<br />
+    {% if customer.email %}<a href="mailto:{{ customer.email }}" title="{{ customer.email}}">{{ customer.email }}</a>{% endif %}
   </div>
   
   <div class="col-sm-6">
     Customer Number: {{ customer.customerNumber }}<br />
     Customer Group Number: {{ customer.customerGroup.customerGroupNumber }}<br />
     Vat Zone Number: {{ customer.vatZone.vatZoneNumber }}<br />
-    Balance: {{ customer.balance }} {{ customer.currency }}<br />
+    {% if customer.vatNumber %}Vat Number: {{ customer.vatNumber }}<br />{% endif %}
+    Balance: {{ customer.balance|intcomma }} {{ customer.currency }}<br />
     Last Updated: {{ customer.lastUpdated }}
   </div>
 </div>
 
 <div class="hr"><hr /></div>
 
+<h2>Invoices</h2>
+
+<table class="table table-bordered table-hover table-striped">
+  
+  <tr>
+    
+  </tr>
+  
+</table>
+
+<div class="hr"><hr /></div>
+
+<h2>Invoice JSON</h2>
 <pre>
   {{ invoice }}
 </pre>
 
 <div class="hr"><hr /></div>
 
+<h2>Customer JSON</h2>
 <pre>
   {{ customer }}
 </pre>

@@ -3,6 +3,7 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load base_extras %}
+{% load humanize %}
 
 {% block pagedescription %}List E-conomic Web Interface for SparMED{% endblock %}
 {% block title %}List E-conomics Interface{% endblock %}
@@ -42,7 +43,7 @@
       {{ customer.city }}, {{ customer.country }}
     </td>  
     <td>
-      {{ customer.balance }} {{ customer.currency }}
+      {{ customer.balance|intcomma }} {{ customer.currency }}
     </td>
     <td>
       {{ customer.email }}
