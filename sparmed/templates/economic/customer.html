@@ -35,6 +35,38 @@
 
 <div class="hr"><hr /></div>
 
+<h2>Accounts</h2>
+
+<table class="table table-bordered table-hover table-striped">
+  <tr>
+    <th>#</th>
+    <th>Account Number</th>
+    <th>Name</th>
+    <th>Account Type</th>
+    <th>Balance</th>
+    <th>Debit / Credit</th>
+    <th>Vat Code</th>
+  </tr>
+  
+  {% for account in accounts.collection %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ account.accountNumber }}</td>
+    <td>{{ account.name }}</td>
+    <td>{{ account.accountType }}</td>
+    <td>{{ account.balance|intcomma }}</td>
+    <td>{{ account.debitCredit }}</td>
+    <td>{{ account.vatAccount.vatCode }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<pre>
+  {{ accounts.collection }}
+</pre>
+
+<div class="hr"><hr /></div>
+
 <h2>Invoices</h2>
 
 <table class="table table-bordered table-hover table-striped">
@@ -49,8 +81,34 @@
 
 <h2>Invoice JSON</h2>
 <pre>
-  {{ invoice }}
+  {{ invoices }}
 </pre>
+
+<h3>Drafts</h3>
+<pre>
+  {{ invoices_drafts }}
+</pre>
+
+<h3>Booked</h3>
+<pre>
+  {{ invoices_booked }}
+</pre>
+
+<h3>Overdue</h3>
+<pre>
+  {{ invoices_overdue }}
+</pre>
+
+<h3>Totals</h3>
+<pre>
+  {{ invoices_totals }}
+</pre>
+
+<h3>Unpaid</h3>
+<pre>
+  {{ invoices_unpaid }}
+</pre>
+
 
 <div class="hr"><hr /></div>
 

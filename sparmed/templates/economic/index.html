@@ -58,12 +58,6 @@
   {% endfor %}
 </table>  
 
-<div class="hr"><hr /></div>
-
-<pre>
-  {{ customers.collection }}
-</pre>
-
 {% endif %}
 
 <div class="hr"><hr /></div>
@@ -77,8 +71,10 @@
     <th>Name</th>
     <th>Product Group</th>
     <th>Recommended Price</th>
+    <th>Sales Price</th>
     <th>Cost Price</th>
     <th>In Stock</th>
+    <th>Available</th>
     <th>Last Updated</th>
   </tr>
   
@@ -91,7 +87,8 @@
     <td>{{ product.recommendedPrice }}</td>
     <td>{{ product.salesPrice }}</td>
     <td>{{ product.costPrice }}</td>
-    <td>{{ product.inStock }}</td>
+    <td>{{ product.inventory.inStock }}</td>
+    <td>{{ product.inventory.available }}</td>
     <td>{{ product.lastUpdated }}</td>
   </tr>
   {% endfor %}
@@ -99,11 +96,19 @@
 
 <div class="hr"><hr /></div>
 
+{% endif %}
+
+
+<h4>Products Collection JSON<h4>
 <pre>
   {{ products.collection }}
 </pre>
 
-{% endif %}
-
+<div class="hr"><hr /></div>  
+  
+<h4>Customers Collection JSON</h4>
+<pre>
+  {{ customers.collection }}
+</pre>
 
 {% endblock %}

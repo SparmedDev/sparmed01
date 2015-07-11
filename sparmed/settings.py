@@ -106,6 +106,7 @@ LOCAL_APPS = (
   'online_order',
   'certificates',
   'distributors',
+  'economic',
 )
 
 INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + COLLECTFAST + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
