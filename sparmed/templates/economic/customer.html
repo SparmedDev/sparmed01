@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load base_extras %}
+
+{% block pagedescription %}Customer E-conomic Web Interface for SparMED{% endblock %}
+{% block title %}Customer E-conomics Interface{% endblock %}
+
+{% block body %}
+
+<h2 class="text-center">Customer Information</h2>
+
+<div class="hr"><hr /></div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <strong>{{ customer.name }}</strong><br />
+    {{ customer.address }}<br />
+    {{ customer.city }}, {{ customer.country }}<br />
+    <a href="mailto:{{ customer.email }}" title="{{ customer.email}}">{{ customer.email }}</a>
+  </div>
+  
+  <div class="col-sm-6">
+    Customer Number: {{ customer.customerNumber }}<br />
+    Customer Group Number: {{ customer.customerGroup.customerGroupNumber }}<br />
+    Vat Zone Number: {{ customer.vatZone.vatZoneNumber }}<br />
+    Balance: {{ customer.balance }} {{ customer.currency }}<br />
+    Last Updated: {{ customer.lastUpdated }}
+  </div>
+</div>
+
+<div class="hr"><hr /></div>
+
+<pre>
+  {{ invoice }}
+</pre>
+
+<div class="hr"><hr /></div>
+
+<pre>
+  {{ customer }}
+</pre>
+
+{% endblock %}

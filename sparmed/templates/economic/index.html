@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+{% load base_extras %}
+
+{% block pagedescription %}List E-conomic Web Interface for SparMED{% endblock %}
+{% block title %}List E-conomics Interface{% endblock %}
+
+{% block body %}
+
+{% if customers and customers|length > 0 %}
+<h2>Customers</h2>
+<table class="table table-bordered table-hover table-striped">
+  <tr>
+    <th>#</th>
+    <th>Customer Number</th>
+    <th>Group Number</th>
+    <th>Name</th>
+    <th>Country</th>
+    <th>Balance</th>
+    <th>Email</th>
+    <th>Telephone / Fax</th>
+    <th>Last Updated</th>
+  </tr>
+  
+  {% for customer in customers.collection %}
+  <tr>
+    <td>
+      {{ forloop.counter }}
+    </td>
+    <td>
+      <a href="{% url 'economic-customer' customer.self %}" title="{{ customer.name }}"> {{ customer.customerNumber }}</a>
+    </td>
+    <td>
+      {{ customer.customerGroup.customerGroupNumber }}
+    </td>
+    <td>
+      {{ customer.name }}
+    </td>
+    <td>
+      {{ customer.city }}, {{ customer.country }}
+    </td>  
+    <td>
+      {{ customer.balance }} {{ customer.currency }}
+    </td>
+    <td>
+      {{ customer.email }}
+    </td>
+    <td>
+      {{ customer.telephoneAndFaxNumber }}
+    </td>
+    <td>
+      {{ customer.lastUpdated }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>  
+
+<div class="hr"><hr /></div>
+
+<pre>
+  {{ customers.collection }}
+</pre>
+
+{% endif %}
+
+<div class="hr"><hr /></div>
+
+{% if products and products|length > 0 %}
+<h2>Products</h2>
+<table class="table table-bordered table-hover table-striped">
+  <tr>
+    <th>#</th>
+    <th>Product Number</th>
+    <th>Name</th>
+    <th>Product Group</th>
+    <th>Recommended Price</th>
+    <th>Cost Price</th>
+    <th>In Stock</th>
+    <th>Last Updated</th>
+  </tr>
+  
+  {% for product in products.collection %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td><a href="{% url 'economic-product' product.self %}" title="{{ product.name }}">{{ product.productNumber }}</a></td>
+    <td>{{ product.name }}</td>
+    <td>{{ product.productGroup.productGroupNumber }} - {{ product.productGroup.name }}</td>
+    <td>{{ product.recommendedPrice }}</td>
+    <td>{{ product.salesPrice }}</td>
+    <td>{{ product.costPrice }}</td>
+    <td>{{ product.inStock }}</td>
+    <td>{{ product.lastUpdated }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="hr"><hr /></div>
+
+<pre>
+  {{ products.collection }}
+</pre>
+
+{% endif %}
+
+
+{% endblock %}

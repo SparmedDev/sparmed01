@@ -44,6 +44,10 @@ urlpatterns = [
 
   url(r'^cookies/remove_account_change/$', 'online_order.views.remove_account_change_cookie', name='remove-account-change-cookie'),
 
+  url(r'^economic/list/$', 'economic.views.index', name='economic-index'),
+  url(r'^economic/customers/(?P<url>.*)/$', 'economic.views.customer', name='economic-customer'),
+  url(r'^economic/products/(?P<url>.*)/$', 'economic.views.product', name='economic-product'),
+  
   url(r'^grappelli/', include('grappelli.urls')),
   url(r'^admin/', include(admin.site.urls)),  
   url(r'^i18n/', include('django.conf.urls.i18n')),
