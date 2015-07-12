@@ -18,9 +18,11 @@
     {% csrf_token %}
     {% bootstrap_form form %}
 
-    <button type="submit" class="btn btn-primary">
-      {% trans "Login" %}
-    </button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">
+        {% trans "Login" %}
+      </button>
+    </div>
     <a class="btn btn-warning" href="{% url 'password_reset' %}">{% trans "Reset Password" %}</a>
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
