@@ -14,15 +14,16 @@
 <hr>
 
 <section id="loginform">
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+  <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
     {% csrf_token %}
     {% bootstrap_form form %}
-    
-    {% trans "Login" as login_trans %}
-    {% buttons submit='{{ login_trans }}' %}{% endbuttons %}
+
+    <button type="submit" class="btn btn-primary">
+      {% trans "Login" %}
+    </button>
     <a class="btn btn-warning" href="{% url 'password_reset' %}">{% trans "Reset Password" %}</a>
     <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+  </form>
 </section>
 
 {% endblock %}

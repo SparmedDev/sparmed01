@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-10 01:43+0000\n"
+"POT-Creation-Date: 2015-07-12 19:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,15 +107,15 @@ msgstr ""
 msgid "URL; Never modify this value!"
 msgstr ""
 
-#: online_order/admin.py:38
+#: online_order/admin.py:33
 msgid "Personal info"
 msgstr ""
 
-#: online_order/admin.py:39
+#: online_order/admin.py:34
 msgid "Permissions"
 msgstr ""
 
-#: online_order/admin.py:41
+#: online_order/admin.py:36
 msgid "Important dates"
 msgstr ""
 
@@ -124,12 +124,10 @@ msgid "Sparmed Website Account Name"
 msgstr ""
 
 #: online_order/models.py:50
-#: sparmed/templates/online_order/account_area.html:46
 msgid "Company City"
 msgstr ""
 
 #: online_order/models.py:51
-#: sparmed/templates/online_order/account_area.html:51
 msgid "Company Postal Code"
 msgstr ""
 
@@ -390,19 +388,19 @@ msgstr ""
 msgid "PDF Document file (56 MB max)"
 msgstr ""
 
-#: sparmed/settings.py:132
+#: sparmed/settings.py:139
 msgid "English"
 msgstr ""
 
-#: sparmed/settings.py:133
+#: sparmed/settings.py:140
 msgid "Russian"
 msgstr ""
 
-#: sparmed/settings.py:134
+#: sparmed/settings.py:141
 msgid "Brazilian"
 msgstr ""
 
-#: sparmed/settings.py:135
+#: sparmed/settings.py:142
 msgid "Spanish"
 msgstr ""
 
@@ -513,7 +511,7 @@ msgstr ""
 msgid "Distributors"
 msgstr ""
 
-#: sparmed/templates/base.html:95 sparmed/templates/contact.html:11
+#: sparmed/templates/base.html:95 sparmed/templates/contact.html:12
 msgid "Contact Us"
 msgstr ""
 
@@ -523,7 +521,7 @@ msgid ""
 msgstr ""
 
 #: sparmed/templates/base.html:103 sparmed/templates/registration/login.html:8
-#: sparmed/templates/registration/login.html:21
+#: sparmed/templates/registration/login.html:22
 msgid "Login"
 msgstr ""
 
@@ -552,20 +550,20 @@ msgstr ""
 
 #: sparmed/templates/base.html:139 sparmed/templates/base.html.py:164
 #: sparmed/templates/online_order/online_order_sheet.html:36
-#: sparmed/templates/online_order/order_history.html:57
+#: sparmed/templates/online_order/order_history.html:58
 #: sparmed/templates/online_order/order_to_from.html:16
 #: sparmed/templates/online_order/order_to_from.html:32
 msgid "Email"
 msgstr ""
 
 #: sparmed/templates/base.html:140 sparmed/templates/base.html.py:165
-#: sparmed/templates/contact.html:33
+#: sparmed/templates/contact.html:34
 #: sparmed/templates/online_order/order_to_from.html:15
 msgid "Phone"
 msgstr ""
 
 #: sparmed/templates/base.html:141 sparmed/templates/base.html.py:166
-#: sparmed/templates/contact.html:34
+#: sparmed/templates/contact.html:35
 msgid "Fax"
 msgstr ""
 
@@ -627,27 +625,28 @@ msgstr ""
 msgid "Certificates and Documents"
 msgstr ""
 
-#: sparmed/templates/contact.html:6
+#: sparmed/templates/contact.html:7
 msgid "Contact SparMED for the best products for GOosafe IVF Laboratories"
 msgstr ""
 
-#: sparmed/templates/contact.html:7
+#: sparmed/templates/contact.html:8
 msgid "Contact"
 msgstr ""
 
-#: sparmed/templates/contact.html:19 sparmed/templates/contact.html.py:53
+#: sparmed/templates/contact.html:20 sparmed/templates/contact.html.py:54
+#: sparmed/templates/online_order/order_details.html:52
 msgid "Address"
 msgstr ""
 
-#: sparmed/templates/contact.html:19
+#: sparmed/templates/contact.html:20
 msgid "DENMARK"
 msgstr ""
 
-#: sparmed/templates/contact.html:25
+#: sparmed/templates/contact.html:26
 msgid "Opening Hours"
 msgstr ""
 
-#: sparmed/templates/contact.html:26
+#: sparmed/templates/contact.html:27
 msgid ""
 "\n"
 "      Monday - Thursday 7:30 - 16:00<br>\n"
@@ -655,43 +654,43 @@ msgid ""
 "      "
 msgstr ""
 
-#: sparmed/templates/contact.html:39
+#: sparmed/templates/contact.html:40
 msgid "General Support"
 msgstr ""
 
-#: sparmed/templates/contact.html:40
+#: sparmed/templates/contact.html:41
 msgid "Sales"
 msgstr ""
 
-#: sparmed/templates/contact.html:40
+#: sparmed/templates/contact.html:41
 msgid "or"
 msgstr ""
 
-#: sparmed/templates/contact.html:41
+#: sparmed/templates/contact.html:42
 msgid "Finance"
 msgstr ""
 
-#: sparmed/templates/contact.html:42
+#: sparmed/templates/contact.html:43
 msgid "IVF and ART"
 msgstr ""
 
-#: sparmed/templates/contact.html:43 sparmed/templates/privacy_policy.html:75
+#: sparmed/templates/contact.html:44 sparmed/templates/privacy_policy.html:75
 msgid "Marketing"
 msgstr ""
 
-#: sparmed/templates/contact.html:44
+#: sparmed/templates/contact.html:45
 msgid "Regulatory Affairs"
 msgstr ""
 
-#: sparmed/templates/contact.html:45
+#: sparmed/templates/contact.html:46
 msgid "IT"
 msgstr ""
 
-#: sparmed/templates/contact.html:51
+#: sparmed/templates/contact.html:52
 msgid "Bank information"
 msgstr ""
 
-#: sparmed/templates/contact.html:56
+#: sparmed/templates/contact.html:57
 msgid ""
 "\n"
 "      BIC/SWIFT code: DABADKKK<br>\n"
@@ -837,8 +836,12 @@ msgstr ""
 msgid "Go back to"
 msgstr ""
 
-#: sparmed/templates/online_order/account_area.html:73
-#: sparmed/templates/registration/login.html:23
+#: sparmed/templates/online_order/account_area.html:68
+msgid "Update Account Details"
+msgstr ""
+
+#: sparmed/templates/online_order/account_area.html:74
+#: sparmed/templates/registration/login.html:24
 #: sparmed/templates/registration/password_reset_form.html:7
 #: sparmed/templates/registration/password_reset_form.html:8
 msgid "Reset Password"
@@ -851,20 +854,20 @@ msgid "Online Order Sheet"
 msgstr ""
 
 #: sparmed/templates/online_order/online_order_sheet.html:24
-#: sparmed/templates/online_order/order_history.html:45
+#: sparmed/templates/online_order/order_history.html:46
 msgid "Company Details"
 msgstr ""
 
 #. Translators: Att abbreviation for 'attention', as used in letters
 #. Translators: 'Att' is short for Attention, as used in letters
 #: sparmed/templates/online_order/online_order_sheet.html:34
-#: sparmed/templates/online_order/order_history.html:55
+#: sparmed/templates/online_order/order_history.html:56
 #: sparmed/templates/online_order/order_to_from.html:30
 msgid "Att"
 msgstr ""
 
 #: sparmed/templates/online_order/online_order_sheet.html:35
-#: sparmed/templates/online_order/order_history.html:56
+#: sparmed/templates/online_order/order_history.html:57
 #: sparmed/templates/online_order/order_to_from.html:31
 msgid "Telephone"
 msgstr ""
@@ -952,6 +955,10 @@ msgid ""
 "safest way of packing your order."
 msgstr ""
 
+#: sparmed/templates/online_order/online_order_sheet.html:177
+msgid "Same delivery address?"
+msgstr ""
+
 #: sparmed/templates/online_order/online_order_sheet.html:192
 msgid "Insurance Chosen?"
 msgstr ""
@@ -972,6 +979,11 @@ msgid ""
 "this order"
 msgstr ""
 
+#: sparmed/templates/online_order/online_order_sheet.html:213
+#: sparmed/templates/online_order/order_confirmation.html:9
+msgid "Send Order"
+msgstr ""
+
 #: sparmed/templates/online_order/order_confirmation.html:4
 msgid ""
 "This Order Confirmation page shows the details concerning a specific order"
@@ -979,10 +991,6 @@ msgstr ""
 
 #: sparmed/templates/online_order/order_confirmation.html:5
 msgid "Order Confirmation"
-msgstr ""
-
-#: sparmed/templates/online_order/order_confirmation.html:9
-msgid "Send Order"
 msgstr ""
 
 #: sparmed/templates/online_order/order_confirmation.html:10
@@ -1078,28 +1086,25 @@ msgstr ""
 msgid "View you Order History with SparMED"
 msgstr ""
 
-#: sparmed/templates/online_order/order_history.html:33
-#, python-format
-msgid ""
-"Order of <time datetime=\"%(order.date|date:'c')s\">"
-"%(order.date|date:'Y-m-d H:i')s</time>"
-msgstr ""
-
-#: sparmed/templates/online_order/order_history.html:83
-msgid "View in Print-Friendly Format"
+#: sparmed/templates/online_order/order_history.html:32
+msgid "Order of"
 msgstr ""
 
 #: sparmed/templates/online_order/order_history.html:84
+msgid "View in Print-Friendly Format"
+msgstr ""
+
+#: sparmed/templates/online_order/order_history.html:85
 #: sparmed/templates/online_order/order_history_print.html:9
 msgid "Repeat Previous Order"
 msgstr ""
 
-#: sparmed/templates/online_order/order_history.html:84
+#: sparmed/templates/online_order/order_history.html:85
 #: sparmed/templates/online_order/order_history_print.html:9
 msgid "Repeat Order"
 msgstr ""
 
-#: sparmed/templates/online_order/order_history.html:97
+#: sparmed/templates/online_order/order_history.html:98
 msgid "No orders found in the order history."
 msgstr ""
 
