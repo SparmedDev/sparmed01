@@ -37,7 +37,6 @@ greenlet==0.4.7
 gunicorn==19.3.0
 html5lib==0.999999
 mandrill==1.0.57
-newrelic==2.52.0.40
 ply==3.4
 pylibmc==1.4.1
 psycopg2==2.6.1
