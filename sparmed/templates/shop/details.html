@@ -18,7 +18,8 @@
 
 {% block body %}
 
-{% cache 3600 products-details-nav-and-info product.slug %}
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 3600 products-details-nav-and-info product.slug LANGUAGE_CODE %}
 <ol class="breadcrumb">
   <li><a href="{{ category.get_absolute_url }}">{{ category.short_name }}</a></li>
   <li class="active">{{ product.subcategory.name|safe }}</li>
@@ -58,7 +59,7 @@
   {% endif %}
 </div>
 
-{% cache 3600 products-details-images product.slug %}
+{% cache 3600 products-details-images product.slug LANGUAGE_CODE %}
 <span class="minor-skip"></span>
 
 <div class="row">  
@@ -94,7 +95,7 @@
 
 {% block endbody %}
 
-{% cache 3600 products-details-scripts %}
+{% cache 3600 products-details-scripts LANGUAGE_CODE %}
 <!-- Include js plugin -->
 <script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8"></script>
 

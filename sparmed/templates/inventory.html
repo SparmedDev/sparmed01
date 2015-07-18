@@ -16,7 +16,8 @@
   <li class="active">{% trans "Inventory" %}</li>
 </ol>
 
-{% cache 6400 sparmed-inventory %}
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 6400 sparmed-inventory LANGUAGE_CODE %}
 <article>  
   <h2 class="text-center">{% trans "Inventory" %}</h2>
 
@@ -106,7 +107,7 @@
 {% endblock %}
 
 {% block endbody %}
-{% cache 6400 sparmed-inventory-scripts %}
+{% cache 6400 sparmed-inventory-scripts LANGUAGE_CODE %}
 <script> 
   function fillProducts(response) {
     if (response && response.collection && response.collection.length) {

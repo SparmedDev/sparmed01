@@ -18,7 +18,8 @@
 {% endblock %}
 
 {% block bodytop %}
-{% cache 3600 owl-carousel-min-js-script %}
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 3600 owl-carousel-min-js-script LANGUAGE_CODE %}
 <!-- Include js plugin -->
 <script src="{% static 'owl-carousel/js/owl.carousel.min.js' %}" type="text/javascript" charset="utf-8" defer></script>
 {% endcache %}
@@ -42,7 +43,7 @@
 <article class="category-article">
   <div class="clearfix"></div>
   
-  {% cache 3600 products-category-article-top category.slug %}  
+  {% cache 3600 products-category-article-top category.slug LANGUAGE_CODE %}  
   <hr>
   <h1 class="text-center">{% filter upper %}{{ category.name|safe }}{% endfilter %}</h1>
   <hr>
