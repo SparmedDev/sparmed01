@@ -45,28 +45,25 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '.herokuapp.com').split(':')
 from postgresify import postgresify
 DATABASES = postgresify()
 
+# Memcache Cache
 from memcacheify import memcacheify
 CACHES = memcacheify()
 MEMCACHEIFY_USE_LOCAL=DEBUG
 
-ROOT_URLCONF = 'sparmed.urls'
+# The maximum number of entries allowed in the cache before old values are deleted. This argument defaults to 300.
+MAX_ENTRIES = 200
 
+ROOT_URLCONF = 'sparmed.urls'
 WSGI_APPLICATION = 'sparmed.wsgi.application'
 
 # Grappelli Admin Site Settings
 GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
 
-GRAPPELLI = (
+THIRD_PARTY_PRE_DJANGO = (
   'grappelli',
   'grappelli_modeltranslation',
-)
-
-MODELTRANSLATION = (
   'modeltranslation',  
-)
-
-COLLECTFAST = (
-  'collectfast',  
+  'collectfast', 
 )
 
 DJANGO_APPS = (
@@ -83,8 +80,9 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
   'gunicorn',
+  'rosetta', 
   'storages',
-  'haystack',
+  'haystack',   
   'bootstrap3',
   'robots',
   'sorl.thumbnail',      
@@ -93,8 +91,7 @@ THIRD_PARTY_APPS = (
   'colorfield',
   'cookielaw',
   'ckeditor',
-  'captcha',  
-  'rosetta',
+  'captcha', 
 )
 
 LOCAL_APPS = (
@@ -109,7 +106,7 @@ LOCAL_APPS = (
   'economic',
 )
 
-INSTALLED_APPS = GRAPPELLI + MODELTRANSLATION + COLLECTFAST + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = THIRD_PARTY_PRE_DJANGO + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = (
   'django.middleware.cache.UpdateCacheMiddleware',
@@ -124,8 +121,6 @@ MIDDLEWARE_CLASSES = (
   'django.middleware.clickjacking.XFrameOptionsMiddleware',  
   'django.middleware.cache.FetchFromCacheMiddleware',
 )
-
-MAX_ENTRIES = 200
 
 TIME_ZONE = 'Europe/Copenhagen'
 LANGUAGE_CODE = 'en'
@@ -153,7 +148,8 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 ROSETTA_WSGI_AUTO_RELOAD = DEBUG
 ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
 ROSETTA_GOOGLE_TRANSLATE = True
-ROSETTA_EXCLUDED_APPLICATIONS = GRAPPELLI + MODELTRANSLATION + DJANGO_APPS + THIRD_PARTY_APPS
+ROSETTA_EXCLUDED_APPLICATIONS = THIRD_PARTY_PRE_DJANGO + DJANGO_APPS + THIRD_PARTY_APPS
+ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -189,6 +185,7 @@ if not DEBUG:
       'Cache-Control': 'public, max-age=86400',
       'Expires': yearfromtoday.strftime('%a, %d %b %Y 20:00:00 GMT'),
     }
+    
     AWS_AUTO_CREATE_BUCKET = True
     AWS_S3_FILE_OVERWRITE = False
     AWS_QUERYSTRING_AUTH = False
