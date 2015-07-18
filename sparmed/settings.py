@@ -128,7 +128,7 @@ MIDDLEWARE_CLASSES = (
 MAX_ENTRIES = 200
 
 TIME_ZONE = 'Europe/Copenhagen'
-LANGUAGE_CODE = 'en-gb'
+LANGUAGE_CODE = 'en'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -266,16 +266,7 @@ else:
 STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)    
-
-#TEMPLATE_CONTEXT_PROCESSORS = (
-#  'django.template.context_processors.request',
-#  "django.contrib.auth.context_processors.auth",
-#  "django.core.context_processors.i18n",
-#  "django.core.context_processors.tz",
-#  'django.contrib.messages.context_processors.messages',
-#  'cart.context_processors.get_cart',
-#)
+)   
 
 # Mandrill email settings
 EMAIL_HOST = 'smtp.mandrillapp.com'
