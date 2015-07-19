@@ -15,10 +15,17 @@ from ckeditor.fields import RichTextField
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name=_("Picture Title"), blank=True)
     image = ImageField(upload_to="/media/products")
+    image_hires = ImageField(upload_to="/media/products", blank=True, null=True)
     product = models.ForeignKey('Product', related_name="images", verbose_name=_("Associated Product"))
 
     def get_absolute_url(self):
       return u'%s' % self.image.url
+    
+    def get_hires_url(self):
+      if self.image_hires:
+          return u'%s' % self.image_hires.url
+      else:
+          return self.get_absolute_url()  
 
     def __unicode__(self):
       return u'%s' % self.image_title
@@ -26,12 +33,19 @@ class ProductImage(models.Model):
 class ShopImage(models.Model):
     image_title = models.CharField(max_length=255, verbose_name=_("Picture Title"), blank=True)
     image = ImageField(upload_to="/media/products")    
+    image_hires = ImageField(upload_to="/media/products/", blank=True, null=True)
     
     subcategory = models.ForeignKey('Subcategory', related_name="images", verbose_name=_("Associated Subcategory"), blank=True, null=True)
     category = models.ForeignKey('Category', related_name="images", verbose_name=_("Associated Category"), blank=True, null=True)
 
     def get_absolute_url(self):
       return u'%s' % self.image.url
+    
+    def get_hires_url(self):
+      if self.image_hires:
+          return u'%s' % self.image_hires.url
+      else:
+          return self.get_absolute_url()   
 
     def __unicode__(self):
       return u'%s' % self.image_title    

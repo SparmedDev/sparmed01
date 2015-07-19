@@ -1,17 +1,21 @@
 {% if post.images %}
-  {% if post.images.all|length > 1 %}
-    <div id="owl-{{ post.slug }}" class="owl-carousel">
-      {% for image in post.images.all %}
-      <div>
-        <img class="img-responsive img-rounded index-owl-image center-block" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl">
-      </div>
-      {% endfor %}
-    </div>    
-  {% else %}
-    <div>
-      {% with image=post.images.all|first %}
-      <img class="img-responsive img-rounded center-block" style="width:100%;" alt="{{ image.title }}" src="{{ image.get_absolute_url }}">
-      {% endwith %}
-    </div>
-  {% endif %}
+{% if post.images.all|length > 1 %}
+<div id="owl-{{ post.slug }}" class="owl-carousel">
+  {% for image in post.images.all %}
+  <div>
+    <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
+      <img class="img-responsive img-rounded index-owl-image center-block" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.title }}" class="lazyOwl">
+    </a>
+  </div>
+  {% endfor %}
+</div>    
+{% else %}
+<div>
+  {% with image=post.images.all|first %}
+  <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
+    <img class="img-responsive img-rounded center-block" style="width:100%;" alt="{{ image.title }}" src="{{ image.get_absolute_url }}">
+  </a>
+  {% endwith %}
+</div>
+{% endif %}
 {% endif %}

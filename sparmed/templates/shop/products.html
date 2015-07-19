@@ -29,98 +29,106 @@
 
 {% if categories %}
 <nav id="products-nav" role="navigation">
-    {% for cat in categories %}
-    {% if forloop.first or forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
-      <div class="col-sm-4 products-nav-cat {% productnavactive request cat.slug %}">
-        <a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a>
-      </div>
-    {% if not forloop.first %}{% if forloop.counter|divisibleby:3 or forloop.last %}</div>{% endif %}{% endif %}
-    {% endfor %}
+  {% for cat in categories %}
+  {% if forloop.first or forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
+  <div class="col-sm-4 products-nav-cat {% productnavactive request cat.slug %}">
+    <a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a>
+  </div>
+  {% if not forloop.first %}{% if forloop.counter|divisibleby:3 or forloop.last %}</div>{% endif %}{% endif %}
+  {% endfor %}
 </nav>
 {% endif %}
 
 
 <article class="category-article">
   <div class="clearfix"></div>
-  
+
   {% cache 3600 products-category-article-top category.slug LANGUAGE_CODE %}  
   <hr>
   <h1 class="text-center">{% filter upper %}{{ category.name|safe }}{% endfilter %}</h1>
   <hr>
   {% if category.description %}<p class="text-center"><em>{{ category.description|safe }}</em></p>{% endif %}
-  
+
   {% with image=category.images.all|first %}
   {% if image %}  
   <section>
+    <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
       <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
+    </a>
   </section>
-  
+
   <hr>
   {% endif %}
   {% endwith %}  
-  
+
   {% if category.long_text %}
   <section class="two-column">
-      {{ category.long_text|safe }}
+    {{ category.long_text|safe }}
   </section>
-  
+
   <hr>
   {% endif %}
-  
+
   {% if category.document %}
   <section>
     <h4 class="text-center"><a style="color: #ed1b2e;" href="{{ category.document.url }}" target="_blank">PDF <span class="glyphicon glyphicon-file"></span></a></h4>
   </section>  
   {% endif %}
-  
+
   {% endcache %}
 
   {% with subcats=category.subcategories.all %}
   {% for subcat in subcats %}
   <hr>
   <div>      
-      <h2 class="text-center" style="color:{{ subcat.color }};">{% filter upper %}{{ subcat.name|safe }}{% endfilter %}</h2>
-      {% if subcat.description %}<p class="text-center" style="padding-top: 25px;"><em>{{ subcat.description|safe }}</em></p>{% endif %}
-    
-      {% with image=subcat.images.all|first %}
-      {% if image %}  
-      <section>
-          <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
-      </section>
+    <h2 class="text-center" style="color:{{ subcat.color }};">{% filter upper %}{{ subcat.name|safe }}{% endfilter %}</h2>
+    {% if subcat.description %}<p class="text-center" style="padding-top: 25px;"><em>{{ subcat.description|safe }}</em></p>{% endif %}
+
+    {% with image=subcat.images.all|first %}
+    {% if image %}  
+    <section>
+      <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
+        <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
+      </a>
+    </section>
+    {% endif %}
+    {% endwith %}     
+
+    {% for product in subcat.products.all %}
+    {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel" class="owl-carousel">{% endif %}
+    <div>
+      <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
+      <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
+
+      {% for image in product.images.all reversed %}
+      {% if forloop.first %}
+      {% if image %}
+      <p>
+        <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
+          <img class="img-responsive img-rounded product-image lazyOwl" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}">
+        </a>
+      </p>
       {% endif %}
-      {% endwith %}     
-
-      {% for product in subcat.products.all %}
-      {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel" class="owl-carousel">{% endif %}
-          <div>
-            <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
-            <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
-
-            {% for image in product.images.all reversed %}
-            {% if forloop.first %}
-              {% if image %}
-              <p><a href="{{ product.get_absolute_url }}"><img class="img-responsive img-rounded product-image lazyOwl" alt="{{ image.image_title }}" src="{{ image.get_absolute_url }}"></a></p>
-              {% endif %}
-            {% endif %}
-            {% endfor %}
-
-            {% if user.is_anonymous %}
-            <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>({% trans "Login required" %})</p>
-            {% else %}
-            <p class="text-center">
-              <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">{% trans "Add to Cart" %} <span class="glyphicon glyphicon-shopping-cart"></span></button>
-            </p>
-
-            {% endif %}
-          </div>    
-      {% if forloop.last %}</div>{% endif %}
+      {% endif %}
       {% endfor %}
 
+      {% if user.is_anonymous %}
+      <p class="text-muted text-center">Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span><br>({% trans "Login required" %})</p>
+      {% else %}
+      <p class="text-center">
+        <button id="{{ product.pk }}_add" class="btn btn-lg add-to-cart-btn" style="color:{{ subcat.color }};">{% trans "Add to Cart" %} <span class="glyphicon glyphicon-shopping-cart"></span></button>
+      </p>
+
+      {% endif %}
+    </div>    
+    {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+
   </div>
-  
+
   {% endfor %}
   {% endwith %}
-  
+
 </article>
 {% endblock %}
 
@@ -133,30 +141,30 @@
     {% for subcat in category.subcategories.all %}
     {% if subcat.products.all|length %}
     itemsLength = {{ subcat.products.all|length }};
-    if (itemsLength > 4) { itemsLength = 4; }
+     if (itemsLength > 4) { itemsLength = 4; }
 
-    $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
-      items: itemsLength,
-      itemsDesktop: [1199, itemsLength],  
-      itemsDesktopSmall: [980, itemsLength],
-      singleItem: false,
-      itemsScaleUp: false,
-      autoPlay: false,   
-      scrollPerPage: false,      
-      responsiveBaseWidth: '#content',      
-      lazyLoad: true,      
-      autoHeight: false,
-    });
+     $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
+       items: itemsLength,
+       itemsDesktop: [1199, itemsLength],  
+       itemsDesktopSmall: [980, itemsLength],
+       singleItem: false,
+       itemsScaleUp: false,
+       autoPlay: false,   
+       scrollPerPage: false,      
+       responsiveBaseWidth: '#content',      
+       lazyLoad: true,      
+       autoHeight: false,
+     });
 
-    {% for product in subcat.products.all %}
-    $("#{{ product.pk }}_add").click(function() {
-      addToCart({{ product.pk }});
-    });    
-    {% endfor %}
-    
-    {% endif %}
-    {% endfor %}
-  });
+     {% for product in subcat.products.all %}
+     $("#{{ product.pk }}_add").click(function() {
+       addToCart({{ product.pk }});
+     });    
+      {% endfor %}
+
+      {% endif %}
+      {% endfor %}
+      });
 </script>
 
 {% endblock %}

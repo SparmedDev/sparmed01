@@ -36,7 +36,7 @@
     {% if product.weight %}{% trans "Weight" %}: {{ product.weight }}{% endif %}
   </p>
   {% endif %}
-  
+
   <p class="text-center">
     {% trans "Tariff No. / HS Code" as prefix %}
     {% if product.hs_code %}
@@ -63,30 +63,34 @@
 <span class="minor-skip"></span>
 
 <div class="row">  
-  
+
   <div class="col-md-6">
     {% if images|length > 1 %}
     <div class="owl-carousel">
       {% for image in images %}
       <div>
-        <img class="img-responsive img-rounded center-block lazyOwl" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
+        <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
+          <img class="img-responsive img-rounded center-block lazyOwl" data-src="{{ image.get_absolute_url }}" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
+        </a>
       </div>
       {% endfor %}
     </div>
     {% elif images|length > 0 %}
     {% with image=images|first %}
-    <img class="img-responsive img-rounded center-block max-height-600" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
+    <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
+      <img class="img-responsive img-rounded center-block max-height-600" src="{{ image.get_absolute_url }}" alt="{{ image.image_title }}">
+    </a>
     {% endwith %}
     {% else %}
     <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "No pictures available" %}</div>
     {% endif %}    
   </div>
-   
-  
+
+
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
-      {{ long_text|safe }}
+    {{ long_text|safe }}
   </div>    
-  
+
 </div>
 
 {% endcache %} 
@@ -115,7 +119,7 @@
       lazyLoad: true,      
       autoHeight: false,
     });
-    
+
     $("#add_btn").click(function() {
       addToCart({{ product.pk }});
     });       
