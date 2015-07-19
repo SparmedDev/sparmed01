@@ -159,6 +159,9 @@ LOCALE_PATHS = (
 
 
 if not DEBUG:
+    # Thumbnail Fix for S3 Slow Response
+    THUMBNAIL_FORCE_OVERWRITE = True
+  
     # Fix admin login cookie not being set correctly 
     SESSION_COOKIE_DOMAIN = DOMAIN_NAME
     CSRF_COOKIE_DOMAIN = DOMAIN_NAME  
