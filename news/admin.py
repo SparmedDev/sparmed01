@@ -20,5 +20,5 @@ class NewsPostAdmin(admin.ModelAdmin):
     
     inlines = [NewsImageInline,]
 
-admin.site.register(NewsImage, NewsImageAdmin)
+#admin.site.register(NewsImage, NewsImageAdmin)
 admin.site.register(NewsPost, NewsPostAdmin)
