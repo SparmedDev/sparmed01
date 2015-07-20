@@ -91,7 +91,7 @@ THIRD_PARTY_APPS = (
   'colorfield',
   'cookielaw',
   'ckeditor',
-  'captcha', 
+  'nocaptcha_recaptcha', 
 )
 
 LOCAL_APPS = (
@@ -157,7 +157,6 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-
 if not DEBUG:
     # Thumbnail Fix for S3 Slow Response
     THUMBNAIL_FORCE_OVERWRITE = True
@@ -194,7 +193,7 @@ if not DEBUG:
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_SECURE_URLS = True
     AWS_REDUCED_REDUNDANCY = False
-    AWS_IS_GZIPPED = False
+    AWS_IS_GZIPPED = False    
     AWS_PRELOAD_METADATA = True   
     
     TEMPLATE_MINIFIER = True    
@@ -226,6 +225,8 @@ if not DEBUG:
         },
     ]    
 else:
+    COLLECTFAST_ENABLED = False
+    
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  
   
@@ -292,10 +293,22 @@ LOGIN_URL = 'django.contrib.auth.views.login'
 AUTH_USER_MODEL = "online_order.SparmedUser"
 
 # Recaptcha for Contact Form
-RECAPTCHA_PUBLIC_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
-RECAPTCHA_PRIVATE_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
-RECAPTCHA_USE_SSL = HTTPS
-CAPTCHA_AJAX = False
+#RECAPTCHA_PUBLIC_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
+#RECAPTCHA_PRIVATE_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
+#RECAPTCHA_USE_SSL = HTTPS
+#CAPTCHA_AJAX = False
+
+# Required settings: 
+NORECAPTCHA_SITE_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
+NORECAPTCHA_SECRET_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
+
+# Optional Settings:
+NORECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
+#    Best to leave this as the default setting.
+#    Default is https://www.google.com/recaptcha/api/siteverify
+NORECAPTCHA_WIDGET_TEMPLATE = 'nocaptcha_recaptcha/widget.html'
+#    Default is nocaptcha_recaptcha/widget.html
+
 
 # Haystack Settings
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
