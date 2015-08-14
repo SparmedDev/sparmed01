@@ -12,18 +12,18 @@ def home(request):
 def about(request):
   return render(request, "about.html")
 
-def terms_conditions(request):  
+def terms_conditions(request):
   return render(request, "terms_conditions.html")
 
-def privacy_policy(request):  
+def privacy_policy(request):
   return render(request, "privacy_policy.html")
 
 @never_cache
 @login_required
 def inventory(request):
-  categories = Category.objects.all()  
+  categories = Category.objects.all()
   return render(request, "inventory.html", {'categories':categories,})
 
 @login_required
-def distributor_login(request):  
+def distributor_login(request):
   return render(request, "distributor_login.html")

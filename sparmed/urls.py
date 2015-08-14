@@ -19,7 +19,7 @@ class StaticViewsSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse(item)
-      
+
 product_dict = {
     'queryset': Product.objects.all(),
     'date_field': 'added',
@@ -35,8 +35,8 @@ sitemaps = {
     'products': GenericSitemap(product_dict, priority=0.2),
     'categories': GenericSitemap(category_dict, priority=0.3),
 }
-      
-urlpatterns = [  
+
+urlpatterns = [
   url(r'^clear_cart/$', 'cart.views.clear_cart', name='clear-cart'),
   url(r'^add_to_cart/$', 'cart.views.add_to_cart', name='add-to-cart'),
   url(r'^remove_from_cart/(?P<object_id>[0-9]+)/$', 'cart.views.remove_from_cart', name='remove-from-cart'),
@@ -47,9 +47,9 @@ urlpatterns = [
 #  url(r'^economic/list/$', 'economic.views.index', name='economic-index'),
 #  url(r'^economic/customers/(?P<url>.*)/$', 'economic.views.customer', name='economic-customer'),
 #  url(r'^economic/products/(?P<url>.*)/$', 'economic.views.product', name='economic-product'),
-  
+
   url(r'^grappelli/', include('grappelli.urls')),
-  url(r'^admin/', include(admin.site.urls)),  
+  url(r'^admin/', include(admin.site.urls)),
   url(r'^i18n/', include('django.conf.urls.i18n')),
   url(r'^translate/', include('rosetta.urls')),
   url(r'^ckeditor/', include('ckeditor.urls')),
@@ -68,8 +68,8 @@ distributor_login_patterns = [
   url(r'^order-regret/(?P<order_id>[0-9]+)/$', 'online_order.views.order_regret', name='order-regret'),
 
   url(r'^certificates/$', 'certificates.views.certificates', name='certificates'),
-  url(r'^inventory/$', views.inventory, name='inventory'),                        
-  url(r'^$', views.distributor_login, name='distributor-login'),      
+  url(r'^inventory/$', views.inventory, name='inventory'),
+  url(r'^$', views.distributor_login, name='distributor-login'),
 ]
 
 urlpatterns += i18n_patterns(
@@ -87,7 +87,7 @@ urlpatterns += i18n_patterns(
 
   url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
   url(r'^products/(?P<slug>[\w\-]+)/$', 'shop.views.products'),
-  url(r'^products/$', 'shop.views.products', name='products'), 
+  url(r'^products/$', 'shop.views.products', name='products'),
 
   url(r'^search/add_to_cart/$', 'shop.views.autocomplete_add_to_cart', name='add-to-cart-search'),
   url(r'^search/autocomplete/', 'shop.views.autocomplete', name='autocomplete-url'),
@@ -99,6 +99,6 @@ urlpatterns += i18n_patterns(
   url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
   url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
   url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
-  url(r'^user/password/done/$', 'django.contrib.auth.views.password_reset_complete'),                       
+  url(r'^user/password/done/$', 'django.contrib.auth.views.password_reset_complete'),
 
 )
