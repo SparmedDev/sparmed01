@@ -40,11 +40,11 @@
   <p class="text-center">
     {% trans "Tariff No. / HS Code" as prefix %}
     {% if product.hs_code %}
-    {{prefix}}{{ product.hs_code }}
+    {{prefix}} {{ product.hs_code }}
     {% elif product.subcategory.hs_code %}
-    {{prefix}}{{ product.subcategory.hs_code }}
+    {{prefix}} {{ product.subcategory.hs_code }}
     {% elif product.category.hs_code %}
-    {{prefix}}{{ product.category.hs_code }}
+    {{prefix}} {{ product.category.hs_code }}
     {% endif %}
   </p>
 
