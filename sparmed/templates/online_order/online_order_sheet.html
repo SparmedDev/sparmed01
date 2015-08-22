@@ -23,7 +23,7 @@
       <div class="panel-heading">
         <h4>{% trans "Company Details" %}</h4>
       </div>
-      <div class="panel-body">          
+      <div class="panel-body">
         <p class="text-muted text-small">
           <strong>{{ user.company_name }}</strong><br>
           {{ user.address}}<br>
@@ -46,44 +46,44 @@
       </div>
     </div>
   </div>
-  
+
   {% url 'inventory' as inventory_url %}
-  {% url 'products' as products_url %}          
+  {% url 'products' as products_url %}
 
   <div class="col-sm-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>{% trans "Products in Cart" %}</h4>
-      </div>    
+      </div>
 
       {% if get_cart and get_cart.count > 0 %}
-      <div class="panel-body">  
+      <div class="panel-body">
 
-        <p>{% blocktrans %}Add more products to your cart through the <a href="{{ inventory_url }}">inventory page</a>, the <a href="{{ products_url }}">products page</a>, or the search box below.{% endblocktrans %}</p>        
-      </div>      
+        <p>{% blocktrans %}Add more products to your cart through the <a href="{{ inventory_url }}">inventory page</a>, the <a href="{{ products_url }}">products page</a>, or the search box below.{% endblocktrans %}</p>
+      </div>
 
       <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
         {% csrf_token %}
         <div class="form-group">
-          <input type="text" id="id_q" name="q" class="form-control" placeholder="{% trans 'Start typing an ID to search for products matching that ID' %}" required />
+          <input type="text" id="id_q" name="q" class="form-control" placeholder="{% trans 'Start typing an Order No. to search for products matching that Order No.' %}" required />
         </div>
         <div class="form-group col-sm-4">
           <input class="btn btn-info" type="submit" value="{% trans 'Add New Product' %}" />
         </div>
-      </form>  
-      
+      </form>
+
       <div class="clearfix"></div>
 
       <form role="form" class="form" action="{% url 'set-quantity-cart' %}" method="post">
         {% csrf_token %}
         <table class="table table-bordered table-hover">
           <tr>
-            <th>{% trans "Product (ID-Name)" %}</th>
+            <th>{% trans "Product (Order No.-Name)" %}</th>
             <th>{% trans "Quantity" %}</th>
             <th>{% trans "Remove?" %}</th>
           </tr>
 
-          {% for item in get_cart %}          
+          {% for item in get_cart %}
           <tr>
             <td>
               <p class="text-small"><a title="View the product details page" href="{{ item.product.get_absolute_url }}">{{ item.product.product_id }} - {{ item.product.get_name|safe }}</a></p>
@@ -97,18 +97,18 @@
               <a class="btn btn-lg btn-block" href="{% url 'remove-from-cart' item.object_id %}"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Remove" %}</span></a>
             </td>
           </tr>
-          {% endfor %}          
-        </table>    
+          {% endfor %}
+        </table>
 
         <div style="display: block; margin: 20px; width: 100%;">
           <input class="btn btn-primary" type="submit" value="Update Cart" />
           <a style="margin: 5px 10px;" class="btn btn-warning" href="{% url 'clear-cart' %}">{% trans "Clear Cart" %}</a>
-        </div>              
+        </div>
 
       </form>
 
       {% else %}
-      <section>  
+      <section>
         <p><span class="minor-skip"></span></p>
         {% if 'error' in order_feedback %}
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -119,20 +119,20 @@
         <div class="alert alert-info alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <span class="glyphicon glyphicon-exclamation-sign"></span> {% blocktrans %} Please add some products to your cart through the <a class="alert-link" href="{{ inventory_url }}">inventory page</a>, the <a class="alert-link" href="{{ products_url }}">products page</a>, or the search box below.{% endblocktrans %}
-        </div>         
-        {% endif %}   
+        </div>
+        {% endif %}
 
         <form method="post" action="{% url 'add-to-cart-search' %}" class="autocomplete-me">
           {% csrf_token %}
           <div class="form-group">
-            <input type="text" id="id_q" name="q" class="form-control" placeholder="{% trans 'Start typing an ID to search for products matching that ID' %}" required />
+            <input type="text" id="id_q" name="q" class="form-control" placeholder="{% trans 'Start typing an Order No. to search for products matching that Order No.' %}" required />
           </div>
           <div class="form-group col-sm-4">
             <input class="btn btn-info form-control" type="submit" value="{% trans 'Add New Product' %}" />
           </div>
-        </form>    
+        </form>
       </section>
-      <div class="clearfix"></div>          
+      <div class="clearfix"></div>
       {% endif %}
     </div>
 
@@ -145,8 +145,8 @@
 <form class="form form-horizontal" role="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
-    <label class="control-label col-sm-4" for="arranged_freight">{% trans "Freight arranged by SparMed?" %}</label>  
-    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked 
+    <label class="control-label col-sm-4" for="arranged_freight">{% trans "Freight arranged by SparMed?" %}</label>
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked
            onclick="javascript:toggleVisible('arranged_freight_options');" />
   </div>
 
@@ -159,7 +159,7 @@
 
   <div class="form-group">
     <label class="control-label col-sm-4" for="arranged_packing">{% trans "Packaging arranged by SparMED?" %}</label>
-    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked 
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_packing" name="arranged_packing" checked
            onclick="javascript:toggleVisible('arranged_packing_options');" />
     <span class="help-block">{% trans "Please note if SparMED arranges packaging, we will choose the best and safest way of packing your order." %}</span>
   </div>
@@ -174,8 +174,8 @@
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-4" for="shipping_and_invoice_same">{% trans "Same delivery address?" %}</label>  
-    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked 
+    <label class="control-label col-sm-4" for="shipping_and_invoice_same">{% trans "Same delivery address?" %}</label>
+    <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="shipping_and_invoice_same" name="shipping_and_invoice_same" checked
            onclick="javascript:toggleVisible('invoice_options'); " />
   </div>
 
@@ -183,30 +183,30 @@
     {% bootstrap_field form.invoice_company_name %}
     {% bootstrap_field form.invoice_company_address %}
     {% bootstrap_field form.invoice_company_postal_code  %}
-    {% bootstrap_field form.invoice_company_country %}            
-  </article>  
+    {% bootstrap_field form.invoice_company_country %}
+  </article>
 
   <hr>
 
   <div class="form-group">
-    <label class="control-label col-sm-4" for="insurance_desired">{% trans "Insurance Chosen?" %}</label>  
+    <label class="control-label col-sm-4" for="insurance_desired">{% trans "Insurance Chosen?" %}</label>
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="insurance_desired" name="insurance_desired"  checked />
-  </div>  
+  </div>
 
   <hr>
 
   <div class="form-group">
-    <label class="control-label" for="documents">{% trans "Any specific documents along with your shipment?" %}</label>  
+    <label class="control-label" for="documents">{% trans "Any specific documents along with your shipment?" %}</label>
     <textarea class="form-control" rows="2" id="documents" name="documents" placeholder="{% trans 'Please write down here if you need any specific documents along with your shipment' %}"></textarea>
-  </div>    
+  </div>
 
   <hr>
 
   <div class="form-group">
-    <label class="control-label" for="other_remarks">{% trans "Any other remarks or comments regarding this order?" %}</label>  
+    <label class="control-label" for="other_remarks">{% trans "Any other remarks or comments regarding this order?" %}</label>
     <textarea class="form-control" rows="2" id="other_remarks" name="other_remarks" placeholder="{% trans 'Please write down here if you have any other remarks or comments regarding this order' %}"></textarea>
   </div>
-  
+
   <hr>
 
   <button type="submit" class="btn btn-primary">
@@ -220,22 +220,22 @@
 {% block endbody %}
 
 <script type="text/javascript">
-  $(function() {  
+  $(function() {
     $("#arranged_freight_options").toggle();
     $("#arranged_packing_options").toggle();
     $("#invoice_options").toggle();
   });
 
   function toggleVisible(divid) {
-    $("#" + divid).toggle(500); 
+    $("#" + divid).toggle(500);
   }
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
 
-<script type="text/javascript">  
-  $(function() {   
+<script type="text/javascript">
+  $(function() {
     var self = $("#id_q");
 
     $("#id_q").autocomplete({
@@ -243,17 +243,17 @@
       minLength: 3,
       source: function(request, response) {
         $.ajax({
-          url: "{% url 'autocomplete-url' %}", 
+          url: "{% url 'autocomplete-url' %}",
           data: {
             'q': self.val(),
-          }, 
+          },
           success: function(data) {
             response(data.results || []);
           }
         });
       }
     });
-  });  
+  });
 </script>
 
 <script type="text/javascript">
@@ -266,11 +266,11 @@
           xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
       }
-    });      
+    });
   });
 
   $("#close-account-change-btn").click(function(event) {
-    $.post("{% url 'remove-account-change-cookie' %}");          
+    $.post("{% url 'remove-account-change-cookie' %}");
   });
 </script>
 

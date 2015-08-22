@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-12 19:06+0200\n"
+"POT-Creation-Date: 2015-08-22 11:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,8 @@ msgid "PDF Document file (256 MB max)"
 msgstr ""
 
 #: certificates/models.py:10 certificates/models.py:25
-#: certificates/models.py:39 news/models.py:20 shop/models.py:49
-#: shop/models.py:86 shop/models.py:111
+#: certificates/models.py:39 news/models.py:27 shop/models.py:63
+#: shop/models.py:100 shop/models.py:125
 msgid "Date and time added"
 msgstr ""
 
@@ -60,23 +60,23 @@ msgstr ""
 msgid "Group Title/Name"
 msgstr ""
 
-#: contact/forms.py:7
+#: contact/forms.py:6
 msgid "Sender Full Name"
 msgstr ""
 
-#: contact/forms.py:8
+#: contact/forms.py:7
 msgid "Sender Email Address"
 msgstr ""
 
-#: contact/forms.py:9
+#: contact/forms.py:8
 msgid "Send copy to my own email"
 msgstr ""
 
-#: contact/forms.py:10
+#: contact/forms.py:9
 msgid "Message Subject"
 msgstr ""
 
-#: contact/forms.py:11
+#: contact/forms.py:10
 msgid "Message Body Text"
 msgstr ""
 
@@ -88,22 +88,22 @@ msgstr ""
 msgid "Country Name"
 msgstr ""
 
-#: news/models.py:8 shop/models.py:16 shop/models.py:27
+#: news/models.py:8 shop/models.py:16 shop/models.py:34
 msgid "Picture Title"
 msgstr ""
 
-#: news/models.py:10
+#: news/models.py:11
 msgid "Associated News Post"
 msgstr ""
 
-#: news/models.py:21
+#: news/models.py:28
 msgid ""
 "Write your news post here (Please do not attempt to insert images here, "
 "instead use the news image below)"
 msgstr ""
 
-#: news/models.py:22 online_order/models.py:217 online_order/models.py:218
-#: shop/models.py:50 shop/models.py:112
+#: news/models.py:29 online_order/models.py:217 online_order/models.py:218
+#: shop/models.py:64 shop/models.py:126
 msgid "URL; Never modify this value!"
 msgstr ""
 
@@ -286,121 +286,121 @@ msgstr ""
 msgid "Any other remarks or comments regarding this order?"
 msgstr ""
 
-#: online_order/models.py:213 shop/models.py:43
-#: sparmed/templates/inventory.html:51
+#: online_order/models.py:213 shop/models.py:57
+#: sparmed/templates/inventory.html:52
 #: sparmed/templates/online_order/order_items.html:6
-#: sparmed/templates/shop/details.html:29
-msgid "Product ID"
+#: sparmed/templates/shop/details.html:30
+msgid "Order No."
 msgstr ""
 
-#: online_order/models.py:214 sparmed/templates/inventory.html:52
+#: online_order/models.py:214 sparmed/templates/inventory.html:53
 #: sparmed/templates/online_order/order_items.html:7
 msgid "Product Name"
 msgstr ""
 
-#: online_order/models.py:215 shop/models.py:45
+#: online_order/models.py:215 shop/models.py:59
 msgid "Product Long Name"
 msgstr ""
 
-#: online_order/models.py:216 shop/models.py:46
+#: online_order/models.py:216 shop/models.py:60
 msgid "Product Description"
 msgstr ""
 
-#: shop/models.py:18
+#: shop/models.py:19
 msgid "Associated Product"
 msgstr ""
 
-#: shop/models.py:30 shop/models.py:51
+#: shop/models.py:38 shop/models.py:65
 msgid "Associated Subcategory"
 msgstr ""
 
-#: shop/models.py:31 shop/models.py:87
+#: shop/models.py:39 shop/models.py:101
 msgid "Associated Category"
 msgstr ""
 
-#: shop/models.py:40
-msgid "Type a product name or ID here"
+#: shop/models.py:54
+msgid "Type a product name or Order No. here"
 msgstr ""
 
-#: shop/models.py:44
+#: shop/models.py:58
 msgid "Product Short Name"
 msgstr ""
 
-#: shop/models.py:47
+#: shop/models.py:61
 msgid "Product Long Text"
 msgstr ""
 
-#: shop/models.py:48
+#: shop/models.py:62
 msgid "Amount on Stock"
 msgstr ""
 
 #. Translators: (LxDxH) = Length x Depth x Height
-#: shop/models.py:54
+#: shop/models.py:68
 msgid "Size (LxDxH)"
 msgstr ""
 
-#: shop/models.py:55 sparmed/templates/shop/details.html:35
+#: shop/models.py:69 sparmed/templates/shop/details.html:36
 msgid "Weight"
 msgstr ""
 
-#: shop/models.py:56 shop/models.py:90 shop/models.py:114
-#: sparmed/templates/shop/details.html:40
+#: shop/models.py:70 shop/models.py:104 shop/models.py:128
+#: sparmed/templates/shop/details.html:41
 msgid "Tariff No. / HS Code"
 msgstr ""
 
-#: shop/models.py:57
+#: shop/models.py:71
 msgid "Price"
 msgstr ""
 
-#: shop/models.py:83
+#: shop/models.py:97
 msgid "Subcategory Name"
 msgstr ""
 
-#: shop/models.py:84
+#: shop/models.py:98
 msgid "Subcategory description"
 msgstr ""
 
-#: shop/models.py:85
+#: shop/models.py:99
 msgid "Subcategory Long Text (Please do not insert images!)"
 msgstr ""
 
-#: shop/models.py:88
+#: shop/models.py:102
 msgid "Subcategory Color"
 msgstr ""
 
-#: shop/models.py:107
+#: shop/models.py:121
 msgid "Category Name"
 msgstr ""
 
-#: shop/models.py:108
+#: shop/models.py:122
 msgid "Category Short Name (for navigation bar)"
 msgstr ""
 
-#: shop/models.py:109
+#: shop/models.py:123
 msgid "Category description"
 msgstr ""
 
-#: shop/models.py:110
+#: shop/models.py:124
 msgid "Category Long Text (Please do not insert images!)"
 msgstr ""
 
-#: shop/models.py:116
+#: shop/models.py:130
 msgid "PDF Document file (56 MB max)"
 msgstr ""
 
-#: sparmed/settings.py:139
+#: sparmed/settings.py:134
 msgid "English"
 msgstr ""
 
-#: sparmed/settings.py:140
+#: sparmed/settings.py:135
 msgid "Russian"
 msgstr ""
 
-#: sparmed/settings.py:141
+#: sparmed/settings.py:136
 msgid "Brazilian"
 msgstr ""
 
-#: sparmed/settings.py:142
+#: sparmed/settings.py:137
 msgid "Spanish"
 msgstr ""
 
@@ -444,49 +444,46 @@ msgstr ""
 msgid "About Us"
 msgstr ""
 
-#: sparmed/templates/about.html:18
+#: sparmed/templates/about.html:19
 msgid ""
 "\n"
-"SparMED is a certified ISO 9001 &amp; ISO 13485 medical device manufacturer "
-"from Denmark. We are supplying the safest products for use in IVF "
-"laboratories to help increase pregnancy rates around the world. IVF business "
-"is very sensitive and requires only the best products, which are harmless to "
-"oocytes, embryos and sperm. Oosafe&reg; is our registered brand for In Vitro "
-"Fertilization use. As mentioned in our catch phrase 'GOosafe in IVF "
-"Laboratories', all Oosafe&reg; products are safe and completely fulfill IVF "
-"Laboratory requirements.\n"
-"    "
+"SparMED is a CE mark certified medical device manufacturer from Denmark. We "
+"are supplying the safest products for use in IVF laboratories to help "
+"increase pregnancy rates around the world. IVF business is very sensitive "
+"and requires only the best products, which are harmless to oocytes, embryos "
+"and sperm. Oosafe® is our registered brand for In Vitro Fertilization use. "
+"As mentioned in our catch phrase 'GOosafe in IVF Laboratories', all Oosafe® "
+"products are safe and completely fulfill IVF Laboratory requirements.\n"
 msgstr ""
 
-#: sparmed/templates/about.html:27
+#: sparmed/templates/about.html:29
 msgid "USE OF SPARMED PRODUCTS INCREASES SUCCESS RATE"
 msgstr ""
 
-#: sparmed/templates/about.html:28
+#: sparmed/templates/about.html:30
 msgid "Proven by scientific studies"
 msgstr ""
 
-#: sparmed/templates/about.html:33
+#: sparmed/templates/about.html:35
 msgid ""
 "\n"
-"Our Oosafe&reg; products are sold in over 80 countries worldwide through our "
+"Our Oosafe® products are sold in over 80 countries worldwide through our "
 "valuable distributors. SparMED ApS was established in 2007. Between that "
 "time and 2013, we have visited more than 50 countries, been participating in "
 "all major international congresses like ASRM, ESHRE, MEFS and ASPIRE, as "
-"well as many national ones, to set up our distribution network. Our "
-"Oosafe&reg; products have been so successful that we are now selling in over "
-"80 countries. Up until the year 2014, we have successfully launched 9 "
-"different Oosafe&reg; products and our brand name has become well known in "
-"the IVF field, as has our company.\n"
-"    "
+"well as many national ones, to set up our distribution network. Our Oosafe® "
+"products have been so successful that we are now selling in over 80 "
+"countries. Up until the year 2014, we have successfully launched 9 different "
+"Oosafe® products and our brand name has become well known in the IVF field, "
+"as has our company.\n"
 msgstr ""
 
-#: sparmed/templates/about.html:39
-msgid "SparMED - the reliable company from Denmark"
+#: sparmed/templates/about.html:42
+msgid "SparMED - the reliable company from Denmark."
 msgstr ""
 
-#: sparmed/templates/about.html:41 sparmed/templates/index.html:20
-msgid "Remember to GO Oosafe"
+#: sparmed/templates/about.html:44
+msgid "Remember to GO Oosafe<sup>&reg;</sup>"
 msgstr ""
 
 #: sparmed/templates/base.html:74
@@ -521,7 +518,7 @@ msgid ""
 msgstr ""
 
 #: sparmed/templates/base.html:103 sparmed/templates/registration/login.html:8
-#: sparmed/templates/registration/login.html:22
+#: sparmed/templates/registration/login.html:23
 msgid "Login"
 msgstr ""
 
@@ -783,36 +780,40 @@ msgstr ""
 msgid "GOosafe in IVF Laboratories"
 msgstr ""
 
+#: sparmed/templates/index.html:20
+msgid "Remember to GO Oosafe"
+msgstr ""
+
 #: sparmed/templates/inventory.html:9
 msgid "View SparMED Inventory - all products and their numbers on stock"
 msgstr ""
 
 #: sparmed/templates/inventory.html:10 sparmed/templates/inventory.html:16
-#: sparmed/templates/inventory.html:21
+#: sparmed/templates/inventory.html:22
 msgid "Inventory"
 msgstr ""
 
-#: sparmed/templates/inventory.html:49 sparmed/templates/shop/details.html:53
-#: sparmed/templates/shop/details.html:56
-#: sparmed/templates/shop/products.html:110
+#: sparmed/templates/inventory.html:50 sparmed/templates/shop/details.html:54
+#: sparmed/templates/shop/details.html:57
+#: sparmed/templates/shop/products.html:119
 msgid "Add to Cart"
 msgstr ""
 
-#: sparmed/templates/inventory.html:50
+#: sparmed/templates/inventory.html:51
 #: sparmed/templates/online_order/online_order_sheet.html:82
 #: sparmed/templates/online_order/order_items.html:8
 msgid "Quantity"
 msgstr ""
 
-#: sparmed/templates/inventory.html:53
+#: sparmed/templates/inventory.html:54
 msgid "In Stock"
 msgstr ""
 
-#: sparmed/templates/inventory.html:54
+#: sparmed/templates/inventory.html:55
 msgid "Available"
 msgstr ""
 
-#: sparmed/templates/inventory.html:97
+#: sparmed/templates/inventory.html:98
 #, python-format
 msgid ""
 "\n"
@@ -841,7 +842,7 @@ msgid "Update Account Details"
 msgstr ""
 
 #: sparmed/templates/online_order/account_area.html:74
-#: sparmed/templates/registration/login.html:24
+#: sparmed/templates/registration/login.html:26
 #: sparmed/templates/registration/password_reset_form.html:7
 #: sparmed/templates/registration/password_reset_form.html:8
 msgid "Reset Password"
@@ -900,7 +901,8 @@ msgstr ""
 
 #: sparmed/templates/online_order/online_order_sheet.html:68
 #: sparmed/templates/online_order/online_order_sheet.html:128
-msgid "Start typing an ID to search for products matching that ID"
+msgid ""
+"Start typing an Order No. to search for products matching that Order No."
 msgstr ""
 
 #: sparmed/templates/online_order/online_order_sheet.html:71
@@ -909,7 +911,7 @@ msgid "Add New Product"
 msgstr ""
 
 #: sparmed/templates/online_order/online_order_sheet.html:81
-msgid "Product (ID-Name)"
+msgid "Product (Order No.-Name)"
 msgstr ""
 
 #: sparmed/templates/online_order/online_order_sheet.html:83
@@ -1572,16 +1574,16 @@ msgstr ""
 msgid "Browse the finest quality IVF Laboratory Equipment"
 msgstr ""
 
-#: sparmed/templates/shop/details.html:33
+#: sparmed/templates/shop/details.html:34
 msgid "Dimensions/Size"
 msgstr ""
 
-#: sparmed/templates/shop/details.html:53
-#: sparmed/templates/shop/products.html:107
+#: sparmed/templates/shop/details.html:54
+#: sparmed/templates/shop/products.html:116
 msgid "Login required"
 msgstr ""
 
-#: sparmed/templates/shop/details.html:80
+#: sparmed/templates/shop/details.html:85
 msgid "No pictures available"
 msgstr ""
 

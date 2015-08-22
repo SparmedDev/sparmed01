@@ -27,10 +27,10 @@
 
 <div style="border-bottom: 2px solid {{ product.subcategory.color }};">
   <h2 class="text-center" style="color:{{ product.subcategory.color }};">{{ product.description|safe }}</h2>
-  <h3 class="text-center"><strong>{% trans "Product ID" %}: {{ product.product_id }}</strong></h3>
+  <h3 class="text-center"><strong>{% trans "Order No." %}: {{ product.product_id }}</strong></h3>
 
   {% if product.size or product.weight %}
-  <p class="text-center"> 
+  <p class="text-center">
     {% if product.size %}{% trans "Dimensions/Size" %}: {{ product.size }}{% endif %}
     {% if product.size and product.weight %} - {% endif %}
     {% if product.weight %}{% trans "Weight" %}: {{ product.weight }}{% endif %}
@@ -46,7 +46,7 @@
     {% elif product.category.hs_code %}
     {{prefix}}{{ product.category.hs_code }}
     {% endif %}
-  </p>  
+  </p>
 
   {% endcache %}
 
@@ -62,7 +62,7 @@
 {% cache 3600 products-details-images product.slug LANGUAGE_CODE %}
 <span class="minor-skip"></span>
 
-<div class="row">  
+<div class="row">
 
   <div class="col-md-6">
     {% if images|length > 1 %}
@@ -83,17 +83,17 @@
     {% endwith %}
     {% else %}
     <div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span> {% trans "No pictures available" %}</div>
-    {% endif %}    
+    {% endif %}
   </div>
 
 
   <div id="{{ product.slug }}-prod-subcat-lt" class="col-md-6">
     {{ long_text|safe }}
-  </div>    
+  </div>
 
 </div>
 
-{% endcache %} 
+{% endcache %}
 
 {% endblock %}
 
@@ -112,18 +112,18 @@
       paginationSpeed: 1500,
       rewindSpeed: 1000,
       autoPlay: true,
-      stopOnHover: true,      
+      stopOnHover: true,
       navigation: false,
-      scrollPerPage: false,      
-      responsiveBaseWidth: '#content',      
-      lazyLoad: true,      
+      scrollPerPage: false,
+      responsiveBaseWidth: '#content',
+      lazyLoad: true,
       autoHeight: false,
     });
 
     $("#add_btn").click(function() {
       addToCart({{ product.pk }});
-    });       
-  });  
+    });
+  });
 </script>
 
 {% endcache %}

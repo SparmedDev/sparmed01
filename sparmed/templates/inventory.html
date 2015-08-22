@@ -18,7 +18,7 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 {% cache 6400 sparmed-inventory LANGUAGE_CODE %}
-<article>  
+<article>
   <h2 class="text-center">{% trans "Inventory" %}</h2>
 
   <hr>
@@ -49,7 +49,7 @@
           <tr>
             <th class="td-max-col-width"><p class="text-center">{% trans "Add to Cart" %}</p></th>
             <th class="td-max-col-width"><p class="text-center">{% trans "Quantity" %}</p></th>
-            <th class="td-max-150-col-width"><p class="text-center">{% trans "Product ID" %}</p></th>
+            <th class="td-max-150-col-width"><p class="text-center">{% trans "Order No." %}</p></th>
             <th><p>{% trans "Product Name" %}</p></th>
             <th><p class="text-center">{% trans "In Stock" %}</p></th>
             <th><p class="text-center">{% trans "Available" %}</p></th>
@@ -62,11 +62,11 @@
                   <button id="{{ product.pk }}_add" class="btn btn-block btn-lg add-to-cart-btn" style="color:red;"><span class="glyphicon glyphicon-shopping-cart"></span></button>
               </div>
               </td>
-              <td>     
+              <td>
                 <form>
                     <div class="form-group">
                       <input id="{{ product.pk }}_quantity" class="form-control" name="quantity" type="number" value="1" min="1" required />
-                    </div>                  
+                    </div>
                 </form>
               </td>
               <td>
@@ -75,26 +75,26 @@
               <td><p>{{ product.name|safe }}</p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_instock" class="text-center"></p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_available" class="text-center"></p></td>
-            </tr>          
-       
+            </tr>
+
           {% endfor %}
         </table>
         {% endif %}
         {% endfor %}
       </div>
     </div> <!-- /.collapse -->
-    
-     {% if not forloop.last %}<hr class="compact">{% endif %}  
-    
+
+     {% if not forloop.last %}<hr class="compact">{% endif %}
+
     {% endif %}
     {% endfor %}
-    
+
     <p><br></p>
 
     <div class="alert alert-warning" role="alert">
       <p class="text-center">
         {% url 'contact' as contact_url %}
-        <span class="glyphicon glyphicon-exclamation-sign"></span> 
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
         {% blocktrans %}
         Can't find the product you're looking for? <a href="{{ contact_url }}">Contact us</a> for information on unlisted products.
         {% endblocktrans %}
@@ -108,18 +108,18 @@
 
 {% block endbody %}
 {% cache 6400 sparmed-inventory-scripts LANGUAGE_CODE %}
-<script> 
+<script>
   function fillProducts(response) {
     if (response && response.collection && response.collection.length) {
       response.collection.forEach(function(item) {
         var productNumber = item.productNumber.trim().replace(/[^a-zA-Z0-9-._~]/g, '-').toLowerCase().replace(/^-+/, '').replace(/-+$/, '').replace(/-+/g, '-');
-        
+
         var instockElem = $("#" + productNumber + "_instock");
         if ($(instockElem).length) {
             instockElem.empty();
             instockElem.text(item.inventory.inStock > 0 ? Math.floor(item.inventory.inStock) : 0);
         }
-        
+
         var availableElem = $("#" + productNumber + "_available");
         if ($(availableElem).length) {
             availableElem.empty();
@@ -142,17 +142,17 @@
         console.log("response:");
         console.log(res);
       }
-    });  
-    
+    });
+
     {% for category in categories %}
-    {% for product in category.products.all %}    
+    {% for product in category.products.all %}
     $("#{{ product.pk }}_add").click(function() {
       quantity = $("#{{ product.pk }}_quantity").val();
       addToCart({{ product.pk }}, quantity);
-    });       
+    });
     {% endfor %}
     {% endfor %}
-    
+
   });
 </script>
 {% endcache %}

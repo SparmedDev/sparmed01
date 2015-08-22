@@ -3,7 +3,7 @@
 {% if items %}
 <table class="table table-bordered table-hover table-responsive">
   <tr>
-    <th>{% trans "Product ID" %}</th>
+    <th>{% trans "Order No." %}</th>
     <th>{% trans "Product Name" %}</th>
     <th>{% trans "Quantity" %}</th>
   </tr>
@@ -19,7 +19,7 @@
     <td>
       <p>{{ item.quantity }}</p>
     </td>
-  </tr> 
+  </tr>
   {% endfor %}
 </table>
 {% else %}

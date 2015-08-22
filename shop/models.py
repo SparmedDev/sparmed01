@@ -20,49 +20,49 @@ class ProductImage(models.Model):
 
     def get_absolute_url(self):
       return u'%s' % self.image.url
-    
+
     def get_hires_url(self):
       if self.image_hires:
           return u'%s' % self.image_hires.url
       else:
-          return self.get_absolute_url()  
+          return self.get_absolute_url()
 
     def __unicode__(self):
       return u'%s' % self.image_title
-    
+
 class ShopImage(models.Model):
     image_title = models.CharField(max_length=255, verbose_name=_("Picture Title"), blank=True)
-    image = ImageField(upload_to="/media/products")    
+    image = ImageField(upload_to="/media/products")
     image_hires = ImageField(upload_to="/media/products/", blank=True, null=True)
-    
+
     subcategory = models.ForeignKey('Subcategory', related_name="images", verbose_name=_("Associated Subcategory"), blank=True, null=True)
     category = models.ForeignKey('Category', related_name="images", verbose_name=_("Associated Category"), blank=True, null=True)
 
     def get_absolute_url(self):
       return u'%s' % self.image.url
-    
+
     def get_hires_url(self):
       if self.image_hires:
           return u'%s' % self.image_hires.url
       else:
-          return self.get_absolute_url()   
+          return self.get_absolute_url()
 
     def __unicode__(self):
-      return u'%s' % self.image_title    
+      return u'%s' % self.image_title
 
 class GenericForm(forms.Form):
-    q = forms.CharField(max_length=60, initial=_("Type a product name or ID here"))
-    
+    q = forms.CharField(max_length=60, initial=_("Type a product name or Order No. here"))
+
 class Product(models.Model):
-    product_id = models.CharField(max_length=255, verbose_name=_("Product ID"), default="OOOO-0000")
+    product_id = models.CharField(max_length=255, verbose_name=_("Order No."), default="OOOO-0000")
     name = models.CharField(max_length=100, verbose_name=_("Product Short Name"))
     long_name = models.CharField(max_length=255, verbose_name=_("Product Long Name"), blank=True, null=True)
     description = models.CharField(max_length=255, verbose_name=_("Product Description"), blank=True)
     long_text = RichTextField(verbose_name=_("Product Long Text"), blank=True, null=True)
-    in_stock = models.IntegerField(verbose_name=_("Amount on Stock"), default=0)    
+    in_stock = models.IntegerField(verbose_name=_("Amount on Stock"), default=0)
     added = models.DateTimeField(default=timezone.now, verbose_name=_("Date and time added"))
     slug = models.SlugField(unique=True, max_length=255, verbose_name=_("URL; Never modify this value!"))
-    subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name=_("Associated Subcategory"))  
+    subcategory = models.ForeignKey('Subcategory', related_name="products", verbose_name=_("Associated Subcategory"))
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     # Translators: (LxDxH) = Length x Depth x Height
     size = models.CharField(max_length=255, verbose_name=_("Size (LxDxH)"), blank=True, null=True)
@@ -75,15 +75,15 @@ class Product(models.Model):
         if new_slug != self.slug:
             self.slug = new_slug
 
-        super(Product, self).save(*args, **kwargs)    
+        super(Product, self).save(*args, **kwargs)
 
     @property
     def category(self):
         return self.subcategory.category
-      
+
     def get_name(self):
         return self.long_name if self.long_name else self.name
-    
+
     def get_absolute_url(self):
         return reverse('shop.views.details', args=[self.category.slug, self.slug])
 
@@ -106,7 +106,7 @@ class Subcategory(models.Model):
     @property
     def slug(self):
         return slugify(self.name)
-    
+
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.category.slug,])
 
@@ -126,7 +126,7 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, max_length=255, verbose_name=_("URL; Never modify this value!"))
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     hs_code = models.CharField(max_length=255, verbose_name=_("Tariff No. / HS Code"), blank=True, null=True)
-    
+
     document = ValidatedFileField(blank=True, null=True, verbose_name=_("PDF Document file (56 MB max)"), upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*56)
 
     def save(self, *args, **kwargs):
@@ -134,17 +134,17 @@ class Category(models.Model):
         if new_slug != self.slug:
             self.slug = new_slug
 
-        super(Category, self).save(*args, **kwargs)    
-        
+        super(Category, self).save(*args, **kwargs)
+
     @property
     def products(self):
         id_list = []
-        
+
         for subcat in self.subcategories.all():
             id_list += [product.pk for product in subcat.products.all()]
-            
+
         return Product.objects.filter(pk__in=id_list)
-    
+
     def get_absolute_url(self):
         return reverse('shop.views.products', args=[self.slug,])
 

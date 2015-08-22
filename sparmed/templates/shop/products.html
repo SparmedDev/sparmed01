@@ -43,14 +43,14 @@
 <article class="category-article">
   <div class="clearfix"></div>
 
-  {% cache 3600 products-category-article-top category.slug LANGUAGE_CODE %}  
+  {% cache 3600 products-category-article-top category.slug LANGUAGE_CODE %}
   <hr>
   <h1 class="text-center">{% filter upper %}{{ category.name|safe }}{% endfilter %}</h1>
   <hr>
   {% if category.description %}<p class="text-center"><em>{{ category.description|safe }}</em></p>{% endif %}
 
   {% with image=category.images.all|first %}
-  {% if image %}  
+  {% if image %}
   <section>
     <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
       <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
@@ -59,7 +59,7 @@
 
   <hr>
   {% endif %}
-  {% endwith %}  
+  {% endwith %}
 
   {% if category.long_text %}
   <section class="two-column">
@@ -72,7 +72,7 @@
   {% if category.document %}
   <section>
     <h4 class="text-center"><a style="color: #ed1b2e;" href="{{ category.document.url }}" target="_blank">PDF <span class="glyphicon glyphicon-file"></span></a></h4>
-  </section>  
+  </section>
   {% endif %}
 
   {% endcache %}
@@ -80,25 +80,25 @@
   {% with subcats=category.subcategories.all %}
   {% for subcat in subcats %}
   <hr>
-  <div>      
+  <div>
     <h2 class="text-center" style="color:{{ subcat.color }};">{% filter upper %}{{ subcat.name|safe }}{% endfilter %}</h2>
     {% if subcat.description %}<p class="text-center" style="padding-top: 25px;"><em>{{ subcat.description|safe }}</em></p>{% endif %}
 
     {% with image=subcat.images.all|first %}
-    {% if image %}  
+    {% if image %}
     <section>
       <a href="{{ image.get_hires_url }}" title="{{ image.title }}">
         <img class="img-responsive img-rounded category-img" src="{{ image.get_absolute_url }}">
       </a>
     </section>
     {% endif %}
-    {% endwith %}     
+    {% endwith %}
 
     {% for product in subcat.products.all %}
     {% if forloop.first %}<div id="{{ subcat.slug }}-owl-carousel" class="owl-carousel">{% endif %}
     <div>
       <h4 class="text-center"><a style="color:{{ subcat.color }};" title="{{ product.name }}" href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
-      <p class="text-center"><strong>Product ID: {{ product.product_id }}</strong></p>
+      <p class="text-center"><strong>Order No.: {{ product.product_id }}</strong></p>
 
       {% for image in product.images.all reversed %}
       {% if forloop.first %}
@@ -120,7 +120,7 @@
       </p>
 
       {% endif %}
-    </div>    
+    </div>
     {% if forloop.last %}</div>{% endif %}
     {% endfor %}
 
@@ -135,7 +135,7 @@
 {% block endbody %}
 
 <script type="text/javascript">
-  $(document).ready(function() {    
+  $(document).ready(function() {
     var itemsLength = 0;
 
     {% for subcat in category.subcategories.all %}
@@ -145,21 +145,21 @@
 
      $("#{{ subcat.slug }}-owl-carousel").owlCarousel({
        items: itemsLength,
-       itemsDesktop: [1199, itemsLength],  
+       itemsDesktop: [1199, itemsLength],
        itemsDesktopSmall: [980, itemsLength],
        singleItem: false,
        itemsScaleUp: false,
-       autoPlay: false,   
-       scrollPerPage: false,      
-       responsiveBaseWidth: '#content',      
-       lazyLoad: true,      
+       autoPlay: false,
+       scrollPerPage: false,
+       responsiveBaseWidth: '#content',
+       lazyLoad: true,
        autoHeight: false,
      });
 
      {% for product in subcat.products.all %}
      $("#{{ product.pk }}_add").click(function() {
        addToCart({{ product.pk }});
-     });    
+     });
       {% endfor %}
 
       {% endif %}
