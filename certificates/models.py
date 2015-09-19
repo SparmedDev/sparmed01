@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class CertificateItem(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Certificate/Document Title"))
-    document = ValidatedFileField(blank=True, null=True, verbose_name=_("PDF Document file (256 MB max)"), upload_to='/certificates/', content_types=['application/pdf'], max_upload_size=1024*1024*256)
+    document = ValidatedFileField(blank=True, null=True, verbose_name=_("PDF Document file (256 MB max)"), upload_to='certificates/', content_types=['application/pdf'], max_upload_size=1024*1024*256)
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     added = models.DateTimeField(default=timezone.now, verbose_name=_("Date and time added"))
     

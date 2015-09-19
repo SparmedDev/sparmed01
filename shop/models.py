@@ -14,8 +14,8 @@ from ckeditor.fields import RichTextField
 
 class ProductImage(models.Model):
     image_title = models.CharField(max_length=200, verbose_name=_("Picture Title"), blank=True)
-    image = ImageField(upload_to="/media/products")
-    image_hires = ImageField(upload_to="/media/products", blank=True, null=True)
+    image = ImageField(upload_to="media/products/")
+    image_hires = ImageField(upload_to="media/products/", blank=True, null=True)
     product = models.ForeignKey('Product', related_name="images", verbose_name=_("Associated Product"))
 
     def get_absolute_url(self):
@@ -32,8 +32,8 @@ class ProductImage(models.Model):
 
 class ShopImage(models.Model):
     image_title = models.CharField(max_length=255, verbose_name=_("Picture Title"), blank=True)
-    image = ImageField(upload_to="/media/products")
-    image_hires = ImageField(upload_to="/media/products/", blank=True, null=True)
+    image = ImageField(upload_to="media/products/")
+    image_hires = ImageField(upload_to="media/products/", blank=True, null=True)
 
     subcategory = models.ForeignKey('Subcategory', related_name="images", verbose_name=_("Associated Subcategory"), blank=True, null=True)
     category = models.ForeignKey('Category', related_name="images", verbose_name=_("Associated Category"), blank=True, null=True)
@@ -127,7 +127,7 @@ class Category(models.Model):
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     hs_code = models.CharField(max_length=255, verbose_name=_("Tariff No. / HS Code"), blank=True, null=True)
 
-    document = ValidatedFileField(blank=True, null=True, verbose_name=_("PDF Document file (56 MB max)"), upload_to='/documents/', content_types=['application/pdf'], max_upload_size=1024*1024*56)
+    document = ValidatedFileField(blank=True, null=True, verbose_name=_("PDF Document file (56 MB max)"), upload_to='documents/', content_types=['application/pdf'], max_upload_size=1024*1024*56)
 
     def save(self, *args, **kwargs):
         new_slug = slugify(self.short_name)
