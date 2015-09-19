@@ -23,20 +23,22 @@
   {% if news_posts %}
     <article id="news-container">
       {% for post in news_posts %}
-          {% if post.content|length > 2 %}    
+          {% if not post.images or post.images.all|length == 0 %}
+              {% include 'news/news_post_no_image.html' %}
+          {% elif post.content|length > 2 %}
               {% if forloop.counter0|divisibleby:"2" or forloop.first %}
                   {% include 'news/news_post_left.html' %}
               {% else %}
                   {% include 'news/news_post_right.html' %}
               {% endif %}
           {% else %}
-              {% include 'news/news_post_no_text.html' %}              
-          {% endif %}      
-      
+              {% include 'news/news_post_no_text.html' %}
+          {% endif %}
+
           {% if not forloop.last %}<hr>{% endif %}
       {% endfor %}
     </article>
-  {% endif %}  
+  {% endif %}
 
 {% endblock %}
 
@@ -52,14 +54,14 @@
       paginationSpeed: 1200,
       rewindSpeed: 1500,
       autoPlay: true,
-      stopOnHover: true,      
+      stopOnHover: true,
       navigation: false,
-      scrollPerPage: false,      
-      responsiveBaseWidth: '#content',      
-      lazyLoad: true,      
+      scrollPerPage: false,
+      responsiveBaseWidth: '#content',
+      lazyLoad: true,
       autoHeight: false,
     });
-    
+
     $(".owl-carousel").parent().removeClass('col-sm-height');
   });
 </script>
