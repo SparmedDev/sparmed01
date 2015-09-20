@@ -62,8 +62,8 @@ GRAPPELLI_ADMIN_TITLE = "Admin | SparMED.dk"
 THIRD_PARTY_PRE_DJANGO = (
   'grappelli',
   'grappelli_modeltranslation',
-  'modeltranslation',  
-  'collectfast', 
+  'modeltranslation',
+  'collectfast',
 )
 
 DJANGO_APPS = (
@@ -80,18 +80,18 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
   'gunicorn',
-  'rosetta', 
+  'rosetta',
   'storages',
-  'haystack',   
+  'haystack',
   'bootstrap3',
   'robots',
-  'sorl.thumbnail',      
-  'django_countries', 
+  'sorl.thumbnail',
+  'django_countries',
   'validatedfile',
   'colorfield',
   'cookielaw',
   'ckeditor',
-  'nocaptcha_recaptcha', 
+  'nocaptcha_recaptcha',
 )
 
 LOCAL_APPS = (
@@ -113,12 +113,12 @@ MIDDLEWARE_CLASSES = (
   'django.middleware.http.ConditionalGetMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.locale.LocaleMiddleware',
-  'django.middleware.common.CommonMiddleware',  
+  'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
-  'django.middleware.clickjacking.XFrameOptionsMiddleware',  
+  'django.middleware.clickjacking.XFrameOptionsMiddleware',
   'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
@@ -160,11 +160,11 @@ LOCALE_PATHS = (
 if not DEBUG:
     # Thumbnail Fix for S3 Slow Response
     THUMBNAIL_FORCE_OVERWRITE = True
-  
-    # Fix admin login cookie not being set correctly 
+
+    # Fix admin login cookie not being set correctly
     SESSION_COOKIE_DOMAIN = DOMAIN_NAME
-    CSRF_COOKIE_DOMAIN = DOMAIN_NAME  
-  
+    CSRF_COOKIE_DOMAIN = DOMAIN_NAME
+
     # Amazon AWS S3 credientials
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
@@ -187,16 +187,16 @@ if not DEBUG:
       'Cache-Control': 'public, max-age=86400',
       'Expires': yearfromtoday.strftime('%a, %d %b %Y 20:00:00 GMT'),
     }
-    
+
     AWS_AUTO_CREATE_BUCKET = True
     AWS_S3_FILE_OVERWRITE = False
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_SECURE_URLS = True
     AWS_REDUCED_REDUNDANCY = False
-    AWS_IS_GZIPPED = False    
-    AWS_PRELOAD_METADATA = True   
-    
-    TEMPLATE_MINIFIER = True    
+    AWS_IS_GZIPPED = False
+    AWS_PRELOAD_METADATA = True
+
+    TEMPLATE_MINIFIER = True
     TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -223,13 +223,13 @@ if not DEBUG:
                 ]
             },
         },
-    ]    
+    ]
 else:
     COLLECTFAST_ENABLED = False
-    
+
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  
-  
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
     STATIC_ROOT = PROJECT_ROOT + "/staticfiles/"
     STATIC_URL = STATIC_ROOT
     MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
@@ -237,7 +237,7 @@ else:
 
     MEDIA_URL = STATIC_URL + 'media/'
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-    
+
     TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -246,7 +246,7 @@ else:
             ],
             'OPTIONS': {
                 'context_processors': [
-                    'django.template.context_processors.request',            
+                    'django.template.context_processors.request',
                     'django.contrib.auth.context_processors.auth',
                     'django.template.context_processors.debug',
                     'django.template.context_processors.i18n',
@@ -262,12 +262,12 @@ else:
                 ]
             },
         },
-    ]      
+    ]
 
 STATICFILES_FINDERS = (
   'django.contrib.staticfiles.finders.FileSystemFinder',
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)   
+)
 
 # Mandrill email settings
 EMAIL_HOST = 'smtp.mandrillapp.com'
@@ -298,7 +298,7 @@ AUTH_USER_MODEL = "online_order.SparmedUser"
 #RECAPTCHA_USE_SSL = HTTPS
 #CAPTCHA_AJAX = False
 
-# Required settings: 
+# Required settings:
 NORECAPTCHA_SITE_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
 NORECAPTCHA_SECRET_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
 
@@ -383,9 +383,7 @@ ELASTICSEARCH_INDEX_SETTINGS = {
     }
 }
 
-# CKEditor    
-CKEDITOR_UPLOAD_PATH = "admin-uploads/"
-CKEDITOR_IMAGE_BACKEND = "Pillow"
+# CKEditor
 CKEDITOR_JQUERY_URL = '//code.jquery.com/jquery.min.js'
 
 CKEDITOR_CONFIGS = {
@@ -398,13 +396,13 @@ CKEDITOR_CONFIGS = {
             [ 'NumberedList','BulletedList','-','Outdent','Indent',],
             [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
             [ 'Link','Unlink' ],
-            [ 'TextColor','BGColor' ],       
+            [ 'TextColor','BGColor' ],
         ],
         'toolbar': 'Full',
     },
 }
-    
-# Logging    
+
+# Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
