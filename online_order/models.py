@@ -43,7 +43,7 @@ class SparmedUserManager(BaseUserManager):
                                  **extra_fields)
 
 class SparmedUser(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=255, verbose_name=_("Sparmed Website Account Name"), unique=True)
+    name = models.CharField(max_length=255, verbose_name=_("Sparmed Client No."), unique=True)
     company_name = models.CharField(max_length=255, verbose_name=("Company Name"))
     country = CountryField()
     address = models.CharField(max_length=255, verbose_name=("Company Address"))

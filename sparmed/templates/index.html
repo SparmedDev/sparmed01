@@ -17,7 +17,13 @@
 
 {% block outerbody %}
 
-  <h2 class="text-center">{% trans "Remember to GO Oosafe" %}<sup>&reg;</sup></h2>
+  <h2 class="text-center">
+    {% if index_page_model.slogan|length > 2 %}
+      {{ index_page_model.slogan|safe }}
+    {% else %}
+      {% trans "Remember to GO Oosafe" %}<sup>&reg;</sup>
+    {% endif %}
+  </h2>
   <hr>
 
   {% if news_posts %}

@@ -104,6 +104,7 @@ LOCAL_APPS = (
   'certificates',
   'distributors',
   'economic',
+  'index_page',
 )
 
 INSTALLED_APPS = THIRD_PARTY_PRE_DJANGO + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

@@ -3,11 +3,13 @@ from news.models import NewsPost
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 
+from index_page.models import IndexPageModel
 from shop.models import Category
 
 def home(request):
   news_posts = NewsPost.objects.all()
-  return render(request, "index.html", {'news_posts':news_posts})
+  page_model = IndexPageModel.objects.all().first()
+  return render(request, "index.html", {'news_posts':news_posts, 'index_page_model':page_model })
 
 def about(request):
   return render(request, "about.html")

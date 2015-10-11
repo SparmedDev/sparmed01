@@ -30,38 +30,38 @@
     <form class="form" role="form" action="{{ user.get_absolute_url }}" method="post">
         {% csrf_token %}
         {% bootstrap_form_errors form type='non_fields' %}
-      
-        {% bootstrap_field form.name %}
-        
+
+        {% bootstrap_field form.name set_disabled=True %}
+
         <hr class="compact">
-      
+
         <div class="row">
-      
+
             <div class="col-xs-6">
-              {% bootstrap_field form.company_name %}              
-              {% bootstrap_field form.address %}     
-              
+              {% bootstrap_field form.company_name %}
+              {% bootstrap_field form.address %}
+
               <div class="row">
                 <div class="col-xs-6 form-group">
                   {% bootstrap_field form.city %}
-                </div>             
+                </div>
 
                 <div class="col-xs-6 form-group">
                   {% bootstrap_field form.postal_code %}
-                </div>         
-              </div>              
-              
-              {% bootstrap_field form.country %}                 
-            </div>         
-          
-            <div class="col-xs-6">
-              {% bootstrap_field form.contact_person_name %}     
-              {% bootstrap_field form.contact_telephone %} 
-              {% bootstrap_field form.email %}               
+                </div>
+              </div>
+
+              {% bootstrap_field form.country %}
             </div>
 
-        </div>          
-      
+            <div class="col-xs-6">
+              {% bootstrap_field form.contact_person_name %}
+              {% bootstrap_field form.contact_telephone %}
+              {% bootstrap_field form.email %}
+            </div>
+
+        </div>
+
         <hr class="compact">
 
       <button type="submit" class="btn btn-primary">
@@ -69,11 +69,11 @@
       </button>
     </form>
     {% endif %}
-    
+
     <span class="minor-skip"></span>
     <a class="btn btn-warning" href="{% url 'password_reset' %}">{% trans "Reset Password" %}</a>
     <span class="minor-skip"></span>
 </section>
-    
+
 
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-22 11:55+0200\n"
+"POT-Creation-Date: 2015-10-11 12:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,6 +89,10 @@ msgstr ""
 msgid "Country Name"
 msgstr ""
 
+#: index_page/models.py:13
+msgid "Index Page Slogan"
+msgstr ""
+
 #: news/models.py:8 shop/models.py:16 shop/models.py:34
 msgid "Picture Title"
 msgstr ""
@@ -121,7 +125,7 @@ msgid "Important dates"
 msgstr ""
 
 #: online_order/models.py:46
-msgid "Sparmed Website Account Name"
+msgid "Sparmed Client No."
 msgstr ""
 
 #: online_order/models.py:50
@@ -283,7 +287,7 @@ msgid "Delivery Country"
 msgstr ""
 
 #: online_order/models.py:189
-#: sparmed/templates/online_order/online_order_sheet.html:206
+#: sparmed/templates/online_order/online_order_sheet.html:125
 msgid "Any other remarks or comments regarding this order?"
 msgstr ""
 
@@ -389,19 +393,19 @@ msgstr ""
 msgid "PDF Document file (56 MB max)"
 msgstr ""
 
-#: sparmed/settings.py:134
+#: sparmed/settings.py:135
 msgid "English"
 msgstr ""
 
-#: sparmed/settings.py:135
+#: sparmed/settings.py:136
 msgid "Russian"
 msgstr ""
 
-#: sparmed/settings.py:136
+#: sparmed/settings.py:137
 msgid "Brazilian"
 msgstr ""
 
-#: sparmed/settings.py:137
+#: sparmed/settings.py:138
 msgid "Spanish"
 msgstr ""
 
@@ -547,7 +551,7 @@ msgid "Logout"
 msgstr ""
 
 #: sparmed/templates/base.html:139 sparmed/templates/base.html.py:164
-#: sparmed/templates/online_order/online_order_sheet.html:36
+#: sparmed/templates/online_order/online_order_sheet.html:52
 #: sparmed/templates/online_order/order_history.html:58
 #: sparmed/templates/online_order/order_to_from.html:16
 #: sparmed/templates/online_order/order_to_from.html:32
@@ -781,7 +785,7 @@ msgstr ""
 msgid "GOosafe in IVF Laboratories"
 msgstr ""
 
-#: sparmed/templates/index.html:20
+#: sparmed/templates/index.html:24
 msgid "Remember to GO Oosafe"
 msgstr ""
 
@@ -801,8 +805,8 @@ msgid "Add to Cart"
 msgstr ""
 
 #: sparmed/templates/inventory.html:51
-#: sparmed/templates/online_order/online_order_sheet.html:82
 #: sparmed/templates/online_order/order_items.html:8
+#: sparmed/templates/online_order/order_sheet_product_cart.html:63
 msgid "Quantity"
 msgstr ""
 
@@ -860,129 +864,73 @@ msgstr ""
 msgid "Company Details"
 msgstr ""
 
+#. Translators: Close as in 'Close window'
+#: sparmed/templates/online_order/online_order_sheet.html:30
+#: sparmed/templates/online_order/order_sheet_product_cart.html:17
+msgid "Close"
+msgstr ""
+
+#: sparmed/templates/online_order/online_order_sheet.html:31
+msgid "If you need to change your company details, click on the account"
+msgstr ""
+
+#: sparmed/templates/online_order/online_order_sheet.html:31
+msgid "button almost in the top-right corner of your screen."
+msgstr ""
+
 #. Translators: Att abbreviation for 'attention', as used in letters
 #. Translators: 'Att' is short for Attention, as used in letters
-#: sparmed/templates/online_order/online_order_sheet.html:34
+#: sparmed/templates/online_order/online_order_sheet.html:50
 #: sparmed/templates/online_order/order_history.html:56
 #: sparmed/templates/online_order/order_to_from.html:30
 msgid "Att"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:35
+#: sparmed/templates/online_order/online_order_sheet.html:51
 #: sparmed/templates/online_order/order_history.html:57
 #: sparmed/templates/online_order/order_to_from.html:31
 msgid "Telephone"
 msgstr ""
 
-#. Translators: Close as in 'Close window'
-#: sparmed/templates/online_order/online_order_sheet.html:42
-#: sparmed/templates/online_order/online_order_sheet.html:115
-msgid "Close"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:43
-msgid "If you need to change your company details, click on the account"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:43
-msgid "button almost in the top-right corner of your screen."
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:56
-msgid "Products in Cart"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:62
-#, python-format
-msgid ""
-"Add more products to your cart through the <a href=\"%(inventory_url)s"
-"\">inventory page</a>, the <a href=\"%(products_url)s\">products page</a>, "
-"or the search box below."
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:68
-#: sparmed/templates/online_order/online_order_sheet.html:128
-msgid ""
-"Start typing an Order No. to search for products matching that Order No."
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:71
-#: sparmed/templates/online_order/online_order_sheet.html:131
-msgid "Add New Product"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:81
-msgid "Product (Order No.-Name)"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:83
-msgid "Remove?"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:97
-msgid "Remove"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:105
-msgid "Clear Cart"
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:116
-#, python-format
-msgid ""
-" You must add some products to your cart through the <a class=\"alert-link\" "
-"href=\"%(inventory_url)s\">inventory page</a>, the <a class=\"alert-link\" "
-"href=\"%(products_url)s\">products page</a>, or the search box below, before "
-"being able to send an order."
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:121
-#, python-format
-msgid ""
-" Please add some products to your cart through the <a class=\"alert-link\" "
-"href=\"%(inventory_url)s\">inventory page</a>, the <a class=\"alert-link\" "
-"href=\"%(products_url)s\">products page</a>, or the search box below."
-msgstr ""
-
-#: sparmed/templates/online_order/online_order_sheet.html:148
+#: sparmed/templates/online_order/online_order_sheet.html:67
 msgid "Freight arranged by SparMed?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:161
+#: sparmed/templates/online_order/online_order_sheet.html:80
 msgid "Packaging arranged by SparMED?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:164
+#: sparmed/templates/online_order/online_order_sheet.html:83
 msgid ""
 "Please note if SparMED arranges packaging, we will choose the best and "
 "safest way of packing your order."
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:177
+#: sparmed/templates/online_order/online_order_sheet.html:96
 msgid "Same delivery address?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:192
+#: sparmed/templates/online_order/online_order_sheet.html:111
 msgid "Insurance Chosen?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:199
+#: sparmed/templates/online_order/online_order_sheet.html:118
 msgid "Any specific documents along with your shipment?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:200
+#: sparmed/templates/online_order/online_order_sheet.html:119
 msgid ""
 "Please write down here if you need any specific documents along with your "
 "shipment"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:207
+#: sparmed/templates/online_order/online_order_sheet.html:126
 msgid ""
 "Please write down here if you have any other remarks or comments regarding "
 "this order"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:213
+#: sparmed/templates/online_order/online_order_sheet.html:132
 #: sparmed/templates/online_order/order_confirmation.html:9
 msgid "Send Order"
 msgstr ""
@@ -1125,6 +1073,68 @@ msgstr ""
 
 #: sparmed/templates/online_order/order_items.html:26
 msgid "No product items found in the order."
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:11
+msgid "Products in Cart"
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:21
+#, python-format
+msgid ""
+"\n"
+"            Please add more products to your cart through the <a class="
+"\"alert-link\" href=\"%(inventory_url)s\">inventory page</a>, the <a class="
+"\"alert-link\" href=\"%(products_url)s\">products page</a>, or the search "
+"box below.\n"
+"            "
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:25
+#, python-format
+msgid ""
+"\n"
+"            You must add some products to your cart through the <a class="
+"\"alert-link\" href=\"%(inventory_url)s\">inventory page</a>, the <a class="
+"\"alert-link\" href=\"%(products_url)s\">products page</a>, or the search "
+"box below, before being able to send an order.\n"
+"            "
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:29
+#, python-format
+msgid ""
+"\n"
+"            Please add some products to your cart through the <a class="
+"\"alert-link\" href=\"%(inventory_url)s\">inventory page</a>, the <a class="
+"\"alert-link\" href=\"%(products_url)s\">products page</a>, or the search "
+"box below.\n"
+"            "
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:44
+msgid ""
+"Start typing an Order No. to search for products matching that Order No."
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:48
+msgid "Add New Product"
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:62
+msgid "Product (Order No.-Name)"
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:64
+msgid "Remove?"
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:78
+msgid "Remove"
+msgstr ""
+
+#: sparmed/templates/online_order/order_sheet_product_cart.html:87
+msgid "Clear Cart"
 msgstr ""
 
 #. Translators: 'TO' as used in mails (to and from - receiver and sender)
