@@ -53,11 +53,6 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name=_("Contact Email Address"), max_length=255, unique=True)
     date_joined = models.DateTimeField(_("Date joined"), default=timezone.now, blank=True, null=True)
 
-    #last_name = models.CharField(blank=True, null=True, max_length=255)
-    #first_name = models.CharField(blank=True, null=True, max_length=255)
-    #username = models.CharField(blank=True, null=True, max_length=255)
-
-
     is_active = models.BooleanField(_('Active'), default=True,
         help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
     is_admin = models.BooleanField(default=False,
@@ -82,11 +77,6 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.name
-
-    #@property
-    #def is_staff(self):
-    #    "Is the user a member of staff?"
-    #    return self.is_admin
 
     @property
     def slug(self):
