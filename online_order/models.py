@@ -26,9 +26,8 @@ class SparmedUserManager(BaseUserManager):
 
         now = timezone.now()
         email = self.normalize_email(email)
-        user = self.model(username=name, name=name, email=email,
-                          is_staff=is_staff, is_active=True,
-                          is_superuser=is_superuser, last_login=now,
+        user = self.model(username=name, name=name, email=email, is_active=True,
+                          is_superuser=is_superuser, is_admin=is_admin, last_login=now,
                           date_joined=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -54,17 +53,17 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name=_("Contact Email Address"), max_length=255, unique=True)
     date_joined = models.DateTimeField(_("Date joined"), default=timezone.now, blank=True, null=True)
 
-    last_name = models.CharField(blank=True, null=True, max_length=255)
-    first_name = models.CharField(blank=True, null=True, max_length=255)
-    username = models.CharField(blank=True, null=True, max_length=255)
+    #last_name = models.CharField(blank=True, null=True, max_length=255)
+    #first_name = models.CharField(blank=True, null=True, max_length=255)
+    #username = models.CharField(blank=True, null=True, max_length=255)
 
 
     is_active = models.BooleanField(_('Active'), default=True,
         help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
     is_admin = models.BooleanField(default=False,
         help_text=_('Designates whether the user can log into this admin site.'))
-    #is_staff = models.BooleanField(default=True,
-    #    help_text=_('Designates whether the user is regarded as staff'))
+    is_staff = models.BooleanField(default=True,
+        help_text=_('Designates whether the user is regarded as staff'))
 
     objects = SparmedUserManager()
 
@@ -84,10 +83,10 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.name
 
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        return self.is_admin
+    #@property
+    #def is_staff(self):
+    #    "Is the user a member of staff?"
+    #    return self.is_admin
 
     @property
     def slug(self):

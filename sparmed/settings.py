@@ -92,7 +92,7 @@ THIRD_PARTY_APPS = (
   'cookielaw',
   'ckeditor',
   'nocaptcha_recaptcha',
-  'authtools',
+#  'authtools',
 )
 
 LOCAL_APPS = (
