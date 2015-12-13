@@ -31,7 +31,8 @@
         {% csrf_token %}
         {% bootstrap_form_errors form type='non_fields' %}
 
-        {% bootstrap_field form.name set_disabled=True %}
+        {#% bootstrap_field form.name set_disabled=True %#}
+        {% bootstrap_field form.name %}
 
         <hr class="compact">
 

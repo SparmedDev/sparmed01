@@ -26,7 +26,7 @@ class SparmedUserManager(BaseUserManager):
 
         now = timezone.now()
         email = self.normalize_email(email)
-        user = self.model(name=name, email=email,
+        user = self.model(username=name, name=name, email=email,
                           is_staff=is_staff, is_active=True,
                           is_superuser=is_superuser, last_login=now,
                           date_joined=now, **extra_fields)
@@ -44,20 +44,27 @@ class SparmedUserManager(BaseUserManager):
 
 class SparmedUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255, verbose_name=_("Sparmed Client No."), unique=True)
-    company_name = models.CharField(max_length=255, verbose_name=("Company Name"))
-    country = CountryField()
-    address = models.CharField(max_length=255, verbose_name=("Company Address"))
-    city = models.CharField(max_length=255, verbose_name=_("Company City"))
+    company_name = models.CharField(max_length=255, verbose_name=("Company Name"), blank=True)
+    country = CountryField(blank=True)
+    address = models.CharField(max_length=255, verbose_name=("Company Address"), blank=True)
+    city = models.CharField(max_length=255, verbose_name=_("Company City"), blank=True)
     postal_code = models.CharField(max_length=255, verbose_name=_("Company Postal Code"), blank=True, null=True)
-    contact_person_name = models.CharField(max_length=255, verbose_name=_("Company Contact Person Name"))
-    contact_telephone = models.CharField(max_length=50, verbose_name=_("Contact Telephone Number"))
+    contact_person_name = models.CharField(max_length=255, verbose_name=_("Company Contact Person Name"), blank=True)
+    contact_telephone = models.CharField(max_length=50, verbose_name=_("Contact Telephone Number"), blank=True)
     email = models.EmailField(verbose_name=_("Contact Email Address"), max_length=255, unique=True)
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_joined = models.DateTimeField(_("Date joined"), default=timezone.now, blank=True, null=True)
 
-    is_active = models.BooleanField(_('active'), default=True,
+    last_name = models.CharField(blank=True, null=True, max_length=255)
+    first_name = models.CharField(blank=True, null=True, max_length=255)
+    username = models.CharField(blank=True, null=True, max_length=255)
+
+
+    is_active = models.BooleanField(_('Active'), default=True,
         help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
     is_admin = models.BooleanField(default=False,
         help_text=_('Designates whether the user can log into this admin site.'))
+    #is_staff = models.BooleanField(default=True,
+    #    help_text=_('Designates whether the user is regarded as staff'))
 
     objects = SparmedUserManager()
 
@@ -71,7 +78,6 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return self.name
 
-
     def get_full_name(self):
         return self.company_name
 
@@ -81,7 +87,6 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
         return self.is_admin
 
     @property
@@ -91,11 +96,11 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
     def get_absolute_url(self):
         return reverse('online_order.views.account_area', args=[self.slug])
 
-    def email_user(self, subject, message, from_email=None):
+    def email_user(self, subject, message, from_email=None, **kwargs):
         """
         Sends an email to this User.
         """
-        send_mail(subject, message, from_email, [self.email])
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def add_to_order_history(self, order, items_list, **kwargs):
         o_new = self.orders.create(

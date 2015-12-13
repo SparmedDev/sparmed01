@@ -48,6 +48,8 @@ urlpatterns = [
 #  url(r'^economic/customers/(?P<url>.*)/$', 'economic.views.customer', name='economic-customer'),
 #  url(r'^economic/products/(?P<url>.*)/$', 'economic.views.product', name='economic-product'),
 
+  url(r'^accounts/', include('authtools.urls')),
+
   url(r'^grappelli/', include('grappelli.urls')),
   url(r'^admin/', include(admin.site.urls)),
   url(r'^i18n/', include('django.conf.urls.i18n')),
@@ -95,9 +97,9 @@ urlpatterns += i18n_patterns(
   url(r'^privacy-policy/$', views.privacy_policy, name='privacy-policy'),
   url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
 
-  url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
-  url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
-  url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
-  url(r'^user/password/done/$', 'django.contrib.auth.views.password_reset_complete'),
+#  url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
+#  url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
+#  url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
+#  url(r'^user/password/done/$', 'django.contrib.auth.views.password_reset_complete'),
 
 )
