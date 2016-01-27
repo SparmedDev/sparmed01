@@ -17,11 +17,11 @@
     <p>
       <strong>SparMED ApS</strong><br>
       CVR: DK-30 89 85 75<br>
-      {% trans "Address" %}: Toppevadvej 34-38, 3660 Stenløse, {% trans "DENMARK" %}
+      {% trans "Address" %}: Ryttermarken 2, 3520 Farum, {% trans "DENMARK" %}
     </p>
-    
+
     <p>
-      
+
     <p>
       <strong>{% trans "Opening Hours" %}:</strong><br>
       {% blocktrans %}
@@ -29,12 +29,12 @@
       Friday 7:30 - 13:00
       {% endblocktrans %}
     </p>
-    
+
     <p>
       {% trans "Phone" %}: <a href="tel:004539402503">(+45) 39 40 25 03</a><br>
       {% trans "Fax" %}: <a href="fax:004539402564">(+45) 39 40 25 64</a>
     </p>
-    
+
     <p>
       <br>
       {% trans "General Support" %}: <a href="mailto:info@sparmed.dk">info@sparmed.dk</a><br>
@@ -43,7 +43,7 @@
       {% trans "IVF and ART" %}: <a href="mailto:evrim@sparmed.dk">evrim@sparmed.dk</a><br>
       {% trans "Marketing" %}: <a href="mailto:onur@sparmed.dk">onur@sparmed.dk</a><br>
       {% trans "Regulatory Affairs" %}: <a href="mailto:inesa@sparmed.dk">inesa@sparmed.dk</a><br>
-      {% trans "IT" %}: <a href="mailto:rami@sparmed.dk">rami@sparmed.dk</a>      
+      {% trans "IT" %}: <a href="mailto:rami@sparmed.dk">rami@sparmed.dk</a>
     </p>
   </div>
   <div class="col-md-6">
@@ -51,7 +51,7 @@
       <br>
       <strong>{% trans "Bank information" %}:</strong><br>
       Danske Bank A/S<br>
-      {% trans "Address" %}: Holmens Kanal 2-12,1092 Copenhagen, Denmark
+      {% trans "Address" %}: Holmens Kanal 2-12, 1092 Copenhagen, Denmark
     </p>
     <p>
       {% blocktrans %}
@@ -61,7 +61,7 @@
       DKK Account: Regnr.: 3543, Kontonr.: 0011400884
       {% endblocktrans %}
     </p>
-    
+
     <img class="img-responsive center-block max-height-250" src="{% static 'img/heart_logo_img.jpg' %}" alt="Heart Logo">
   </div>
 </div>
@@ -70,7 +70,7 @@
 
 <section style="width:154px; margin: 5px auto; padding: 5px;">
     <div class="addthis_horizontal_follow_toolbox">
-    </div>  
+    </div>
 </section>
 
 <hr>
@@ -92,7 +92,7 @@
           {% bootstrap_field form.subject %}
           {% bootstrap_field form.message %}
           <div class="form-group">{{ form.captcha }}</div>
-          
+
           {% buttons submit='Send Message' %}{% endbuttons %}
         </form>
         {% endif %}
@@ -101,19 +101,19 @@
   </div>
 
   <div class="col-md-6">
-    <iframe width="90%"
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2241.4893232639233!2d12.355738626662063!3d55.819465623079225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465245b3b31f88b1%3A0x3867b20a1db29ac9!2sRyttermarken+2%2C+3520+Farum!5e0!3m2!1sen!2sdk!4v1453927428572"
+            width="90%"
             height="500px"
             frameborder="0"
             style="border:0px; margin:0px auto; display: block;"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB1uhDdWjtNEl9K35lJtuq5Sw2BjKR8-OM
-                 &q=Toppevadvej+34+3660+stenlose+SparMED+ApS">
-    </iframe>    
-  </div>    
+            allowfullscreen>
+    </iframe>
+  </div>
 </div>
-  
+
 {% endblock %}
 
 {% block endbody %}
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>   
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-521f5a26519ca481" async></script>
 {% endblock %}
