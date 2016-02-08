@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 20:03+0100\n"
+"POT-Creation-Date: 2016-02-08 19:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,207 +107,219 @@ msgid ""
 "instead use the news image below)"
 msgstr ""
 
-#: news/models.py:29 online_order/models.py:217 online_order/models.py:218
+#: news/models.py:29 online_order/models.py:211 online_order/models.py:212
 #: shop/models.py:64 shop/models.py:126
 msgid "URL; Never modify this value!"
 msgstr ""
 
-#: online_order/admin.py:33
-msgid "Personal info"
+#: online_order/admin.py:30 online_order/admin.py:48
+msgid "Basic Info"
 msgstr ""
 
-#: online_order/admin.py:34
+#: online_order/admin.py:33 online_order/admin.py:51
+msgid "Password"
+msgstr ""
+
+#: online_order/admin.py:36 online_order/admin.py:54
+msgid "Personal Info"
+msgstr ""
+
+#: online_order/admin.py:39 online_order/admin.py:57
 msgid "Permissions"
 msgstr ""
 
-#: online_order/admin.py:36
-msgid "Important dates"
+#: online_order/admin.py:42 online_order/admin.py:60
+msgid "Dates"
 msgstr ""
 
-#: online_order/models.py:46
+#: online_order/models.py:45
 msgid "Sparmed Client No."
 msgstr ""
 
-#: online_order/models.py:50
+#: online_order/models.py:49
 msgid "Company City"
 msgstr ""
 
-#: online_order/models.py:51
+#: online_order/models.py:50
 msgid "Company Postal Code"
 msgstr ""
 
-#: online_order/models.py:52
+#: online_order/models.py:51
 msgid "Company Contact Person Name"
 msgstr ""
 
-#: online_order/models.py:53
+#: online_order/models.py:52
 msgid "Contact Telephone Number"
 msgstr ""
 
-#: online_order/models.py:54
+#: online_order/models.py:53
 msgid "Contact Email Address"
 msgstr ""
 
-#: online_order/models.py:55
-msgid "date joined"
+#: online_order/models.py:54
+msgid "Date joined"
+msgstr ""
+
+#: online_order/models.py:56
+msgid "Active"
 msgstr ""
 
 #: online_order/models.py:57
-msgid "active"
-msgstr ""
-
-#: online_order/models.py:58
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
 
-#: online_order/models.py:60
+#: online_order/models.py:59
 msgid "Designates whether the user can log into this admin site."
 msgstr ""
 
-#: online_order/models.py:68
-msgid "user"
+#: online_order/models.py:61
+msgid "Designates whether the user is regarded as staff"
 msgstr ""
 
 #: online_order/models.py:69
+msgid "user"
+msgstr ""
+
+#: online_order/models.py:70
 msgid "users"
 msgstr ""
 
-#: online_order/models.py:147
+#: online_order/models.py:141
 msgid "Date and time of order"
 msgstr ""
 
-#: online_order/models.py:149 online_order/models.py:195
+#: online_order/models.py:143 online_order/models.py:189
 msgid "SparMED Arranges Freight?"
 msgstr ""
 
-#: online_order/models.py:150
+#: online_order/models.py:144
 msgid "Freight Forwarder"
 msgstr ""
 
-#: online_order/models.py:151
+#: online_order/models.py:145
 msgid "Account Number"
 msgstr ""
 
 #. Translators: Euro Pallet abbreviation 'EP'
-#: online_order/models.py:154
+#: online_order/models.py:148
 msgid "EP"
 msgstr ""
 
 #. Translators: Half Pallet abbreviation 'HP'
-#: online_order/models.py:156
+#: online_order/models.py:150
 msgid "HP"
 msgstr ""
 
 #. Translators: Box abbreviation 'BX'
-#: online_order/models.py:158
+#: online_order/models.py:152
 msgid "BX"
 msgstr ""
 
-#: online_order/models.py:160
+#: online_order/models.py:154
 msgid "Euro Pallet"
 msgstr ""
 
-#: online_order/models.py:161
+#: online_order/models.py:155
 msgid "Half Pallet"
 msgstr ""
 
-#: online_order/models.py:162
+#: online_order/models.py:156
 msgid "Box"
 msgstr ""
 
-#: online_order/models.py:165 online_order/models.py:196
+#: online_order/models.py:159 online_order/models.py:190
 msgid "SparMED Arranges Packaging?"
 msgstr ""
 
-#: online_order/models.py:166
+#: online_order/models.py:160
 msgid "Packaging Instructions"
 msgstr ""
 
-#: online_order/models.py:166
+#: online_order/models.py:160
 msgid ""
 "Please note if nothing is filled out SparMED will choose the best and safest "
 "way of packing your order."
 msgstr ""
 
-#: online_order/models.py:167
+#: online_order/models.py:161
 msgid "Packaging Remarks/Comments"
 msgstr ""
 
 #. Translators: Carboard Box abbreviation 'CB'
-#: online_order/models.py:170
+#: online_order/models.py:164
 msgid "CB"
 msgstr ""
 
 #. Translators: Wooden Frames abbreviation 'WF'
-#: online_order/models.py:172
+#: online_order/models.py:166
 msgid "WF"
 msgstr ""
 
-#: online_order/models.py:174
+#: online_order/models.py:168
 msgid "Cardboard Box"
 msgstr ""
 
-#: online_order/models.py:175
+#: online_order/models.py:169
 msgid "Wooden Frames"
 msgstr ""
 
-#: online_order/models.py:177
+#: online_order/models.py:171
 msgid "Aircleaner Instructions (If applicable)"
 msgstr ""
 
-#: online_order/models.py:179 online_order/models.py:197
+#: online_order/models.py:173 online_order/models.py:191
 msgid "Is insurance needed?"
 msgstr ""
 
-#: online_order/models.py:181
+#: online_order/models.py:175
 msgid ""
 "Please write down if you need any specific documents along with your shipment"
 msgstr ""
 
-#: online_order/models.py:183 online_order/models.py:198
+#: online_order/models.py:177 online_order/models.py:192
 msgid "Different delivery address?"
 msgstr ""
 
-#: online_order/models.py:184
+#: online_order/models.py:178
 msgid "Company Name"
 msgstr ""
 
-#: online_order/models.py:185
+#: online_order/models.py:179
 msgid "Delivery Address"
 msgstr ""
 
-#: online_order/models.py:186
+#: online_order/models.py:180
 msgid "Delivery Postal Code"
 msgstr ""
 
-#: online_order/models.py:187
+#: online_order/models.py:181
 msgid "Delivery Country"
 msgstr ""
 
-#: online_order/models.py:189
+#: online_order/models.py:183
 #: sparmed/templates/online_order/online_order_sheet.html:125
 msgid "Any other remarks or comments regarding this order?"
 msgstr ""
 
-#: online_order/models.py:213 shop/models.py:57
+#: online_order/models.py:207 shop/models.py:57
 #: sparmed/templates/inventory.html:52
 #: sparmed/templates/online_order/order_items.html:6
 #: sparmed/templates/shop/details.html:30
 msgid "Order No."
 msgstr ""
 
-#: online_order/models.py:214 sparmed/templates/inventory.html:53
+#: online_order/models.py:208 sparmed/templates/inventory.html:53
 #: sparmed/templates/online_order/order_items.html:7
 msgid "Product Name"
 msgstr ""
 
-#: online_order/models.py:215 shop/models.py:59
+#: online_order/models.py:209 shop/models.py:59
 msgid "Product Long Name"
 msgstr ""
 
-#: online_order/models.py:216 shop/models.py:60
+#: online_order/models.py:210 shop/models.py:60
 msgid "Product Description"
 msgstr ""
 
@@ -843,11 +855,11 @@ msgstr ""
 msgid "Go back to"
 msgstr ""
 
-#: sparmed/templates/online_order/account_area.html:68
+#: sparmed/templates/online_order/account_area.html:69
 msgid "Update Account Details"
 msgstr ""
 
-#: sparmed/templates/online_order/account_area.html:74
+#: sparmed/templates/online_order/account_area.html:75
 #: sparmed/templates/registration/login.html:26
 #: sparmed/templates/registration/password_reset_form.html:7
 #: sparmed/templates/registration/password_reset_form.html:8
@@ -936,6 +948,11 @@ msgstr ""
 msgid "Send Order"
 msgstr ""
 
+#: sparmed/templates/online_order/order_conf_base.html:33
+#: sparmed/templates/online_order/order_email.html:81
+msgid "Purchase Order Sheet Receipt"
+msgstr ""
+
 #: sparmed/templates/online_order/order_confirmation.html:4
 msgid ""
 "This Order Confirmation page shows the details concerning a specific order"
@@ -1016,11 +1033,7 @@ msgstr ""
 msgid "Other Remarks given to SparMED"
 msgstr ""
 
-#: sparmed/templates/online_order/order_email.html:81
-msgid "Purchase Order Sheet Receipt"
-msgstr ""
-
-#: sparmed/templates/online_order/order_email.html:89
+#: sparmed/templates/online_order/order_email.html:87
 #, python-format
 msgid ""
 "\n"
@@ -1030,7 +1043,7 @@ msgid ""
 "                "
 msgstr ""
 
-#: sparmed/templates/online_order/order_email.html:96
+#: sparmed/templates/online_order/order_email.html:94
 msgid "Sparmed Logo - GOosafe in IVF Laboratories"
 msgstr ""
 
