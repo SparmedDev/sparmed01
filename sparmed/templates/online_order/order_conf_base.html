@@ -21,7 +21,7 @@
 
     a:link:after, a:visited:after {
         content: "";
-    }  
+    }
 </style>
 {% endblock %}
 
@@ -30,11 +30,9 @@
   <table class="table table-responsive">
     <tr>
       <td>
-        <h2>Purchase Order Sheet Receipt</h2>
+        <h2>{% trans "Purchase Order Sheet Receipt" %}</h2>
         <h4>
-          {% localtime on %}
-          <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>       
-          {% endlocaltime %}
+          <time datetime="{{ order.date|date:'c' }}">{{ order.date|date:'Y-m-d H:i' }}</time>
         </h4>
         <div>
           <a type="button" class="btn btn-default non-printable" href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span></a>
@@ -44,20 +42,20 @@
       <td>
         <img style="display: block; max-width: 300px; width: 50%; margin: 5px auto;" class="img-responsive" src="{% static 'img/sparmed-logo.png' %}" alt="Sparmed Logo - GOosafe in IVF Laboratories">
       </td>
-    </tr>   
+    </tr>
   </table>
 
   {% include 'online_order/order_to_from.html' %}
 
   {% with items=order.items.all %}
       {% include 'online_order/order_items.html' %}
-  {% endwith %}  
+  {% endwith %}
 
   {% include 'online_order/order_details.html' %}
-  
+
   {% block containerend %}
   {% endblock %}
-  
+
 </div>
 
-{% endblock %}  
+{% endblock %}
