@@ -277,7 +277,7 @@ EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
 EMAIL_USE_TLS = True
 
-SERVER_EMAIL = "SparMED.dk <admin@SparMED.dk>"
+SERVER_EMAIL = "SparMED.dk <info@sparmed.dk>"
 
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
