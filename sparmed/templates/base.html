@@ -38,7 +38,7 @@
 
     <!--[if gte IE 9]>
         <style type="text/css"> .gradient { filter: none; } </style>
-    <![endif]-->    
+    <![endif]-->
 
     {# Load jQuery #}
     <script type="text/javascript" src="{% bootstrap_jquery_url %}" charset="utf-8"></script>
@@ -54,22 +54,22 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-54174179-1', 'auto');
-      ga('require', 'displayfeatures');      
-      ga('send', 'pageview');  
+      ga('require', 'displayfeatures');
+      ga('send', 'pageview');
     </script>
-    
+
   </head>
-  
-  <body>  
+
+  <body>
     {% block bodytop %}
-    {% endblock %} 
+    {% endblock %}
 
     {% cookielaw_custom_banner %}
 
     <div id="main-container">
-    
+
       <header id="header" class="gradient">
-        <section class="content-container">        
+        <section class="content-container">
           <div id="nav-logo">
             <img class="img-responsive" src="{% static 'img/sparmed-logo.png' %}" alt="{% trans 'SparMED Logo - GOosafe in IVF Laboratories' %}">
           </div>
@@ -83,36 +83,36 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
-                </button>          
+                </button>
               </div>
 
               <div class="navbar-collapse collapse">
                 <ul class="nav nav-pills">
                   <li class="btn-fancy{% navactive request 'home' %}"><a title="{% trans 'Home' %}" href="{% url 'home' %}">{% trans "Home" %}</a></li>
                   <li class="btn-fancy{% navactive request 'products' %}"><a title="{% trans 'Products' %}" href="{% url 'products' %}">{% trans "Products" %}</a></li>
-                  <li class="btn-fancy{% navactive request 'distributors' %}"><a title="{% trans 'Distributors' %}" href="{% url 'distributors' %}">{% trans "Distributors" %}</a></li>                
+                  <li class="btn-fancy{% navactive request 'distributors' %}"><a title="{% trans 'Distributors' %}" href="{% url 'distributors' %}">{% trans "Distributors" %}</a></li>
                   <li class="btn-fancy{% navactive request 'about' %}"><a title="{% trans 'About Us' %}" href="{% url 'about' %}">{% trans "About Us" %}</a></li>
-                  <li class="btn-fancy{% navactive request 'contact' %}"><a title="{% trans 'Contact Us' %}" href="{% url 'contact' %}">{% trans "Contact Us" %}</a></li>                
+                  <li class="btn-fancy{% navactive request 'contact' %}"><a title="{% trans 'Contact Us' %}" href="{% url 'contact' %}">{% trans "Contact Us" %}</a></li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div id="dist-login">        
+          <div id="dist-login">
             {% if user.is_anonymous %}
             <a title="{% trans 'Login for expanded access to the Distributor Home Panel and Online Ordering' %}" href="{% url 'django.contrib.auth.views.login' %}">{% trans "Login" %} <span class="glyphicon glyphicon-user"></span></a>
             {% else %}
             {% if get_cart and get_cart.count > 0 %}
             <a title="{% trans 'Go to Online Order Sheet to view your cart with your chosen products' %}" href="{% url 'order-online' %}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{ get_cart.count }}</span></a> |
             {% endif %}
-            <a id="home-button" title="{% trans 'Go to Distributor Home Panel - online ordering, certificates, inventory and more' %}" class="{% productnavactive request 'distributor-login' %}" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> | 
-            <a id="account-button" class="{% productnavactive request 'account-area' %}" title="{% trans 'Go to Account Area - view or change company account details' %}" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> | 
+            <a id="home-button" title="{% trans 'Go to Distributor Home Panel - online ordering, certificates, inventory and more' %}" class="{% productnavactive request 'distributor-login' %}" href="{% url 'distributor-login' %}"><span class="glyphicon glyphicon-home"></span></a> |
+            <a id="account-button" class="{% productnavactive request 'account-area' %}" title="{% trans 'Go to Account Area - view or change company account details' %}" href="{{ user.get_absolute_url }}">{{ user }} <span class="glyphicon glyphicon-wrench"></span></a> |
             <a title="{% trans 'Logout from SparMED Distributor Panel' %}" href="{% url 'django.contrib.auth.views.logout_then_login' %}">{% trans "Logout" %} <span class="glyphicon glyphicon-off"></span></a>
             {% endif %}
-            
+
             {% include 'language_chooser.html' %}
-          </div>  
-        </section><!-- /content-container -->        
+          </div>
+        </section><!-- /content-container -->
       </header>
 
       <section id="content">
@@ -132,7 +132,7 @@
               <div class="col-sm-4">
                 <p class="text-right"><strong>SparMED ApS</strong></p>
                 <p class="text-right">DK-30 89 85 75</p>
-                <p class="text-right">Toppevadvej 34-38, 3660 Stenløse, DK</p>
+                <p class="text-right">Ryttermarken 2, 3520 Farum, DK</p>
               </div>
 
               <div class="col-sm-4">
@@ -143,7 +143,7 @@
 
               <div class="col-sm-4">
                 <p class="text-left"><a href="{% url 'privacy-policy' %}" title="{% trans 'Privacy Policy' %}">{% trans "Privacy Policy" %}</a></p>
-                <p class="text-left"><a href="{% url 'terms-conditions' %}" title="{% trans 'Terms and Conditions' %}">{% trans "Terms &amp; Conditions" %}</a></p>            
+                <p class="text-left"><a href="{% url 'terms-conditions' %}" title="{% trans 'Terms and Conditions' %}">{% trans "Terms &amp; Conditions" %}</a></p>
                 <p class="text-left">&copy; Copyright 2015 SparMED ApS</p>
               </div>
             </div>
@@ -155,7 +155,7 @@
                 <p class="text-center">
                   <strong>SparMED ApS</strong><br>
                   DK-30 89 85 75<br>
-                  Toppevadvej 34-38, 3660 Stenløse, DK
+                  Ryttermarken 2, 3520 Farum, DK
                 </p>
               </div>
 
@@ -174,18 +174,18 @@
                   &copy; Copyright 2015 SparMED ApS
                 </p>
               </div>
-            </div>   
+            </div>
           </section>
 
           <p><span class="minor-skip"></span><span class="minor-skip"></span></p>
-          <p class="text-center"><em>{% trans "Website by" %} <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>       
+          <p class="text-center"><em>{% trans "Website by" %} <a href="//alphastagestudios.com" target="_blank" title="Alpha Stage Studios">Alpha Stage Studios</a></em></p>
 
         </section><!-- /content-container -->
       </footer>
 
     </div><!-- /main-container -->
 
-    <a href="https://plus.google.com/117721401203157103617" rel="publisher"></a>    
+    <a href="https://plus.google.com/117721401203157103617" rel="publisher"></a>
 
     {# Load javascript at bottom for speed optimization #}
 
@@ -193,7 +193,7 @@
       if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='{% static 'js/jquery.min.js' %}' type='text/javascript'%3E%3C/script%3E"));
       }
-    </script>    
+    </script>
 
     {# Load Bootstrap javascript #}
     {% bootstrap_javascript %}
@@ -211,13 +211,13 @@
               $('.nav-pills').removeClass('nav-stacked');
               $('#main-nav').removeClass('stacked');
             }, 1000);
-          });    
+          });
       });
-    </script>    
-    
+    </script>
+
     <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}" async></script>
 
-     
+
     <script type="text/javascript">
       function getCookie(name) {
         var cookieValue = null;
@@ -239,7 +239,7 @@
         /* these HTTP methods do not require CSRF protection */
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
       }
-      
+
       function addToCart(product_pk, quantity) {
         quantity = quantity > 1 ? quantity : 1;
         $.ajax({
@@ -254,9 +254,9 @@
         })
         .always(function(msg) {
             window.location.reload();
-        });            
-      }      
-    </script>    
+        });
+      }
+    </script>
 
     {% block endbody %}
     {% endblock %}
