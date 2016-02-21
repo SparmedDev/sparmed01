@@ -73,8 +73,13 @@
                 <p class="text-center"><a title="View the product details page" href="{{ product.get_absolute_url }}">{{ product.product_id }}</a></p>
               </td>
               <td><p><strong>{{ product.name|safe }}</strong></p></td>
+              {% if subcategory.category.get_stock_numbers %}
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_instock" class="text-center"></p></td>
               <td class="td-max-col-width"><p id="{{ product.product_id|slugify }}_available" class="text-center"></p></td>
+              {% else %}
+              <td class="td-max-col-width"><p class="text-center">In Stock</p></td>
+              <td class="td-max-col-width"><p class="text-center">Available</p></td>
+              {% endif %}
             </tr>
 
           {% endfor %}

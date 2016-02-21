@@ -126,7 +126,7 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, max_length=255, verbose_name=_("URL; Never modify this value!"))
     order_index = models.PositiveIntegerField(blank=True, null=True, default=0)
     hs_code = models.CharField(max_length=255, verbose_name=_("Tariff No. / HS Code"), blank=True, null=True)
-
+    get_stock_numbers = models.BooleanField(verbose_name=_("Automatically Get Stock Numbers from E-conomics for this Category"), default=False)
     document = ValidatedFileField(blank=True, null=True, verbose_name=_("PDF Document file (56 MB max)"), upload_to='documents/', content_types=['application/pdf'], max_upload_size=1024*1024*56)
 
     def save(self, *args, **kwargs):
