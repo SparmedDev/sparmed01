@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 19:23+0100\n"
+"POT-Creation-Date: 2016-02-21 12:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -401,23 +401,27 @@ msgstr ""
 msgid "Category Long Text (Please do not insert images!)"
 msgstr ""
 
+#: shop/models.py:129
+msgid "Automatically Get Stock Numbers from E-conomics for this Category"
+msgstr ""
+
 #: shop/models.py:130
 msgid "PDF Document file (56 MB max)"
 msgstr ""
 
-#: sparmed/settings.py:135
+#: sparmed/settings.py:138
 msgid "English"
 msgstr ""
 
-#: sparmed/settings.py:136
+#: sparmed/settings.py:139
 msgid "Russian"
 msgstr ""
 
-#: sparmed/settings.py:137
+#: sparmed/settings.py:140
 msgid "Brazilian"
 msgstr ""
 
-#: sparmed/settings.py:138
+#: sparmed/settings.py:141
 msgid "Spanish"
 msgstr ""
 
@@ -831,7 +835,7 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: sparmed/templates/inventory.html:98
+#: sparmed/templates/inventory.html:103
 #, python-format
 msgid ""
 "\n"
