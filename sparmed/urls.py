@@ -81,9 +81,6 @@ urlpatterns += i18n_patterns(
   url(r'^contact/$', 'contact.views.contact', name='contact'),
   url(r'^thanks/$', 'contact.views.thanks', name='thanks'),
 
-  #url(r'^login/$', 'django.contrib.auth.views.login'),
-  url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
-
   url(r'^distributor-login/', include(distributor_login_patterns, namespace='')),
 
   url(r'^products/(?P<category_slug>[\w\-]+)/(?P<product_slug>[\w\-]+)/$', 'shop.views.details'),
@@ -97,10 +94,6 @@ urlpatterns += i18n_patterns(
   url(r'^privacy-policy/$', views.privacy_policy, name='privacy-policy'),
   url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
 
+  url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
   url('^', include('django.contrib.auth.urls')),
-#  url(r'^user/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/user/password/reset/done/'}, name="password_reset"),
-#  url(r'^user/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
-#  url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/user/password/done/'}, name='password_reset_confirm'),
-#  url(r'^user/password/done/$', 'django.contrib.auth.views.password_reset_complete'),
-
 )
