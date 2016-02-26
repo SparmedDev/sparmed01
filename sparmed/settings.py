@@ -274,16 +274,14 @@ STATICFILES_FINDERS = (
 )
 
 # Mandrill email settings
-EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('MANDRILL_USERNAME')
-EMAIL_HOST_PASSWORD = os.environ.get('MANDRILL_APIKEY')
 EMAIL_USE_TLS = True
 
 SERVER_EMAIL = "SparMED.dk <info@sparmed.dk>"
-
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
-
 EMAIL_SUBJECT_PREFIX = "SparMED.dk"
 
 # Robots caching
@@ -296,12 +294,6 @@ LOGIN_URL = 'django.contrib.auth.views.login'
 # Custom user model
 AUTH_USER_MODEL = "online_order.SparmedUser"
 
-# Recaptcha for Contact Form
-#RECAPTCHA_PUBLIC_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
-#RECAPTCHA_PRIVATE_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
-#RECAPTCHA_USE_SSL = HTTPS
-#CAPTCHA_AJAX = False
-
 # Required settings:
 NORECAPTCHA_SITE_KEY = "6Leu_wITAAAAAJ2D3Hu1FqIjL61FhQaAxusckJHd"
 NORECAPTCHA_SECRET_KEY = "6Leu_wITAAAAAJWZFk8DZMMjATryJh3Z0Yp_SDie"
@@ -312,7 +304,6 @@ NORECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
 #    Default is https://www.google.com/recaptcha/api/siteverify
 NORECAPTCHA_WIDGET_TEMPLATE = 'nocaptcha_recaptcha/widget.html'
 #    Default is nocaptcha_recaptcha/widget.html
-
 
 # Haystack Settings
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

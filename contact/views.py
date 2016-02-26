@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
+from django.core.mail import send_mail
 
 from contact.forms import ContactForm
 
@@ -23,22 +24,7 @@ def contact(request):
                     'email': sender,
                     'name': sender_name})
 
-            import mandrill
-            try:
-                mandrill_client = mandrill.Mandrill('Bml5XQ7DhMZLvw3NDwykrQ')
-                message = {
-                    'from_email': sender,
-                    'from_name': sender_name,
-                    'subject': subject,
-                    'text': message,
-                    'to': recipients,
-                }
-                result = mandrill_client.messages.send(message=message)
-
-            except mandrill.Error, e:
-                # Mandrill errors are thrown as exceptions
-                print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
-                raise
+            send_mail(subject, message, {'name':sender_name, 'email':sender}, recipients, fail_silently=False)
 
             return HttpResponseRedirect('/thanks/')
     else:
