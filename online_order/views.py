@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect
 from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
-from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.cache import cache
@@ -15,6 +14,8 @@ from online_order.admin import SparmedUserChangeForm
 from shop.models import Category, Product
 
 from cart import Cart
+
+import sendgrid
 
 # Create your views here.
 @login_required
@@ -43,7 +44,6 @@ def order_online(request):
 @ensure_csrf_cookie
 def remove_account_change_cookie(request):
     if request.method == 'POST':
-        #request.session['removed_account_change_notice'] = True
         cache.set('removed_account_change_notice', True)
 
     return HttpResponseRedirect(reverse('online_order.views.order_online'))
@@ -67,7 +67,6 @@ def reorder_online(request, order_pk):
     else:
         form = OrderForm()
 
-    #account_change = not request.session.get('removed_account_change_notice')
     account_change = not cache.get('removed_account_change_notice')
 
     return render(request, 'online_order/online_order_sheet.html', {'form': form, 'cookie_account_change':account_change })
@@ -90,7 +89,15 @@ def order_confirmation(request, order_id, confirmed):
 
         html_content = render_to_string('online_order/order_email.html', {'order':order})
 
-        send_mail("Online Order Confirmation Receipt | SparMED", html_content, "SparMED.dk <info@SparMED.dk>", recipients, fail_silently=False)
+        sg = sendgrid.SendGridClient(os.environ.get('SENDGRID_USERNAME'), os.environ.get('SENDGRID_PASSWORD'))
+
+        message = sendgrid.Mail()
+        message.add_to(recipients)
+        message.set_subject("Online Order Confirmation Receipt | SparMED")
+        message.set_text(html_content)
+        message.set_html(html_content)
+        message.set_from("SparMED.dk <info@SparMED.dk>")
+        status, msg = sg.send(message)
 
         cart = Cart(request)
         cart.delete()

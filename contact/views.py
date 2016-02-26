@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.core.mail import send_mail
 
+import sendgrid
 from contact.forms import ContactForm
 
 # Create your views here.
@@ -11,7 +11,7 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
+            body = form.cleaned_data['message']
             sender = form.cleaned_data['sender']
             sender_name = form.cleaned_data['sender_name']
             cc_myself = form.cleaned_data['cc_myself']
@@ -20,7 +20,15 @@ def contact(request):
             if cc_myself:
                 recipients.append('%s <%s>' % (sender_name, sender))
 
-            send_mail(subject, message, '%s <%s>' % (sender_name, sender), recipients, fail_silently=False)
+            sg = sendgrid.SendGridClient(os.environ.get('SENDGRID_USERNAME'), os.environ.get('SENDGRID_PASSWORD'))
+
+            message = sendgrid.Mail()
+            message.add_to(recipients)
+            message.set_subject(subject)
+            message.set_text(body)
+            message.set_html(body)
+            message.set_from('%s <%s>' % (sender_name, sender))
+            status, msg = sg.send(message)
 
             return HttpResponseRedirect('/thanks/')
     else:
