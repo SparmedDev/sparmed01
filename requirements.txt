@@ -10,7 +10,7 @@ dj-database-url==0.4.0
 dj-static==0.0.6
 django-appconf==1.0.1
 django-authtools==1.4.0
-django-bootstrap3==6.2.2
+django-bootstrap3==7.0.0
 django-ckeditor==5.0.3
 django-classy-tags==0.7.1
 git+https://h3@github.com/h3/django-colorfield.git
