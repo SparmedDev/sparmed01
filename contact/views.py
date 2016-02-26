@@ -33,7 +33,7 @@ def contact(request):
                     'text': message,
                     'to': recipients,
                 }
-                result = mandrill_client.messages.send(message=message, async=False)
+                result = mandrill_client.messages.send(message=message)
 
             except mandrill.Error, e:
                 # Mandrill errors are thrown as exceptions
