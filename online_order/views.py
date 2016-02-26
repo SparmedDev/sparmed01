@@ -84,12 +84,8 @@ def order_confirmation(request, order_id, confirmed):
     order = OrderHistoryItem.objects.get(pk=order_id)
     if confirmed == 'True':
         recipients = [
-          { 'email': order.user.email,
-            'name': order.user.contact_person_name,
-            'type': 'to' },
-          { 'email': 'admin@sparmed.dk',
-            'name': 'SparMED',
-            'type': 'cc' },
+          '%s <%s>' % (order.user.contact_person_name, order.user.email),
+          'SparMED <admin@SparMED.dk>',
         ]
 
         html_content = render_to_string('online_order/order_email.html', {'order':order})

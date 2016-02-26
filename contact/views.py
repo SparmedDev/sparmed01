@@ -16,13 +16,9 @@ def contact(request):
             sender_name = form.cleaned_data['sender_name']
             cc_myself = form.cleaned_data['cc_myself']
 
-            recipients = [{
-                'email': 'info@sparmed.dk',
-                'name': 'SparMed'}]
+            recipients = ['SparMED <info@SparMED.dk>', ]
             if cc_myself:
-                recipients.append({
-                    'email': sender,
-                    'name': sender_name})
+                recipients.append('%s <%s>' % (sender_name, sender))
 
             send_mail(subject, message, {'name':sender_name, 'email':sender}, recipients, fail_silently=False)
 
