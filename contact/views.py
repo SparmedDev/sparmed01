@@ -20,7 +20,7 @@ def contact(request):
             if cc_myself:
                 recipients.append('%s <%s>' % (sender_name, sender))
 
-            send_mail(subject, message, {'name':sender_name, 'email':sender}, recipients, fail_silently=False)
+            send_mail(subject, message, '%s <%s>' % (sender_name, sender), recipients, fail_silently=False)
 
             return HttpResponseRedirect('/thanks/')
     else:
