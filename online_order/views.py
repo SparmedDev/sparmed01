@@ -4,6 +4,10 @@ from django.http import HttpResponseRedirect
 from django.views.decorators.cache import never_cache
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.cache import cache
 
 from online_order.models import OrderForm, SparmedUser, OrderHistoryItem
 from online_order.admin import SparmedUserChangeForm
@@ -11,13 +15,6 @@ from online_order.admin import SparmedUserChangeForm
 from shop.models import Category, Product
 
 from cart import Cart
-
-from django.template.loader import render_to_string
-import mandrill
-
-from django.views.decorators.csrf import ensure_csrf_cookie
-
-from django.core.cache import cache
 
 # Create your views here.
 @login_required
@@ -97,26 +94,7 @@ def order_confirmation(request, order_id, confirmed):
 
         html_content = render_to_string('online_order/order_email.html', {'order':order})
 
-        try:
-          mandrill_client = mandrill.Mandrill('Bml5XQ7DhMZLvw3NDwykrQ')
-          message = {
-            "from_email": 'info@sparmed.dk',
-            "from_name": 'SparMED.dk',
-            "subject": 'Online Order Confirmation Receipt | SparMED',
-            "html": html_content,
-            "to": recipients,
-            "headers": {"Reply-To": "info@sparmed.dk"},
-            "auto_html": True,
-            "inline_css": True,
-            "metadata": {"website": "www.sparmed.dk"},
-            "async": True,
-          }
-          result = mandrill_client.messages.send(message=message)
-
-        except mandrill.Error, e:
-          # Mandrill errors are thrown as exceptions
-          print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
-          pass
+        send_mail("Online Order Confirmation Receipt | SparMED", html_content, "SparMED.dk <info@SparMED.dk>", recipients, fail_silently=False)
 
         cart = Cart(request)
         cart.delete()

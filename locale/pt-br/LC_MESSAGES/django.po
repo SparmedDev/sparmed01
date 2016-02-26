@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-21 12:38+0100\n"
+"POT-Creation-Date: 2016-02-26 12:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,7 @@ msgstr ""
 msgid "Message Body Text"
 msgstr ""
 
-#: contact/views.py:50
+#: contact/views.py:36
 msgid "Thank you for contacting us. We will return to you as soon as possible."
 msgstr ""
 
@@ -1351,17 +1351,17 @@ msgid ""
 msgstr ""
 
 #: sparmed/templates/privacy_policy.html:144
-msgid "Mandrill by MailChimp"
+msgid "SendGrid"
 msgstr ""
 
 #: sparmed/templates/privacy_policy.html:146
 msgid ""
 "\n"
-"      We use Mandrill for the automatically generated email sent when you "
+"      We use SendGrid for the automatically generated email sent when you "
 "click 'send' in the contact form or when you place an order online. You can "
-"read <a href=\"//mandrill.com/privacy/\" target=\"_blank\">Mandrill's "
-"privacy policy</a>. The contact form requires you to write your name and "
-"email address.\n"
+"read <a href=\"//sendgrid.com/tos\" target=\"_blank\">SendGrid's privacy "
+"policy</a>. The contact form requires you to write your name and email "
+"address.\n"
 "      "
 msgstr ""
 

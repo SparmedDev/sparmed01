@@ -37,7 +37,6 @@ grappelli-modeltranslation==0.1.3
 greenlet==0.4.9
 gunicorn==19.4.5
 html5lib==0.9999999
-mandrill==1.0.6
 ply==3.8
 pylibmc==1.5.0
 psycopg2==2.6.1
