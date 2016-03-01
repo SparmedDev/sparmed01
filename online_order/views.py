@@ -15,6 +15,7 @@ from shop.models import Category, Product
 
 from cart import Cart
 
+import os
 import sendgrid
 
 # Create your views here.

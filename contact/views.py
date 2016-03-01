@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
 
+import os
 import sendgrid
 from contact.forms import ContactForm
 
