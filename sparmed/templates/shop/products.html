@@ -30,11 +30,19 @@
 {% if categories %}
 <nav id="products-nav" role="navigation">
   {% for cat in categories %}
-  {% if forloop.first or forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
-  <div class="col-sm-4 products-nav-cat {% productnavactive request cat.slug %}">
-    <a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a>
-  </div>
-  {% if not forloop.first %}{% if forloop.counter|divisibleby:3 or forloop.last %}</div>{% endif %}{% endif %}
+    {% if forloop.last and categories|length|modulo:3 == 1 %}
+    <div class="row">
+      <div class="col-sm-offset-4 col-sm-4 products-nav-cat {% productnavactive request cat.slug %}">
+        <a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a>
+      </div>
+    </div>
+    {% else %}
+      {% if forloop.first or forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
+      <div class="col-sm-4 products-nav-cat {% productnavactive request cat.slug %}">
+        <a href="{{ cat.get_absolute_url }}">{{ cat.short_name|safe }}</a>
+      </div>
+      {% if not forloop.first %}{% if forloop.counter|divisibleby:3 or forloop.last %}</div>{% endif %}{% endif %}
+    {% endif %}
   {% endfor %}
 </nav>
 {% endif %}

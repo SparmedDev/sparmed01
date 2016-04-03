@@ -98,3 +98,7 @@ class ValueFromSettings(Node):
       return ''
     else:
       return ret_val      
+
+@register.filter
+def modulo(num, val):
+    return num % val    
