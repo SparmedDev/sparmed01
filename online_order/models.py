@@ -172,6 +172,13 @@ class Order(models.Model):
 
     insurance_desired = models.BooleanField(verbose_name=_("Is insurance needed?"), default=False, blank=True)
 
+    CURRENCY_CHOICES = (
+      (_('EUR'), _('Euro')),
+      (_('USD'), _('US Dollars')),
+      (_('Both'), _('Both')),
+    )
+    chosen_currency = models.CharField(verbose_name=_("Choose the currency of the invoice"), max_length=255, choices=CURRENCY_CHOICES, default='EUR', blank=True)
+
     documents = models.TextField(verbose_name=_("Please write down if you need any specific documents along with your shipment"), blank=True, null=True)
 
     shipping_and_invoice_same = models.BooleanField(verbose_name=_("Different delivery address?"), default=True, blank=True)

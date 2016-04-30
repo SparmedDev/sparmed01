@@ -8,7 +8,7 @@
     {% if order.arranged_freight %}
     <p>
       {% trans "SparMED Arranged freight: Yes" %}
-    </p>    
+    </p>
     {% else %}
     <p>
       {% blocktrans %}
@@ -19,41 +19,50 @@
     </p>
     {% endif %}
 
+    <p>
     {% if order.arranged_packing %}
-    <p>{% trans "SparMED Arranged Packaging: Yes" %}</p>        
+    {% trans "SparMED Arranged Packaging: Yes" %}
     {% else %}
-    <p>{% trans "Choice of Packaging" %}: {{ order.packing_instructions }}<br>
+    {% trans "Choice of Packaging" %}: {{ order.packing_instructions }}<br>
       {% if order.packing_remarks|length %}
       {% trans "Associated Remarks" %}: <br>
       {{ order.packing_remarks }}
       {% endif %}
-    </p>
+
     {% endif %}
+    </p>
 
     {% if order.aircleaner_instructions|length %}
     {{ order.aircleaner_instructions }}
     {% endif %}
 
+    <p>
     {% if order.insurance_desired %}
-    <p>{% trans "Insurance chosen and included" %}</p>
+    {% trans "Insurance chosen and included" %}
     {% else %}
-    <p>{% trans "Insurance not chosen and therefore not included." %}</p>
+    {% trans "Insurance not chosen and therefore not included." %}
+    {% endif %}
+    </p>
+
+    {% if order.chosen_currency|length %}
+    <p>{% trans "Currency chosen:" %} {{ order.chosen_currency }} </p>
     {% endif %}
 
     {% if order.documents|length %}
     <p>{% trans "Specific Documents Requested" %}:<br> {{ order.documents }}</p>
     {% endif %}
 
+    <p>
     {% if order.shipping_and_invoice_same %}
-    <p>{% trans "Invoice and delivery address was the same" %}.</p>
+    {% trans "Invoice and delivery address was the same" %}.
     {% else %}
-    <p>{% trans "Delivery Address Details" %}:<br>
+    {% trans "Delivery Address Details" %}:<br>
       {% trans "Name" %}: {{ order.invoice_company_name }}<br>
       {% trans "Address" %}: {{ order.invoice_company_address }}<br>
       {% trans "Postal Code" %}: {{ order.invoice_company_postal_code }}<br>
       {% trans "Country" %}: {{ order.invoice_company_country }}
-    </p>
     {% endif %}
+    </p>
 
     {% if order.other_remarks|length %}
     <p>{% trans "Other Remarks given to SparMED" %}: <br> {{ order.other_remarks }}</p>
