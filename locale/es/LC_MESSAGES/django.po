@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-26 12:30+0100\n"
+"POT-Creation-Date: 2016-04-30 13:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Message Body Text"
 msgstr ""
 
-#: contact/views.py:36
+#: contact/views.py:41
 msgid "Thank you for contacting us. We will return to you as soon as possible."
 msgstr ""
 
@@ -106,7 +106,7 @@ msgid ""
 "instead use the news image below)"
 msgstr ""
 
-#: news/models.py:29 online_order/models.py:211 online_order/models.py:212
+#: news/models.py:29 online_order/models.py:218 online_order/models.py:219
 #: shop/models.py:64 shop/models.py:126
 msgid "URL; Never modify this value!"
 msgstr ""
@@ -189,7 +189,7 @@ msgstr ""
 msgid "Date and time of order"
 msgstr ""
 
-#: online_order/models.py:143 online_order/models.py:189
+#: online_order/models.py:143 online_order/models.py:196
 msgid "SparMED Arranges Freight?"
 msgstr ""
 
@@ -228,7 +228,7 @@ msgstr ""
 msgid "Box"
 msgstr ""
 
-#: online_order/models.py:159 online_order/models.py:190
+#: online_order/models.py:159 online_order/models.py:197
 msgid "SparMED Arranges Packaging?"
 msgstr ""
 
@@ -268,57 +268,81 @@ msgstr ""
 msgid "Aircleaner Instructions (If applicable)"
 msgstr ""
 
-#: online_order/models.py:173 online_order/models.py:191
+#: online_order/models.py:173 online_order/models.py:198
 msgid "Is insurance needed?"
 msgstr ""
 
-#: online_order/models.py:175
+#: online_order/models.py:176
+msgid "EUR"
+msgstr ""
+
+#: online_order/models.py:176
+msgid "Euro"
+msgstr ""
+
+#: online_order/models.py:177
+msgid "USD"
+msgstr ""
+
+#: online_order/models.py:177
+msgid "US Dollars"
+msgstr ""
+
+#: online_order/models.py:178
+msgid "Both"
+msgstr ""
+
+#: online_order/models.py:180
+msgid "Choose the currency of the invoice"
+msgstr ""
+
+#: online_order/models.py:182
 msgid ""
 "Please write down if you need any specific documents along with your shipment"
 msgstr ""
 
-#: online_order/models.py:177 online_order/models.py:192
+#: online_order/models.py:184 online_order/models.py:199
 msgid "Different delivery address?"
 msgstr ""
 
-#: online_order/models.py:178
+#: online_order/models.py:185
 msgid "Company Name"
 msgstr ""
 
-#: online_order/models.py:179
+#: online_order/models.py:186
 msgid "Delivery Address"
 msgstr ""
 
-#: online_order/models.py:180
+#: online_order/models.py:187
 msgid "Delivery Postal Code"
 msgstr ""
 
-#: online_order/models.py:181
+#: online_order/models.py:188
 msgid "Delivery Country"
 msgstr ""
 
-#: online_order/models.py:183
-#: sparmed/templates/online_order/online_order_sheet.html:125
+#: online_order/models.py:190
+#: sparmed/templates/online_order/online_order_sheet.html:129
 msgid "Any other remarks or comments regarding this order?"
 msgstr ""
 
-#: online_order/models.py:207 shop/models.py:57
+#: online_order/models.py:214 shop/models.py:57
 #: sparmed/templates/inventory.html:52
 #: sparmed/templates/online_order/order_items.html:6
 #: sparmed/templates/shop/details.html:30
 msgid "Order No."
 msgstr ""
 
-#: online_order/models.py:208 sparmed/templates/inventory.html:53
+#: online_order/models.py:215 sparmed/templates/inventory.html:53
 #: sparmed/templates/online_order/order_items.html:7
 msgid "Product Name"
 msgstr ""
 
-#: online_order/models.py:209 shop/models.py:59
+#: online_order/models.py:216 shop/models.py:59
 msgid "Product Long Name"
 msgstr ""
 
-#: online_order/models.py:210 shop/models.py:60
+#: online_order/models.py:217 shop/models.py:60
 msgid "Product Description"
 msgstr ""
 
@@ -652,7 +676,7 @@ msgid "Contact"
 msgstr ""
 
 #: sparmed/templates/contact.html:20 sparmed/templates/contact.html.py:54
-#: sparmed/templates/online_order/order_details.html:52
+#: sparmed/templates/online_order/order_details.html:61
 msgid "Address"
 msgstr ""
 
@@ -816,7 +840,7 @@ msgstr ""
 
 #: sparmed/templates/inventory.html:50 sparmed/templates/shop/details.html:54
 #: sparmed/templates/shop/details.html:57
-#: sparmed/templates/shop/products.html:119
+#: sparmed/templates/shop/products.html:127
 msgid "Add to Cart"
 msgstr ""
 
@@ -930,23 +954,23 @@ msgstr ""
 msgid "Insurance Chosen?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:118
+#: sparmed/templates/online_order/online_order_sheet.html:122
 msgid "Any specific documents along with your shipment?"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:119
+#: sparmed/templates/online_order/online_order_sheet.html:123
 msgid ""
 "Please write down here if you need any specific documents along with your "
 "shipment"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:126
+#: sparmed/templates/online_order/online_order_sheet.html:130
 msgid ""
 "Please write down here if you have any other remarks or comments regarding "
 "this order"
 msgstr ""
 
-#: sparmed/templates/online_order/online_order_sheet.html:132
+#: sparmed/templates/online_order/online_order_sheet.html:136
 #: sparmed/templates/online_order/order_confirmation.html:9
 msgid "Send Order"
 msgstr ""
@@ -988,51 +1012,55 @@ msgid ""
 "      "
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:23
+#: sparmed/templates/online_order/order_details.html:24
 msgid "SparMED Arranged Packaging: Yes"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:25
+#: sparmed/templates/online_order/order_details.html:26
 msgid "Choice of Packaging"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:27
+#: sparmed/templates/online_order/order_details.html:28
 msgid "Associated Remarks"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:38
+#: sparmed/templates/online_order/order_details.html:41
 msgid "Insurance chosen and included"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:40
+#: sparmed/templates/online_order/order_details.html:43
 msgid "Insurance not chosen and therefore not included."
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:44
+#: sparmed/templates/online_order/order_details.html:48
+msgid "Currency chosen:"
+msgstr ""
+
+#: sparmed/templates/online_order/order_details.html:52
 msgid "Specific Documents Requested"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:48
+#: sparmed/templates/online_order/order_details.html:57
 msgid "Invoice and delivery address was the same"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:50
+#: sparmed/templates/online_order/order_details.html:59
 msgid "Delivery Address Details"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:51
+#: sparmed/templates/online_order/order_details.html:60
 msgid "Name"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:53
+#: sparmed/templates/online_order/order_details.html:62
 msgid "Postal Code"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:54
+#: sparmed/templates/online_order/order_details.html:63
 msgid "Country"
 msgstr ""
 
-#: sparmed/templates/online_order/order_details.html:59
+#: sparmed/templates/online_order/order_details.html:68
 msgid "Other Remarks given to SparMED"
 msgstr ""
 
@@ -1607,7 +1635,7 @@ msgid "Dimensions/Size"
 msgstr ""
 
 #: sparmed/templates/shop/details.html:54
-#: sparmed/templates/shop/products.html:116
+#: sparmed/templates/shop/products.html:124
 msgid "Login required"
 msgstr ""
 
