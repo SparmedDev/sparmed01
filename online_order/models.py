@@ -57,7 +57,7 @@ class SparmedUser(AbstractBaseUser, PermissionsMixin):
         help_text=_('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
     is_admin = models.BooleanField(default=False,
         help_text=_('Designates whether the user can log into this admin site.'))
-    is_staff = models.BooleanField(default=True,
+    is_staff = models.BooleanField(default=False,
         help_text=_('Designates whether the user is regarded as staff'))
 
     objects = SparmedUserManager()
