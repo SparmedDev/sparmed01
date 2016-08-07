@@ -125,15 +125,14 @@ def order_history(request):
 @login_required
 @never_cache
 def account_area(request, account_slug):
-  feedback = ''
-  if request.method == 'POST':
-      form = SparmedUserChangeForm(request.POST, instance=request.user)
-      if form.is_valid():
-          form.save()
-          feedback = 'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'
-          #return render(request, 'online_order/account_area.html', {'feedback':'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'})
-  else:
-      form = SparmedUserChangeForm(instance=request.user)
+    feedback = ''
+    if request.method == 'POST':
+        form = SparmedUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            feedback = 'Your account has been succesfully updated. Please wait a few seconds for the changes to take effect.'
+    else:
+        form = SparmedUserChangeForm(instance=request.user)
 
-  contexts = { 'feedback' : feedback } if feedback else { 'form': form }
-  return render(request, 'online_order/account_area.html', contexts)
+    contexts = { 'feedback' : feedback } if feedback else { 'form': form }
+    return render(request, 'online_order/account_area.html', contexts)
