@@ -206,6 +206,7 @@ if not DEBUG:
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': [
+                os.path.join(BASE_DIR, 'templates')
                 # insert your TEMPLATE_DIRS here
             ],
             'OPTIONS': {
@@ -247,6 +248,7 @@ else:
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': [
+                os.path.join(BASE_DIR, 'templates')
                 # insert your TEMPLATE_DIRS here
             ],
             'OPTIONS': {

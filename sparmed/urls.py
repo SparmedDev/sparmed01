@@ -3,6 +3,7 @@ from django.contrib import sitemaps
 from django.contrib.sitemaps import GenericSitemap
 from django.core.urlresolvers import reverse
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib.auth import views as auth_views
 
 from sparmed import views
 from shop.models import Product, Category
@@ -94,6 +95,7 @@ urlpatterns += i18n_patterns(
   url(r'^privacy-policy/$', views.privacy_policy, name='privacy-policy'),
   url(r'^terms-conditions/$', views.terms_conditions, name='terms-conditions'),
 
-  url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
+  url(r'^logout/$', auth_views.logout_then_login, name='logout'),
+  url(r'^password_change/$', auth_views.password_change, {'post_change_redirect':'distributor-login'}, name='password_change'),
   url('^', include('django.contrib.auth.urls')),
 )
