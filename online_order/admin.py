@@ -21,7 +21,7 @@ class SparmedUserAdmin(UserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('name', 'company_name', 'email', 'contact_person_name', 'is_admin', 'is_staff', 'country',)
+    list_display = ('name', 'company_name', 'email', 'contact_person_name', 'is_admin', 'is_staff', 'country', 'orders')
     list_filter = ('is_admin', 'country',)
 
     exclude = ('first_name', 'last_name',)
@@ -42,6 +42,9 @@ class SparmedUserAdmin(UserAdmin):
         (_('Dates'), {
             'fields': ('last_login', 'date_joined',)
         }),
+        (_('Orders'), {
+            'fields': ('orders', ) 
+        }),
     )
 
     add_fieldsets = (
@@ -59,6 +62,9 @@ class SparmedUserAdmin(UserAdmin):
         }),
         (_('Dates'), {
             'fields': ('last_login', 'date_joined',)
+        }),
+        (_('Orders'), {
+            'fields': ('orders', ) 
         }),
     )
 
