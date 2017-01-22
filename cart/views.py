@@ -43,7 +43,10 @@ def set_quantity_on_product(request):
                 if object_id.isdigit():
                     product = Product.objects.get(id=object_id)
                     cart = Cart(request)
-                    cart.set_product_quantity(product, value)
+                    try:
+                        cart.set_product_quantity(product, value)
+                    except ItemDoesNotExist:
+                        pass
 
     return HttpResponseRedirect(reverse('online_order.views.order_online'))
 
