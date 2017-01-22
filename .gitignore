@@ -5,6 +5,7 @@ venv/
 staticfiles/
 sparmed/staticfiles/
 sparmed/sparmed/staticfiles/
+libmemcached-1.0.18
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
