@@ -64,7 +64,7 @@
 <form class="form form-horizontal" role="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
-    <label class="control-label col-sm-4" for="arranged_freight">{% trans "Freight arranged by SparMed?" %}</label>
+    <label class="control-label col-sm-4" for="arranged_freight">{% trans "Freight arranged by SparMED?" %}</label>
     <input style="display: inline-block; width: 50px;" type="checkbox" class="form-control col-sm-4" id="arranged_freight" name="arranged_freight" checked
            onclick="javascript:toggleVisible('arranged_freight_options');" />
   </div>
