@@ -44,7 +44,6 @@
 {% include 'online_order/order_sheet_product_cart.html' %}
 
 <hr>
-
 <form class="form form-horizontal" role="form" action="{% url 'order-online' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
