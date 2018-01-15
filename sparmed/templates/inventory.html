@@ -124,7 +124,6 @@
             instockElem.empty();
             instockElem.text(item.inventory.inStock > 0 ? Math.floor(item.inventory.inStock) : 0);
         }
-
         var availableElem = $("#" + productNumber + "_available");
         if ($(availableElem).length) {
             availableElem.empty();
