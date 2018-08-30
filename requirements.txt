@@ -38,7 +38,7 @@ gunicorn==19.6.0
 html5lib==0.999999999
 ply==3.8
 pylibmc==1.5.1
-psycopg2==2.6.2
+psycopg2==2.7.5
 python-gettext==3.0
 python-magic==0.4.12
 pytz==2016.6.1
